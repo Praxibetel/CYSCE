@@ -1,0 +1,95 @@
+<div id="storygameListContainer">
+  <form id="storygameListFilters" action="#">
+    <div class="flex">
+      <h2 data-for="filterTagContainer" data-value="0">Tags</h2>
+      <div id="filterTagContainer"></div>
+    </div>
+    <div class="flex">
+      <h2 data-for="filterTagMatchContainer">Match</h2>
+      <div id="filterTagMatchContainer">
+        <label><input type="radio" name="tagMatch" id="filterTagAll" checked> All Tags</label>
+        <label><input type="radio" name="tagMatch" id="filterTagAny"> Any Tag</label>
+      </div>
+    </div>
+    <div class="flex">
+      <h2 data-for="filterFeaturedContainer">Featured</h2>
+      <div id="filterFeaturedContainer">
+        <label><input type="radio" name="featured" id="filterFeatureAll" checked> Featured and Unfeatured</label>
+        <label><input type="radio" name="featured" id="filterFeatureFeatured"> Featured Only</label>
+        <label><input type="radio" name="featured" id="filterFeatureUnfeatured"> Unfeatured Only</label>
+      </div>
+    </div>
+    <div class="flex">
+      <h2 data-for="filterRatingContainer">Rating</h2>
+      <div id="filterRatingContainer">
+        <div id="filterRatedContainer">
+          <label><input type="radio" name="rated" id="filterRatedAll" checked> Rated and Unrated</label>
+          <label><input type="radio" name="rated" id="filterRatedRated"> Rated by Me</label>
+          <label><input type="radio" name="rated" id="filterRatedUnrated"> Not Rated by Me</label>
+        </div>
+        <select id="filterRatingMin">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3" selected>3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+        </select>
+        –
+        <select id="filterRatingMax">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8" selected>8</option>
+      </select>
+      </div>
+    </div>
+    <div class="flex"><input type="button" id="filterApply" value="Apply Filters"></div>
+  </form>
+  <div id="storygameListPages">
+    <form id="storygameListPagination">
+      <div class="flex">
+        Search
+        <input id="paginationSearch" type="text">
+      </div>
+      <div class="flex">
+        Sort by
+        <select id="paginationSort">
+        <option value="rating-desc" selected>Highest Rating</option>
+        <option value="rating-asc">Lowest Rating</option>
+        <option value="published-desc">Newest</option>
+        <option value="published-asc">Oldest</option>
+        <option value="length-asc">Shortest</option>
+        <option value="length-desc">Longest</option>
+        <option value="alpha-asc">A-Z</option>
+        <option value="alpha-desc">Z-A</option>
+        <option value="ratings-desc">Most Ratings</option>
+        <option value="ratings-asc">Fewest Ratings</option>
+      </select>
+      </div>
+      <div id="paginationSort">
+        Display
+        <select id="paginationPageSize">
+          <option value="9">9</option>
+          <option value="18" selected="selected">18</option>
+          <option value="27">27</option>
+          <option value="36">36</option>
+        </select>
+      </div>
+      <div id="paginationNumeration">
+        Page
+        <strong id="paginationPageNumber"><span id="paginationNumerator">1</span>/<span id="paginationDenominator">1</span></strong>
+        <input type="button" id="paginationPrev" value="<"><input type="button" id="paginationNext" value=">">
+      </div>
+    </form>
+    <div id="storygameList"></div>
+  </div>
+</div>

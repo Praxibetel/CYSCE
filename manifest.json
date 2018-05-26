@@ -1,0 +1,63 @@
+{
+  "manifest_version": 2,
+
+  "name": "CYS",
+  "description": "CYS Chrome Extension",
+  "version": "0.1",
+
+  "icons": {
+    "16": "cysicon-16.png",
+    "32": "cysicon-32.png",
+    "48": "cysicon-48.png",
+    "128": "cysicon-128.png"
+  },
+
+  "browser_action": {
+    "default_icon": "cysicon.png",
+    "default_popup": "popup.html"
+  },
+
+  "content_scripts": [{
+    "matches": ["http://chooseyourstory.com/*"],
+    "exclude_matches": ["http://chooseyourstory.com/story/viewer/*"],
+    "js": ["jquery.js", "moment.js"],
+    "css": ["notification.css"],
+    "run_at": "document_start"
+  }, {
+    "matches": ["http://chooseyourstory.com/*"],
+    "exclude_matches": ["http://chooseyourstory.com/story/viewer/*"],
+    "js": ["notification.js"],
+    "run_at": "document_end"
+  }, {
+    "matches": ["http://chooseyourstory.com/Stories/", "http://chooseyourstory.com/Stories", "http://chooseyourstory.com/stories/", "http://chooseyourstory.com/stories"],
+    "js": ["storylist.js"],
+    "css": ["storylist.css"]
+  }, {
+    "matches": ["http://chooseyourstory.com/forums/*/message/*"],
+    "js": ["thread.js"],
+    "run_at": "document_end"
+  }, {
+    "matches": ["http://chooseyourstory.com/My/Games.aspx"],
+    "js": ["rating.js"],
+    "run_at": "document_end"
+  }, {
+    "matches": ["http://chooseyourstory.com/My/Profile.aspx"],
+    "js": ["preferences.js"],
+    "run_at": "document_end"
+  }],
+
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+
+  "web_accessible_resources": [
+    "featured-medal.svg",
+    "material-throbber.svg",
+    "preferences.html",
+    "rating-star-gold.svg",
+    "rating-star-green.svg",
+    "rating-star-outline.svg",
+    "storylist.html"
+  ]
+}

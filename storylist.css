@@ -1,0 +1,173 @@
+#mainContent>table {
+  display: none;
+}
+
+#storygameListContainer {
+  display: flex;
+  font-size: 14px;
+  line-height: 2;
+  margin-top: 20px;
+}
+
+#storygameListFilters {
+  border-right: 1px solid #C04039;
+  flex: 0 0 240px;
+  margin-right: 10px;
+  padding-top: 10px;
+}
+
+#storygameListFilters label {
+  color: #871D18;
+  display: block;
+}
+
+#storygameListPages {
+  flex: 1 0 680px;
+}
+
+#storygameListPagination {
+  border-bottom: 1px solid #C04039;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+#storygameList {
+  display: flex;
+  flex-direction: column;
+}
+
+.entry {
+  border-bottom: 1px solid #C04039;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px 0 10px 10px;
+}
+
+.entry:last-child {
+  border-bottom: none;
+}
+
+.entry>div {
+  flex: 1 0 0;
+}
+
+.entry>div:nth-child(2) {
+  flex: 0 0 480px;
+}
+
+.entry .fullwidth {
+  flex: 1 0 100%;
+}
+
+.ratingContainer {
+  background-image: url("chrome-extension://__MSG_@@extension_id__/rating-star-outline.svg");
+  background-size: auto 100%;
+  display: inline-block;
+  height: 16.5px;
+  width: 144px;
+}
+
+.rating {
+  background-image: url("chrome-extension://__MSG_@@extension_id__/rating-star-gold.svg");
+  background-size: auto 100%;
+  height: 100%;
+  width: var(--rating);
+}
+
+.rating.rated {
+  background-image: url("chrome-extension://__MSG_@@extension_id__/rating-star-green.svg")
+}
+
+.tag {
+  background-color: #6F231F;
+  border-radius: 4px;
+  color: #EEE;
+  cursor: pointer;
+  display: inline-block;
+  font-size: .95em;
+  height: 1.3em;
+  line-height: 1.3em;
+  margin-right: 1em;
+  padding: .2em .4em;
+}
+
+.tag:last-child {
+  margin-right: none;
+}
+
+.tag.featured::before {
+    background-image: url("chrome-extension://__MSG_@@extension_id__/featured-medal.svg");
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    content: " ";
+    display: inline-block;
+    height: 100%;
+    vertical-align: top;
+    width: 1.3em;
+}
+
+.tag .booru {
+  float: left;
+  font-weight: bold;
+  overflow: hidden;
+  transition: width 200ms ease;
+  width: 0;
+  white-space: nowrap;
+}
+
+.tag:hover .booru {
+  width: 3ch;
+}
+
+.tag a {
+  color: inherit !important;
+}
+
+.loading::after {
+  background-image: url("chrome-extension://__MSG_@@extension_id__/material-throbber.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  content: " ";
+  display: block;
+  height: 1.2em;
+  width: 1.2em;
+}
+
+#storygameList.loading::after {
+  background-position-x: 50%;
+  height: 2em;
+  margin-top: 1em;
+  width: 100%;
+}
+
+h2[data-for] {
+    cursor: pointer;
+}
+
+h2[data-for]::after {
+    content: " ▾";
+}
+
+h2[data-for].collapsed::after {
+    content: " ▸";
+}
+
+h2[data-for][data-value]:not([data-value=""])::after {
+    content: " (" attr(data-value) ") ▾";
+}
+
+h2[data-for][data-value]:not([data-value=""]).collapsed::after {
+    content: " (" attr(data-value) ") ▸";
+}
+
+/*
+
+#storygameList.loading::before {
+  content: "Loading";
+  display: block;
+  text-align: center;
+  width: 100%;
+}
+
+*/
