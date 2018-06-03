@@ -1,4 +1,4 @@
-li > a[data-badge]:after {
+li > a[data-badge]::after {
   content: attr(data-badge);
   position: absolute;
   bottom: 100%;
@@ -18,7 +18,9 @@ li > a[data-badge]:after {
 }
 
 li li a[data-badge]::after {
-  left: auto;
-  right: 3px;
+  left: 100%;
+  right: unset;
   top: 50%;
+  bottom: unset;
+  transform: translateY(-50%);
 }

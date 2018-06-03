@@ -3,7 +3,7 @@
 
   "name": "CYS",
   "description": "CYS Chrome Extension",
-  "version": "0.1",
+  "version": "0.2",
 
   "icons": {
     "16": "cysicon-16.png",
@@ -12,37 +12,60 @@
     "128": "cysicon-128.png"
   },
 
-  "browser_action": {
-    "default_icon": "cysicon.png",
-    "default_popup": "popup.html"
+  "background": {
+    "scripts": ["js/background.js"]
   },
 
   "content_scripts": [{
     "matches": ["http://chooseyourstory.com/*"],
     "exclude_matches": ["http://chooseyourstory.com/story/viewer/*"],
-    "js": ["jquery.js", "moment.js"],
+    "js": ["js/jquery.js", "js/theme.js"],
     "css": ["notification.css"],
     "run_at": "document_start"
   }, {
     "matches": ["http://chooseyourstory.com/*"],
     "exclude_matches": ["http://chooseyourstory.com/story/viewer/*"],
-    "js": ["notification.js"],
+    "js": ["js/navbar.js"],
     "run_at": "document_end"
   }, {
-    "matches": ["http://chooseyourstory.com/Stories/", "http://chooseyourstory.com/Stories", "http://chooseyourstory.com/stories/", "http://chooseyourstory.com/stories"],
-    "js": ["storylist.js"],
+    "matches": ["http://chooseyourstory.com/Games/Search.aspx"],
+    "js": ["js/moment.js", "js/storylist.js"],
     "css": ["storylist.css"]
   }, {
     "matches": ["http://chooseyourstory.com/forums/*/message/*"],
-    "js": ["thread.js"],
+    "js": ["js/thread.js"],
+    "run_at": "document_end"
+  }, {
+    "matches": ["http://chooseyourstory.com/Member/*"],
+    "js": ["js/member.js"],
     "run_at": "document_end"
   }, {
     "matches": ["http://chooseyourstory.com/My/Games.aspx"],
-    "js": ["rating.js"],
+    "js": ["js/rating.js"],
     "run_at": "document_end"
   }, {
     "matches": ["http://chooseyourstory.com/My/Profile.aspx"],
-    "js": ["preferences.js"],
+    "js": ["js/preferences.js"],
+    "run_at": "document_end"
+  }, {
+    "matches": ["http://chooseyourstory.com/my/adveditor/pagePopup.asp*", "http://chooseyourstory.com/My/adveditor/pagePopup.asp*"],
+    "js": ["codemirror/lib/codemirror.js", "codemirror/addon/mode/overlay.js", "codemirror/addon/mode/simple.js", "codemirror/addon/edit/closebrackets.js", "codemirror/addon/edit/closetag.js", "codemirror/mode/css/css.js", "codemirror/mode/javascript/javascript.js", "codemirror/mode/xml/xml.js", "codemirror/mode/htmlmixed/htmlmixed.js", "js/htmleditor.js"],
+    "css": ["codemirror/lib/codemirror.css", "codemirror/theme/bespin.css"],
+    "run_at": "document_end"
+  }, {
+    "matches": ["http://chooseyourstory.com/my/adveditor/ScriptPopup.aspx*", "http://chooseyourstory.com/My/adveditor/ScriptPopup.aspx*"],
+    "js": ["codemirror/lib/codemirror.js", "codemirror/addon/mode/simple.js", "codemirror/addon/edit/closebrackets.js", "js/scripteditor.js"],
+    "css": ["codemirror/lib/codemirror.css", "codemirror/theme/bespin.css"],
+    "run_at": "document_end"
+  }, {
+    "matches": ["http://chooseyourstory.com/story/*"],
+    "exclude_matches": ["http://chooseyourstory.com/story/viewer/*"],
+    "js": ["js/an.js"],
+    "run_at": "document_end"
+  }, {
+    "matches": ["http://chooseyourstory.com/story/viewer/*"],
+    "js": ["js/jquery.js", "js/storygame-dev.js"],
+    "css": ["storygame-dev.css"],
     "run_at": "document_end"
   }],
 
@@ -52,12 +75,47 @@
   ],
 
   "web_accessible_resources": [
-    "featured-medal.svg",
-    "material-throbber.svg",
-    "preferences.html",
-    "rating-star-gold.svg",
-    "rating-star-green.svg",
-    "rating-star-outline.svg",
-    "storylist.html"
+    "html/preferences.html",
+    "html/storylist.html",
+    "themes/fonts/elusive/elusiveicons-webfont.woff",
+    "themes/fonts/fira-code/FiraCode-Bold.woff2",
+    "themes/fonts/fira-code/FiraCode-Regular.woff2",
+    "themes/fonts/playfair-display/PlayfairDisplayBold.ttf",
+    "themes/fonts/playfair-display/PlayfairDisplayRegular.ttf",
+    "themes/fonts/playfair-display/PlayfairDisplaySCBold.ttf",
+    "themes/fonts/playfair-display/PlayfairDisplaySCRegular.ttf",
+    "themes/fonts/route-159/Route159Bold.otf",
+    "themes/fonts/route-159/Route159BoldItalic.otf",
+    "themes/fonts/route-159/Route159Light.otf",
+    "themes/fonts/route-159/Route159LightItalic.otf",
+    "themes/images/elusive/align-justify.svg",
+    "themes/images/elusive/align-left.svg",
+    "themes/images/elusive/arrow-right.svg",
+    "themes/images/elusive/eye-close.svg",
+    "themes/images/elusive/eye-open.svg",
+    "themes/images/elusive/file.svg",
+    "themes/images/elusive/file-edit.svg",
+    "themes/images/elusive/gift.svg",
+    "themes/images/elusive/link.svg",
+    "themes/images/elusive/minus.svg",
+    "themes/images/elusive/pencil.svg",
+    "themes/images/elusive/plus.svg",
+    "themes/images/elusive/remove.svg",
+    "themes/images/elusive/search.svg",
+    "themes/images/elusive/share-alt.svg",
+    "themes/images/elusive/star-alt.svg",
+    "themes/images/elusive/star-empty.svg",
+    "themes/images/elusive/star-green.svg",
+    "themes/images/elusive/star.svg",
+    "themes/images/elusive/stop-alt.svg",
+    "themes/images/elusive/tag.svg",
+    "themes/images/cys-banner-baked.svg",
+    "themes/images/cys-corner.svg",
+    "themes/images/cys-header-2x.png",
+    "themes/images/cys-header.png",
+    "themes/images/material-throbber.svg",
+    "themes/images/percent.svg",
+    "themes/cyslantia-dark.min.css",
+    "themes/cyslantia-light.min.css"
   ]
 }

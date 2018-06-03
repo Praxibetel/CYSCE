@@ -1,0 +1,39 @@
+chrome.storage.sync.get("preferenceNotifications", (e) => {
+    if (!chrome.runtime.lastError && !e.preferenceNotifications) {
+        $(".header-alerts-container").parent().hide();
+    }
+});
+
+$(".sidebar-content > ul > li > a[href='/Stories/']:not(.selected)").after('<ul id="ctl13"><li id="ctl14"><a id="ctl15" href="/stories/random">Random</a></li><li id="ctl16"><a id="ctl17" href="/Games/Search.aspx">Search</a></li></ul>');
+$(".sidebar-content > ul > li > a[href='/forums']:not(.selected)").after('<ul id="ctl104"><li id="ctl105"><a id="ctl106" href="/Forums/Search.aspx">Search</a></li></ul>');
+if ($("#Cys_DisplayName").length) $(".sidebar-content > ul > li > a[href='/my/']:not(.selected)").after('<ul id="ctl25"><li id="ctl26"><a id="ctl27" href="/My/Games.aspx">Storygames</a></li><li id="ctl28"><a id="ctl29" href="/My/Pictures/Default.aspx">Pictures</a></li><li id="ctl30"><a id="ctl31" href="/my/messages">Messages</a></li><li id="ctl32"><a id="ctl33" href="/My/Notifications">Notifications</a></li><li id="ctl34"><a id="ctl35" href="/My/Duels/Default.aspx">Duels</a></li><li id="ctl36"><a id="ctl37" href="/My/Saves.aspx">Saves</a></li><li id="ctl38"><a id="ctl39" href="/My/Comments.aspx">Comments</a></li><li id="ctl40"><a id="ctl41" href="/My/Points.aspx">Points</a></li><li id="ctl42"><a id="ctl43" href="/user/endorsements?username=' + $("#Cys_DisplayName").text() + '">Commendations</a></li><li id="ctl44"><a id="ctl45" href="/my/notepad">Notepad</a></li><li id="ctl46"><a id="ctl47" href="/My/Profile.aspx">Profile</a></li></ul>');
+$(".sidebar-content > ul > li > a[href='/help/']:not(.selected)").after('<ul id="ctl50"><li id="ctl51"><a id="ctl52" href="/Help/History.aspx">CYOA History</a></li><li id="ctl53"><a id="ctl54" href="/Help/AboutUs.aspx">About Us</a></li><li id="ctl55"><a id="ctl56" href="/Help/PrivacyPolicy.aspx">Privacy Policy</a></li><li id="ctl57"><a id="ctl58" href="/Help/TermsOfService.aspx">Terms Of Service</a></li></ul>');
+
+$.get("/alerts", (data) => {
+    if (data) {
+        data = JSON.parse(data);
+        if (data && data.length) {
+            var n = {
+                    messages: {
+                        selector: "li a[href='/my/messages']",
+                        value: 0
+                    },
+                    notifications: {
+                        selector: "li a[href='/My/Notifications']",
+                        value: 0
+                    }
+                },
+                notifications = 0;
+            data.forEach((i) => {
+                if ((i.type || null) === "newmessage") n.messages.value = parseInt(i.message.match(/\d[\d,]*/)[0].replace(/,/g, ""));
+                else if ((i.type || null) === "notification") n.notifications.value++;
+            });
+            for (var i in n) {
+                i = n[i];
+                if (i.value) $(i.selector).attr("data-badge", i.value);
+                notifications += i.value;
+            }
+            if (notifications) $("li a[href='/my/']").attr("data-badge", "!");
+        }
+    }
+});
