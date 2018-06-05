@@ -1,7 +1,7 @@
 CodeMirror.defineSimpleMode("onpage", {
     start: [{
-        regex: /(%%)(?:|([A-Z][A-Z0-9]*)|(-?[0-9]+))(%)(!?=|<=?|>=?)(%)(?:|([A-Z][A-Z0-9]*)|(-?[0-9]+))(%(?:.*?)%%)/,
-        token: ["keyword", "variable", "number", "keyword", "operator keyword", "keyword", "variable", "number", "keyword"]
+        regex: /(%%)(?:|([A-Z][A-Z0-9]*)|(-?[0-9]+))(%)(!?=|<=?|>=?)(%)(?:|([A-Z][A-Z0-9]*)|(-?[0-9]+))(%)(.*?)(%%)/,
+        token: ["keyword", "variable", "number", "keyword", "operator", "keyword", "variable", "number", "keyword", "string", "keyword"]
     }, {
         regex: /(%%)(|[A-Z][A-Z0-9]*)(%%)/,
         token: ["keyword", "variable", "keyword"]

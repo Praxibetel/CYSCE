@@ -48,12 +48,16 @@ CodeMirror.defineSimpleMode("cysscript", {
         }
     ],
     string: [{
-            regex: /[ -~\n\r]*?"/,
+            regex: /"/,
             token: "string",
             next: "start"
         },
         {
-            regex: /.*/,
+            regex: /[^ -~\n\r]+/,
+            token: "error"
+        },
+        {
+            regex: /[ !#-~\n\r]+/,
             token: "string"
         }
     ],
@@ -84,5 +88,5 @@ $("form").submit(function() {
 });
 
 $(window).on("load", function() {
-  scriptMirror.refresh();
+    scriptMirror.refresh();
 });
