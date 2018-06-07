@@ -13,6 +13,7 @@ ChooseYourStory Chrome Extension
 	+ CYS theme integration (no more need for stylish/stylus chrome extension)
 	+ Choose to recieve alerts or not
 
+
 ### TODO
 - [x] Make README file
 - [x] Put a license on this thing
@@ -21,11 +22,23 @@ ChooseYourStory Chrome Extension
     - [ ] Convert all color literals in `_cyslantia-base.sass` to variables
     - [ ] Custom CodeMirror theme?
 	- [ ] Find and fix all remaining icons and .gifs on the site
+	- [ ] Replace trophies
+	- [ ] Replace other icons around the site with pngs within themes>images>custom
+	- [ ] Replace emojis
+	- [ ] Replace storygame category backgrounds for dark css
+	- [ ] Fix dark theme alternating colors
+		* recommend taking a look at the dropbox version of cysdark for reference and guide
 - [ ] Additional storygame search options
 - [ ] Fix forum post collapsing
 - [ ] CodeMirror in more places?
 - [ ] Fix Forum Search
 	- [ ] Forum Search CSS
 	- [ ] Forum Search Functionality
+- [ ] Make or find graphics for Rejected Features in FWW
+- [ ] || for Completed Features in FWW
+- [ ] || for Accepted Features in FWW (blue light is weird and therefore unacceptable)
+
+
+
 - [ ] CYS Mobile Application?
-	- [ ] Have a think on it
+	- [ ] Have a think on it.
