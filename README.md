@@ -3,7 +3,7 @@ ChooseYourStory Chrome Extension
 
 ### TODO
 - [ ] Make README file
-	- [ ] a TODO list is not a README file
+	- [x] a TODO list is not a README file
 - [ ] Finish CSS
     - [ ] Consolidate all stray CSS into either `_cyslantia-base.sass` or `notheme.css`
     - [ ] Convert all color literals in `_cyslantia-base.sass` to variables
