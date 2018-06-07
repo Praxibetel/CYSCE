@@ -4,7 +4,7 @@ ChooseYourStory Chrome Extension
 ### Things you didn't notice (features list):
 
 + Complete overhaul of storygame search functionality
-+ Site navigation links are shown or available from every webpage
++ Site navigation links are available from every webpage
 
 ### TODO
 - [ ] Make README file
