@@ -1,8 +1,9 @@
 # CYSCE
-CYS Chrome Extension
+ChooseYourStory Chrome Extension
 
 ### TODO
-- [x] MAKE README FILE
+- [ ] Make README file
+	- [ ] a TODO list is not a README file
 - [ ] Finish CSS
     - [ ] Consolidate all stray CSS into either `_cyslantia-base.sass` or `notheme.css`
     - [ ] Convert all color literals in `_cyslantia-base.sass` to variables
@@ -14,5 +15,7 @@ CYS Chrome Extension
 - [ ] Fix Forum Search
 	- [ ] Forum Search CSS
 	- [ ] Forum Search Functionality
+- [ ] Make version history file / update log
+	- [ ] Include significant changes
 - [ ] CYS Mobile Application?
-	- [ ] Have a think
+	- [ ] Have a think on it
