@@ -5,10 +5,11 @@ ChooseYourStory Chrome Extension
 
 + Complete overhaul of storygame search functionality
 + Site navigation links are available from every webpage
++ Able to collapse and anchor thread posts
 
 ### TODO
-- [ ] Make README file
-	- [x] a TODO list is not a README file
+- [x] Make README file
+- [x] Put a license on this thing
 - [ ] Finish CSS
     - [ ] Consolidate all stray CSS into either `_cyslantia-base.sass` or `notheme.css`
     - [ ] Convert all color literals in `_cyslantia-base.sass` to variables
