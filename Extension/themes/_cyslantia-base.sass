@@ -45,7 +45,10 @@ $image-icon-reply: url("#{$directory}/images/elusive/share-alt.svg") !default
 $image-icon-edit: url("#{$directory}/images/elusive/pencil.svg") !default
 $image-icon-minus: url("#{$directory}/images/elusive/minus.svg") !default
 $image-icon-plus: url("#{$directory}/images/elusive/plus.svg") !default
+$image-icon-bug: url("#{$directory}/images/elusive/bug.png") !default
+$image-icon-squashed-bug: url("#{$directory}/images/elusive/squashedbug.png") !default
 $image-icon-tag: url("#{$directory}/images/elusive/tag.svg") !default
+$image-icon-exclaim: url("#{$directory}/images/elusive/exclaim.png") !default
 $image-icon-edit-adv: url("#{$directory}/images/elusive/file-edit.svg") !default
 $image-icon-delete: url("#{$directory}/images/elusive/remove.svg") !default
 $image-icon-go: url("#{$directory}/images/elusive/arrow-right.svg") !default
@@ -191,6 +194,24 @@ body
           &:hover, &.selected
             text-shadow: 0 0 20px rgba(white, 0.9)
 
+          &[data-badge]::after
+            content: attr(data-badge)
+            position: absolute
+            bottom: 100%
+            font-family: $font-main
+            right: 0
+            width: 1.75em
+            height: 1.75em
+            background-color: #591414
+            border-radius: 1.75em
+            line-height: 1.75em
+            text-align: center
+            font-weight: bold
+            font-size: 0.6em
+            left: 0
+            margin: auto
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px rgba(255, 255, 255, 0.2)
+
         &:last-of-type a
           border-right: none
 
@@ -221,6 +242,24 @@ body
               position: relative
               text-align: left
               width: auto
+
+              &[data-badge]::after
+                content: attr(data-badge)
+                position: absolute
+                font-family: $font-main
+                left: 100%
+                width: 1.75em
+                height: 1.75em
+                background-color: #591414
+                border-radius: 1.75em
+                line-height: 1.75em
+                text-align: center
+                font-weight: bold
+                font-size: 0.6em
+                top: 50%
+                transform: translateY(-50%)
+                margin: auto
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px rgba(255, 255, 255, 0.2)
 
         &:hover > ul
           visibility: visible
@@ -377,6 +416,14 @@ a.button, a.button:active
 .forum-thread.collapsed a.button.collapse > img
   content: $image-icon-plus
 
+.styled-table
+  img
+    &[src$="bug.gif"]
+      content: $image-icon-bug
+
+    &[src$="squashedbug.gif"]
+      content: $image-icon-squashed-bug
+
 // Profiles
 
 #profile_Text > img:first-child
@@ -524,6 +571,9 @@ a.button, a.button:active
   text-align: center
 
 // Advanced Editor
+img[src$="exclaim.gif"]
+  content: $image-icon-exclaim
+
 img[src$="edit.gif"]
   content: $image-icon-edit-adv
 

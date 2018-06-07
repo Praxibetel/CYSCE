@@ -8,13 +8,28 @@ if ($("a.button:contains('Non-threaded')").length) {
 }
 
 $(".forum-message .heading .buttons").eq(0).prepend(
-    '<a href="#collapse" class="button collapse" onclick="return $(this).parent().parent().parent().siblings().filter(\'.forum-thread\').toggleClass(\'collapsed\'), !1"><img src="' + chrome.extension.getURL("themes/images/elusive/minus.svg") + '"><span>Collapse</span> All</a>'
-);
-
+    $("<a></a>", {
+        href: "#collapse",
+        class: "button collapse"
+    }).click(function() {
+        var e = $(this).parent().parent().parent().siblings().filter(".forum-thread");
+        e.toggleClass("collapsed");
+        return false;
+    }).append($("<img>", {
+        src: "/0x44/InedoLib/Inedo.Web.Controls.IconImage/ProcessImageRequest/InedoIcons/F3Silk/16x16/delete.png"
+    }), " ", $("<span></span>").text("Collapse"), " All"));
 $(".forum-thread > .forum-thread .forum-message .heading .buttons").prepend(
-    '<a href="#collapse" class="button collapse" onclick="var e = $(this).parent().parent().parent().parent(); return e.toggleClass(\'collapsed\'), $(this).find(\'span\').text(e.hasClass(\'collapsed\') ? \'Expand\' : \'Collapse\'), !1"><img src="' + chrome.extension.getURL("themes/images/elusive/minus.svg") + '"><span>Collapse</span></a>'
-);
-
+    $("<a></a>", {
+        href: "#collapse",
+        class: "button collapse"
+    }).click(function() {
+        var e = $(this).parent().parent().parent().parent();
+        e.toggleClass("collapsed");
+        $(this).find("span").text(e.hasClass("collapsed") ? "Expand" : "Collapse");
+        return false;
+    }).append($("<img>", {
+        src: "/0x44/InedoLib/Inedo.Web.Controls.IconImage/ProcessImageRequest/InedoIcons/F3Silk/16x16/delete.png"
+    }), " ", $("<span></span>").text("Collapse")));
 $(".body, .body *").contents().filter(function() {
     return (this.nodeType == 3 && $.trim(this.nodeValue) && /@[\w-]+/.test(this.data))
 }).each(function() {
@@ -27,8 +42,8 @@ $(".body, .body *").contents().filter(function() {
 $("a[name]").each(function() {
     $(this).parent().find(".heading .buttons").prepend($("<a></a>", {
         href: "#" + $(this).attr("name"),
-        class: "button"
+        class: "button anchor"
     }).append($("<img>", {
-        src: chrome.extension.getURL("themes/images/elusive/link.svg")
+        src: "/0x44/InedoLib/Inedo.Web.Controls.IconImage/ProcessImageRequest/InedoIcons/F3Silk/16x16/link.png"
     }), " Anchor"));
 });

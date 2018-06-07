@@ -1,0 +1,36 @@
+.forum-message .buttons {
+  display: flex;
+}
+
+.forum-thread.collapsed .avatar {
+  display: none;
+}
+
+.forum-thread.collapsed .forum-message, .forum-thread.collapsed .forum-thread.collapsed>.forum-message {
+  display: none;
+}
+
+.forum-thread.collapsed>.forum-message {
+  display: block;
+  min-height: 25px;
+}
+
+.forum-thread.collapsed>.forum-message .body {
+  display: none;
+}
+
+.forum-thread.collapsed>.forum-message .subH2 {
+  display: none;
+}
+
+.forum-thread.collapsed>.forum-message .avatar {
+  display: none;
+}
+
+.forum-thread.collapsed>.forum-message h2 {
+  border-bottom: none !important;
+}
+
+.forum-thread.collapsed a.button.collapse>img {
+  content: url("/0x44/InedoLib/Inedo.Web.Controls.IconImage/ProcessImageRequest/InedoIcons/F3Silk/16x16/add.png");
+}

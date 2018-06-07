@@ -20,7 +20,7 @@
     "matches": ["http://chooseyourstory.com/*"],
     "exclude_matches": ["http://chooseyourstory.com/story/viewer/*"],
     "js": ["js/jquery.js", "js/theme.js"],
-    "css": ["notification.css"],
+    "css": ["themes/notheme.css"],
     "run_at": "document_start"
   }, {
     "matches": ["http://chooseyourstory.com/*"],
@@ -91,6 +91,8 @@
     "themes/images/elusive/align-justify.svg",
     "themes/images/elusive/align-left.svg",
     "themes/images/elusive/arrow-right.svg",
+    "themes/images/elusive/bug.png",
+    "themes/images/elusive/exclaim.png",
     "themes/images/elusive/eye-close.svg",
     "themes/images/elusive/eye-open.svg",
     "themes/images/elusive/file.svg",
@@ -103,6 +105,7 @@
     "themes/images/elusive/remove.svg",
     "themes/images/elusive/search.svg",
     "themes/images/elusive/share-alt.svg",
+    "themes/images/elusive/squashedbug.png",
     "themes/images/elusive/star-alt.svg",
     "themes/images/elusive/star-empty.svg",
     "themes/images/elusive/star-green.svg",

@@ -72,7 +72,6 @@
   background-image: url("chrome-extension://__MSG_@@extension_id__/themes/images/elusive/star.svg");
   background-size: auto 100%;
   height: 100%;
-  width: var(--rating);
 }
 
 .rating.rated {

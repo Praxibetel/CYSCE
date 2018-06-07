@@ -1,38 +1,40 @@
-console.log($("input[name='SS']").val()); // testing
+//console.log($("input[name='SS']").val()); // testing
 
 var ss = atob($("input[name='SS']").val()).split("|"),
-  ssIter;
+    ssIter;
 
-var ssCoords = new Map(ss.shift().split(",").map((e, i) => [["guid","pageId"][i], e]));
+var ssCoords = new Map(ss.shift().split(",").map((e, i) => [
+    ["guid", "pageId"][i], e
+]));
 var ssHistory = ss.shift().split(",").map(e => parseInt(e));
 ssIter = ss.shift();
 var ssLinks = new Map(ssIter ? ssIter.split(";").map(e => e.split(",").map(e => parseInt(e))) : null);
 ssIter = ss.shift();
 var ssItems = new Map(ssIter ? ssIter.split(";").map(e => e.split(",").map(e => parseInt(e))) : null);
-var ssVariables = JSON.parse("{" + ss.shift().replace(/[A-Z][A-Z0-9]*/g, "\"$&\"").replace(/,/g, ":").replace(/;/g, ",") + "}");
+var ssVariables = JSON.parse("{" + ss.shift().replace(/([A-Z0-9]*),/g, "\"$1\",").replace(/,/g, ":").replace(/;/g, ",") + "}");
 var ssOriginalVariables = Object.assign({}, ssVariables);
 
-console.log(ssCoords, ssHistory, ssLinks, ssItems, ssVariables); // testing
+//console.log(ssCoords, ssHistory, ssLinks, ssItems, ssVariables); // testing
 
 function rebuildSS() {
-  return btoa([
-    unmap(ssCoords).map(e => e[1]).join(","),
-    ssHistory.join(","),
-    unmap(ssLinks).map(e => e.join(",")).join(";"),
-    unmap(ssItems).map(e => e.join(",")).join(";"),
-    Object.entries(ssVariables).map(e => e.join(",")).join(";")
-  ].join("|"));
+    return btoa([
+        unmap(ssCoords).map(e => e[1]).join(","),
+        ssHistory.join(","),
+        unmap(ssLinks).map(e => e.join(",")).join(";"),
+        unmap(ssItems).map(e => e.join(",")).join(";"),
+        Object.entries(ssVariables).map(e => e.join(",")).join(";")
+    ].join("|"));
 }
 
 function unmap(map) {
-  var array = [];
-  map.forEach((value, key) => array.push([key, value]));
-  return array;
+    var array = [];
+    map.forEach((value, key) => array.push([key, value]));
+    return array;
 }
 
-console.log(rebuildSS()); // testing
+//console.log(rebuildSS()); // testing
 
-console.log($("input[name='SS']").val() === rebuildSS()); // testing
+//console.log($("input[name='SS']").val() === rebuildSS()); // testing
 
 var devPanel = $("<div></div>", {
     id: "devPanel",
@@ -85,14 +87,6 @@ $("#svbanner").after(devPanel, $("<div></div>", {
     class: "CYSExtension"
 }));
 
-$(".dark1border + div > ul > li > a").after(function() {
-  id = parseInt($(this).attr("onclick").match(/'(\d+)'/)[1]);
-  return $("<span></span>", {
-    class: "devLinkId",
-    dataId: id
-  }).text("#" + id);
-});
-
 chrome.storage.sync.get("preferenceDevmode", (e) => {
     if ((!chrome.runtime.lastError && e.preferenceDevmode) || /adveditor/i.test(opener.location)) {
         $("#svbanner ul").prepend($("<li></li>", {
@@ -102,5 +96,12 @@ chrome.storage.sync.get("preferenceDevmode", (e) => {
         }).text("Variables").click(function() {
             return $("#devPanel").toggle(), false
         })));
+        $(".dark1border + div > ul > li > a").after(function() {
+            id = parseInt($(this).attr("onclick").match(/'(\d+)'/)[1]);
+            return $("<span></span>", {
+                class: "devLinkId",
+                dataId: id
+            }).text("#" + id);
+        });
     }
 });
