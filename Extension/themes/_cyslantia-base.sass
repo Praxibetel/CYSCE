@@ -200,11 +200,11 @@ body
             bottom: 100%
             font-family: $font-main
             right: 0
-            width: 1.75em
-            height: 1.75em
-            background-color: #591414
-            border-radius: 1.75em
-            line-height: 1.75em
+            width: 20px
+            height: 20px
+            background-color: #C09839
+            border-radius: 20px
+            line-height: 20px
             text-align: center
             font-weight: bold
             font-size: 0.6em
@@ -244,22 +244,14 @@ body
               width: auto
 
               &[data-badge]::after
-                content: attr(data-badge)
-                position: absolute
-                font-family: $font-main
+                border-radius: 18px
+                bottom: unset
+                height: 18px
                 left: 100%
-                width: 1.75em
-                height: 1.75em
-                background-color: #591414
-                border-radius: 1.75em
-                line-height: 1.75em
-                text-align: center
-                font-weight: bold
-                font-size: 0.6em
+                line-height: 18px
                 top: 50%
                 transform: translateY(-50%)
-                margin: auto
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px rgba(255, 255, 255, 0.2)
+                width: 18px
 
         &:hover > ul
           visibility: visible
@@ -348,7 +340,7 @@ code, kbd, samp
   font-family: $font-monospace
 
 code
-  font-variant-ligatures: no-contextual
+  font-variant-ligatures: contextual
 
 kbd, samp
   font-variant-ligatures: no-contextual
@@ -376,7 +368,7 @@ a.button, a.button:active
   color: rgb(221, 221, 221)
   background-color: #3F1A18
   background-image: unset
-  border: medium none rgb(221, 221, 221)
+  border: none
   font-size: 80%
   height: 14px
   line-height: 14px
