@@ -1,6 +1,11 @@
 # CYSCE
 ChooseYourStory Chrome Extension
 
+### Things you didn't notice (features list):
+
++ User profile storygame list is now clickable
++ Complete overhaul of storygame search functionality
+
 ### TODO
 - [ ] Make README file
 	- [x] a TODO list is not a README file
