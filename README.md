@@ -6,6 +6,12 @@ ChooseYourStory Chrome Extension
 + Complete overhaul of storygame search functionality
 + Site navigation links are available from every webpage
 + Able to collapse and anchor thread posts
++ @mentions are clicky links on profile pages and forums
++ Unpublished storygames are clicky links on profile pages
++ New profile settings
+	+ Storygame Developer Mode
+	+ CYS theme integration (no more need for stylish/stylus chrome extension)
+	+ Choose to recieve alerts or not
 
 ### TODO
 - [x] Make README file
