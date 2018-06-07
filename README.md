@@ -15,7 +15,5 @@ ChooseYourStory Chrome Extension
 - [ ] Fix Forum Search
 	- [ ] Forum Search CSS
 	- [ ] Forum Search Functionality
-- [ ] Make version history file / update log
-	- [ ] Include significant changes
 - [ ] CYS Mobile Application?
 	- [ ] Have a think on it
