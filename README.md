@@ -17,7 +17,7 @@ ChooseYourStory Chrome Extension
 ### TODO
 - [x] Make README file
 - [x] Put a license on this thing
-- [ ] Finish CSS
+- [ ] CSS -> SASS
     - [ ] Consolidate all stray CSS into either `_cyslantia-base.sass` or `notheme.css`
     - [ ] Convert all color literals in `_cyslantia-base.sass` to variables
     - [ ] Custom CodeMirror theme?
@@ -27,16 +27,15 @@ ChooseYourStory Chrome Extension
 	- [ ] Replace emojis
 	- [ ] Replace storygame category backgrounds for dark css
 	- [ ] Fix dark theme alternating colors
-		* recommend taking a look at the dropbox version of cysdark for reference and guide
 - [ ] Additional storygame search options
 - [ ] Fix forum post collapsing
 - [ ] CodeMirror in more places?
 - [ ] Fix Forum Search
 	- [ ] Forum Search CSS
 	- [ ] Forum Search Functionality
-- [ ] Make or find graphics for Rejected Features in FWW
-- [ ] || for Completed Features in FWW
-- [ ] || for Accepted Features in FWW (blue light is weird and therefore unacceptable)
+- [ ] Make graphics for Rejected Features in FWW
+- [ ] ^ for Completed Features in FWW
+- [ ] ^ for Accepted Features in FWW (blue light is weird and therefore unacceptable)
 
 
 
