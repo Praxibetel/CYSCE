@@ -11,29 +11,32 @@ $version: "2.0" !default
 // Initialize variables
 
 $color-background-page: null !default
-$color-background-header: null !default
+$color-background-masthead: null !default
 $color-background-navbar: null !default
 $color-background-main: null !default
 $color-background-sidebar: null !default
 $color-background-accent: null !default
 
-$color-text-header: null !default
+$color-border-sidebar: null !default
+
+$color-text-masthead: null !default
 $color-text-navbar: null !default
 $color-text-heading: null !default
+$color-text-heading-alt: null !default
 $color-text-main: null !default
 $color-text-sidebar: null !default
 $color-text-link: null !default
 $color-text-link-hover: null !default
 
-$font-header: "Playfair Display", serif !default
+$font-heading: "Playfair Display", serif !default
 $font-main: "Route 159", Ubuntu, "Trebuchet MS", sans-serif !default
 $font-monospace: "Fira Code", "Fira Mono", monospace !default
 $font-size-main: 14px !default
 
 $image-background-page: url("#{$directory}/images/cys-banner-baked.svg") !default
 $image-background-underside: url("#{$directory}/images/cys-corner.svg") !default
-$image-background-header: url("#{$directory}/images/cys-header.png") !default
-$image-background-header-2: url("#{$directory}/images/cys-header-2x.png") !default
+$image-background-masthead: url("#{$directory}/images/cys-header.png") !default
+$image-background-masthead-2x: url("#{$directory}/images/cys-header-2x.png") !default
 
 $image-icon-featured: url("#{$directory}/images/elusive/star-alt.svg") !default
 $image-icon-search: url("#{$directory}/images/elusive/search.svg") !default
@@ -43,10 +46,11 @@ $image-icon-threaded: url("#{$directory}/images/elusive/align-left.svg") !defaul
 $image-icon-unthreaded: url("#{$directory}/images/elusive/align-justify.svg") !default
 $image-icon-reply: url("#{$directory}/images/elusive/share-alt.svg") !default
 $image-icon-edit: url("#{$directory}/images/elusive/pencil.svg") !default
+$image-icon-link: url("#{$directory}/images/elusive/link.svg") !default
 $image-icon-minus: url("#{$directory}/images/elusive/minus.svg") !default
 $image-icon-plus: url("#{$directory}/images/elusive/plus.svg") !default
-$image-icon-bug: url("#{$directory}/images/elusive/bug.png") !default
-$image-icon-squashed-bug: url("#{$directory}/images/elusive/squashedbug.png") !default
+$image-icon-bug: url("#{$directory}/images/custom/bug.png") !default
+$image-icon-squashed-bug: url("#{$directory}/images/custom/squashedbug.png") !default
 $image-icon-tag: url("#{$directory}/images/elusive/tag.svg") !default
 $image-icon-exclaim: url("#{$directory}/images/elusive/exclaim.png") !default
 $image-icon-edit-adv: url("#{$directory}/images/elusive/file-edit.svg") !default
@@ -54,7 +58,7 @@ $image-icon-delete: url("#{$directory}/images/elusive/remove.svg") !default
 $image-icon-go: url("#{$directory}/images/elusive/arrow-right.svg") !default
 $image-icon-stop: url("#{$directory}/images/elusive/stop-alt.svg") !default
 $image-icon-item: url("#{$directory}/images/elusive/gift.svg") !default
-$image-icon-variable: url("#{$directory}/images/percent.svg") !default
+$image-icon-variable: url("#{$directory}/images/custom/percent.svg") !default
 $image-icon-script: url("#{$directory}/images/elusive/file.svg") !default
 
 @function specular-gradient($w, $x)
@@ -94,9 +98,9 @@ body
 // Header area
 
 #HeaderContainer
-  background-color: $color-background-header
-  background: $image-background-header top center no-repeat, specular-gradient(360px, 33.33%), $color-background-header
-  background: -webkit-image-set($image-background-header 1x, $image-background-header-2 2x) top center no-repeat, specular-gradient(360px, 33.33%), $color-background-header
+  background-color: $color-background-masthead
+  background: $image-background-masthead top center no-repeat, specular-gradient(360px, 33.33%), $color-background-masthead
+  background: -webkit-image-set($image-background-masthead 1x, $image-background-masthead-2x 2x) top center no-repeat, specular-gradient(360px, 33.33%), $color-background-masthead
   height: 130px
   z-index: -1
 
@@ -123,10 +127,10 @@ body
         display: none
 
       a::after
-        color: $color-text-header
+        color: $color-text-masthead
         content: "chooseyourstory.com"
         font-size: 30pt
-        font-family: $font-header
+        font-family: $font-heading
         font-weight: bold
         left: -40px
         line-height: 120px
@@ -178,7 +182,7 @@ body
         flex: 1 0 auto
 
         a
-          font-family: $font-header
+          font-family: $font-heading
 
           //font-variant: small-caps //using font-weight: 500
           padding: 0 20px
@@ -249,6 +253,7 @@ body
                 height: 18px
                 left: 100%
                 line-height: 18px
+                right: unset
                 top: 50%
                 transform: translateY(-50%)
                 width: 18px
@@ -327,7 +332,7 @@ body
 
 h1, h2, h3, h1 a
   color: $color-text-heading
-  font-family: $font-header
+  font-family: $font-heading
 
 a
   color: $color-text-link
@@ -353,13 +358,36 @@ hr
   margin: 0.5em 2px
 
 // Storygame sections
+
 img[src$="CYS/images/star.gif"]
   content: $image-icon-featured
   vertical-align: text-bottom
 
 // Storygame description page
+
 img[src$="16x16/star.png"]
   content: $image-icon-featured
+
+// Storygame rating container
+
+.ui-dialog
+  font-family: $font-heading
+  box-shadow: 0 3px 8px rgba(black, 0.4)
+  border-radius: 0
+  background-color: $color-background-sidebar !important
+  border: 1px solid $color-border-sidebar
+  background: specular-gradient(360px, 0%)
+
+  > .ui-dialog-titlebar
+    background-color: transparent
+    background-image: none
+    border: none
+    border-radius: 0
+
+.ui-widget-overlay
+  background: rgba(grey, 0.4)
+  opacity: 1
+  backdrop-filter: blur(3px)
 
 // Forums
 
@@ -405,9 +433,6 @@ a.button, a.button:active
     &[src$="tag_green.png"]
       content: $image-icon-tag
 
-.forum-thread.collapsed a.button.collapse > img
-  content: $image-icon-plus
-
 .styled-table
   img
     &[src$="bug.gif"]
@@ -415,6 +440,86 @@ a.button, a.button:active
 
     &[src$="squashedbug.gif"]
       content: $image-icon-squashed-bug
+
+// Forum posts
+
+.forum-thread
+  .forum-thread
+    margin-left: 25px
+
+  .forum-message
+    margin-left: 0 !important
+    transition: background-color 0.5s ease
+
+  &.collapsed
+    a.button.collapse > img
+      content: $image-icon-plus
+
+    > .forum-message
+      > .heading
+        padding-bottom: 0
+
+        > h2
+          margin-bottom: 0
+
+  &:hover
+    > .forum-message
+      background-color: #E6DABE
+
+.forum-message
+  background-color: #FFFAEF
+  border-color: #E6DABE !important
+  box-shadow: 0 3px 8px rgba(black, 0.15)
+
+  > div
+    border: none !important
+
+  > .heading
+    background-color: inherit
+
+    > .buttons
+        .anchor > img
+          content: $image-icon-link
+
+        .collapse > img
+          content: $image-icon-minus
+
+    > h2
+      background-color: #C04039
+      color: $color-text-heading-alt
+      padding: 6px 5px
+      margin: (-5px) -5px 10px
+
+    > .subH2
+      font-style: italic
+      margin-bottom: 0
+
+  > .avatar-container
+    background-color: #F5F0E4
+    border-right: 1px solid #E6DABE !important
+    overflow: hidden
+
+    > .avatar
+      margin-top: 10px
+      object-fit: cover
+      object-position: 50% 15%
+      width: 80px
+      height: 80px
+      max-width: unset
+      filter: drop-shadow(0 0px 3px rgba(black, 0.15))
+      transition: object-position 0.2s linear
+
+    > .user-name
+      overflow: visible
+      white-space: nowrap
+
+      &[style*="#990000"]
+        color: #B68000 !important
+
+  > .body
+    img
+      max-width: 100%
+      height: auto
 
 // Profiles
 
@@ -431,11 +536,11 @@ a.button, a.button:active
   margin-right: -20px
   margin-left: 10px
   background-color: $color-background-sidebar !important
-  border: 1px solid #998D4E
+  border: 1px solid $color-border-sidebar
   color: $color-text-sidebar
   position: relative
   width: 170px !important
-  background: specular-gradient(360px, 0% 0%), #B7A374
+  background: specular-gradient(360px, 0%)
 
   h2
     color: #201A1A
@@ -451,7 +556,7 @@ a.button, a.button:active
     padding-bottom: 0
 
   a
-    color: #EEE !important
+    color: $color-text-sidebar !important
     text-shadow: 0 1px 0 rgba(black, 0.8)
     text-decoration: none
     transition: text-shadow 0.33s ease
@@ -469,7 +574,8 @@ a.button, a.button:active
     right: -1px
     z-index: -1
 
-.alternate
+.alternate, h1.alternate
+  color: $color-text-heading-alt
   text-align: center
   border: 1px solid #871D18 !important
   margin: 15px -20px 5px !important
@@ -529,30 +635,6 @@ a.button, a.button:active
   .unpublished a
     display: inline
     font-style: italic
-
-// Storygame description page
-
-// Storygame rating container
-
-.ui-widget.ui-widget-content
-  font-family: $font-header
-  box-shadow: 0 3px 8px rgba(black, 0.4)
-  border-radius: 0
-  background-color: #BCAE8E !important
-  border: 1px solid #998D4E
-  background: specular-gradient(360px, 0%), #B7A374
-
-.ui-dialog-titlebar
-  background-color: transparent
-  background-image: none
-  border: none
-  border-radius: 0
-
-.ui-widget-overlay.ui-front
-  backdrop-filter: blur(3px)
-  -webkit-backdrop-filter: blur(3px)
-  background: rgba(grey, 0.4)
-  opacity: 1
 
 // Footer area
 #Footer
