@@ -17,6 +17,7 @@ $color-background-main: null !default
 $color-background-sidebar: null !default
 $color-background-accent: null !default
 
+$color-border-main: null !default
 $color-border-sidebar: null !default
 
 $color-text-masthead: null !default
@@ -90,6 +91,7 @@ body
     background-color: #FFFAEF
 
   &:not(.cke_editable)
+    line-height: 1.0625
     margin: 0
 
   > table:first-child
@@ -274,11 +276,10 @@ body
       z-index: -1
 
   > .main-content
-    &, .footer-content
-      background-color: $color-background-main !important
-      border-color: #BBB !important
-      margin: 38px auto 0 !important
-      position: relative
+    background-color: $color-background-main !important
+    border-color: $color-border-main !important
+    margin: 38px auto 0 !important
+    position: relative
 
     &::before, &::after
       content: " "
@@ -297,6 +298,8 @@ body
       right: -10px
 
   > .footer-content
+    background-color: lighten($color-background-main, 3%) !important
+    border-color: $color-border-main !important
     margin: 0 !important
 
   // Extras for certain pages and the CKEditor
@@ -434,6 +437,18 @@ a.button, a.button:active
       content: $image-icon-tag
 
 .styled-table
+  th, tr
+    padding: 5px 10px
+
+  th
+    background-color: $color-background-accent
+    border: none !important
+    border-radius: 0 !important
+    padding: 2px 10px
+
+  tr:nth-of-type(even)
+    background-color: lighten($color-background-main, 3%)
+
   img
     &[src$="bug.gif"]
       content: $image-icon-bug
@@ -478,17 +493,17 @@ a.button, a.button:active
     background-color: inherit
 
     > .buttons
-        .anchor > img
-          content: $image-icon-link
+      .anchor > img
+        content: $image-icon-link
 
-        .collapse > img
-          content: $image-icon-minus
+      .collapse > img
+        content: $image-icon-minus
 
     > h2
       background-color: #C04039
       color: $color-text-heading-alt
       padding: 6px 5px
-      margin: (-5px) -5px 10px
+      margin: -5px -5px 10px
 
     > .subH2
       font-style: italic
@@ -500,6 +515,7 @@ a.button, a.button:active
     overflow: hidden
 
     > .avatar
+      border: none
       margin-top: 10px
       object-fit: cover
       object-position: 50% 15%
@@ -577,6 +593,7 @@ a.button, a.button:active
 .alternate, h1.alternate
   color: $color-text-heading-alt
   text-align: center
+  background-color: $color-background-accent !important
   border: 1px solid #871D18 !important
   margin: 15px -20px 5px !important
   box-shadow: 0 3px 8px rgba(black, 0.4)

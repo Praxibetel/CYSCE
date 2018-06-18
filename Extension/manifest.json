@@ -28,7 +28,7 @@
     "js": ["js/navbar.js"],
     "run_at": "document_end"
   }, {
-    "matches": ["http://chooseyourstory.com/Games/Search.aspx"],
+    "matches": ["http://chooseyourstory.com/Games/Search.aspx*"],
     "js": ["js/moment.js", "js/storylist.js"],
     "css": ["storylist.css"]
   }, {
