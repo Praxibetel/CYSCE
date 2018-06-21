@@ -11,7 +11,7 @@
 
 #storygameListFilters {
   border-right: 1px solid #C04039;
-  flex: 0 0 240px;
+  flex: 0 0 200px;
   margin-right: 10px;
   padding-top: 10px;
 }
@@ -22,7 +22,7 @@
 }
 
 #storygameListPages {
-  flex: 1 0 680px;
+  flex: 1 0 580px;
 }
 
 #storygameListPagination {
@@ -53,7 +53,7 @@
 }
 
 .entry>div:nth-child(2) {
-  flex: 0 0 480px;
+  flex: 0 0 440px;
 }
 
 .entry .fullwidth {
@@ -124,7 +124,7 @@
 }
 
 .loading::after {
-  background-image: url("chrome-extension://__MSG_@@extension_id__/material-throbber.svg");
+  background-image: url("chrome-extension://__MSG_@@extension_id__/themes/images/material-throbber.svg");
   background-repeat: no-repeat;
   background-size: contain;
   content: " ";

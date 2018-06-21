@@ -28,19 +28,28 @@ chrome.storage.sync.get("preferenceStoryList", (e) => {
                     if ($(this).find("input").prop("checked")) return $(this).text().trim();
                 }).get(),
                 maxRating: parseInt($("#filterRatingMax").val()) || storyListFiltersDefault.maxRating,
-                minRating: parseInt($("#filterRatingMin").val()) || storyListFiltersDefault.minRating
+                minRating: parseInt($("#filterRatingMin").val()) || storyListFiltersDefault.minRating,
+                maxDate: new Date($("#filterDateMax").val()),
+                minDate: new Date($("#filterDateMin").val())
             };
             filters = Object.assign(storyListFiltersDefault, filters);
             return storyListData.filter(a => {
+                var pubdate = new Date(a.published);
                 return (
                     Math.round(a.rating) >= filters.minRating &&
                     Math.round(a.rating) <= filters.maxRating &&
                     (filters.inclEvery ?
                         filters.inclTags.every(t => a.tags.includes(t)) :
-                        filters.inclTags.some(t => a.tags.includes(t))) &&
+                        filters.inclTags.some(t => a.tags.includes(t))
+                    ) &&
                     ((a.myrating && filters.inclRated[0]) || !a.myrating && filters.inclRated[1]) &&
-                    ((a.featured && filters.inclFeatured[0]) || !a.featured && filters.inclFeatured[1])
-
+                    ((a.featured && filters.inclFeatured[0]) || !a.featured && filters.inclFeatured[1]) &&
+                    (!isNaN(filters.minDate.valueOf()) ?
+                        (!isNaN(filters.maxDate.valueOf()) ?
+                            (filters.minDate <= pubdate && pubdate <= filters.maxDate) :
+                            filters.minDate <= pubdate
+                        ) : !isNaN(filters.maxDate.valueOf()) ? pubdate <= filters.maxDate : true
+                    )
                 );
             });
         }
@@ -222,8 +231,11 @@ chrome.storage.sync.get("preferenceStoryList", (e) => {
             storyListProcess();
         });
 
-        $("body").on("change", "#filterTagContainer input", function() {
+        $("body").on("change", "#filterTagContainer input[type='checkbox']", function() {
             $("[data-for='filterTagContainer']").attr("data-value", $("#filterTagContainer input:checked").length);
+            $("#filterTagArray").val($("#filterTagContainer input:checked").map(function() {
+                return $(this).parent().text().trim();
+            }).get().join(","));
         });
 
         $("body").on("change", "#storygameListFilters #filterRatingMin", function() {
@@ -234,6 +246,16 @@ chrome.storage.sync.get("preferenceStoryList", (e) => {
         $("body").on("change", "#storygameListFilters #filterRatingMax", function() {
             if ($(this).val() < $("#filterRatingMin").val())
                 $("#filterRatingMin").val($(this).val());
+        });
+
+        $("body").on("change", "#storygameListFilters #filterDateMin", function() {
+            if (new Date($(this).val()) > new Date($("#filterDateMax").val()))
+                $("#filterDateMax").val($(this).val());
+        });
+
+        $("body").on("change", "#storygameListFilters #filterDateMax", function() {
+            if (new Date($(this).val()) < new Date($("#filterDateMin").val()))
+                $("#filterDateMin").val($(this).val());
         });
 
         $("body").on("submit", "#storygameListPagination", function() {
@@ -253,6 +275,9 @@ chrome.storage.sync.get("preferenceStoryList", (e) => {
         $("body").on("click", ".tag:not(.featured)", function() {
             $("#filterTagContainer label:contains(' " + $(this).text() + "')").find("input").prop("checked", true);
             $("[data-for='filterTagContainer']").attr("data-value", $("#filterTagContainer input:checked").length);
+            $("#filterTagArray").val($("#filterTagContainer input:checked").map(function() {
+                return $(this).parent().text().trim();
+            }).get().join(","));
             storyListProcess();
         });
 

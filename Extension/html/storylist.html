@@ -2,7 +2,9 @@
   <form id="storygameListFilters" action="#">
     <div class="flex">
       <h2 data-for="filterTagContainer" data-value="0">Tags</h2>
-      <div id="filterTagContainer"></div>
+      <div id="filterTagContainer">
+        <input type="hidden" name="tags" id="filterTagArray">
+      </div>
     </div>
     <div class="flex">
       <h2 data-for="filterTagMatchContainer">Match</h2>
@@ -50,6 +52,14 @@
           <option value="7">7</option>
           <option value="8" selected>8</option>
       </select>
+      </div>
+    </div>
+    <div class="flex">
+      <h2 data-for="filterDateContainer">Publish Date</h2>
+      <div id="filterDateContainer">
+        <input id="filterDateMin" type="date">
+        –
+        <input id="filterDateMax" type="date">
       </div>
     </div>
     <div class="flex"><input type="button" id="filterApply" value="Apply Filters"></div>
