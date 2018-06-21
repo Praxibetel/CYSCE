@@ -25,11 +25,11 @@ ChooseYourStory Chrome Extension
 	- [ ] Replace emojis
 	- [ ] Replace storygame category backgrounds for dark css
 	- [x] Fix dark theme alternating colors
-	- [ ] Forum Search Style*
+	- [ ] Forum Search Style
 - [ ] Additional storygame search options
 - [ ] Fix forum post collapsing
 - [ ] CodeMirror in more places?
-- [ ] Think about Forum Search Functionality
+- [ ] Forum Search Functionality
 	- Webscraper? Hacking? Pidgeons?
 
 - Make graphics for:
