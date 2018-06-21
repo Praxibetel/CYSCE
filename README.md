@@ -3,7 +3,7 @@ ChooseYourStory Chrome Extension
 
 ## How To:
 
-**IMPORTANT** - This extension is made for the Google Chrome web-browser
+**This extension is made for the Google Chrome web-browser**
 
 1) Go to https://github.com/Praxibetel/CYSCE
 2) Click the green **[Clone or Download]** button
