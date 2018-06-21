@@ -1,7 +1,7 @@
 # CYSCE
 ChooseYourStory Chrome Extension
 
-### Things you didn't notice (features list):
+### Features list
 
 + Complete overhaul of storygame search functionality
 + Site navigation links are available from every webpage
@@ -12,11 +12,9 @@ ChooseYourStory Chrome Extension
 	+ Storygame Developer Mode
 	+ CYS theme integration (no more need for stylish/stylus chrome extension)
 	+ Choose to recieve alerts or not
-
++ BTE now has syntax highlighting (colorful code for visual organization)
 
 ### TODO
-- [x] Make README file
-- [x] Put a license on this thing
 - [ ] CSS -> SASS
     - [ ] Consolidate all stray CSS into either `_cyslantia-base.sass` or `notheme.css`
     - [ ] Convert all color literals in `_cyslantia-base.sass` to variables
@@ -26,18 +24,16 @@ ChooseYourStory Chrome Extension
 	- [ ] Replace other icons around the site with pngs within themes>images>custom
 	- [ ] Replace emojis
 	- [ ] Replace storygame category backgrounds for dark css
-	- [ ] Fix dark theme alternating colors
+	- [x] Fix dark theme alternating colors
+	- [ ] Forum Search Style*
 - [ ] Additional storygame search options
 - [ ] Fix forum post collapsing
 - [ ] CodeMirror in more places?
-- [ ] Fix Forum Search
-	- [ ] Forum Search CSS
-	- [ ] Forum Search Functionality
-- [ ] Make graphics for Rejected Features in FWW
-- [ ] ^ for Completed Features in FWW
-- [ ] ^ for Accepted Features in FWW (blue light is weird and therefore unacceptable)
+- [ ] Think about Forum Search Functionality
+	- Webscraper? Hacking? Pidgeons?
 
+- Make graphics for:
+	- [ ] FWW
 
-
-- [ ] CYS Mobile Application?
-	- [ ] Have a think on it.
+### Backburner
+- CYS Mobile
