@@ -39,6 +39,7 @@ ChooseYourStory Chrome Extension
 + Unpublished storygames are clicky links on profile pages
 + New profile settings
 	+ Storygame Developer Mode
+		- Allows for in-preview variable editing and other cool stuff
 	+ CYS theme integration (no more need for stylish/stylus chrome extension)
 		- Makes the site beautiful. Dark Mode for easy browsing at night, light mode for an elegant new look with the same comfy feel, or just keep the default :)
 	+ Choose to recieve alerts or not
