@@ -1,20 +1,17 @@
-//console.log($("input[name='SS']").val()); // testing
+var ss, ssIter, ssCoords, ssHistory, ssLinks, ssItems, ssVariables, ssOriginalVariables;
 
-var ss = atob($("input[name='SS']").val()).split("|"),
-    ssIter;
+ss = atob($("input[name='SS']").val()).split("|");
 
-var ssCoords = new Map(ss.shift().split(",").map((e, i) => [
+ssCoords = new Map(ss.shift().split(",").map((e, i) => [
     ["guid", "pageId"][i], e
 ]));
-var ssHistory = ss.shift().split(",").map(e => parseInt(e));
+ssHistory = ss.shift().split(",").map(e => parseInt(e));
 ssIter = ss.shift();
-var ssLinks = new Map(ssIter ? ssIter.split(";").map(e => e.split(",").map(e => parseInt(e))) : null);
+ssLinks = new Map(ssIter ? ssIter.split(";").map(e => e.split(",").map(e => parseInt(e))) : null);
 ssIter = ss.shift();
-var ssItems = new Map(ssIter ? ssIter.split(";").map(e => e.split(",").map(e => parseInt(e))) : null);
-var ssVariables = JSON.parse("{" + ss.shift().replace(/([A-Z0-9]*),/g, "\"$1\",").replace(/,/g, ":").replace(/;/g, ",") + "}");
-var ssOriginalVariables = Object.assign({}, ssVariables);
-
-//console.log(ssCoords, ssHistory, ssLinks, ssItems, ssVariables); // testing
+ssItems = new Map(ssIter ? ssIter.split(";").map(e => e.split(",").map(e => parseInt(e))) : null);
+ssVariables = JSON.parse("{" + ss.shift().replace(/([^;,]*?),/g, "\"$1\",").replace(/,/g, ":").replace(/;/g, ",") + "}");
+ssOriginalVariables = Object.assign({}, ssVariables);
 
 function rebuildSS() {
     return btoa([
@@ -31,10 +28,6 @@ function unmap(map) {
     map.forEach((value, key) => array.push([key, value]));
     return array;
 }
-
-//console.log(rebuildSS()); // testing
-
-//console.log($("input[name='SS']").val() === rebuildSS()); // testing
 
 var devPanel = $("<div></div>", {
     id: "devPanel",
@@ -96,12 +89,10 @@ chrome.storage.sync.get("preferenceDevmode", (e) => {
         }).text("Variables").click(function() {
             return $("#devPanel").toggle(), false
         })));
-        $(".dark1border + div > ul > li > a").after(function() {
-            id = parseInt($(this).attr("onclick").match(/'(\d+)'/)[1]);
-            return $("<span></span>", {
-                class: "devLinkId",
-                dataId: id
-            }).text("#" + id);
+        $(".dark1border > h1").data("id", ssCoords.get("pageId")).attr("title", `Page ID: ${ssCoords.get("pageId")}`);
+        $(".dark1border + div > ul > li > a").each(function() {
+            var id = parseInt($(this).attr("onclick").match(/'(\d+)'/)[1]);
+            $(this).data("id", id).attr("title", `Link ID: ${id}`);
         });
     }
 });
