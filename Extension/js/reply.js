@@ -1,19 +1,5 @@
 if (!$("script:contains('CKEDITOR.replace')").length) {
-    CodeMirror.defineSimpleMode("onpage", {
-        start: [{
-            regex: /(%%)(?:|([A-Z][A-Z0-9]*)|(-?[0-9]+))(%)(!?=|<=?|>=?)(%)(?:|([A-Z][A-Z0-9]*)|(-?[0-9]+))(%)(.*?)(%%)/,
-            token: ["keyword", "variable", "number", "keyword", "operator", "keyword", "variable", "number", "keyword", "string", "keyword"]
-        }, {
-            regex: /(%%)(|[A-Z][A-Z0-9]*)(%%)/,
-            token: ["keyword", "variable", "keyword"]
-        }]
-    });
-
-    CodeMirror.defineMode("cyshtml", function(config, parserConfig) {
-        return CodeMirror.overlayMode(CodeMirror.getMode(config, parserConfig.backdrop || "htmlmixed"), CodeMirror.getMode(config, "onpage"));
-    });
-
-    var htmlContent = document.getElementById("Content"),
+    var htmlContent = document.querySelector(".contents > textarea"),
         htmlMirror = CodeMirror.fromTextArea(htmlContent, {
             autoCloseBrackets: true,
             autoCloseTags: {
@@ -29,7 +15,7 @@ if (!$("script:contains('CKEDITOR.replace')").length) {
             },
             lineNumbers: true,
             lineWrapping: true,
-            mode: "cyshtml",
+            mode: "htmlmixed",
             theme: "bespin",
             workDelay: 800,
             workTime: 600

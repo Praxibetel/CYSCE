@@ -16,6 +16,7 @@ $color-background-navbar: null !default
 $color-background-main: null !default
 $color-background-sidebar: null !default
 $color-background-accent: null !default
+$color-background-input: null !default
 
 $color-border-navbar: null !default
 $color-border-main: null !default
@@ -29,6 +30,7 @@ $color-text-main: null !default
 $color-text-sidebar: null !default
 $color-text-link: null !default
 $color-text-link-hover: null !default
+$color-text-label: null !default
 
 $font-heading: "Playfair Display", serif !default
 $font-main: "Route 159", Ubuntu, "Trebuchet MS", sans-serif !default
@@ -64,6 +66,8 @@ $image-icon-stop: url("#{$directory}/images/elusive/stop-alt.svg") !default
 $image-icon-item: url("#{$directory}/images/elusive/gift.svg") !default
 $image-icon-variable: url("#{$directory}/images/custom/percent.svg") !default
 $image-icon-script: url("#{$directory}/images/elusive/file.svg") !default
+$image-icon-user: url("#{$directory}/images/elusive/user.svg") !default
+$image-icon-ok: url("#{$directory}/images/elusive/ok.svg") !default
 
 @function specular-gradient($w, $x)
   @return radial-gradient(circle $w at $x 0%, rgba(white, 0.1), rgba(white, 0))
@@ -356,10 +360,23 @@ code
 kbd, samp
   font-variant-ligatures: no-contextual
 
+input
+  &[type="text"], &[type="password"], &[type="number"], &[type="date"]
+    background-color: lighten($color-background-main, 12%)
+    border: none
+    border-radius: 4px
+    color: lighten($color-text-main, 6%)
+    font-family: $font-monospace
+    font-variant-ligatures: no-contextual
+    padding: 4px
+
+label
+  color: $color-text-label
+
 hr
   background-color: $color-background-accent
   border: none
-  border-radius: none
+  border-radius: 0
   height: 1px
   margin: 0.5em 2px
 
@@ -451,6 +468,12 @@ a.button, a.button:active
     &[src$="tag_green.png"]
       content: $image-icon-tag
 
+    &[src$="user_add.png"]
+      content: $image-icon-user
+
+    &[src$="disk.png"]
+      content: $image-icon-ok
+
 .styled-table
   th, tr
     padding: 5px 10px
@@ -514,6 +537,9 @@ a.button, a.button:active
       .collapse > img
         content: $image-icon-minus
 
+      .collapse.collapsed > img
+        content: $image-icon-plus
+
     > h2
       background-color: #C04039
       color: $color-text-heading-alt
@@ -551,6 +577,17 @@ a.button, a.button:active
     img
       max-width: 100%
       height: auto
+
+// Login
+
+.twocol-form-field-set
+  td
+    background-color: lighten($color-background-main, 3%) !important
+    border: none
+
+
+#ui-datepicker-div
+  z-index: unset !important
 
 // Profiles
 
@@ -668,7 +705,12 @@ a.button, a.button:active
     display: inline
     font-style: italic
 
+tr
+  &.back1Background
+    background-color: lighten($color-background-main, 3%)
+
 // Footer area
+
 #Footer
   margin-bottom: 0
   margin-left: auto
@@ -677,6 +719,7 @@ a.button, a.button:active
   text-align: center
 
 // Advanced Editor
+
 img[src$="exclaim.gif"]
   content: $image-icon-exclaim
 
@@ -705,6 +748,7 @@ img[src$="_dim.gif"]
   filter: saturate(0.8) opacity(0.6)
 
 // Script editor
+
 body[onload*="ScriptText"]
   padding: 0 !important
 
@@ -722,7 +766,8 @@ body[onload*="ScriptText"]
     > .CodeMirror
       flex: 1 0
 
-//Page editor
+// Page editor
+
 form[name="mainForm"]
   > div
     box-sizing: border-box
@@ -740,3 +785,24 @@ form[name="mainForm"]
 
       > .CodeMirror
         height: 100%
+
+// Media queries
+
+@media (max-width: 1056px)
+  #HeaderContainer .header-contents .header-logo a::after
+    font-size: 28pt
+    left: 0
+
+@media (max-width: 998px)
+  html, body, .fixed-width-container, .sidebar-content, #Footer
+    width: 100% !important
+
+  #BodyContainer
+    .main-content::before, .main-content::after
+      content: none
+
+    .main-content, .sidebar-content::after
+      border-style: none
+
+    .footer-content
+      border-style: none none solid

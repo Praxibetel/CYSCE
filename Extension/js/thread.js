@@ -13,7 +13,11 @@ $(".forum-message .heading .buttons").eq(0).prepend(
         class: "button collapse"
     }).click(function() {
         var e = $(this).parent().parent().parent().siblings().filter(".forum-thread");
-        e.toggleClass("collapsed");
+        if ($(this).hasClass("collapsed")) e.removeClass("collapsed").find("span").text("Collapse"),
+            $(this).find("span").text("Collapse");
+        else e.addClass("collapsed").find("span").text("Expand"),
+            $(this).find("span").text("Expand");
+        $(this).toggleClass("collapsed");
         return false;
     }).append($("<img>", {
         src: "/0x44/InedoLib/Inedo.Web.Controls.IconImage/ProcessImageRequest/InedoIcons/F3Silk/16x16/delete.png"

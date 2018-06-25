@@ -59,7 +59,7 @@ ChooseYourStory Chrome Extension
 	- [x] Fix dark theme alternating colors
 	- [ ] Forum Search Style
 - [ ] Additional storygame search options
-- [ ] Fix forum post collapsing
+- [x] Fix forum post collapsing
 - [ ] CodeMirror in more places?
 - [ ] Forum Search Functionality
 	- Webscraper? Hacking? Pidgeons?

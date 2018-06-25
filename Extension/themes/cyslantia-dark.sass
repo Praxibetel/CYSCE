@@ -9,6 +9,7 @@ $color-background-navbar: hsl($hue-primary, 53%, 29%)
 $color-background-main: hsl($hue-tertiary, 10%, 11%)
 $color-background-sidebar: hsl($hue-tertiary, 26%, 65%)
 $color-background-accent: hsl($hue-tertiary, 9%, 6%)
+$color-background-input: null !default
 
 $color-border-navbar: hsl($hue-primary, 93%, 16%)
 $color-border-main: hsl($hue-tertiary, 5%, 17%)
@@ -22,6 +23,7 @@ $color-text-main: hsl(0, 0%, 73%)
 $color-text-sidebar: hsl(0, 0%, 93%)
 $color-text-link: hsla($hue-secondary, 100%, 70%, 0.8)
 $color-text-link-hover: hsl($hue-secondary, 60%, 37%)
+$color-text-label: hsl($hue-tertiary, 35%, 50%)
 
 @import "cyslantia-base"
 
@@ -29,9 +31,88 @@ $color-text-link-hover: hsl($hue-secondary, 60%, 37%)
 
 $color-background-forumpost: hsl($hue-tertiary, 10%, 17%)
 
+// Dark themes need more negative space
 
 body:not(.cke_editable)
   line-height: 1.25
+
+// Storygame categories
+
+.dark1border
+  &[style*="categories/fantasy.gif"]
+    background-image: url("#{$directory}/images/dark-category-fantasy.png") !important
+
+  &[style*="categories/modern_adventure.gif"]
+    background-image: url("#{$directory}/images/dark-category-modern-adventure.png") !important
+
+  &[style*="categories/science_fiction.gif"]
+    background-image: url("#{$directory}/images/dark-category-sci-fi.png") !important
+
+  &[style*="categories/edutainment.gif"]
+    background-image: url("#{$directory}/images/dark-category-edutainment.png") !important
+
+  &[style*="categories/school.gif"]
+    background-image: url("#{$directory}/images/dark-category-school.png") !important
+
+  &[style*="categories/mystery_puzzle.gif"]
+    background-image: url("#{$directory}/images/dark-category-mystery-puzzle.png") !important
+
+  &[style*="categories/fan_fiction.gif"]
+    background-image: url("#{$directory}/images/dark-category-fan-fiction.png") !important
+
+  &[style*="categories/everything_else.gif"]
+    background-image: url("#{$directory}/images/dark-category-everything-else.png") !important
+
+  &[style*="categories/love_dating.gif"]
+    background-image: url("#{$directory}/images/dark-category-love-dating.png") !important
+
+  &[style*="categories/horror.gif"]
+    background-image: url("#{$directory}/images/dark-category-horror.png") !important
+
+  &[style*="categories/new.gif"]
+    background-image: url("#{$directory}/images/dark-category-new.png") !important
+
+  &[style*="categories/top_rated.gif"]
+    background-image: url("#{$directory}/images/dark-category-top.png") !important
+
+#stories_storylistdiv
+  &[style*="categories/fantasy_full.gif"]
+    background-image: url("#{$directory}/images/dark-category-fantasy-full.png") !important
+
+  &[style*="categories/modern_adventure_full.gif"]
+    background-image: url("#{$directory}/images/dark-category-modern-adventure-full.png") !important
+
+  &[style*="categories/science_fiction_full.gif"]
+    background-image: url("#{$directory}/images/dark-category-sci-fi-full.png") !important
+
+  &[style*="categories/edutainment_full.gif"]
+    background-image: url("#{$directory}/images/dark-category-edutainment-full.png") !important
+
+  &[style*="categories/school_full.gif"]
+    background-image: url("#{$directory}/images/dark-category-school-full.png") !important
+
+  &[style*="categories/mystery_puzzle_full.gif"]
+    background-image: url("#{$directory}/images/dark-category-mystery-puzzle-full.png") !important
+
+  &[style*="categories/fan_fiction_full.gif"]
+    background-image: url("#{$directory}/images/dark-category-fan-fiction-full.png") !important
+
+  &[style*="categories/everything_else_full.gif"]
+    background-image: url("#{$directory}/images/dark-category-everything-else-full.png") !important
+
+  &[style*="categories/love_dating_full.gif"]
+    background-image: url("#{$directory}/images/dark-category-love-dating-full.png") !important
+
+  &[style*="categories/horror_full.gif"]
+    background-image: url("#{$directory}/images/dark-category-horror-full.png") !important
+
+  &[style*="categories/new_full.gif"]
+    background-image: url("#{$directory}/images/dark-category-new-full.png") !important
+
+  &[style*="categories/top_rated_full.gif"]
+    background-image: url("#{$directory}/images/dark-category-top-full.png") !important
+
+// Forums
 
 .forum-thread:hover > .forum-message
   background-color: lighten($color-background-forumpost, 5%)
@@ -50,3 +131,8 @@ body:not(.cke_editable)
   > .avatar-container
     background-color: transparent
     border: none !important
+
+// Login screen
+
+img[src="App_Themes/CYS/images/login.gif"]
+  content: url("#{$directory}/images/dark-login.png")

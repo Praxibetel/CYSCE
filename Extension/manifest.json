@@ -20,7 +20,7 @@
     "matches": ["http://chooseyourstory.com/*"],
     "exclude_matches": ["http://chooseyourstory.com/story/viewer/*"],
     "js": ["js/jquery.js", "js/theme.js"],
-    "css": ["themes/notheme.css"],
+    "css": ["themes/notheme.css", "codemirror/lib/codemirror.css", "codemirror/theme/bespin.css"],
     "run_at": "document_start"
   }, {
     "matches": ["http://chooseyourstory.com/*"],
@@ -36,6 +36,10 @@
     "js": ["js/thread.js"],
     "run_at": "document_end"
   }, {
+    "matches": ["http://chooseyourstory.com/forums/*/edit-post*", "http://chooseyourstory.com/forums/*/new-post*", "http://chooseyourstory.com/forums/*/new-reply*"],
+    "js": ["codemirror/lib/codemirror.js", "codemirror/addon/edit/closebrackets.js", "codemirror/addon/edit/closetag.js", "codemirror/mode/css/css.js", "codemirror/mode/javascript/javascript.js", "codemirror/mode/xml/xml.js", "codemirror/mode/htmlmixed/htmlmixed.js", "js/reply.js"],
+    "run_at": "document_end"
+  }, {
     "matches": ["http://chooseyourstory.com/Member/*"],
     "js": ["js/member.js"],
     "run_at": "document_end"
@@ -44,18 +48,24 @@
     "js": ["js/rating.js"],
     "run_at": "document_end"
   }, {
+    "matches": ["http://chooseyourstory.com/my/notepad"],
+    "js": ["codemirror/lib/codemirror.js", "codemirror/addon/edit/closebrackets.js", "codemirror/addon/edit/closetag.js", "codemirror/mode/markdown/markdown.js", "js/notepad.js"],
+    "run_at": "document_end"
+  }, {
     "matches": ["http://chooseyourstory.com/My/Profile.aspx"],
-    "js": ["js/preferences.js"],
+    "js": ["codemirror/lib/codemirror.js", "codemirror/addon/mode/overlay.js", "codemirror/addon/mode/simple.js", "codemirror/addon/edit/closebrackets.js", "codemirror/addon/edit/closetag.js", "codemirror/mode/css/css.js", "codemirror/mode/javascript/javascript.js", "codemirror/mode/xml/xml.js", "codemirror/mode/htmlmixed/htmlmixed.js", "js/preferences.js"],
+    "run_at": "document_end"
+  }, {
+    "matches": ["http://chooseyourstory.com/new-user"],
+    "js": ["js/login.js"],
     "run_at": "document_end"
   }, {
     "matches": ["http://chooseyourstory.com/my/adveditor/pagePopup.asp*", "http://chooseyourstory.com/My/adveditor/pagePopup.asp*"],
     "js": ["codemirror/lib/codemirror.js", "codemirror/addon/mode/overlay.js", "codemirror/addon/mode/simple.js", "codemirror/addon/edit/closebrackets.js", "codemirror/addon/edit/closetag.js", "codemirror/mode/css/css.js", "codemirror/mode/javascript/javascript.js", "codemirror/mode/xml/xml.js", "codemirror/mode/htmlmixed/htmlmixed.js", "js/htmleditor.js"],
-    "css": ["codemirror/lib/codemirror.css", "codemirror/theme/bespin.css"],
     "run_at": "document_end"
   }, {
     "matches": ["http://chooseyourstory.com/my/adveditor/ScriptPopup.aspx*", "http://chooseyourstory.com/My/adveditor/ScriptPopup.aspx*"],
     "js": ["codemirror/lib/codemirror.js", "codemirror/addon/mode/simple.js", "codemirror/addon/edit/closebrackets.js", "js/scripteditor.js"],
-    "css": ["codemirror/lib/codemirror.css", "codemirror/theme/bespin.css"],
     "run_at": "document_end"
   }, {
     "matches": ["http://chooseyourstory.com/story/*"],
@@ -102,6 +112,7 @@
     "themes/images/elusive/gift.svg",
     "themes/images/elusive/link.svg",
     "themes/images/elusive/minus.svg",
+    "themes/images/elusive/ok.svg",
     "themes/images/elusive/pencil.svg",
     "themes/images/elusive/plus.svg",
     "themes/images/elusive/remove.svg",
@@ -113,10 +124,40 @@
     "themes/images/elusive/star.svg",
     "themes/images/elusive/stop-alt.svg",
     "themes/images/elusive/tag.svg",
+    "themes/images/elusive/user.svg",
     "themes/images/cys-banner-baked.svg",
     "themes/images/cys-corner.svg",
-    "themes/images/cys-header-2x.png",
     "themes/images/cys-header.png",
+    "themes/images/cys-header-2x.png",
+    "themes/images/dark-category-edutainment-full.png",
+    "themes/images/dark-category-edutainment.png",
+    "themes/images/dark-category-everything-else-full.png",
+    "themes/images/dark-category-everything-else.png",
+    "themes/images/dark-category-fan-fiction-full.png",
+    "themes/images/dark-category-fan-fiction.png",
+    "themes/images/dark-category-fantasy-full.png",
+    "themes/images/dark-category-fantasy.png",
+    "themes/images/dark-category-horror-full.png",
+    "themes/images/dark-category-horror.png",
+    "themes/images/dark-category-love-dating-full.png",
+    "themes/images/dark-category-love-dating.png",
+    "themes/images/dark-category-modern-adventure-full.png",
+    "themes/images/dark-category-modern-adventure.png",
+    "themes/images/dark-category-mystery-puzzle-full.png",
+    "themes/images/dark-category-mystery-puzzle.png",
+    "themes/images/dark-category-new-full.png",
+    "themes/images/dark-category-new.png",
+    "themes/images/dark-category-school-full.png",
+    "themes/images/dark-category-school.png",
+    "themes/images/dark-category-sci-fi-full.png",
+    "themes/images/dark-category-sci-fi.png",
+    "themes/images/dark-category-top-full.png",
+    "themes/images/dark-category-top.png",
+    "themes/images/dark-login.png",
+    "themes/images/masthead-1x.png",
+    "themes/images/masthead-2x.png",
+    "themes/images/masthead-3x.png",
+    "themes/images/masthead-4x.png",
     "themes/images/material-throbber.svg",
     "themes/cyslantia-dark.min.css",
     "themes/cyslantia-light.min.css"

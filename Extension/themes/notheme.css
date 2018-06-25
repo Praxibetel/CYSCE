@@ -31,6 +31,14 @@
   border-bottom: none !important;
 }
 
-.forum-thread.collapsed a.button.collapse>img {
+.forum-thread.collapsed a.button.collapse>img, .forum-thread a.button.collapse.collapsed>img {
   content: url("/0x44/InedoLib/Inedo.Web.Controls.IconImage/ProcessImageRequest/InedoIcons/F3Silk/16x16/add.png");
+}
+
+div[style="width=680px; "] > form[method="get"] + div {
+  white-space: pre-wrap;
+}
+
+#MainContentPlaceHolder_btnEditMode {
+  display: none;
 }
