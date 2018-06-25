@@ -55,7 +55,7 @@ ChooseYourStory Chrome Extension
 	- [ ] Replace trophies
 	- [ ] Replace other icons around the site with pngs within themes>images>custom
 	- [ ] Replace emojis
-	- [ ] Replace storygame category backgrounds for dark css
+	- [x] Replace storygame category backgrounds for dark css
 	- [x] Fix dark theme alternating colors
 	- [ ] Forum Search Style
 - [ ] Additional storygame search options
@@ -63,6 +63,7 @@ ChooseYourStory Chrome Extension
 - [ ] CodeMirror in more places?
 - [ ] Forum Search Functionality
 	- Webscraper? Hacking? Pidgeons?
+- [ ] Pimp out My Stuff hub?
 
 - Make graphics for:
 	- [ ] FWW
