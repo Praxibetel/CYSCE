@@ -61,6 +61,7 @@ ChooseYourStory Chrome Extension
 - [ ] Additional storygame search options
 - [x] Fix forum post collapsing
 - [ ] CodeMirror in more places?
+	- [ ] Toggleable?
 - [ ] Forum Search Functionality
 	- Webscraper? Hacking? Pidgeons?
 - [ ] Pimp out My Stuff hub?
