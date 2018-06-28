@@ -66,7 +66,7 @@ ChooseYourStory Chrome Extension
 	- Webscraper? Hacking? Pidgeons?
 - [ ] Pimp out My Stuff hub?
 
-- Make graphics for:
+- [ ] Graphics for site
 	- [ ] FWW
 
 ### Backburner
