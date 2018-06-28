@@ -34,33 +34,43 @@ var devPanel = $("<div></div>", {
     class: "CYSExtension"
 }).append($("<ul></ul>", {
     id: "devPanelList"
-}), $("<button></button>", {
-    id: "devPanelUpdate"
-}).text("Apply").click(function() {
-    $("#devPanelList li input[type='number']").each(function() {
-        ssVariables[this.dataset.name] = +this.value;
-        this.dataset.value = this.value;
-        this.parentElement.className = "";
-    });
-    $("input[name='SS']").val(rebuildSS());
-}), $("<button></button>", {
-    id: "devPanelCancel"
-}).text("Cancel").click(function() {
-    $("#devPanelList li input[type='number']").each(function() {
-        this.value = this.dataset.value;
-        this.parentElement.className = "";
-    });
-    $("input[name='SS']").val(rebuildSS());
-}), $("<button></button>", {
-    id: "devPanelReset"
-}).text("Reset").click(function() {
-    $("#devPanelList li input[type='number']").each(function() {
-        ssVariables = Object.assign({}, ssOriginalVariables);
-        this.value = this.dataset.value = ssVariables[this.dataset.name];
-        this.parentElement.className = "";
-    });
-    $("input[name='SS']").val(rebuildSS());
-})).hide();
+}), $("<div></div>", {
+    id: "devPanelButtons"
+}).append(
+    $("<button></button>", {
+        id: "devPanelUpdate"
+    }).text("Apply").click(function() {
+        $("#devPanelList li input[type='number']").each(function() {
+            ssVariables[this.dataset.name] = +this.value;
+            this.dataset.value = this.value;
+            this.parentElement.className = "";
+        });
+        $("input[name='SS']").val(rebuildSS());
+    }), $("<button></button>", {
+        id: "devPanelCancel"
+    }).text("Cancel").click(function() {
+        $("#devPanelList li input[type='number']").each(function() {
+            this.value = this.dataset.value;
+            this.parentElement.className = "";
+        });
+        $("input[name='SS']").val(rebuildSS());
+    }), $("<button></button>", {
+        id: "devPanelReset"
+    }).text("Reset").click(function() {
+        $("#devPanelList li input[type='number']").each(function() {
+            ssVariables = Object.assign({}, ssOriginalVariables);
+            this.value = this.dataset.value = ssVariables[this.dataset.name];
+            this.parentElement.className = "";
+        });
+        $("input[name='SS']").val(rebuildSS());
+    }), $("<input>", {
+        id: "devPanelHeight",
+        type: "range",
+        min: 18,
+        max: 100,
+    }).val(37).change(function() {
+        $("#devPanel").css("height", `calc(${$(this).val()}vh - 20px)`);
+    }))).hide();
 
 for (var i in ssVariables) {
     devPanel.find("#devPanelList").append($("<li></li>").append($("<span></span>").text(i + ": "), $("<input>", {

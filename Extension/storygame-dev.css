@@ -16,17 +16,21 @@
 
 #devPanel[style*="none"] {
   display: block !important;
-  height: 0;
+  height: 0 !important;
 }
 
 #devPanelList {
+  box-sizing: border-box;
   list-style: none;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  height: 150px;
+  justify-content: space-between;
+  height: 100%;
+  overflow: auto hidden;
   margin: 0;
   padding: 10px;
+  padding-bottom: 30px;
 }
 
 #devPanelList li {
@@ -63,6 +67,12 @@
   color: #E3A000;
 }
 
+#devPanelButtons {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+}
+
 #devPanel+#devPanelOverlay {
   position: fixed;
   top: 0;
@@ -94,4 +104,9 @@
 
 #devPanel button:hover {
   text-decoration: underline;
+}
+
+#devPanel input[type="range"] {
+  float: right;
+  margin-right: 10px;
 }
