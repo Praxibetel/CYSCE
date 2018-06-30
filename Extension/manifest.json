@@ -19,7 +19,11 @@
   "content_scripts": [{
     "matches": ["http://chooseyourstory.com/*"],
     "exclude_matches": ["http://chooseyourstory.com/story/viewer/*"],
-    "js": ["js/jquery.js", "js/theme.js"],
+    "js": [
+      "js/jquery.js",
+      "codemirror/lib/codemirror.js", "codemirror/addon/edit/closebrackets.js", "codemirror/addon/edit/closetag.js", "codemirror/addon/mode/overlay.js", "codemirror/addon/mode/simple.js", "codemirror/mode/css/css.js", "codemirror/mode/javascript/javascript.js", "codemirror/mode/xml/xml.js", "codemirror/mode/htmlmixed/htmlmixed.js", "codemirror/mode/markdown/markdown.js",
+      "js/window.js"
+    ],
     "css": ["themes/notheme.css", "codemirror/lib/codemirror.css", "codemirror/theme/bespin.css"],
     "run_at": "document_start"
   }, {
@@ -37,7 +41,7 @@
     "run_at": "document_end"
   }, {
     "matches": ["http://chooseyourstory.com/forums/*/edit-post*", "http://chooseyourstory.com/forums/*/new-post*", "http://chooseyourstory.com/forums/*/new-reply*"],
-    "js": ["codemirror/lib/codemirror.js", "codemirror/addon/edit/closebrackets.js", "codemirror/addon/edit/closetag.js", "codemirror/mode/css/css.js", "codemirror/mode/javascript/javascript.js", "codemirror/mode/xml/xml.js", "codemirror/mode/htmlmixed/htmlmixed.js", "js/reply.js"],
+    "js": ["js/reply.js"],
     "run_at": "document_end"
   }, {
     "matches": ["http://chooseyourstory.com/Member/*"],
@@ -49,23 +53,27 @@
     "run_at": "document_end"
   }, {
     "matches": ["http://chooseyourstory.com/my/notepad"],
-    "js": ["codemirror/lib/codemirror.js", "codemirror/addon/edit/closebrackets.js", "codemirror/addon/edit/closetag.js", "codemirror/mode/markdown/markdown.js", "js/notepad.js"],
+    "js": ["js/notepad.js"],
     "run_at": "document_end"
   }, {
     "matches": ["http://chooseyourstory.com/My/Profile.aspx"],
-    "js": ["codemirror/lib/codemirror.js", "codemirror/addon/mode/overlay.js", "codemirror/addon/mode/simple.js", "codemirror/addon/edit/closebrackets.js", "codemirror/addon/edit/closetag.js", "codemirror/mode/css/css.js", "codemirror/mode/javascript/javascript.js", "codemirror/mode/xml/xml.js", "codemirror/mode/htmlmixed/htmlmixed.js", "js/preferences.js"],
+    "js": ["js/preferences.js"],
     "run_at": "document_end"
   }, {
     "matches": ["http://chooseyourstory.com/new-user"],
     "js": ["js/login.js"],
     "run_at": "document_end"
   }, {
+    "matches": ["http://chooseyourstory.com/my/adveditor/properties.aspx*", "http://chooseyourstory.com/My/adveditor/properties.aspx*", "http://chooseyourstory.com/my/adveditor/default.aspx*", "http://chooseyourstory.com/My/adveditor/default.aspx*"],
+    "js": ["js/adveditor.js"],
+    "run_at": "document_end"
+  }, {
     "matches": ["http://chooseyourstory.com/my/adveditor/pagePopup.asp*", "http://chooseyourstory.com/My/adveditor/pagePopup.asp*"],
-    "js": ["codemirror/lib/codemirror.js", "codemirror/addon/mode/overlay.js", "codemirror/addon/mode/simple.js", "codemirror/addon/edit/closebrackets.js", "codemirror/addon/edit/closetag.js", "codemirror/mode/css/css.js", "codemirror/mode/javascript/javascript.js", "codemirror/mode/xml/xml.js", "codemirror/mode/htmlmixed/htmlmixed.js", "js/htmleditor.js"],
+    "js": ["js/htmleditor.js"],
     "run_at": "document_end"
   }, {
     "matches": ["http://chooseyourstory.com/my/adveditor/ScriptPopup.aspx*", "http://chooseyourstory.com/My/adveditor/ScriptPopup.aspx*"],
-    "js": ["codemirror/lib/codemirror.js", "codemirror/addon/mode/simple.js", "codemirror/addon/edit/closebrackets.js", "js/scripteditor.js"],
+    "js": ["js/scripteditor.js"],
     "run_at": "document_end"
   }, {
     "matches": ["http://chooseyourstory.com/story/*"],

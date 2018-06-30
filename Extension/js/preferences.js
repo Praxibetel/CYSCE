@@ -51,36 +51,26 @@ chrome.storage.sync.get(null, (e) => {
     }
 });
 
-if (!$("script:contains('CKEDITOR.replace')").length) {
-    var profileMirror = CodeMirror.fromTextArea(document.getElementById("Profile"), {
-        autoCloseBrackets: true,
-        autoCloseTags: {
-            whenOpening: true,
-            whenClosing: true,
-            indentTags: ["applet", "blockquote", "body", "div", "dl", "fieldset", "form", "frameset", "head", "html", "layer", "legend", "object", "ol", "script", "select", "style", "table", "ul"]
-        },
-        extraKeys: {
-            "Tab": function(cm) {
-                var spaces = Array(cm.getOption("indentUnit") + 1).join(" ");
-                cm.replaceSelection(spaces);
-            }
-        },
-        lineNumbers: true,
-        lineWrapping: true,
-        mode: "htmlmixed",
-        theme: "bespin",
-        workDelay: 800,
-        workTime: 600
-    });
+if (!$("script:contains('CKEDITOR.replace')").length) chrome.storage.sync.get("preferenceCodeMirror", (e) => {
+    if (!chrome.runtime.lastError && !(e.preferenceCodeMirror === false)) {
+        var profileMirror = CodeMirror.fromTextArea(document.getElementById("Profile"), {
+            autoCloseTags: {
+                whenOpening: true,
+                whenClosing: true,
+                indentTags: ["applet", "blockquote", "body", "div", "dl", "fieldset", "form", "frameset", "head", "html", "layer", "legend", "object", "ol", "script", "select", "style", "table", "ul"]
+            },
+            mode: "htmlmixed"
+        });
 
-    $("form").submit(function() {
-        $("#Profile").val(profileMirror.getValue());
-    });
+        $("form").submit(function() {
+            $("#Profile").val(profileMirror.getValue());
+        });
 
-    $(window).on("load", function() {
-        profileMirror.refresh();
-    });
-}
+        $(window).on("load", function() {
+            profileMirror.refresh();
+        });
+    }
+});
 
 $("input[name='Birthdate']").attr("type", "hidden").after($("<input>", {
     type: "date"
