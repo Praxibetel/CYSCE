@@ -5,9 +5,27 @@ chrome.runtime.sendMessage({
         var style = $("<style></style>", {
             id: "CYS-Theme"
         }).text(response.theme || "");
-        console.log(!!document.body);
-        if (document.head || document.documentElement) $(document.head || document.documentElement).append(style), $(() => $("style#CYS-Theme").appendTo("head"));
-        else $(() => $("head").append(style));
+        if (!document.body) {
+            var observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (!mutation.addedNodes) return
+                    for (var i = 0; i < mutation.addedNodes.length; i++) {
+                        var node = mutation.addedNodes[i];
+                        if (node.nodeName == "BODY") {
+                            $(document.head).append(style);
+                            observer.disconnect();
+                        }
+                    }
+                });
+            });
+            observer.observe(document, {
+                childList: true,
+                subtree: true,
+                attributes: false,
+                characterData: false
+            });
+        } else if (document.head || document.documentElement) $(document.head || document.documentElement).append(style), $(() => $("style#CYS-Theme").appendTo("head"));
+        else $(() => $(document.head).append(style));
     }
 });
 
