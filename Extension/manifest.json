@@ -48,6 +48,10 @@
     "js": ["js/member.js"],
     "run_at": "document_end"
   }, {
+    "matches": ["http://chooseyourstory.com/my/", "http://chooseyourstory.com/My/", "http://chooseyourstory.com/my/default.aspx*", "http://chooseyourstory.com/My/default.aspx*"],
+    "js": ["js/mystuff.js"],
+    "run_at": "document_end"
+  }, {
     "matches": ["http://chooseyourstory.com/My/Games.aspx"],
     "js": ["js/rating.js"],
     "run_at": "document_end"

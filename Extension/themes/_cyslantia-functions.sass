@@ -1,0 +1,103 @@
+$PI: 3.1415926536
+
+@function specular-gradient($w, $x)
+  @return radial-gradient(circle $w at $x 0%, rgba(white, 0.1), rgba(white, 0))
+
+@function strip-unit($number)
+  @if unitless($number)
+    @return $number
+  @else
+    @return $number / ($number * 0 + 1)
+
+@function deg-to-rad($deg, $unit: true)
+  @return strip-unit($deg) * $PI / 180 * if($unit, 1rad, 1)
+
+@function rad-to-deg($rad, $unit: true)
+  @return strip-unit($rad) * 180 / $PI * if($unit, 1deg, 1)
+
+@function unitless-rad($angle)
+  @if unitless($angle)
+    @return $angle
+  @else if unit($angle) == rad
+    @return $angle / 1rad
+  @else if unit($angle) == deg
+    @return deg-to-rad($angle, false)
+  @else if type-of($angle) != number or not unitless($angle)
+    @warn "#{$angle} is not a valid number."
+
+    @return $angle
+
+@function cos($x)
+  $x: unitless-rad($x) % ($PI * 2)
+  $ret: 1
+  $i: 1
+
+  @for $n from 1 to 24
+    $i: $i * -1 * $x * $x / (2 * $n) / (2 * $n - 1)
+    $ret: $ret + $i
+
+  @return $ret
+
+@function sin($x)
+  $x: unitless-rad($x)
+
+  @return cos($x - $PI / 2)
+
+@function atan($x)
+  $i: 24
+  $sgn: 0
+  $a: 0
+
+  @if $x > 1
+    $sgn: 1
+    $x: 1 / $x
+  @else if $x < -1
+    $sgn: -1
+    $x: 1 / $x
+
+  @while $i > 0
+    $a: $i * $i * $x * $x / (2 * $i + 1 + $a)
+    $i: $i - 1
+
+  @if $sgn > 0
+    @return $PI / 2 - $x / (1 + $a)
+  @else if $sgn < 0
+    @return -$PI / 2 - $x / (1 + $a)
+  @else
+    @return $x / (1 + $a)
+
+@function atan2($y, $x)
+  @if $x > 0
+    @return atan($y / $x)
+  @else if $x < 0
+    @if $y < 0
+      @return atan($y / $x) - $PI
+    @else
+      @return atan($y / $x) + $PI
+  @else
+    @if $y < 0
+      @return -$PI / 2
+    @else if $y > 0
+      @return $PI / 2
+    @else
+      @if 1 / $x == 1 / 0
+        @return 0
+      @else
+        @if 1 / $y == 1 / 0
+          @return $PI
+        @else
+          @return -$PI
+
+@function mean-angle($list)
+  $length: length($list)
+  $sins: 0
+  $coss: 0
+
+  @for $i from 1 through $length
+    $sins: $sins + sin(nth($list, $i))
+    $coss: $coss + cos(nth($list, $i))
+
+  $sins: $sins / $length
+  $coss: $coss / $length
+
+  @return rad-to-deg(atan2($sins, $coss))

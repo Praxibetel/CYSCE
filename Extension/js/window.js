@@ -24,8 +24,7 @@ chrome.runtime.sendMessage({
                 attributes: false,
                 characterData: false
             });
-        } else if (document.head || document.documentElement) $(document.head || document.documentElement).append(style), $(() => $("style#CYS-Theme").appendTo("head"));
-        else $(() => $(document.head).append(style));
+        } else $(document.head || document.documentElement).append(style), $(() => $("style#CYS-Theme").appendTo("head"));
     }
 });
 

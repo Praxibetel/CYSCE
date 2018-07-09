@@ -54,7 +54,7 @@ ChooseYourStory Chrome Extension
 	- [ ] Find and fix all remaining icons and .gifs on the site
 	- [ ] Replace trophies
 	- [ ] Replace other icons around the site with pngs within themes>images>custom
-	- [ ] Replace emojis
+	- [x] Replace emojis
 	- [x] Replace storygame category backgrounds for dark css
 	- [x] Fix dark theme alternating colors
 	- [ ] Forum Search Style

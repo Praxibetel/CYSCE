@@ -44,8 +44,21 @@ $image-background-masthead-2x: url("#{$directory}/images/cys-header-2x.png") !de
 $image-background-masthead-3x: url("#{$directory}/images/cys-header-3x.png") !default
 $image-background-masthead-4x: url("#{$directory}/images/cys-header-4x.png") !default
 
+$image-icon-rss: url("#{$directory}/images/elusive/rss.svg") !default
 $image-icon-featured: url("#{$directory}/images/elusive/star-alt.svg") !default
+$image-icon-length-rating: url("#{$directory}/images/custom/length-rating.svg") !default
+$image-icon-difficulty-1: url("#{$directory}/images/custom/difficulty-1.svg") !default
+$image-icon-difficulty-2: url("#{$directory}/images/custom/difficulty-2.svg") !default
+$image-icon-difficulty-3: url("#{$directory}/images/custom/difficulty-3.svg") !default
+$image-icon-difficulty-4: url("#{$directory}/images/custom/difficulty-4.svg") !default
+$image-icon-difficulty-5: url("#{$directory}/images/custom/difficulty-5.svg") !default
+$image-icon-difficulty-6: url("#{$directory}/images/custom/difficulty-6.svg") !default
+$image-icon-difficulty-7: url("#{$directory}/images/custom/difficulty-7.svg") !default
+$image-icon-difficulty-8: url("#{$directory}/images/custom/difficulty-8.svg") !default
+$image-icon-check: url("#{$directory}/images/elusive/ok-sign.svg") !default
 $image-icon-search: url("#{$directory}/images/elusive/search.svg") !default
+$image-icon-prev: url("#{$directory}/images/elusive/backward.svg") !default
+$image-icon-next: url("#{$directory}/images/elusive/forward.svg") !default
 $image-icon-eye: url("#{$directory}/images/elusive/eye-open.svg") !default
 $image-icon-eye-closed: url("#{$directory}/images/elusive/eye-close.svg") !default
 $image-icon-threaded: url("#{$directory}/images/elusive/align-left.svg") !default
@@ -69,10 +82,9 @@ $image-icon-script: url("#{$directory}/images/elusive/file.svg") !default
 $image-icon-user: url("#{$directory}/images/elusive/user.svg") !default
 $image-icon-ok: url("#{$directory}/images/elusive/ok.svg") !default
 
-@function specular-gradient($w, $x)
-  @return radial-gradient(circle $w at $x 0%, rgba(white, 0.1), rgba(white, 0))
-
 @import cyslantia-fonts
+
+@import cyslantia-functions
 
 // Basic body stuff first
 
@@ -178,7 +190,7 @@ body
       background-color: $color-background-navbar
       border-top: 1px solid $color-border-navbar
       background: specular-gradient(360px, 33.33%), $color-background-navbar
-      z-index: 2
+      z-index: 101
       display: flex
       flex-direction: row
       justify-content: space-between
@@ -267,6 +279,8 @@ body
                 top: 50%
                 transform: translateY(-50%)
                 width: 18px
+            &:last-of-type a
+              border-bottom: none
 
         &:hover > ul
           visibility: visible
@@ -390,7 +404,7 @@ code
 kbd, samp
   font-variant-ligatures: no-contextual
 
-select
+select, textarea
   background-color: lighten($color-background-main, 12%)
   border: none
   border-radius: 4px
@@ -404,7 +418,7 @@ input
   &[type="text"], &[type="password"], &[type="number"], &[type="date"]
     @extend select
 
-  &[type="button"], &[type="submit"]
+  &[type="button"], &[type="file"], &[type="submit"]
     @extend select
 
     background-color: #3F1A18
@@ -424,9 +438,103 @@ hr
 
 // Storygame sections
 
-img[src$="CYS/images/star.gif"]
-  content: $image-icon-featured
-  vertical-align: text-bottom
+td > .dark1border
+  border-color: $color-border-main !important
+
+#FilterOptionsDiv
+  background-color: lighten($color-background-main, 3%)
+
+  tr
+    background-color: transparent
+
+  th
+    color: $color-text-label
+
+#MainContentPlaceHolder_StoriesGridView
+  tr
+    background-color: transparent
+
+    &:nth-of-type(even)
+      background-color: rgba(white, 0.03)
+
+  .inverse1
+    color: $color-text-heading-alt
+    background-color: $color-background-accent
+
+  td
+    height: 1.6em
+
+    img
+      vertical-align: middle
+
+    p
+      display: inline
+
+      img
+        vertical-align: top
+
+img
+  &[src="/Resources/Images/feed-icon-12x12.gif"]
+    content: $image-icon-rss
+
+  &[src$="CYS/images/star.gif"]
+    content: $image-icon-featured
+
+  &[src$="CYS/images/checkmark.gif"]
+    content: $image-icon-check
+
+  &[src*="CYS/images/length_levels/"][src$=".gif"]
+    content: $image-icon-length-rating
+    object-fit: cover
+    object-position: left
+
+  &[src$="CYS/images/length_levels/1.gif"]
+    width: 5px
+
+  &[src$="CYS/images/length_levels/2.gif"]
+    width: 11px
+
+  &[src$="CYS/images/length_levels/3.gif"]
+    width: 17px
+
+  &[src$="CYS/images/length_levels/4.gif"]
+    width: 23px
+
+  &[src$="CYS/images/length_levels/5.gif"]
+    width: 29px
+
+  &[src$="CYS/images/length_levels/6.gif"]
+    width: 35px
+
+  &[src$="CYS/images/length_levels/7.gif"]
+    width: 41px
+
+  &[src$="CYS/images/length_levels/8.gif"]
+    width: 47px
+
+  &[src$="CYS/images/difficulty_levels/1.gif"]
+    content: $image-icon-difficulty-1
+
+  &[src$="CYS/images/difficulty_levels/2.gif"]
+    content: $image-icon-difficulty-2
+
+  &[src$="CYS/images/difficulty_levels/3.gif"]
+    content: $image-icon-difficulty-3
+
+  &[src$="CYS/images/difficulty_levels/4.gif"]
+    content: $image-icon-difficulty-4
+
+  &[src$="CYS/images/difficulty_levels/5.gif"]
+    content: $image-icon-difficulty-5
+
+  &[src$="CYS/images/difficulty_levels/6.gif"]
+    content: $image-icon-difficulty-6
+
+  &[src$="CYS/images/difficulty_levels/7.gif"]
+    content: $image-icon-difficulty-7
+
+  &[src$="CYS/images/difficulty_levels/8.gif"]
+    content: $image-icon-difficulty-8
 
 // Storygame description page
 
@@ -518,12 +626,29 @@ a.button, a.button:active
     &[src$="disk.png"]
       content: $image-icon-ok
 
+    &[src$="control_rewind.png"]
+      content: $image-icon-prev
+
+    &[src$="control_fastforward.png"]
+      content: $image-icon-next
+
   img
     &[src$="bug.gif"]
       content: $image-icon-bug
 
     &[src$="squashedbug.gif"]
       content: $image-icon-squashed-bug
+
+ul.bug-selector, ul.fww-selector
+  background-color: #3F1A18
+  border: none
+
+  li
+    &.selected
+      background-color: lighten(#3F1A18, 12%)
+
+    a
+      color: rgb(221, 221, 221)
 
 // Forum posts
 
@@ -608,6 +733,12 @@ a.button, a.button:active
     img
       max-width: 100%
       height: auto
+
+// My Pictures
+
+td > a > img[vspace="5"]
+  object-fit: contain
+  object-position: bottom
 
 // Login
 
@@ -792,6 +923,9 @@ body[onload*="ScriptText"]
 
     > table
       margin-bottom: 0.5em
+
+    > textarea
+      font-variant-ligatures: contextual
 
     > .CodeMirror
       flex: 1 0

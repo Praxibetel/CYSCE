@@ -52,7 +52,7 @@ chrome.storage.sync.get(null, (e) => {
 });
 
 if (!$("script:contains('CKEDITOR.replace')").length) chrome.storage.sync.get("preferenceCodeMirror", (e) => {
-    if (!chrome.runtime.lastError && !(e.preferenceCodeMirror === false)) {
+    if (!chrome.runtime.lastError && e.preferenceCodeMirror !== false) {
         var profileMirror = CodeMirror.fromTextArea(document.getElementById("Profile"), {
             autoCloseTags: {
                 whenOpening: true,

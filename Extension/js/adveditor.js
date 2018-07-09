@@ -1,5 +1,5 @@
 if (!$("script:contains('CKEDITOR.replace')").length) chrome.storage.sync.get("preferenceCodeMirror", (e) => {
-    if (!chrome.runtime.lastError && !(e.preferenceCodeMirror === false)) {
+    if (!chrome.runtime.lastError && e.preferenceCodeMirror !== false) {
         var propertyMirror = CodeMirror.fromTextArea($("#MainContentPlaceHolder_StoryDescription_ctl00")[0], {
             autoCloseTags: {
                 whenOpening: true,

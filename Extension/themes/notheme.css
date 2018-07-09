@@ -43,6 +43,75 @@ div[style="width=680px; "]>form[method="get"]+div {
   display: none;
 }
 
+#MyStuffContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+}
+
+#MyStuffContainer > .flex.row {
+  display: flex;
+  flex-direction: row;
+  height: 230px;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+#MyStuffContainer > .flex.row > .flex.col {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 1;
+  margin-right: 10px;
+  width: 0;
+}
+
+#MyStuffContainer > .flex.row > .flex.col:last-child {
+  margin-right: 0;
+}
+
+.flex.col[data-ratio="6"] {
+  flex-grow: 6;
+}
+
+.flex.col[data-ratio="5"] {
+  flex-grow: 5;
+}
+
+.flex.col[data-ratio="4"] {
+  flex-grow: 4;
+}
+
+.flex.col[data-ratio="3"] {
+  flex-grow: 3;
+}
+
+.flex.col[data-ratio="2"] {
+  flex-grow: 2;
+}
+
+.flex.col[data-ratio="1"] {
+  flex-grow: 1;
+}
+
+.flex>.flex-dom {
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.flex>.flex-sub {
+  flex: 0 1 auto;
+  overflow: auto;
+}
+
+.flex>.flex-sub>table, .flex>.flex-sub>.CodeMirror {
+  height: 100%;
+  width: 100%;
+}
+
 /* Emoji */
 
 img[src*="/ckeditor4/plugins/smiley/images/"] {
