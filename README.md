@@ -64,10 +64,12 @@ ChooseYourStory Chrome Extension
 	- [x] Toggleable?
 - [ ] Forum Search Functionality
 	- Webscraper? Hacking? Pidgeons?
-- [ ] Pimp out My Stuff hub?
-
+- [ ] Pimp out My Stuff hub
 - [ ] Graphics for site
 	- [ ] FWW
+	- [ ] Order Decor
+- Decorate profile pages dependant on order (give orders an aesthetic use)
+	- [ ] Dark, Light, and Normal decor
 
 ### Backburner
 - CYS Mobile
