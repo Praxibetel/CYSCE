@@ -1,4 +1,4 @@
-if (!$("script:contains('CKEDITOR.replace')").length) chrome.storage.sync.get("preferenceCodeMirror", (e) => {
+if (!$("script:contains('CKEDITOR.replace')").length) chrome.storage.sync.get("preferenceCodeMirror", e => {
     if (!chrome.runtime.lastError && e.preferenceCodeMirror !== false) {
         var htmlContent = document.getElementById("Content"),
             htmlMirror = CodeMirror.fromTextArea(htmlContent, {
@@ -18,4 +18,8 @@ if (!$("script:contains('CKEDITOR.replace')").length) chrome.storage.sync.get("p
             htmlMirror.refresh();
         });
     }
+});
+
+$("input[name='LinkTitle']").after(function() {
+    return $("<label></label>").text(` #${$(this).parent().find("input[name='LinkID']").val()}`);
 });

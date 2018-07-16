@@ -1,4 +1,4 @@
-chrome.storage.sync.get("preferenceNotifications", (e) => {
+chrome.storage.sync.get("preferenceNotifications", e => {
     if (!chrome.runtime.lastError && !e.preferenceNotifications) {
         $(".header-alerts-container").parent().hide();
     }
@@ -17,7 +17,13 @@ e = $(".sidebar-content > ul > li > a[href='/help/']");
 if (!e.parent().find("ul").length) e.after('<ul id="ctl50"><li id="ctl51"><a id="ctl52" href="/Help/History.aspx">CYOA History</a></li><li id="ctl53"><a id="ctl54" href="/Help/AboutUs.aspx">About Us</a></li><li id="ctl55"><a id="ctl56" href="/Help/PrivacyPolicy.aspx">Privacy Policy</a></li><li id="ctl57"><a id="ctl58" href="/Help/TermsOfService.aspx">Terms Of Service</a></li></ul>');
 if (!u) $(".sidebar-content > ul > li > a[href='/Logon.aspx']").after('<ul><li><a href="/newuser.aspx">Register</a></li></ul>');
 
-$.get("/alerts", (data) => {
+$(".tertiaryButton").parent().replaceWith(function() {
+    return $("<ul></ul>", {
+        class: "help-info-selector"
+    }).append($(this).find(".tertiaryButton"));
+});
+
+$.get("/alerts", data => {
     if (data) {
         data = JSON.parse(data);
         if (data && data.length) {
@@ -32,7 +38,7 @@ $.get("/alerts", (data) => {
                     }
                 },
                 notifications = 0;
-            data.forEach((i) => {
+            data.forEach(i => {
                 if ((i.type || null) === "newmessage") n.messages.value = parseInt(i.message.match(/\d[\d,]*/)[0].replace(/,/g, ""));
                 else if ((i.type || null) === "notification") n.notifications.value++;
             });

@@ -1,6 +1,6 @@
 chrome.runtime.sendMessage({
     action: "CYSgetTheme"
-}, (response) => {
+}, response => {
     if (response) {
         var style = $("<style></style>", {
             id: "CYS-Theme"

@@ -1,7 +1,7 @@
-chrome.storage.sync.get(null, (e) => {
+chrome.storage.sync.get(null, e => {
     if (!chrome.runtime.lastError) {
         console.log(e);
-        $.get(chrome.extension.getURL("html/preferences.html"), (data) => {
+        $.get(chrome.extension.getURL("html/preferences.html"), data => {
             $("form > table > tbody > tr:nth-child(22)").after(
                 $(data)
                 .find("input[type='checkbox']").each(function() {
@@ -41,7 +41,7 @@ chrome.storage.sync.get(null, (e) => {
                 chrome.storage.sync.set(preferences, () => {
                     if (e.id === "CYSExtensionTheme") chrome.runtime.sendMessage({
                         action: "CYSupdateTheme"
-                    }, (response) => {
+                    }, response => {
                         console.log(response);
                         $("style#CYS-Theme").text(response.theme || "")
                     });
@@ -51,7 +51,7 @@ chrome.storage.sync.get(null, (e) => {
     }
 });
 
-if (!$("script:contains('CKEDITOR.replace')").length) chrome.storage.sync.get("preferenceCodeMirror", (e) => {
+if (!$("script:contains('CKEDITOR.replace')").length) chrome.storage.sync.get("preferenceCodeMirror", e => {
     if (!chrome.runtime.lastError && e.preferenceCodeMirror !== false) {
         var profileMirror = CodeMirror.fromTextArea(document.getElementById("Profile"), {
             autoCloseTags: {

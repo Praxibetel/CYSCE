@@ -16,7 +16,10 @@ $color-background-navbar: null !default
 $color-background-main: null !default
 $color-background-sidebar: null !default
 $color-background-accent: null !default
-$color-background-input: null !default
+$color-background-button: null !default
+$color-background-card: null !default
+$color-background-chip: null !default
+$color-background-chip-active: null !default
 
 $color-border-navbar: null !default
 $color-border-main: null !default
@@ -31,6 +34,7 @@ $color-text-sidebar: null !default
 $color-text-link: null !default
 $color-text-link-hover: null !default
 $color-text-label: null !default
+$color-text-button: $color-text-masthead !default
 
 $font-heading: "Playfair Display", serif !default
 $font-main: "Route 159", Ubuntu, "Trebuchet MS", sans-serif !default
@@ -72,6 +76,7 @@ $image-icon-bug: url("#{$directory}/images/custom/bug.png") !default
 $image-icon-squashed-bug: url("#{$directory}/images/custom/squashedbug.png") !default
 $image-icon-tag: url("#{$directory}/images/elusive/tag.svg") !default
 $image-icon-exclaim: url("#{$directory}/images/elusive/exclaim.png") !default
+$image-icon-coauth: url("#{$directory}/images/elusive/group.svg") !default
 $image-icon-edit-adv: url("#{$directory}/images/elusive/file-edit.svg") !default
 $image-icon-delete: url("#{$directory}/images/elusive/remove.svg") !default
 $image-icon-go: url("#{$directory}/images/elusive/arrow-right.svg") !default
@@ -81,6 +86,8 @@ $image-icon-variable: url("#{$directory}/images/custom/percent.svg") !default
 $image-icon-script: url("#{$directory}/images/elusive/file.svg") !default
 $image-icon-user: url("#{$directory}/images/elusive/user.svg") !default
 $image-icon-ok: url("#{$directory}/images/elusive/ok.svg") !default
+
+$radius-default: 4px
 
 @import cyslantia-fonts
 
@@ -213,7 +220,7 @@ body
           font-weight: 500
           border-right: 1px solid rgba(white, 0.15)
           white-space: nowrap
-          transition: text-shadow 0.33s ease
+          transition: text-shadow 333ms ease
           text-align: center
           width: 100%
 
@@ -249,7 +256,7 @@ body
           background-clip: content-box
           visibility: hidden
           opacity: 0
-          transition: opacity 0.33s ease
+          transition: opacity 333ms ease
           min-width: 100%
           z-index: 1
 
@@ -279,6 +286,7 @@ body
                 top: 50%
                 transform: translateY(-50%)
                 width: 18px
+
             &:last-of-type a
               border-bottom: none
 
@@ -407,7 +415,7 @@ kbd, samp
 select, textarea
   background-color: lighten($color-background-main, 12%)
   border: none
-  border-radius: 4px
+  border-radius: $radius-default
   color: lighten($color-text-main, 6%)
   font-family: $font-monospace
   font-size: 11px
@@ -421,8 +429,8 @@ input
   &[type="button"], &[type="file"], &[type="submit"]
     @extend select
 
-    background-color: #3F1A18
-    color: rgb(221, 221, 221)
+    background-color: $color-background-button
+    color: $color-text-button
     cursor: pointer
     font-family: $font-main
 
@@ -436,9 +444,18 @@ hr
   height: 1px
   margin: 0.5em 2px
 
+// Home
+
+[style="font-size:85%"] + table
+  margin: auto
+
+  + h1 ~ div > div
+    background-color: transparent !important
+
 // Storygame sections
 
 td > .dark1border
+  background-color: $color-background-card !important
   border-color: $color-border-main !important
 
 #FilterOptionsDiv
@@ -480,7 +497,7 @@ img
   &[src$="CYS/images/star.gif"]
     content: $image-icon-featured
 
-  &[src$="CYS/images/checkmark.gif"]
+  &[src$="CYS/images/checkmark.gif"], &[src$="16x16/accept.png"]
     content: $image-icon-check
 
   &[src*="CYS/images/length_levels/"][src$=".gif"]
@@ -632,23 +649,57 @@ a.button, a.button:active
     &[src$="control_fastforward.png"]
       content: $image-icon-next
 
-  img
-    &[src$="bug.gif"]
-      content: $image-icon-bug
+img
+  &[src="/forums/images/bug.gif"]
+    content: $image-icon-bug
 
-    &[src$="squashedbug.gif"]
-      content: $image-icon-squashed-bug
+  &[src="/forums/images/squashedbug.gif"]
+    content: $image-icon-squashed-bug
 
-ul.bug-selector, ul.fww-selector
-  background-color: #3F1A18
+.icon-box
+  background-color: $color-background-chip
   border: none
+  border-radius: $radius-default
+  line-height: 1
 
-  li
-    &.selected
-      background-color: lighten(#3F1A18, 12%)
+ul
+  &.bug-selector, &.fww-selector, &.help-info-selector
+    @extend .icon-box
 
-    a
-      color: rgb(221, 221, 221)
+    display: table
+    font-weight: bold
+    margin: 10px
+    overflow: hidden
+    padding: 0
+
+    > li, > span
+      color: inherit
+      font-size: inherit
+      display: inline-block
+      padding: 10px
+      position: relative
+
+      &::after
+        background-color: rgba(white, 0.15)
+        content: " "
+        height: 50%
+        left: 100%
+        position: absolute
+        top: 50%
+        transform: translateY(-50%)
+        width: 1px
+
+      &.selected
+        background-color: $color-background-chip-active
+
+        &::after
+          content: none
+
+      &:last-of-type::after
+        content: none
+
+      a
+        color: inherit
 
 // Forum posts
 
@@ -734,6 +785,34 @@ ul.bug-selector, ul.fww-selector
       max-width: 100%
       height: auto
 
+// My Stuff
+@mixin helper
+  background-color: $color-background-card
+  border: 1px solid $color-border-main !important
+  border-radius: $radius-default
+
+.ui-sortable-helper
+  @include helper
+
+  color: $color-text-main
+  padding: 5px !important
+
+#MyStuffEditor
+  > #MyStuffSidebar
+    @extend #profile_Sidebar
+
+    float: right
+    text-align: center
+
+    > div
+      padding: 5px 0
+      margin: 0 10px
+
+  > #MyStuffContainer
+    > .flex.row
+      > .flex.col
+        @include helper
+
 // My Pictures
 
 td > a > img[vspace="5"]
@@ -788,7 +867,7 @@ td > a > img[vspace="5"]
     color: $color-text-sidebar !important
     text-shadow: 0 1px 0 rgba(black, 0.8)
     text-decoration: none
-    transition: text-shadow 0.33s ease
+    transition: text-shadow 333ms ease
 
     &:hover
       text-shadow: 0 0 20px rgba(white, 0.9)
@@ -881,32 +960,36 @@ tr
 
 // Advanced Editor
 
-img[src$="exclaim.gif"]
-  content: $image-icon-exclaim
+img
+  &[src$="CYS/images/checkmark.gif"][alt$="coauthor"]
+    content: $image-icon-coauth
 
-img[src$="edit.gif"]
-  content: $image-icon-edit-adv
+  &[src$="exclaim.gif"]
+    content: $image-icon-exclaim
 
-img[src$="script.gif"], img[src$="script_dim.gif"]
-  content: $image-icon-script
+  &[src$="edit.gif"]
+    content: $image-icon-edit-adv
 
-img[src$="delete.gif"]
-  content: $image-icon-delete
+  &[src$="script.gif"], &[src$="script_dim.gif"]
+    content: $image-icon-script
 
-img[src$="go.gif"]
-  content: $image-icon-go
+  &[src$="delete.gif"]
+    content: $image-icon-delete
 
-img[src$="stop.gif"], img[src$="stop_dim.gif"]
-  content: $image-icon-stop
+  &[src$="go.gif"]
+    content: $image-icon-go
 
-img[src$="item.gif"], img[src$="item_dim.gif"]
-  content: $image-icon-item
+  &[src$="stop.gif"], &[src$="stop_dim.gif"], &[src$="16x16/delete.png"]
+    content: $image-icon-stop
 
-img[src$="addsub.gif"], img[src$="addsub_dim.gif"]
-  content: $image-icon-variable
+  &[src$="item.gif"], &[src$="item_dim.gif"]
+    content: $image-icon-item
 
-img[src$="_dim.gif"]
-  filter: saturate(0.8) opacity(0.6)
+  &[src$="addsub.gif"], &[src$="addsub_dim.gif"]
+    content: $image-icon-variable
+
+  &[src$="_dim.gif"]
+    filter: saturate(0.8) opacity(0.6)
 
 // Script editor
 

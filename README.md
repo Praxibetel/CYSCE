@@ -65,6 +65,14 @@ ChooseYourStory Chrome Extension
 - [ ] Forum Search Functionality
 	- Webscraper? Hacking? Pidgeons?
 - [ ] Pimp out My Stuff hub
+	- [x] Storygames Widget
+	- [x] Notepad Widget
+	- [x] EXP & Comms Widgets
+	- [x] Saves Widget
+	- [x] Messages Widget
+	- [x] Comments Widget
+	- [x] Widget Configuration Mode
+	- [ ] Visual consistency
 - [ ] Graphics for site
 	- [ ] FWW
 	- [ ] Order Decor
