@@ -80,6 +80,10 @@
     "js": ["js/scripteditor.js"],
     "run_at": "document_end"
   }, {
+    "matches": ["http://chooseyourstory.com/Member/trophyInfo.htm"],
+    "js": ["js/trophyinfo.js"],
+    "run_at": "document_end"
+  }, {
     "matches": ["http://chooseyourstory.com/story/*"],
     "exclude_matches": ["http://chooseyourstory.com/story/viewer/*"],
     "js": ["js/an.js"],

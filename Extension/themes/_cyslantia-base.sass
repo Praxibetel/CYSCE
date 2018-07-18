@@ -1,12 +1,17 @@
 $directory: "chrome-extension://__MSG_@@extension_id__/themes"
 
+$image: "#{$directory}/images"
+$custom: "#{$directory}/images/custom"
+$elusive: "#{$directory}/images/elusive"
+$trophy: "#{$directory}/images/custom/trophies"
+
 $author: "Brad in Dvorak" !default
 $title: "Cyslantia" !default
 $version: "2.0" !default
 
 // Version info
 
-/*! #{$title}, version #{$version} by #{$author} !
+/*! #{$title}, version #{$version} by #{$author} !*/
 
 // Initialize variables
 
@@ -41,51 +46,82 @@ $font-main: "Route 159", Ubuntu, "Trebuchet MS", sans-serif !default
 $font-monospace: "Fira Code", "Fira Mono", monospace !default
 $font-size-main: 14px !default
 
-$image-background-page: url("#{$directory}/images/cys-banner-baked.svg") !default
-$image-background-underside: url("#{$directory}/images/cys-corner.svg") !default
-$image-background-masthead-1x: url("#{$directory}/images/cys-header.png") !default
-$image-background-masthead-2x: url("#{$directory}/images/cys-header-2x.png") !default
-$image-background-masthead-3x: url("#{$directory}/images/cys-header-3x.png") !default
-$image-background-masthead-4x: url("#{$directory}/images/cys-header-4x.png") !default
+$image-background-page: url("#{$image}/cys-banner-baked.svg") !default
+$image-background-underside: url("#{$image}/cys-corner.svg") !default
+$image-background-masthead-1x: url("#{$image}/cys-header.png") !default
+$image-background-masthead-2x: url("#{$image}/cys-header-2x.png") !default
+$image-background-masthead-3x: url("#{$image}/cys-header-3x.png") !default
+$image-background-masthead-4x: url("#{$image}/cys-header-4x.png") !default
 
-$image-icon-rss: url("#{$directory}/images/elusive/rss.svg") !default
-$image-icon-featured: url("#{$directory}/images/elusive/star-alt.svg") !default
-$image-icon-length-rating: url("#{$directory}/images/custom/length-rating.svg") !default
-$image-icon-difficulty-1: url("#{$directory}/images/custom/difficulty-1.svg") !default
-$image-icon-difficulty-2: url("#{$directory}/images/custom/difficulty-2.svg") !default
-$image-icon-difficulty-3: url("#{$directory}/images/custom/difficulty-3.svg") !default
-$image-icon-difficulty-4: url("#{$directory}/images/custom/difficulty-4.svg") !default
-$image-icon-difficulty-5: url("#{$directory}/images/custom/difficulty-5.svg") !default
-$image-icon-difficulty-6: url("#{$directory}/images/custom/difficulty-6.svg") !default
-$image-icon-difficulty-7: url("#{$directory}/images/custom/difficulty-7.svg") !default
-$image-icon-difficulty-8: url("#{$directory}/images/custom/difficulty-8.svg") !default
-$image-icon-check: url("#{$directory}/images/elusive/ok-sign.svg") !default
-$image-icon-search: url("#{$directory}/images/elusive/search.svg") !default
-$image-icon-prev: url("#{$directory}/images/elusive/backward.svg") !default
-$image-icon-next: url("#{$directory}/images/elusive/forward.svg") !default
-$image-icon-eye: url("#{$directory}/images/elusive/eye-open.svg") !default
-$image-icon-eye-closed: url("#{$directory}/images/elusive/eye-close.svg") !default
-$image-icon-threaded: url("#{$directory}/images/elusive/align-left.svg") !default
-$image-icon-unthreaded: url("#{$directory}/images/elusive/align-justify.svg") !default
-$image-icon-reply: url("#{$directory}/images/elusive/share-alt.svg") !default
-$image-icon-edit: url("#{$directory}/images/elusive/pencil.svg") !default
-$image-icon-link: url("#{$directory}/images/elusive/link.svg") !default
-$image-icon-minus: url("#{$directory}/images/elusive/minus.svg") !default
-$image-icon-plus: url("#{$directory}/images/elusive/plus.svg") !default
-$image-icon-bug: url("#{$directory}/images/custom/bug.png") !default
-$image-icon-squashed-bug: url("#{$directory}/images/custom/squashedbug.png") !default
-$image-icon-tag: url("#{$directory}/images/elusive/tag.svg") !default
-$image-icon-exclaim: url("#{$directory}/images/elusive/exclaim.png") !default
-$image-icon-coauth: url("#{$directory}/images/elusive/group.svg") !default
-$image-icon-edit-adv: url("#{$directory}/images/elusive/file-edit.svg") !default
-$image-icon-delete: url("#{$directory}/images/elusive/remove.svg") !default
-$image-icon-go: url("#{$directory}/images/elusive/arrow-right.svg") !default
-$image-icon-stop: url("#{$directory}/images/elusive/stop-alt.svg") !default
-$image-icon-item: url("#{$directory}/images/elusive/gift.svg") !default
-$image-icon-variable: url("#{$directory}/images/custom/percent.svg") !default
-$image-icon-script: url("#{$directory}/images/elusive/file.svg") !default
-$image-icon-user: url("#{$directory}/images/elusive/user.svg") !default
-$image-icon-ok: url("#{$directory}/images/elusive/ok.svg") !default
+$image-icon-rss: url("#{$elusive}/rss.svg") !default
+$image-icon-featured: url("#{$elusive}/star-alt.svg") !default
+$image-icon-length-rating: url("#{$custom}/length-rating.svg") !default
+$image-icon-difficulty-1: url("#{$custom}/difficulty-1.svg") !default
+$image-icon-difficulty-2: url("#{$custom}/difficulty-2.svg") !default
+$image-icon-difficulty-3: url("#{$custom}/difficulty-3.svg") !default
+$image-icon-difficulty-4: url("#{$custom}/difficulty-4.svg") !default
+$image-icon-difficulty-5: url("#{$custom}/difficulty-5.svg") !default
+$image-icon-difficulty-6: url("#{$custom}/difficulty-6.svg") !default
+$image-icon-difficulty-7: url("#{$custom}/difficulty-7.svg") !default
+$image-icon-difficulty-8: url("#{$custom}/difficulty-8.svg") !default
+$image-icon-check: url("#{$elusive}/ok-sign.svg") !default
+$image-icon-search: url("#{$elusive}/search.svg") !default
+$image-icon-prev: url("#{$elusive}/backward.svg") !default
+$image-icon-next: url("#{$elusive}/forward.svg") !default
+$image-icon-eye: url("#{$elusive}/eye-open.svg") !default
+$image-icon-eye-closed: url("#{$elusive}/eye-close.svg") !default
+$image-icon-threaded: url("#{$elusive}/align-left.svg") !default
+$image-icon-unthreaded: url("#{$elusive}/align-justify.svg") !default
+$image-icon-reply: url("#{$elusive}/share-alt.svg") !default
+$image-icon-edit: url("#{$elusive}/pencil.svg") !default
+$image-icon-link: url("#{$elusive}/link.svg") !default
+$image-icon-minus: url("#{$elusive}/minus.svg") !default
+$image-icon-plus: url("#{$elusive}/plus.svg") !default
+$image-icon-bug: url("#{$custom}/bug.png") !default
+$image-icon-squashed-bug: url("#{$custom}/squashedbug.png") !default
+$image-icon-tag: url("#{$elusive}/tag.svg") !default
+$image-icon-exclaim: url("#{$elusive}/exclaim.png") !default
+$image-icon-coauth: url("#{$elusive}/group.svg") !default
+$image-icon-edit-adv: url("#{$elusive}/file-edit.svg") !default
+$image-icon-delete: url("#{$elusive}/remove.svg") !default
+$image-icon-go: url("#{$elusive}/arrow-right.svg") !default
+$image-icon-stop: url("#{$elusive}/stop-alt.svg") !default
+$image-icon-item: url("#{$elusive}/gift.svg") !default
+$image-icon-variable: url("#{$custom}/percent.svg") !default
+$image-icon-script: url("#{$elusive}/file.svg") !default
+$image-icon-user: url("#{$elusive}/user.svg") !default
+$image-icon-ok: url("#{$elusive}/ok.svg") !default
+
+$image-trophy-100points: url("#{$trophy}/100.png") !default
+$image-trophy-500points: url("#{$trophy}/500.png") !default
+$image-trophy-1000points: url("#{$trophy}/1000.png") !default
+$image-trophy-2000points: url("#{$trophy}/2000.png") !default
+$image-trophy-5000points: url("#{$trophy}/5000.png") !default
+$image-trophy-infinitepoints: url("#{$trophy}/infinite.png") !default
+$image-trophy-contestwinner: url("#{$trophy}/contest.png") !default
+$image-trophy-featuredstory: url("#{$trophy}/featured.png") !default
+$image-trophy-luckydueler: url("#{$trophy}/luckydueler.png") !default
+$image-trophy-topposter: url("#{$trophy}/toppost.png") !default
+$image-trophy-supremeposter: url("#{$trophy}/toppostglow.png") !default
+$image-trophy-bughunter: url("#{$trophy}/bughunter.png") !default
+$image-trophy-toprater: url("#{$trophy}/toprate.png") !default
+$image-trophy-supremerater: url("#{$trophy}/toprateglow.png") !default
+$image-trophy-communitycontributor: url("#{$trophy}/contributor.png") !default
+$image-trophy-genericfrom: url("#{$trophy}/from.png") !default
+$image-trophy-fromindex: url("#{$trophy}/trophyFromIndex.png") !default
+$image-trophy-fromalexp: url("#{$trophy}/alexp.png") !default
+$image-trophy-fromberka: url("#{$trophy}/bz.png") !default
+$image-trophy-fromchocobot: url("#{$trophy}/chocobot.png") !default
+$image-trophy-fromendmaster: url("#{$trophy}/end.png") !default
+$image-trophy-fromfleshnblood: url("#{$trophy}/nate.png") !default
+$image-trophy-fromhavacoman: url("#{$trophy}/havacoman.png") !default
+$image-trophy-fromjjj: url("#{$trophy}/3j.png") !default
+$image-trophy-frommadglee: url("#{$trophy}/madglee.png") !default
+$image-trophy-frommarch5th: url("#{$trophy}/march.png") !default
+$image-trophy-fromsethaniel: url("#{$trophy}/seth.png") !default
+$image-trophy-fromsolostrike: url("#{$trophy}/solo.png") !default
+$image-trophy-fromtsmpaul: url("#{$trophy}/tsmpaul.png") !default
+$image-trophy-fromwill11: url("#{$trophy}/will.png") !default
 
 $radius-default: 4px
 
@@ -786,13 +822,14 @@ ul
       height: auto
 
 // My Stuff
-@mixin helper
+
+=helper
   background-color: $color-background-card
   border: 1px solid $color-border-main !important
   border-radius: $radius-default
 
 .ui-sortable-helper
-  @include helper
+  +helper
 
   color: $color-text-main
   padding: 5px !important
@@ -811,7 +848,7 @@ ul
   > #MyStuffContainer
     > .flex.row
       > .flex.col
-        @include helper
+        +helper
 
 // My Pictures
 
@@ -913,6 +950,97 @@ td > a > img[vspace="5"]
 
   h2
     margin-left: 2px
+
+img
+  &[src="images/trophies/100points.gif"]
+    content: $image-trophy-100points
+
+  &[src="images/trophies/500points.gif"]
+    content: $image-trophy-500points
+
+  &[src="images/trophies/1000points.gif"]
+    content: $image-trophy-1000points
+
+  &[src="images/trophies/2000points.gif"], &[src="../member/images/trophies/2000points.gif"]
+    content: $image-trophy-2000points
+
+  &[src="images/trophies/5000points.gif"]
+    content: $image-trophy-5000points
+
+  &[src="images/trophies/infinitePoints.gif"]
+    content: $image-trophy-infinitepoints
+
+  &[src="images/trophies/contestWinner.gif"]
+    content: $image-trophy-contestwinner
+
+  &[src="images/trophies/featuredStory.gif"]
+    content: $image-trophy-featuredstory
+
+  &[src="images/trophies/luckyDueler.gif"]
+    content: $image-trophy-luckydueler
+
+  &[src="images/trophies/topPoster.gif"]
+    content: $image-trophy-topposter
+
+  &[src="images/trophies/supremePoster.gif"]
+    content: $image-trophy-supremeposter
+
+  &[src="images/trophies/bugHunter.gif"]
+    content: $image-trophy-bughunter
+
+  &[src="images/trophies/topRater.gif"]
+    content: $image-trophy-toprater
+
+  &[src="images/trophies/supremeRater.gif"]
+    content: $image-trophy-supremerater
+
+  &[src="images/trophies/CommunityContributor.gif"]
+    content: $image-trophy-communitycontributor
+
+  &[src="images/genericFrom.gif"]
+    content: $image-trophy-genericfrom
+
+  &[src="images/trophyFromIndex.gif"]
+    content: $image-trophy-fromindex
+
+  &[src="images/trophies/fromalexp.gif"]
+    content: $image-trophy-fromalexp
+
+  &[src="images/trophies/fromBerkaZerka.gif"]
+    content: $image-trophy-fromberka
+
+  &[src="images/trophies/fromchocobot.gif"]
+    content: $image-trophy-fromchocobot
+
+  &[src="images/trophies/fromEndMaster.gif"]
+    content: $image-trophy-fromendmaster
+
+  &[src="images/trophies/fromFleshnblood_78.gif"]
+    content: $image-trophy-fromfleshnblood
+
+  &[src="images/trophies/fromHavacoman.gif"]
+    content: $image-trophy-fromhavacoman
+
+  &[src="images/trophies/fromJJJ-thebanisher.gif"]
+    content: $image-trophy-fromjjj
+
+  &[src="images/trophies/fromMadglee.gif"]
+    content: $image-trophy-frommadglee
+
+  &[src="images/trophies/frommarch5th00.gif"]
+    content: $image-trophy-frommarch5th
+
+  &[src="images/trophies/fromSethaniel.gif"]
+    content: $image-trophy-fromsethaniel
+
+  &[src="images/trophies/fromSolostrike.gif"]
+    content: $image-trophy-fromsolostrike
+
+  &[src="images/trophies/fromtsmpaul.gif"]
+    content: $image-trophy-fromtsmpaul
+
+  &[src="images/trophies/fromWill11.gif"]
+    content: $image-trophy-fromwill11
 
 #profile_Articles, #profile_Posts, #profile_Stories
   clear: both
