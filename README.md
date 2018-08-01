@@ -52,7 +52,7 @@ ChooseYourStory Chrome Extension
     - [ ] Convert all color literals in `_cyslantia-base.sass` to variables
     - [ ] Custom CodeMirror theme?
 	- [ ] Find and fix all remaining icons and .gifs on the site
-	- [ ] Replace trophies
+	- [x] Replace trophies
 	- [ ] Replace other icons around the site with pngs within themes>images>custom
 	- [x] Replace emojis
 	- [x] Replace storygame category backgrounds for dark css
@@ -60,7 +60,7 @@ ChooseYourStory Chrome Extension
 	- [ ] Forum Search Style
 - [ ] Additional storygame search options
 - [x] Fix forum post collapsing
-- [ ] CodeMirror in more places?
+- [x] CodeMirror in more places?
 	- [x] Toggleable?
 - [ ] Forum Search Functionality
 	- Webscraper? Hacking? Pidgeons?

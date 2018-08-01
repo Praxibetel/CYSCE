@@ -1,4 +1,4 @@
-chrome.storage.sync.get("preferenceCodeMirror", (e) => {
+chrome.storage.sync.get("preferenceCodeMirror", e => {
     if (!chrome.runtime.lastError && e.preferenceCodeMirror !== false) {
         var scriptMirror = CodeMirror.fromTextArea(document.getElementById("ScriptText"), {
             mode: "cysscript"

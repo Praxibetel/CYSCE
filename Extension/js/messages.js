@@ -1,6 +1,6 @@
-if (!$("script:contains('CKEDITOR.replace')").length) chrome.storage.sync.get("preferenceCodeMirror", e => {
+chrome.storage.sync.get("preferenceCodeMirror", e => {
     if (!chrome.runtime.lastError && e.preferenceCodeMirror !== false) {
-        var htmlContent = document.querySelector(".contents > textarea"),
+        var htmlContent = document.querySelector(".message-body > textarea"),
             htmlMirror = CodeMirror.fromTextArea(htmlContent, {
                 autoCloseTags: {
                     whenOpening: true,

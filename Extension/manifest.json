@@ -56,6 +56,10 @@
     "js": ["js/rating.js"],
     "run_at": "document_end"
   }, {
+    "matches": ["http://chooseyourstory.com/my/messages/conversation*", "http://chooseyourstory.com/my/messages/new*"],
+    "js": ["js/messages.js"],
+    "run_at": "document_end"
+  }, {
     "matches": ["http://chooseyourstory.com/my/notepad"],
     "js": ["js/notepad.js"],
     "run_at": "document_end"

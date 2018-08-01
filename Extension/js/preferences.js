@@ -41,10 +41,7 @@ chrome.storage.sync.get(null, e => {
                 chrome.storage.sync.set(preferences, () => {
                     if (e.id === "CYSExtensionTheme") chrome.runtime.sendMessage({
                         action: "CYSupdateTheme"
-                    }, response => {
-                        console.log(response);
-                        $("style#CYS-Theme").text(response.theme || "")
-                    });
+                    }, response => $("style#CYS-Theme").text(response.theme || ""));
                 });
             }
         });
