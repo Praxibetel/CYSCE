@@ -42,6 +42,14 @@ $(".body, .body *").contents().filter(function() {
     div.html(node.text().replace(/@([\w-]+)/g, "<a href='/Member/?Username=$1'>$&</a>"));
     node.before(div.contents()).remove();
 });
+$(".body, .body *").contents().filter(function() {
+    return (this.nodeType == 3 && this.parentNode.nodeName !== "A" && $.trim(this.nodeValue) && /\b(https?|ftp):\/\/(-\.)?([^\s/?\.#-]+\.?)+(\/[^\s]*)?/.test(this.data))
+}).each(function() {
+    var div = $("<div></div>"),
+        node = $(this);
+    div.html(node.text().replace(/\b(https?|ftp):\/\/(-\.)?([^\s/?\.#-]+\.?)+(\/[^\s]*)?/g, "<a href='$&'>$&</a>"));
+    node.before(div.contents()).remove();
+});
 
 $("a[name]").each(function() {
     $(this).parent().find(".heading .buttons").prepend($("<a></a>", {

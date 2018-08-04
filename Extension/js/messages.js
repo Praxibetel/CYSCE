@@ -19,3 +19,20 @@ chrome.storage.sync.get("preferenceCodeMirror", e => {
         });
     }
 });
+
+$(".message-body, .message-body *").contents().filter(function() {
+    return (this.nodeType == 3 && $.trim(this.nodeValue) && /@[\w-]+/.test(this.data))
+}).each(function() {
+    var div = $("<div></div>"),
+        node = $(this);
+    div.html(node.text().replace(/@([\w-]+)/g, "<a href='/Member/?Username=$1'>$&</a>"));
+    node.before(div.contents()).remove();
+});
+$(".message-body, .message-body *").contents().filter(function() {
+    return (this.nodeType == 3 && this.parentNode.nodeName !== "A" && $.trim(this.nodeValue) && /\b(https?|ftp):\/\/(-\.)?([^\s/?\.#-]+\.?)+(\/[^\s]*)?/.test(this.data))
+}).each(function() {
+    var div = $("<div></div>"),
+        node = $(this);
+    div.html(node.text().replace(/\b(https?|ftp):\/\/(-\.)?([^\s/?\.#-]+\.?)+(\/[^\s]*)?/g, "<a href='$&'>$&</a>"));
+    node.before(div.contents()).remove();
+});
