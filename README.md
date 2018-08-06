@@ -1,5 +1,4 @@
-# CYSCE
-ChooseYourStory Chrome Extension
+# ChooseYourStory Chrome Extension
 
 ## How To:
 
