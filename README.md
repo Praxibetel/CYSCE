@@ -53,33 +53,17 @@
     - [ ] Consolidate all stray CSS into either `_cyslantia-base.sass` or `notheme.css`
     - [ ] Convert all color literals in `_cyslantia-base.sass` to variables
     - [ ] Custom CodeMirror theme?
-	- [ ] Find and fix all remaining icons and .gifs on the site
-	- [x] Replace trophies
-	- [ ] Replace other icons around the site with pngs within themes>images>custom
-	- [x] Replace emojis
-	- [x] Replace storygame category backgrounds for dark css
-	- [x] Fix dark theme alternating colors
 	- [ ] Forum Search Style
+	- [ ] use FWW icons in themes/images/custom
+	- [ ] .smallerText {font-size: xx-small;} -> x-small
+	- [ ] h3 font-size on /my/ and /help/articles -> x-small
+	- [ ] Dark theme equivalent for all-comments and ratings
+	- [ ] td containing nbsp; on /help/AboutUs -> display: none;
 - [ ] Additional storygame search options
-- [x] Fix forum post collapsing
-- [x] CodeMirror in more places?
-	- [x] Toggleable?
 - [ ] Forum Search Functionality
 	- Webscraper? Hacking? Pidgeons?
-- [ ] Pimp out My Stuff hub
-	- [x] Storygames Widget
-	- [x] Notepad Widget
-	- [x] EXP & Comms Widgets
-	- [x] Saves Widget
-	- [x] Messages Widget
-	- [x] Comments Widget
-	- [x] Widget Configuration Mode
+- [ ] Pimp out /my/
 	- [ ] Visual consistency
-- [ ] Graphics for site
-	- [x] FWW icons
-	- [ ] Order Decor
-- Decorate profile pages dependant on order (give orders an aesthetic use)
-	- [ ] Dark, Light, and Normal decor
 
 ### Backburner
 - CYS Mobile
