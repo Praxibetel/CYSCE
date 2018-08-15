@@ -53,19 +53,20 @@
     - [ ] Consolidate all stray CSS into either `_cyslantia-base.sass` or `notheme.css`
     - [ ] Convert all color literals in `_cyslantia-base.sass` to variables
     - [ ] Custom CodeMirror theme?
+    - [ ] Graphical nit-picks
 	- [ ] Forum Search Style
 	- [ ] use FWW icons in themes/images/custom
 	- [x] .smallerText {font-size: xx-small;} -> x-small
 	- [ ] h3 font-size on /my/ and /help/articles -> x-small
 	- [x] Dark theme equivalent for all-comments and ratings
 	- [x] td containing nbsp; on /help/AboutUs -> display: none;
+	- [ ] make RPS, RPS25, and Toggle graphics
+	- [ ] fix first tr on /my/points
 - [ ] Additional storygame search options
 - [ ] Forum Search Functionality
 	- Webscraper? Hacking? Pidgeons?
 - [ ] Pimp out /my/
 	- [ ] Visual consistency
-- [x] Pay chrome developer fee with intention to publish once done
-	- [x] out $5 :(
 - [ ] Publish CYSCE to Chrome Web-Store
 
 ### Backburner
