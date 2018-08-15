@@ -32,10 +32,9 @@
 ### Features list
 
 + Complete overhaul of storygame search functionality
++ Things you wish were clicky links are now clicky
 + Site navigation links are available from every webpage
 + Able to collapse and anchor thread posts
-+ @mentions are clicky links on profile pages and forums
-+ Unpublished storygames are clicky links on profile pages
 + New profile settings
 	+ Storygame Developer Mode
 		- Allows for in-preview variable editing and other cool stuff
@@ -43,7 +42,11 @@
 	+ CYS theme integration (no more need for stylish/stylus chrome extension)
 		- Makes the site beautiful. Dark Mode for easy browsing at night, light mode for an elegant new look with the same comfy feel, or just keep the default :)
 	+ Choose to recieve alerts or not
-+ BTE now has syntax highlighting (colorful code for visual organization)
++ Text editors around the site now have syntax highlighting
+	- toggleable for those who like the old way
++ Lots of nit-picky things we noticed and fixed
++ Complete graphic overhaul
+	- New icons, symbols, and trophy graphics
 
 ### TODO
 - [ ] CSS -> SASS
@@ -73,7 +76,7 @@
 	- [x] Widget Configuration Mode
 	- [ ] Visual consistency
 - [ ] Graphics for site
-	- [ ] FWW
+	- [x] FWW icons
 	- [ ] Order Decor
 - Decorate profile pages dependant on order (give orders an aesthetic use)
 	- [ ] Dark, Light, and Normal decor
