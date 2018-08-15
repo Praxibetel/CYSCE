@@ -64,6 +64,9 @@
 	- Webscraper? Hacking? Pidgeons?
 - [ ] Pimp out /my/
 	- [ ] Visual consistency
+- [x] Pay chrome developer fee with intention to publish once done
+	- [x] out $5 :(
+- [ ] Publish CYSCE to Chrome Web-Store
 
 ### Backburner
 - CYS Mobile
