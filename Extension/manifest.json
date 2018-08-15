@@ -25,7 +25,8 @@
       "js/window.js"
     ],
     "css": ["themes/notheme.css", "codemirror/lib/codemirror.css", "codemirror/theme/bespin.css"],
-    "run_at": "document_start"
+    "run_at": "document_start",
+    "all_frames": true
   }, {
     "matches": ["http://chooseyourstory.com/*"],
     "exclude_matches": ["http://chooseyourstory.com/story/viewer/*"],

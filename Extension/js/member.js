@@ -14,10 +14,10 @@ $("#profile_Posts > div, #profile_Posts > div *").contents().filter(function() {
     node.before(div.contents()).remove();
 });
 $("#profile_Posts > div, #profile_Posts > div *").contents().filter(function() {
-    return (this.nodeType == 3 && this.parentNode.nodeName !== "A" && $.trim(this.nodeValue) && /\b(https?|ftp):\/\/(-\.)?([^\s/?\.#-]+\.?)+(\/[^\s]*)?/.test(this.data))
+    return (this.nodeType == 3 && this.parentNode.nodeName !== "A" && $.trim(this.nodeValue) && /\b(https?|ftp):\/\/(-\.)?([^\s/?\.#-]+\.?)+(\/[^\s]*)?/i.test(this.data))
 }).each(function() {
     var div = $("<div></div>"),
         node = $(this);
-    div.html(node.text().replace(/\b(https?|ftp):\/\/(-\.)?([^\s/?\.#-]+\.?)+(\/[^\s]*)?/g, "<a href='$&'>$&</a>"));
+    div.html(node.text().replace(/\b(https?|ftp):\/\/(-\.)?([^\s/?\.#-]+\.?)+(\/[^\s]*)?/gi, "<a href='$&'>$&</a>"));
     node.before(div.contents()).remove();
 });

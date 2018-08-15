@@ -55,10 +55,10 @@
     - [ ] Custom CodeMirror theme?
 	- [ ] Forum Search Style
 	- [ ] use FWW icons in themes/images/custom
-	- [ ] .smallerText {font-size: xx-small;} -> x-small
+	- [x] .smallerText {font-size: xx-small;} -> x-small
 	- [ ] h3 font-size on /my/ and /help/articles -> x-small
-	- [ ] Dark theme equivalent for all-comments and ratings
-	- [ ] td containing nbsp; on /help/AboutUs -> display: none;
+	- [x] Dark theme equivalent for all-comments and ratings
+	- [x] td containing nbsp; on /help/AboutUs -> display: none;
 - [ ] Additional storygame search options
 - [ ] Forum Search Functionality
 	- Webscraper? Hacking? Pidgeons?

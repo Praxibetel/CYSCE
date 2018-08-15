@@ -25,6 +25,7 @@ $color-background-button: null !default
 $color-background-card: null !default
 $color-background-chip: null !default
 $color-background-chip-active: null !default
+$color-background-badge: #C09839 !default
 
 $color-border-navbar: null !default
 $color-border-main: null !default
@@ -36,10 +37,12 @@ $color-text-heading: null !default
 $color-text-heading-alt: null !default
 $color-text-main: null !default
 $color-text-sidebar: null !default
+$color-text-sidebar-heading: null !default
 $color-text-link: null !default
 $color-text-link-hover: null !default
 $color-text-label: null !default
 $color-text-button: $color-text-masthead !default
+$color-text-comm: #B68000 !default
 
 $font-heading: "Playfair Display", serif !default
 $font-main: "Route 159", Ubuntu, "Trebuchet MS", sans-serif !default
@@ -271,7 +274,7 @@ body
             right: 0
             width: 20px
             height: 20px
-            background-color: #C09839
+            background-color: $color-background-badge
             border-radius: 20px
             line-height: 20px
             text-align: center
@@ -288,7 +291,7 @@ body
           position: absolute
           top: 100%
           padding-top: 10px
-          background-color: #6F231F
+          background-color: darken(desaturate($color-background-navbar, 14), 4)
           background-clip: content-box
           visibility: hidden
           opacity: 0
@@ -438,6 +441,9 @@ table
 
   .dark1borderTop1pxSolid
     border-top: none
+
+.smallerText
+  font-size: 0.75em
 
 code, kbd, samp
   font-family: $font-monospace
@@ -624,13 +630,25 @@ img[src$="16x16/star.png"]
 
 #storygameListContainer
   #storygameListFilters
-    flex: 1 0 240px
+    flex: 1 0 200px
 
   #storygameListPages
     flex: 1 0 680px
 
   .entry > div:nth-child(2)
     flex: 0 0 480px
+
+.multiInput
+  @extend select
+
+  padding: 0
+  padding-right: 1.5em
+
+  label[for="paginationSubsearch"]
+    background-color: inherit
+    font-size: inherit
+    top: 50%
+    transform: translateY(-50%)
 
 // Forums
 
@@ -664,7 +682,7 @@ a.button, a.button:active
     &[src$="application_cascade.png"]
       content: $image-icon-threaded
 
-    &[src$="note_go.png"]
+    &[src$="note_go.png"], &[src$="email_go.png"]
       content: $image-icon-reply
 
     &[src$="note_edit.png"]
@@ -787,7 +805,7 @@ ul
       background-color: #C04039
       color: $color-text-heading-alt
       padding: 6px 5px
-      margin: (-5px) -5px 10px
+      margin: -5px -5px 10px
 
     > .subH2
       font-style: italic
@@ -814,7 +832,7 @@ ul
       white-space: nowrap
 
       &[style*="#990000"]
-        color: #B68000 !important
+        color: $color-text-comm !important
 
   > .body
     img
@@ -856,6 +874,21 @@ td > a > img[vspace="5"]
   object-fit: contain
   object-position: bottom
 
+// My Messages
+
+.message-header
+  background-color: $color-background-card
+  border: none
+
+.message-body
+  border: none
+
+// Help & Info
+
+[name="Founders"] ~ table tr:nth-of-type(even)
+  display: none
+
+
 // Login
 
 .twocol-form-field-set
@@ -888,7 +921,7 @@ td > a > img[vspace="5"]
   background: specular-gradient(360px, 0%)
 
   h2
-    color: #201A1A
+    color: $color-text-sidebar-heading
     margin-top: 5px !important
 
   > div
@@ -1160,6 +1193,25 @@ form[name="mainForm"]
 
       > .CodeMirror
         height: 100%
+
+// CodeMirror Theme
+
+.cm-s-cymirror
+  &.CodeMirror
+    background: saturate(lighten($color-background-main, 6%), 8%)
+    color: lighten($color-text-main, 6%)
+
+  div.CodeMirror-selected
+    background: saturate(lighten($color-background-main, 12%), 2%) !important
+
+  .CodeMirror-gutters
+    background: saturate(lighten($color-background-main, 12%), 2%)
+    border-right: 0
+
+  .CodeMirror-linenumber
+
+  .CodeMirror-cursor
+    border-left: 1px solid lighten($color-text-main, 6%)
 
 // Media queries
 
