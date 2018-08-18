@@ -49,6 +49,9 @@
 	- New icons, symbols, and trophy graphics
 
 ### TODO
+
+- [ ] Fix Var/Item Restriction buttons
+
 - [ ] CSS -> SASS
 	- [ ] Consolidate all stray CSS into either `_cyslantia-base.sass` or `notheme.css`
 	- [ ] Convert all color literals in `_cyslantia-base.sass` to variables
@@ -65,4 +68,5 @@
 - [ ] Additional storygame search options
 - [ ] Pimp out /my/
 	- [ ] Visual consistency
+
 - [ ] Publish CYSCE to Chrome Web-Store
