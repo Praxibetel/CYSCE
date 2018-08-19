@@ -50,8 +50,8 @@
 
 ### TODO
 
-- [x] Fix Var/Item Restriction buttons
-	- Certain chrome settings on company or school computers may somehow be the cause.
+- [ ] Fix Var/Item Restriction buttons
+	- Unknown cause.
 - [ ] CSS -> SASS
 	- [ ] Consolidate all stray CSS into either `_cyslantia-base.sass` or `notheme.css`
 	- [ ] Convert all color literals in `_cyslantia-base.sass` to variables
