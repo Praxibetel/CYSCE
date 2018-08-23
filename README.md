@@ -50,7 +50,7 @@
 
 ### TODO
 
-- [ ] Fix Var/Item Restriction buttons
+- [x] Fix Var/Item Restriction buttons
 	- Unknown cause.
 - [ ] CSS -> SASS
 	- [ ] Consolidate all stray CSS into either `_cyslantia-base.sass` or `notheme.css`
