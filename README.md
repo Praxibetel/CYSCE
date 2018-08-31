@@ -50,8 +50,6 @@
 
 ### TODO
 
-- [x] Fix Var/Item Restriction buttons
-	- Unknown cause.
 - [ ] CSS -> SASS
 	- [ ] Consolidate all stray CSS into either `_cyslantia-base.sass` or `notheme.css`
 	- [ ] Convert all color literals in `_cyslantia-base.sass` to variables
@@ -59,10 +57,7 @@
 	- Graphical nit-picks
 		- [ ] Forum Search Style
 		- [ ] use FWW icons in themes/images/custom
-		- [x] .smallerText {font-size: xx-small;} -> x-small
 		- [ ] h3 font-size on /my/ and /help/articles -> x-small
-		- [x] Dark theme equivalent for all-comments and ratings
-		- [x] td containing nbsp; on /help/AboutUs -> display: none;
 		- [ ] make RPS, RPS25, and Toggle graphics
 		- [ ] fix first tr on /my/points
 - [ ] Additional storygame search options
