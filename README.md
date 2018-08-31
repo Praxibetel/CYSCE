@@ -48,20 +48,3 @@
 + Complete graphic overhaul
 	- New icons, symbols, and trophy graphics
 
-### TODO
-
-- [ ] CSS -> SASS
-	- [ ] Consolidate all stray CSS into either `_cyslantia-base.sass` or `notheme.css`
-	- [ ] Convert all color literals in `_cyslantia-base.sass` to variables
-	- [ ] Custom CodeMirror theme?
-	- Graphical nit-picks
-		- [ ] Forum Search Style
-		- [ ] use FWW icons in themes/images/custom
-		- [ ] h3 font-size on /my/ and /help/articles -> x-small
-		- [ ] make RPS, RPS25, and Toggle graphics
-		- [ ] fix first tr on /my/points
-- [ ] Additional storygame search options
-- [ ] Pimp out /my/
-	- [ ] Visual consistency
-
-- [ ] Publish CYSCE to Chrome Web-Store
