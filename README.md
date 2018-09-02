@@ -1,11 +1,19 @@
 # ChooseYourStory Chrome Extension
 
+## How To:
+
+- Literally just [go here](https://chrome.google.com/webstore/detail/cysce/iohpenfcjbjleliiomgkomefnkpokpfj) and click "Add to chrome" or "install" or whatever the big blue button to add it to your browser says.
+
+### Features:
+
 + Complete overhaul of storygame search functionality
 + Things you wish were clicky links are now clicky (any posted links, member tags, unpublished games, etc)
 + Site navigation links are available from every webpage
 + Complete graphic overhaul
 	- New icons, symbols, and trophy graphics
 + HTTPS support
++ Complete MyStuff overhaul
+	+ Arrange widgets for messages, storygames, your notepad, points, and anything else you can think of!
 + Able to collapse and anchor thread posts
 + New profile settings
 	+ Storygame Developer Mode
