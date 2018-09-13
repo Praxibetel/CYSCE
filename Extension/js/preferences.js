@@ -1,6 +1,8 @@
+var profileMirror;
+
 chrome.storage.sync.get(null, e => {
     if (!chrome.runtime.lastError) {
-        console.log(e);
+        //console.log(e);
         $.get(chrome.extension.getURL("html/preferences.html"), data => {
             $("form > table > tbody > tr:nth-child(22)").after(
                 $(data)
@@ -39,9 +41,18 @@ chrome.storage.sync.get(null, e => {
                 var preferences = {};
                 preferences[e.dataset.key] = e.value;
                 chrome.storage.sync.set(preferences, () => {
-                    if (e.id === "CYSExtensionTheme") chrome.runtime.sendMessage({
-                        action: "CYSupdateTheme"
-                    }, response => $("style#CYS-Theme").text(response.theme || ""));
+                    switch (e.id) {
+                        case "CYSExtensionTheme":
+                            chrome.runtime.sendMessage({
+                                action: "CYSupdateTheme"
+                            }, response => $("style#CYS-Theme").text(response.theme || ""));
+                            break;
+                        case "CYSExtensionCodeMirrorTheme":
+                            profileMirror.setOption("theme", e.value);
+                            break;
+                        default:
+                            break;
+                    }
                 });
             }
         });
@@ -50,17 +61,12 @@ chrome.storage.sync.get(null, e => {
 
 if (!$("script:contains('CKEDITOR.replace')").length) chrome.storage.sync.get("preferenceCodeMirror", e => {
     if (!chrome.runtime.lastError && e.preferenceCodeMirror !== false) {
-        var profileMirror = CodeMirror.fromTextArea(document.getElementById("Profile"), {
-            autoCloseTags: {
-                whenOpening: true,
-                whenClosing: true,
-                indentTags: ["applet", "blockquote", "body", "div", "dl", "fieldset", "form", "frameset", "head", "html", "layer", "legend", "object", "ol", "script", "select", "style", "table", "ul"]
-            },
-            mode: "htmlmixed"
-        });
+        profileMirror = CodeMirror.fromTextArea(document.getElementById("Profile"), CMHTML);
+
+        if (CMAutobreak) profileMirror.setValue(CMUnPreLine(profileMirror.getValue()));
 
         $("form").submit(function() {
-            $("#Profile").val(profileMirror.getValue());
+            $("#Profile").val(CMAutobreak ? CMPreLine(profileMirror.getValue()) : profileMirror.getValue());
         });
 
         $(window).on("load", function() {

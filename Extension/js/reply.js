@@ -1,17 +1,12 @@
 if (!$("script:contains('CKEDITOR.replace')").length) chrome.storage.sync.get("preferenceCodeMirror", e => {
     if (!chrome.runtime.lastError && e.preferenceCodeMirror !== false) {
         var htmlContent = document.querySelector(".contents > textarea"),
-            htmlMirror = CodeMirror.fromTextArea(htmlContent, {
-                autoCloseTags: {
-                    whenOpening: true,
-                    whenClosing: true,
-                    indentTags: ["applet", "blockquote", "body", "div", "dl", "fieldset", "form", "frameset", "head", "html", "layer", "legend", "object", "ol", "script", "select", "style", "table", "ul"]
-                },
-                mode: "htmlmixed"
-            });
+            htmlMirror = CodeMirror.fromTextArea(htmlContent, CMHTML);
+
+        if (CMAutobreak) htmlMirror.setValue(CMUnPreLine(htmlMirror.getValue()));
 
         htmlMirror.on("change", function(mirror) {
-            htmlContent.value = mirror.getValue();
+            htmlContent.value = CMAutobreak ? CMPreLine(mirror.getValue()) : mirror.getValue();
         });
 
         $(window).on("load", function() {

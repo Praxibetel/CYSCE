@@ -3,7 +3,7 @@
 
   "name": "CYSCE",
   "description": "CYS Chrome Extension",
-  "version": "0.2",
+  "version": "0.3",
 
   "icons": {
     "16": "cysicon-16.png",
@@ -24,18 +24,17 @@
       "codemirror/lib/codemirror.js", "codemirror/addon/edit/closebrackets.js", "codemirror/addon/edit/closetag.js", "codemirror/addon/mode/overlay.js", "codemirror/addon/mode/simple.js", "codemirror/mode/css/css.js", "codemirror/mode/javascript/javascript.js", "codemirror/mode/xml/xml.js", "codemirror/mode/htmlmixed/htmlmixed.js", "codemirror/mode/markdown/markdown.js",
       "js/window.js"
     ],
-    "css": ["themes/notheme.css", "codemirror/lib/codemirror.css", "codemirror/theme/bespin.css"],
+    "css": ["themes/notheme.css", "codemirror/lib/codemirror.css", "codemirror/theme/base16-dark-modified.css", "codemirror/theme/base16-light-modified.css"],
     "run_at": "document_start",
     "all_frames": true
   }, {
     "matches": ["*://chooseyourstory.com/*"],
     "exclude_matches": ["*://chooseyourstory.com/story/viewer/*"],
-    "js": ["js/navbar.js"],
+    "js": ["js/main.js"],
     "run_at": "document_end"
   }, {
     "matches": ["*://chooseyourstory.com/Games/Search.aspx*"],
-    "js": ["js/moment.js", "js/storylist.js"],
-    "css": ["storylist.css"]
+    "js": ["js/moment.js", "js/storylist.js"]
   }, {
     "matches": ["*://chooseyourstory.com/forums/*/message/*"],
     "js": ["js/thread.js"],
@@ -77,6 +76,10 @@
     "js": ["js/adveditor.js"],
     "run_at": "document_end"
   }, {
+    "matches": ["*://chooseyourstory.com/my/adveditor/item.aspx*", "*://chooseyourstory.com/My/adveditor/item.aspx*"],
+    "js": ["js/adveditoritem.js"],
+    "run_at": "document_end"
+  }, {
     "matches": ["*://chooseyourstory.com/my/adveditor/pagePopup.asp*", "*://chooseyourstory.com/My/adveditor/pagePopup.asp*"],
     "js": ["js/htmleditor.js"],
     "run_at": "document_end"
@@ -96,7 +99,7 @@
   }, {
     "matches": ["*://chooseyourstory.com/story/viewer/*"],
     "js": ["js/jquery.js", "js/storygame-dev.js"],
-    "css": ["storygame-dev.css"],
+    "css": ["themes/notheme-viewer.css"],
     "run_at": "document_end"
   }],
 

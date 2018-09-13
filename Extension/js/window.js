@@ -1,3 +1,5 @@
+var AJAX, CMAutobreak, CMCYSScript, CMHTML, CMReady;
+
 chrome.runtime.sendMessage({
     action: "CYSgetTheme"
 }, response => {
@@ -6,8 +8,8 @@ chrome.runtime.sendMessage({
             id: "CYS-Theme"
         }).text(response.theme || "");
         if (!document.body) {
-            var observer = new MutationObserver(function(mutations) {
-                mutations.forEach(function(mutation) {
+            var observer = new MutationObserver(mutations => {
+                mutations.forEach(mutation => {
                     if (!mutation.addedNodes) return
                     for (var i = 0; i < mutation.addedNodes.length; i++) {
                         var node = mutation.addedNodes[i];
@@ -28,20 +30,44 @@ chrome.runtime.sendMessage({
     }
 });
 
+AJAX = new Promise((resolve, reject) => {
+    chrome.storage.sync.get("preferenceAJAX", e => {
+        if (chrome.runtime.lastError) reject(chrome.runtime.lastError);
+        resolve(e.preferenceAJAX !== false);
+    });
+});
 
-Object.assign(CodeMirror.defaults, {
-    autoCloseBrackets: true,
-    extraKeys: {
-        "Tab": function(cm) {
-            var spaces = Array(cm.getOption("indentUnit") + 1).join(" ");
-            cm.replaceSelection(spaces);
-        }
+CMCYSScript = {
+    mode: "cysscript"
+};
+
+CMHTML = {
+    autoCloseTags: {
+        whenOpening: true,
+        whenClosing: true,
+        indentTags: ["applet", "blockquote", "body", "div", "dl", "fieldset", "form", "frameset", "head", "html", "layer", "legend", "object", "ol", "script", "select", "style", "table", "ul"]
     },
-    lineNumbers: true,
-    lineWrapping: true,
-    theme: "bespin",
-    workDelay: 800,
-    workTime: 600
+    mode: "htmlmixed"
+};
+
+CMReady = chrome.storage.sync.get(["preferenceCodeMirrorAutobreak", "preferenceCodeMirrorAutoclose", "preferenceCodeMirrorTheme"], e => {
+    if (chrome.runtime.lastError) return;
+    CMAutobreak = e.preferenceCodeMirrorAutobreak === true;
+    CMHTML.autoCloseTags.whenClosing = CMHTML.autoCloseTags.whenOpening = e.preferenceCodeMirrorAutoclose !== false;
+    Object.assign(CodeMirror.defaults, {
+        autoCloseBrackets: true,
+        extraKeys: {
+            Tab(cm) {
+                var spaces = Array(cm.getOption("indentUnit") + 1).join(" ");
+                cm.replaceSelection(spaces);
+            }
+        },
+        lineNumbers: true,
+        lineWrapping: true,
+        theme: e.preferenceCodeMirrorTheme || "base16-dark",
+        workDelay: 800,
+        workTime: 600
+    });
 });
 
 CodeMirror.defineSimpleMode("cysscript", {
@@ -126,3 +152,11 @@ CodeMirror.defineSimpleMode("onpage", {
 CodeMirror.defineMode("cyshtml", function(config, parserConfig) {
     return CodeMirror.overlayMode(CodeMirror.getMode(config, parserConfig.backdrop || "htmlmixed"), CodeMirror.getMode(config, "onpage"));
 });
+
+function CMPreLine(text) {
+    return `<div data-autobreak style="white-space: pre-line;">${text}</div>`;
+}
+
+function CMUnPreLine(text) {
+    return text.replace(/^<div *data-autobreak *style=["'] *white-space: *pre-line *;? *["']>([\s\S]*?)<\/div>$/gi, "$1");
+}

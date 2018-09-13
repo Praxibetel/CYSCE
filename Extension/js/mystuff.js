@@ -62,190 +62,193 @@ var flexContainer,
         }
     ];
 
-$("form > table + table").empty();
-chrome.storage.sync.get("myStuffConfig", e => {
-    if (!chrome.runtime.lastError && e.myStuffConfig) stuffTable = e.myStuffConfig;
+AJAX.then((resolve, reject) => {
+    if (reject || !resolve) return;
+    $("form > table + table").empty();
+    chrome.storage.sync.get("myStuffConfig", e => {
+        if (!chrome.runtime.lastError && e.myStuffConfig) stuffTable = e.myStuffConfig;
 
-    if ($("#MainContentPlaceHolder_btnNormalMode").length) {
-        // Edit Mode
-        $("form > table + table").replaceWith($("<div></div>", {
-            id: "MyStuffEditor"
-        }).append($("<div></div>", {
-            id: "MyStuffContainer"
-        }), $("<div></div>", {
-            id: "MyStuffSidebar"
-        })));
+        if ($("#MainContentPlaceHolder_btnNormalMode").length) {
+            // Edit Mode
+            $("form > table + table").replaceWith($("<div></div>", {
+                id: "MyStuffEditor"
+            }).append($("<div></div>", {
+                id: "MyStuffContainer"
+            }), $("<div></div>", {
+                id: "MyStuffSidebar"
+            })));
 
-        flexContainer = $("#MyStuffContainer");
-        sidebar = $("#MyStuffSidebar");
+            flexContainer = $("#MyStuffContainer");
+            sidebar = $("#MyStuffSidebar");
 
-        for (var row of stuffTable) {
-            var flexRow = $("<div></div>", {
-                class: "flex row"
-            });
-            for (var col of row) {
-                if (col.widget) flexRow.append(createWidget(col, true)), usedWidgets.push(col.widget);
-            }
-            flexContainer.append(flexRow);
-        }
-
-        sidebar.append(
-            $("<h2></h2>").text("Widgets"),
-            widgets.filter(i => i.name === "spacer" || !usedWidgets.includes(i.name)).map(i => createWidget(i, true))
-        );
-        sortableOptions = {
-            connectWith: "#MyStuffSidebar, .flex.row",
-            cursor: "dragging",
-            cursorAt: {
-                left: -10,
-                top: -6
-            },
-            helper: (event, e) => $("<div></div>", {
-                class: "ui-sortable-helper"
-            }).text(e.attr("data-name")),
-            items: ":not(h2)",
-            receive: myStuffUpdate,
-            tolerance: "pointer",
-            update: myStuffUpdate
-        };
-        $("#MyStuffSidebar, .flex.row").sortable(sortableOptions);
-        myStuffUpdateRows();
-        myStuffUpdatePercentage();
-    } else {
-        $("form > table + table").replaceWith($("<div></div>", {
-            id: "MyStuffContainer"
-        }));
-
-        flexContainer = $("#MyStuffContainer");
-
-        for (var row of stuffTable) {
-            var flexRow = $("<div></div>", {
-                class: "flex row"
-            });
-            for (var col of row) {
-                flexRow.append(createWidget(col));
-            }
-            flexContainer.append(flexRow);
-        }
-
-        $.get("Games.aspx", data => {
-            $(".flex.storygames").append(
-                $("<h2></h2>").append($("<a></a>", {
-                    href: "Games.aspx"
-                }).text("Storygames")),
-                $("<div></div>", {
-                    class: "flex-sub"
-                }).append($("<table></table>").append($(data).find("tr").slice(1)))
-            );
-        });
-
-        $.get("messages", data => {
-            $(".flex.messages").append(
-                $("<h2></h2>").append($("<a></a>", {
-                    href: "messages"
-                }).text("Messages")),
-                $("<div></div>", {
-                    class: "flex-sub"
-                }).append($("<table></table>").append($(data).find("tr:not(:last-child)").slice(1, 25).each(function() {
-                    $(this).find("> :first-child").remove();
-                })))
-            );
-        });
-
-        $.get("Duels/open.aspx", data => {
-            $(".flex.duels").append(
-                $("<h2></h2>").append($("<a></a>", {
-                    href: "Duels/default.aspx"
-                }).text("Duels")),
-                $("<div></div>", {
-                    class: "flex-sub"
-                }).append($("<table></table>").append($(data).find("tr").slice(1, 25)))
-            );
-        });
-
-        $.get("Comments.aspx", data => {
-            $(".flex.comments").append(
-                $("<h2></h2>").append($("<a></a>", {
-                    href: "Comments.aspx"
-                }).text("Comments")),
-                $("<div></div>", {
-                    class: "flex-sub"
-                }).append($("<div></div>").append($(data).find("#mainContent > div > div").slice(0, 1)))
-            );
-        });
-
-        $.get(`/user/points?username=${$("#Cys_DisplayName").text()}`, data => {
-            $(".flex.points").append(
-                $("<h2></h2>").append($("<a></a>", {
-                    href: `/user/points?username=${$("#Cys_DisplayName").text()}`
-                }).text("EXP Points")),
-                $("<div></div>", {
-                    class: "flex-sub"
-                }).append($("<table></table>").append($(data).find("tr").slice(1, 25)))
-            );
-        });
-
-        $.get(`/user/endorsements?username=${$("#Cys_DisplayName").text()}`, data => {
-            $(".flex.commendations").append(
-                $("<h2></h2>").append($("<a></a>", {
-                    href: `/user/endorsements?username=${$("#Cys_DisplayName").text()}`
-                }).text("Commendations")),
-                $("<div></div>", {
-                    class: "flex-sub"
-                }).append($("<table></table>").append($(data).find("tr").slice(1, 25)))
-            );
-        });
-
-        $.get("Saves.aspx", data => {
-            $(".flex.saves").append(
-                $("<h2></h2>").append($("<a></a>", {
-                    href: "Saves.aspx"
-                }).text("Saves")),
-                $("<div></div>", {
-                    class: "flex-sub"
-                }).append($("<table></table>").append($(data).find("tr").slice(2)))
-            );
-        });
-
-        $(".flex.notepad").append(
-            $("<div></div>", {
-                class: "flex-dom"
-            }).append(
-                $("<h2></h2>").append($("<a></a>", {
-                    href: "notepad"
-                }).text("Notepad")),
-                $("<a></a>", {
-                    href: "#save",
-                    class: "button"
-                }).click(function() {
-                    $("#notepadFrame").contents().find("form > textarea").val(notepadMirror.getValue());
-                    $("#notepadFrame").contents().find("input[name='__EVENTTARGET']").val("ctl11");
-                    $("#notepadFrame").contents().find("form").submit();
-                    return false;
-                }).append($("<img>", {
-                    src: "/0x44/InedoLib/Inedo.Web.Controls.IconImage/ProcessImageRequest/InedoIcons/F3Silk/16x16/disk.png"
-                }), " Save Changes")),
-            $("<div></div>", {
-                class: "flex-sub"
-            }).append($("<iframe></iframe>", {
-                id: "notepadFrame",
-                hidden: true,
-                src: "http://chooseyourstory.com/my/notepad"
-            }).on("load", () => {
-                if (!notepadMirror) notepadMirror = CodeMirror(mirror => $(".flex.notepad > .flex-sub").append(mirror), {
-                    mode: "markdown",
-                    scrollbarStyle: null,
-                    value: $("#notepadFrame").contents().find("form > textarea").val()
+            for (var row of stuffTable) {
+                var flexRow = $("<div></div>", {
+                    class: "flex row"
                 });
-                else notepadMirror.setValue($("#notepadFrame").contents().find("form > textarea").val());
-                notepadMirror.refresh();
-            }))
-        );
+                for (var col of row) {
+                    if (col.widget) flexRow.append(createWidget(col, true)), usedWidgets.push(col.widget);
+                }
+                flexContainer.append(flexRow);
+            }
 
-        $(window).on("load", function() {
-            if (notepadMirror) notepadMirror.refresh();
-        });
-    }
+            sidebar.append(
+                $("<h2></h2>").text("Widgets"),
+                widgets.filter(i => i.name === "spacer" || !usedWidgets.includes(i.name)).map(i => createWidget(i, true))
+            );
+            sortableOptions = {
+                connectWith: "#MyStuffSidebar, .flex.row",
+                cursor: "dragging",
+                cursorAt: {
+                    left: -10,
+                    top: -6
+                },
+                helper: (event, e) => $("<div></div>", {
+                    class: "ui-sortable-helper"
+                }).text(e.attr("data-name")),
+                items: ":not(h2)",
+                receive: myStuffUpdate,
+                tolerance: "pointer",
+                update: myStuffUpdate
+            };
+            $("#MyStuffSidebar, .flex.row").sortable(sortableOptions);
+            myStuffUpdateRows();
+            myStuffUpdatePercentage();
+        } else {
+            $("form > table + table").replaceWith($("<div></div>", {
+                id: "MyStuffContainer"
+            }));
+
+            flexContainer = $("#MyStuffContainer");
+
+            for (var row of stuffTable) {
+                var flexRow = $("<div></div>", {
+                    class: "flex row"
+                });
+                for (var col of row) {
+                    flexRow.append(createWidget(col));
+                }
+                flexContainer.append(flexRow);
+            }
+
+            $.get("Games.aspx", data => {
+                $(".flex.storygames").append(
+                    $("<h2></h2>").append($("<a></a>", {
+                        href: "Games.aspx"
+                    }).text("Storygames")),
+                    $("<div></div>", {
+                        class: "flex-sub"
+                    }).append($("<table></table>").append($(data).find("tr").slice(1)))
+                );
+            });
+
+            $.get("messages", data => {
+                $(".flex.messages").append(
+                    $("<h2></h2>").append($("<a></a>", {
+                        href: "messages"
+                    }).text("Messages")),
+                    $("<div></div>", {
+                        class: "flex-sub"
+                    }).append($("<table></table>").append($(data).find("tr:not(:last-child)").slice(1, 25).each(function() {
+                        $(this).find("> :first-child").remove();
+                    })))
+                );
+            });
+
+            $.get("Duels/open.aspx", data => {
+                $(".flex.duels").append(
+                    $("<h2></h2>").append($("<a></a>", {
+                        href: "Duels/default.aspx"
+                    }).text("Duels")),
+                    $("<div></div>", {
+                        class: "flex-sub"
+                    }).append($("<table></table>").append($(data).find("tr").slice(1, 25)))
+                );
+            });
+
+            $.get("Comments.aspx", data => {
+                $(".flex.comments").append(
+                    $("<h2></h2>").append($("<a></a>", {
+                        href: "Comments.aspx"
+                    }).text("Comments")),
+                    $("<div></div>", {
+                        class: "flex-sub"
+                    }).append($("<div></div>").append($(data).find("#mainContent > div > div").slice(0, 1)))
+                );
+            });
+
+            $.get(`/user/points?username=${$("#Cys_DisplayName").text()}`, data => {
+                $(".flex.points").append(
+                    $("<h2></h2>").append($("<a></a>", {
+                        href: `/user/points?username=${$("#Cys_DisplayName").text()}`
+                    }).text("EXP Points")),
+                    $("<div></div>", {
+                        class: "flex-sub"
+                    }).append($("<table></table>").append($(data).find("tr").slice(1, 25)))
+                );
+            });
+
+            $.get(`/user/endorsements?username=${$("#Cys_DisplayName").text()}`, data => {
+                $(".flex.commendations").append(
+                    $("<h2></h2>").append($("<a></a>", {
+                        href: `/user/endorsements?username=${$("#Cys_DisplayName").text()}`
+                    }).text("Commendations")),
+                    $("<div></div>", {
+                        class: "flex-sub"
+                    }).append($("<table></table>").append($(data).find("tr").slice(1, 25)))
+                );
+            });
+
+            $.get("Saves.aspx", data => {
+                $(".flex.saves").append(
+                    $("<h2></h2>").append($("<a></a>", {
+                        href: "Saves.aspx"
+                    }).text("Saves")),
+                    $("<div></div>", {
+                        class: "flex-sub"
+                    }).append($("<table></table>").append($(data).find("tr").slice(2)))
+                );
+            });
+
+            $(".flex.notepad").append(
+                $("<div></div>", {
+                    class: "flex-dom"
+                }).append(
+                    $("<h2></h2>").append($("<a></a>", {
+                        href: "notepad"
+                    }).text("Notepad")),
+                    $("<a></a>", {
+                        href: "#save",
+                        class: "button"
+                    }).click(function() {
+                        $("#notepadFrame").contents().find("form > textarea").val(notepadMirror.getValue());
+                        $("#notepadFrame").contents().find("input[name='__EVENTTARGET']").val("ctl11");
+                        $("#notepadFrame").contents().find("form").submit();
+                        return false;
+                    }).append($("<img>", {
+                        src: "/0x44/InedoLib/Inedo.Web.Controls.IconImage/ProcessImageRequest/InedoIcons/F3Silk/16x16/disk.png"
+                    }), " Save Changes")),
+                $("<div></div>", {
+                    class: "flex-sub"
+                }).append($("<iframe></iframe>", {
+                    id: "notepadFrame",
+                    hidden: true,
+                    src: "//chooseyourstory.com/my/notepad"
+                }).on("load", () => {
+                    if (!notepadMirror) notepadMirror = CodeMirror(mirror => $(".flex.notepad > .flex-sub").append(mirror), {
+                        mode: "markdown",
+                        scrollbarStyle: null,
+                        value: $("#notepadFrame").contents().find("form > textarea").val()
+                    });
+                    else notepadMirror.setValue($("#notepadFrame").contents().find("form > textarea").val());
+                    notepadMirror.refresh();
+                }))
+            );
+
+            $(window).on("load", function() {
+                if (notepadMirror) notepadMirror.refresh();
+            });
+        }
+    });
 });
 
 function createWidget(options, edit = false) {

@@ -1,0 +1,49 @@
+@media print {
+  * {
+    background-color: white !important;
+    color: #222;
+    font-family: "Playfair Display", "Palatino Linotype", "Palatino", serif;
+    font-size: 12pt;
+    line-height: 1.42em;
+    text-align: justify;
+  }
+  #HeaderContainer, .sidebar-content, .footer-content, #Footer, ul.help-info-selector {
+    display: none;
+  }
+  #BodyContainer>.main-content {
+    padding: 0;
+    margin: 0 !important;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  .main-content::before, .main-content::after {
+    content: none;
+  }
+  .main-content>#maincontent {
+    width: 100%;
+    word-wrap: break-word;
+  }
+  .main-content>#maincontent> :first-child {
+    margin-top: 0;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.21em;
+    margin: 0.84em 0 0;
+    text-align: left;
+  }
+  h1 {
+    color: #444;
+    font-size: 24pt;
+    font-weight: 500;
+  }
+  p {
+    margin: 1em 0px 0px;
+  }
+  @page {
+    margin: 1in;
+    size: Letter portrait;
+  }
+}

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   style="height: 72px; width: 72px;"
+   viewBox="0 0 512 512"
+   id="svg2999"
+   version="1.1"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   width="100%"
+   height="100%"
+   sodipodi:docname="checked.svg">
+  <metadata
+     id="metadata3011">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs3009" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1018"
+     id="namedview3007"
+     showgrid="false"
+     inkscape:zoom="1.1504296"
+     inkscape:cx="-64.613136"
+     inkscape:cy="194.11605"
+     inkscape:window-x="1272"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2999" />
+  <path
+     d="M0 0h512v512H0z"
+     fill="transparent"
+     fill-opacity="0"
+     id="path3001" />
+  <g
+     class=""
+     style="touch-action:none;fill:#871d18;fill-opacity:1"
+     transform="translate(0,0)"
+     id="g3003">
+    <path
+       d="M23.05 23.05V488.9H488.9V23.05H23.05z"
+       fill="#eeeeee"
+       fill-opacity="1"
+       id="path3005"
+       style="fill:#871d18;fill-opacity:1" />
+  </g>
+  <path
+     inkscape:connector-curvature="0"
+     d="M 385.35585,95.72864 189.69504,291.38976 126.23744,227.93216 64,290.16928 127.4576,353.6272 190.10144,416.27136 252.33921,354.03361 448,158.37311 385.35585,95.72864 z"
+     id="path3900"
+     style="fill:#00b016;fill-opacity:1" />
+</svg>

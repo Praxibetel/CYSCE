@@ -1,9 +1,9 @@
 var theme;
 
-getTheme((data) => theme = data);
+getTheme(data => theme = data);
 
 function cacheTheme(callback) {
-    chrome.storage.sync.get("preferenceTheme", (e) => {
+    chrome.storage.sync.get("preferenceTheme", e => {
         if (!chrome.runtime.lastError && e.preferenceTheme && e.preferenceTheme !== "none") {
             var httpRequest = new XMLHttpRequest();
             httpRequest.onreadystatechange = () => {
@@ -26,7 +26,7 @@ function cacheTheme(callback) {
                     callback(data)
                 };
             };
-            httpRequest.open("GET", "themes/cyslantia-" + e.preferenceTheme + ".min.css");
+            httpRequest.open("GET", `themes/cyslantia-${e.preferenceTheme}.min.css`);
             httpRequest.send();
         } else {
             callback("");
@@ -46,30 +46,25 @@ function getTheme(callback) {
     });
     */
     var e = sessionStorage.getItem("theme");
-    if (e && e.content && e.timestamp) {
-        if (e.timestamp > Date.now() - 3600 * 1000) {
-            return callback(e.content);
-        }
-    }
+    if (e && e.content && e.timestamp && e.timestamp > Date.now() - 3600000) return callback(e.content);
     cacheTheme(callback);
 }
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.action === "CYSgetTheme") {
-        sendResponse({
-            theme: theme
-        });
-    }
-});
-
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.action === "CYSupdateTheme") {
-        cacheTheme((data) => {
-            theme = data;
+    switch (request.action) {
+        case "CYSgetTheme":
             sendResponse({
                 theme: theme
             });
-        });
-        return true;
+            break;
+        case "CYSupdateTheme":
+            cacheTheme(data => {
+                theme = data;
+                sendResponse({
+                    theme: theme
+                });
+            });
+            return true;
+            break;
     }
 });

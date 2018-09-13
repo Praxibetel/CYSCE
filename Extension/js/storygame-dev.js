@@ -73,7 +73,7 @@ var devPanel = $("<div></div>", {
     }))).hide();
 
 for (var i in ssVariables) {
-    devPanel.find("#devPanelList").append($("<li></li>").append($("<span></span>").text(i + ": "), $("<input>", {
+    devPanel.find("#devPanelList").append($("<li></li>").append($("<span></span>").text(`${i}: `), $("<input>", {
         "data-name": i,
         "data-value": ssVariables[i],
         type: "number",

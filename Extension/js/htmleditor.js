@@ -1,14 +1,9 @@
 if (!$("script:contains('CKEDITOR.replace')").length) chrome.storage.sync.get("preferenceCodeMirror", e => {
     if (!chrome.runtime.lastError && e.preferenceCodeMirror !== false) {
         var htmlContent = document.getElementById("Content"),
-            htmlMirror = CodeMirror.fromTextArea(htmlContent, {
-                autoCloseTags: {
-                    whenOpening: true,
-                    whenClosing: true,
-                    indentTags: ["applet", "blockquote", "body", "div", "dl", "fieldset", "form", "frameset", "head", "html", "layer", "legend", "object", "ol", "script", "select", "style", "table", "ul"]
-                },
+            htmlMirror = CodeMirror.fromTextArea(htmlContent, Object.assign({}, CMHTML, {
                 mode: "cyshtml"
-            });
+            }));
 
         htmlMirror.on("change", function(mirror) {
             htmlContent.value = mirror.getValue();
@@ -19,6 +14,12 @@ if (!$("script:contains('CKEDITOR.replace')").length) chrome.storage.sync.get("p
         });
     }
 });
+
+$("input[name='Title']").parent().children().wrapAll($("<span></span>", {
+    class: "storygamePageEditorTitle"
+}));
+
+$("textarea#Content").parent().addClass(`CodeMirror-wrapper cm-s-${CodeMirror.defaults.theme}`);
 
 $("input[name='LinkTitle']").after(function() {
     return $("<label></label>").text(` #${$(this).parent().find("input[name='LinkID']").val()}`);

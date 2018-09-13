@@ -94,6 +94,10 @@ $image-icon-variable: url("#{$custom}/percent.svg") !default
 $image-icon-script: url("#{$elusive}/file.svg") !default
 $image-icon-user: url("#{$elusive}/user.svg") !default
 $image-icon-ok: url("#{$elusive}/ok.svg") !default
+$image-icon-fww-new: url("#{$custom}/fwwNew.png") !default
+$image-icon-fww-accepted: url("#{$custom}/fwwAccepted.png") !default
+$image-icon-fww-completed: url("#{$custom}/fwwCompleted.png") !default
+$image-icon-fww-rejected: url("#{$custom}/fwwRejected.png") !default
 
 $image-trophy-100points: url("#{$trophy}/100.png") !default
 $image-trophy-500points: url("#{$trophy}/500.png") !default
@@ -125,6 +129,38 @@ $image-trophy-fromsethaniel: url("#{$trophy}/seth.png") !default
 $image-trophy-fromsolostrike: url("#{$trophy}/solo.png") !default
 $image-trophy-fromtsmpaul: url("#{$trophy}/tsmpaul.png") !default
 $image-trophy-fromwill11: url("#{$trophy}/will.png") !default
+
+$image-duel-toggle: url("#{$custom}/duel-toggle.png") !default
+$image-duel-rps: url("#{$custom}/duel-rps.png") !default
+$image-duel-rps25: url("#{$custom}/duel-rps25.png") !default
+$image-icon-duel-checked: url("#{$directory}/images/game-icons/checked.svg") !default
+$image-icon-duel-square: url("#{$directory}/images/game-icons/square.svg") !default
+$image-icon-duel-blank: url("#{$directory}/images/game-icons/blank.svg") !default
+$image-icon-duel-nuke: url("#{$directory}/images/game-icons/nuke.svg") !default
+$image-icon-duel-lightning: url("#{$directory}/images/game-icons/lightning.svg") !default
+$image-icon-duel-snake: url("#{$directory}/images/game-icons/snake.svg") !default
+$image-icon-duel-devil: url("#{$directory}/images/game-icons/devil.svg") !default
+$image-icon-duel-gun: url("#{$directory}/images/game-icons/gun.svg") !default
+$image-icon-duel-wolf: url("#{$directory}/images/game-icons/wolf.svg") !default
+$image-icon-duel-woman: url("#{$directory}/images/game-icons/woman.svg") !default
+$image-icon-duel-rock: url("#{$directory}/images/game-icons/rock.svg") !default
+$image-icon-duel-paper: url("#{$directory}/images/game-icons/paper.svg") !default
+$image-icon-duel-dynamite: url("#{$directory}/images/game-icons/dynamite.svg") !default
+$image-icon-duel-axe: url("#{$directory}/images/game-icons/axe.svg") !default
+$image-icon-duel-sponge: url("#{$directory}/images/game-icons/sponge.svg") !default
+$image-icon-duel-scissors: url("#{$directory}/images/game-icons/scissors.svg") !default
+$image-icon-duel-water: url("#{$directory}/images/game-icons/water.svg") !default
+$image-icon-duel-bowl: url("#{$directory}/images/game-icons/bowl.svg") !default
+$image-icon-duel-cockroach: url("#{$directory}/images/game-icons/cockroach.svg") !default
+$image-icon-duel-air: url("#{$directory}/images/game-icons/air.svg") !default
+$image-icon-duel-fire: url("#{$directory}/images/game-icons/fire.svg") !default
+$image-icon-duel-alien: url("#{$directory}/images/game-icons/alien.svg") !default
+$image-icon-duel-dragon: url("#{$directory}/images/game-icons/dragon.svg") !default
+$image-icon-duel-man: url("#{$directory}/images/game-icons/man.svg") !default
+$image-icon-duel-tree: url("#{$directory}/images/game-icons/tree.svg") !default
+$image-icon-duel-monkey: url("#{$directory}/images/game-icons/monkey.svg") !default
+$image-icon-duel-moon: url("#{$directory}/images/game-icons/moon.svg") !default
+$image-icon-duel-sun: url("#{$directory}/images/game-icons/sun.svg") !default
 
 $radius-default: 4px
 
@@ -472,6 +508,7 @@ input
     @extend select
 
     background-color: $color-background-button
+    background-image: unset
     color: $color-text-button
     cursor: pointer
     font-family: $font-main
@@ -710,6 +747,18 @@ img
   &[src="/forums/images/squashedbug.gif"]
     content: $image-icon-squashed-bug
 
+  &[src="/forums/images/newFeature.gif"]
+    content: $image-icon-fww-new
+
+  &[src="/forums/images/acceptedFeature.gif"]
+    content: $image-icon-fww-accepted
+
+  &[src="/forums/images/completedFeature.gif"]
+    content: $image-icon-fww-completed
+
+  &[src="/forums/images/rejectedFeature.gif"]
+    content: $image-icon-fww-rejected
+
 .icon-box
   background-color: $color-background-chip
   border: none
@@ -882,6 +931,127 @@ td > a > img[vspace="5"]
 
 .message-body
   border: none
+
+// My Duels
+
+img
+  &[src="toggle/image.gif"]
+    content: $image-duel-toggle
+
+  &[src="rockpaperscissors/image.gif"]
+    content: $image-duel-rps
+
+  &[src="rps/images/rpslogo.gif"]
+    content: $image-duel-rps25
+
+form[action*="newduel"] > table
+  margin: auto
+
+td
+  &[style*="1px solid #000033"]
+    background-color: transparent !important
+    border: none !important
+
+  hr[noshade]
+    display: none
+
+[for="radchecked"] > img
+  content: $image-icon-duel-checked
+
+[for="radunchecked"] > img
+  content: $image-icon-duel-square
+
+[for="radRock"] > img
+  content: $image-icon-duel-rock
+
+[for="radPaper"] > img
+  content: $image-icon-duel-paper
+
+[for="radScissors"] > img
+  content: $image-icon-duel-scissors
+
+img
+  &[title="???"]
+    content: $image-icon-duel-blank
+    filter: saturate(0.8) opacity(0.3)
+
+  &[id^="MainContentPlaceHolder__choiceImage_"]:not([title="???"])
+    cursor: pointer !important
+
+  &#MainContentPlaceHolder__choiceImage_nuke, &[width="72"][height="72"][src$="nuke.gif"]
+    content: $image-icon-duel-nuke
+
+  &#MainContentPlaceHolder__choiceImage_lightning, &[width="72"][height="72"][src$="lightning.gif"]
+    content: $image-icon-duel-lightning
+
+  &#MainContentPlaceHolder__choiceImage_snake, &[width="72"][height="72"][src$="snake.gif"]
+    content: $image-icon-duel-snake
+
+  &#MainContentPlaceHolder__choiceImage_devil, &[width="72"][height="72"][src$="devil.gif"]
+    content: $image-icon-duel-devil
+
+  &#MainContentPlaceHolder__choiceImage_gun, &[width="72"][height="72"][src$="gun.gif"]
+    content: $image-icon-duel-gun
+
+  &#MainContentPlaceHolder__choiceImage_wolf, &[width="72"][height="72"][src$="wolf.gif"]
+    content: $image-icon-duel-wolf
+
+  &#MainContentPlaceHolder__choiceImage_woman, &[width="72"][height="72"][src$="woman.gif"]
+    content: $image-icon-duel-woman
+
+  &#MainContentPlaceHolder__choiceImage_rock, &[width="72"][height="72"][src$="rock.gif"]
+    content: $image-icon-duel-rock
+
+  &#MainContentPlaceHolder__choiceImage_paper, &[width="72"][height="72"][src$="paper.gif"]
+    content: $image-icon-duel-paper
+
+  &#MainContentPlaceHolder__choiceImage_dynamite, &[width="72"][height="72"][src$="dynamite.gif"]
+    content: $image-icon-duel-dynamite
+
+  &#MainContentPlaceHolder__choiceImage_axe, &[width="72"][height="72"][src$="axe.gif"]
+    content: $image-icon-duel-axe
+
+  &#MainContentPlaceHolder__choiceImage_sponge, &[width="72"][height="72"][src$="sponge.gif"]
+    content: $image-icon-duel-sponge
+
+  &#MainContentPlaceHolder__choiceImage_scissors, &[width="72"][height="72"][src$="scissors.gif"]
+    content: $image-icon-duel-scissors
+
+  &#MainContentPlaceHolder__choiceImage_water, &[width="72"][height="72"][src$="water.gif"]
+    content: $image-icon-duel-water
+
+  &#MainContentPlaceHolder__choiceImage_bowl, &[width="72"][height="72"][src$="bowl.gif"]
+    content: $image-icon-duel-bowl
+
+  &#MainContentPlaceHolder__choiceImage_cockroach, &[width="72"][height="72"][src$="cockroach.gif"]
+    content: $image-icon-duel-cockroach
+
+  &#MainContentPlaceHolder__choiceImage_air, &[width="72"][height="72"][src$="air.gif"]
+    content: $image-icon-duel-air
+
+  &#MainContentPlaceHolder__choiceImage_fire, &[width="72"][height="72"][src$="fire.gif"]
+    content: $image-icon-duel-fire
+
+  &#MainContentPlaceHolder__choiceImage_alien, &[width="72"][height="72"][src$="alien.gif"]
+    content: $image-icon-duel-alien
+
+  &#MainContentPlaceHolder__choiceImage_dragon, &[width="72"][height="72"][src$="dragon.gif"]
+    content: $image-icon-duel-dragon
+
+  &#MainContentPlaceHolder__choiceImage_man, &[width="72"][height="72"][src$="man.gif"]
+    content: $image-icon-duel-man
+
+  &#MainContentPlaceHolder__choiceImage_tree, &[width="72"][height="72"][src$="tree.gif"]
+    content: $image-icon-duel-tree
+
+  &#MainContentPlaceHolder__choiceImage_monkey, &[width="72"][height="72"][src$="monkey.gif"]
+    content: $image-icon-duel-monkey
+
+  &#MainContentPlaceHolder__choiceImage_moon, &[width="72"][height="72"][src$="moon.gif"]
+    content: $image-icon-duel-moon
+
+  &#MainContentPlaceHolder__choiceImage_sun, &[width="72"][height="72"][src$="sun.gif"]
+    content: $image-icon-duel-sun
 
 // Help & Info
 
@@ -1125,28 +1295,28 @@ img
   &[src$="CYS/images/checkmark.gif"][alt$="coauthor"]
     content: $image-icon-coauth
 
-  &[src$="exclaim.gif"]
+  &[src$="/exclaim.gif"]
     content: $image-icon-exclaim
 
-  &[src$="edit.gif"]
+  &[src$="/edit.gif"]
     content: $image-icon-edit-adv
 
-  &[src$="script.gif"], &[src$="script_dim.gif"]
+  &[src$="/script.gif"], &[src$="/script_dim.gif"]
     content: $image-icon-script
 
-  &[src$="delete.gif"]
+  &[src$="/delete.gif"]
     content: $image-icon-delete
 
-  &[src$="go.gif"]
+  &[src$="/go.gif"]
     content: $image-icon-go
 
-  &[src$="stop.gif"], &[src$="stop_dim.gif"], &[src$="16x16/delete.png"]
+  &[src$="/stop.gif"], &[src$="/stop_dim.gif"], &[src$="16x16/delete.png"]
     content: $image-icon-stop
 
-  &[src$="item.gif"], &[src$="item_dim.gif"]
+  &[src$="/item.gif"], &[src$="/item_dim.gif"]
     content: $image-icon-item
 
-  &[src$="addsub.gif"], &[src$="addsub_dim.gif"]
+  &[src$="/addsub.gif"], &[src$="/addsub_dim.gif"]
     content: $image-icon-variable
 
   &[src$="_dim.gif"]
@@ -1177,7 +1347,7 @@ body[onload*="ScriptText"]
 // Page editor
 
 form[name="mainForm"]
-  > div
+  > div[style]
     box-sizing: border-box
     display: flex
     flex-direction: column
@@ -1186,32 +1356,26 @@ form[name="mainForm"]
     padding: 20px
 
     > p
-      background-color: #28211c
+      border-radius: $radius-default
       flex: 1 1 50vh
       min-height: 180px
       overflow: auto
 
       > .CodeMirror
+        border-radius: 0
         height: 100%
+
+.storygamePageEditorTitle
+  align-items: baseline
+  display: flex
+
+  input
+    color: lighten($color-text-main, 6%) !important
 
 // CodeMirror Theme
 
-.cm-s-cymirror
-  &.CodeMirror
-    background: saturate(lighten($color-background-main, 6%), 8%)
-    color: lighten($color-text-main, 6%)
-
-  div.CodeMirror-selected
-    background: saturate(lighten($color-background-main, 12%), 2%) !important
-
-  .CodeMirror-gutters
-    background: saturate(lighten($color-background-main, 12%), 2%)
-    border-right: 0
-
-  .CodeMirror-linenumber
-
-  .CodeMirror-cursor
-    border-left: 1px solid lighten($color-text-main, 6%)
+.CodeMirror
+  border-radius: $radius-default
 
 // Media queries
 
@@ -1233,3 +1397,16 @@ form[name="mainForm"]
 
     .footer-content
       border-style: none none solid
+
+@media (max-width: 780px)
+  #BodyContainer
+    .sidebar-content > ul
+      flex-wrap: wrap
+      height: 85px
+
+      > li
+        flex: 1 0 25%
+        height: 27px
+
+    > .main-content
+      margin-top: 75px !important
