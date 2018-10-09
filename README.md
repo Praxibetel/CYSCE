@@ -2,7 +2,7 @@
 
 ## How To:
 
-- Literally just [go here](https://chrome.google.com/webstore/detail/cysce/iohpenfcjbjleliiomgkomefnkpokpfj) and click "Add to chrome" or "install" or whatever the big blue button to add it to your browser says.
+- Go to: [https://chrome.google.com/webstore/detail/cysce/iohpenfcjbjleliiomgkomefnkpokpfj](https://chrome.google.com/webstore/detail/cysce/iohpenfcjbjleliiomgkomefnkpokpfj) and click "Add to Chrome"
 
 ### Features:
 
@@ -25,4 +25,3 @@
 + Text editors around the site now have syntax highlighting
 	- toggleable for those who like the old text editor
 + Lots of nit-picky fixes
-
