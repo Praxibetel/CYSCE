@@ -119,6 +119,7 @@ div[style="width=680px; "]>form[method="get"]+div {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin-top: 10px;
   width: 100%;
 }
 
@@ -141,6 +142,15 @@ div[style="width=680px; "]>form[method="get"]+div {
 
 #MyStuffContainer>.flex.row>.flex.col:last-child {
   margin-right: 0;
+}
+
+#MyStuffContainer>.flex.row>.flex.col h2, #MyStuffContainer>.flex.row>.flex.col>.flex-dom {
+  line-height: 1.5em;
+  padding: 2px;
+}
+
+#MyStuffContainer>.flex.row>.flex.col h3 {
+  font-size: unset;
 }
 
 #MyStuffSidebar {
@@ -240,6 +250,10 @@ ul.help-info-selector span {
   display: inline-block;
   padding: 5px 15px;
   margin: 0px;
+}
+
+h3+h2+h3 {
+  font-size: .9em;
 }
 
 /* Emoji */

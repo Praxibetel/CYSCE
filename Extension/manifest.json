@@ -44,7 +44,7 @@
     "js": ["js/reply.js"],
     "run_at": "document_end"
   }, {
-    "matches": ["*://chooseyourstory.com/Member/*"],
+    "matches": ["*://chooseyourstory.com/member/*", "*://chooseyourstory.com/Member/*"],
     "js": ["js/member.js"],
     "run_at": "document_end"
   }, {
@@ -72,7 +72,7 @@
     "js": ["js/login.js"],
     "run_at": "document_end"
   }, {
-    "matches": ["*://chooseyourstory.com/my/adveditor/properties.aspx*", "*://chooseyourstory.com/My/adveditor/properties.aspx*", "*://chooseyourstory.com/my/adveditor/default.aspx*", "*://chooseyourstory.com/My/adveditor/default.aspx*"],
+    "matches": ["*://chooseyourstory.com/my/adveditor/properties.aspx*", "*://chooseyourstory.com/My/adveditor/properties.aspx*", "*://chooseyourstory.com/my/adveditor/Properties.aspx*", "*://chooseyourstory.com/My/adveditor/Properties.aspx*", "*://chooseyourstory.com/my/adveditor/default.aspx*", "*://chooseyourstory.com/My/adveditor/default.aspx*"],
     "js": ["js/adveditor.js"],
     "run_at": "document_end"
   }, {

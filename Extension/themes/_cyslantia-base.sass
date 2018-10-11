@@ -56,6 +56,8 @@ $image-background-masthead-2x: url("#{$image}/cys-header-2x.png") !default
 $image-background-masthead-3x: url("#{$image}/cys-header-3x.png") !default
 $image-background-masthead-4x: url("#{$image}/cys-header-4x.png") !default
 
+$image-login: url("#{$image}/login.png") !default
+
 $image-icon-rss: url("#{$elusive}/rss.svg") !default
 $image-icon-featured: url("#{$elusive}/star-alt.svg") !default
 $image-icon-length-rating: url("#{$custom}/length-rating.svg") !default
@@ -424,10 +426,11 @@ body
         content: none
 
       table
-        background-color: #F5F0E4
+        tr
+          background-color: lighten($color-background-page, 4%) !important
 
-        tr:nth-of-type(2n+1)
-          background-color: #EAE2CE !important
+        tr:nth-of-type(odd)
+          background-color: $color-background-page !important
 
         + .button
           display: none
@@ -513,7 +516,10 @@ input
     cursor: pointer
     font-family: $font-main
 
-label
+  &[style="background-color:#DFDFDF"]
+    background-color: lighten($color-background-main, 12%) !important
+
+th, label
   color: $color-text-label
 
 hr
@@ -542,9 +548,6 @@ td > .dark1border
 
   tr
     background-color: transparent
-
-  th
-    color: $color-text-label
 
 #MainContentPlaceHolder_StoriesGridView
   tr
@@ -867,6 +870,7 @@ ul
 
     > .avatar
       border: none
+      border-radius: $radius-default
       margin-top: 10px
       object-fit: cover
       object-position: 50% 15%
@@ -926,11 +930,25 @@ td > a > img[vspace="5"]
 // My Messages
 
 .message-header
-  background-color: $color-background-card
-  border: none
+  background-color: lighten($color-background-main, 3%) !important
+  border: none !important
+
+  + .message-header
+    background-color: lighten($color-background-main, 3%) !important
 
 .message-body
-  border: none
+  background-color: lighten($color-background-main, 3%) !important
+  border: none !important
+  font-size: inherit !important
+
+.message-body + hr
+  display: none
+
+  &:nth-of-type(odd) + .message-header
+    background-color: transparent !important
+
+    + .message-body
+      background-color: transparent !important
 
 // My Duels
 
@@ -1060,6 +1078,9 @@ img
 
 
 // Login
+
+img[src="App_Themes/CYS/images/login.gif"]
+  content: $image-login
 
 .twocol-form-field-set
   td

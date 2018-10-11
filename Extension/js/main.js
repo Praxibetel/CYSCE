@@ -1,11 +1,6 @@
-chrome.storage.sync.get("preferenceNotifications", e => {
-    if (!chrome.runtime.lastError && !e.preferenceNotifications) {
-        $(".header-alerts-container").parent().hide();
-    }
-});
-
 var e,
-    u = !!$("#Cys_DisplayName").length;
+    u = !!$("#Cys_DisplayName").length,
+    url = new URL(document.location);
 
 e = $(".sidebar-content > ul > li > a[href='/Stories/']");
 if (!e.parent().find("ul").length) e.after('<ul id="ctl13"><li id="ctl14"><a id="ctl15" href="/stories/random">Random</a></li><li id="ctl16"><a id="ctl17" href="/Games/Search.aspx">Search</a></li></ul>');
@@ -17,44 +12,56 @@ e = $(".sidebar-content > ul > li > a[href='/help/']");
 if (!e.parent().find("ul").length) e.after('<ul id="ctl50"><li id="ctl51"><a id="ctl52" href="/Help/History.aspx">CYOA History</a></li><li id="ctl53"><a id="ctl54" href="/Help/AboutUs.aspx">About Us</a></li><li id="ctl55"><a id="ctl56" href="/Help/PrivacyPolicy.aspx">Privacy Policy</a></li><li id="ctl57"><a id="ctl58" href="/Help/TermsOfService.aspx">Terms Of Service</a></li></ul>');
 if (!u) $(".sidebar-content > ul > li > a[href='/Logon.aspx']").after('<ul><li><a href="/newuser.aspx">Register</a></li></ul>');
 
-if ($(":not(.tertiaryButtonSelected) + .tertiaryButton").length) {
-    $(":not(.tertiaryButtonSelected) + .tertiaryButton").parent().replaceWith(function() {
-        return $("<ul></ul>", {
-            class: "help-info-selector"
-        }).append($(this).find(".tertiaryButton"));
-    });
-    $(document.head).append($("<link>", {
+if (url.pathname.endsWith("article.aspx")) {
+    $(document.body).append($("<link>", {
         rel: "stylesheet",
         type: "text/css",
         href: chrome.extension.getURL("themes/print.css")
     }));
+    $(".tertiaryButton").parent().replaceWith(function() {
+        return $("<ul></ul>", {
+            class: "help-info-selector"
+        }).append($(this).find(".tertiaryButton"));
+    });
 }
 
-$.get("/alerts", data => {
-    if (data) {
-        data = JSON.parse(data);
-        if (data && data.length) {
-            var n = {
-                    messages: {
-                        selector: "li a[href='/my/messages']",
-                        value: 0
-                    },
-                    notifications: {
-                        selector: "li a[href='/My/Notifications']",
-                        value: 0
+if (u) chrome.storage.sync.get("preferenceNotifications", e => {
+    if (!chrome.runtime.lastError && e.preferenceNotifications !== false) {
+        AJAX.then((resolve, reject) => {
+            var alertCheck;
+            $(".header-alerts-container").parent().hide();
+            alertCheck = function() {
+                $.get("/alerts", data => {
+                    if (data) {
+                        data = JSON.parse(data);
+                        if (data && data.length) {
+                            var n = {
+                                    messages: {
+                                        selector: "li a[href='/my/messages']",
+                                        value: 0
+                                    },
+                                    notifications: {
+                                        selector: "li a[href='/My/Notifications']",
+                                        value: 0
+                                    }
+                                },
+                                notifications = 0;
+                            data.forEach(i => {
+                                if ((i.type || null) === "newmessage") n.messages.value = parseInt(i.message.match(/\d[\d,]*/)[0].replace(/,/g, ""));
+                                else if ((i.type || null) === "notification") n.notifications.value++;
+                            });
+                            for (var i in n) {
+                                i = n[i];
+                                if (i.value) $(i.selector).attr("data-badge", i.value);
+                                notifications += i.value;
+                            }
+                            if (notifications) return $("li a[href='/my/']").attr("data-badge", "!");
+                        }
                     }
-                },
-                notifications = 0;
-            data.forEach(i => {
-                if ((i.type || null) === "newmessage") n.messages.value = parseInt(i.message.match(/\d[\d,]*/)[0].replace(/,/g, ""));
-                else if ((i.type || null) === "notification") n.notifications.value++;
-            });
-            for (var i in n) {
-                i = n[i];
-                if (i.value) $(i.selector).attr("data-badge", i.value);
-                notifications += i.value;
+                    if (resolve) setTimeout(alertCheck, 15000);
+                });
             }
-            if (notifications) $("li a[href='/my/']").attr("data-badge", "!");
-        }
+            alertCheck();
+        });
     }
 });
