@@ -7,8 +7,12 @@
 
   "icons": {
     "16": "cysicon-16.png",
+    "19": "cysicon-19.png",
+    "24": "cysicon-64.png",
     "32": "cysicon-32.png",
+    "38": "cysicon-38.png",
     "48": "cysicon-48.png",
+    "64": "cysicon-64.png",
     "128": "cysicon-128.png"
   },
 
@@ -16,12 +20,17 @@
     "scripts": ["js/background.js"]
   },
 
+  "browser_action": {
+    "browser_style": true,
+    "default_title": "CYS Chrome Extension"
+  },
+
   "content_scripts": [{
     "matches": ["*://chooseyourstory.com/*"],
     "exclude_matches": ["*://chooseyourstory.com/story/viewer/*"],
     "js": [
       "js/jquery.js", "js/jquery-ui.js",
-      "codemirror/lib/codemirror.js", "codemirror/addon/edit/closebrackets.js", "codemirror/addon/edit/closetag.js", "codemirror/addon/mode/overlay.js", "codemirror/addon/mode/simple.js", "codemirror/mode/css/css.js", "codemirror/mode/javascript/javascript.js", "codemirror/mode/xml/xml.js", "codemirror/mode/htmlmixed/htmlmixed.js", "codemirror/mode/markdown/markdown.js",
+      "codemirror/lib/codemirror.js", "codemirror/addon/edit/closebrackets.js", "codemirror/addon/edit/closetag.js", "codemirror/addon/mode/overlay.js", "codemirror/addon/mode/simple.js", "codemirror/mode/css/css.js", "codemirror/mode/javascript/javascript.js", "codemirror/mode/xml/xml.js", "codemirror/mode/htmlmixed/htmlmixed.js",
       "js/window.js"
     ],
     "css": ["themes/notheme.css", "codemirror/lib/codemirror.css", "codemirror/theme/base16-dark-modified.css", "codemirror/theme/base16-light-modified.css"],
@@ -59,6 +68,10 @@
     "matches": ["*://chooseyourstory.com/my/messages/conversation*", "*://chooseyourstory.com/my/messages/new*"],
     "js": ["js/messages.js"],
     "run_at": "document_end"
+  }, {
+    "matches": ["*://chooseyourstory.com/my/notepad"],
+    "js": ["codemirror/mode/bbcode/bbcode.js", "codemirror/mode/bbcodemixed/bbcodemixed.js", "codemirror/mode/markdown/markdown.js", "codemirror/mode/textile/textile.js", "codemirror/mode/yaml/yaml.js"],
+    "run_at": "document_start"
   }, {
     "matches": ["*://chooseyourstory.com/my/notepad"],
     "js": ["js/notepad.js"],

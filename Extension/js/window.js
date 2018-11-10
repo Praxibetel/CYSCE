@@ -33,7 +33,7 @@ chrome.runtime.sendMessage({
 AJAX = new Promise((resolve, reject) => {
     chrome.storage.sync.get("preferenceAJAX", e => {
         if (chrome.runtime.lastError) reject(chrome.runtime.lastError);
-        resolve(e.preferenceAJAX !== false);
+        resolve(e.preferenceAJAX !== false && e.preferenceAJAX !== "0");
     });
 });
 
@@ -50,12 +50,12 @@ CMHTML = {
     mode: "htmlmixed"
 };
 
-CMReady = chrome.storage.sync.get(["preferenceCodeMirrorAutobreak", "preferenceCodeMirrorAutoclose", "preferenceCodeMirrorTheme"], e => {
+CMReady = chrome.storage.sync.get(["preferenceCodeMirrorAutobracket", "preferenceCodeMirrorAutobreak", "preferenceCodeMirrorAutoclose", "preferenceCodeMirrorTheme"], e => {
     if (chrome.runtime.lastError) return;
     CMAutobreak = e.preferenceCodeMirrorAutobreak === true;
     CMHTML.autoCloseTags.whenClosing = CMHTML.autoCloseTags.whenOpening = e.preferenceCodeMirrorAutoclose !== false;
     Object.assign(CodeMirror.defaults, {
-        autoCloseBrackets: true,
+        autoCloseBrackets: e.preferenceCodeMirrorAutobracket !== false,
         extraKeys: {
             Tab(cm) {
                 var spaces = Array(cm.getOption("indentUnit") + 1).join(" ");

@@ -642,6 +642,10 @@ img
   background-image: none
   padding: 6px
 
+.storygame-sidebar .rating-level-block h3 .rating[title]:not([title=""])
+  border-bottom: 1px dotted $color-background-main
+  cursor: help
+
 img[src$="16x16/star.png"]
   content: $image-icon-featured
 
@@ -860,6 +864,7 @@ ul
       margin: -5px -5px 10px
 
     > .subH2
+      cursor: help
       font-style: italic
       margin-bottom: 0
 
@@ -1070,6 +1075,11 @@ img
 
   &#MainContentPlaceHolder__choiceImage_sun, &[width="72"][height="72"][src$="sun.gif"]
     content: $image-icon-duel-sun
+
+// My Preferences
+
+#CYSExtensionAvatarPreview
+  border-radius: $radius-default
 
 // Help & Info
 

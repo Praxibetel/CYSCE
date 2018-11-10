@@ -35,7 +35,16 @@
 </tr>
 <tr>
   <td>&nbsp;</td>
-  <td class="smallerText">Enables "My Stuff" customization and other features that may make additional webpage requests. This is best left unchecked if you have limited data or bandwidth.</td>
+  <td>
+    <input id="CYSExtensionAJAX-0" class="CYSExtension" data-key="preferenceAJAX" name="preferenceAJAX" type="radio" value="0"><label for="CYSExtensionAJAX-0">Off</label>
+    <input id="CYSExtensionAJAX-1" class="CYSExtension" data-key="preferenceAJAX" name="preferenceAJAX" type="radio" value="1" checked><label for="CYSExtensionAJAX-1">Standard</label>
+    <input id="CYSExtensionAJAX-2" class="CYSExtension" data-key="preferenceAJAX" name="preferenceAJAX" type="radio" value="2"><label for="CYSExtensionAJAX-2">Background (experimental)</label>
+  </td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td class="smallerText">The "standard" setting enables "My Stuff" customization and other features that may make additional webpage requests. The "background" setting compounds this with toolbar notifications even when you are not browsing CYS (as long as you are still logged in). This is best left off if you have limited data or bandwidth.</td>
   <td>&nbsp;</td>
 </tr>
 <tr>
@@ -49,6 +58,19 @@
 <tr>
   <td>&nbsp;</td>
   <td class="smallerText">When this box is checked, you will be alerted of your notifications via "badges" in the navigation bar rather than the default alert box.</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td colspan="3"><img src="../i/spacer.gif" style="width: 100%; height: 15px;"></td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td><input id="CYSExtensionStifle" class="CYSExtension" data-key="preferenceStifleTags" type="checkbox"><label for="CYSExtensionStifle">Stifle Tag Notifications</label></td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td class="smallerText">When this box is checked, you will not recieve badge notifications for being tagged in forum posts.</td>
   <td>&nbsp;</td>
 </tr>
 <tr>
@@ -75,6 +97,19 @@
 </tr>
 <tr class="CYSExtensionCodeMirrorSubsetting">
   <td>&nbsp;</td>
+  <td><input id="CYSExtensionCodeMirrorAutobracket" class="CYSExtension" data-key="preferenceCodeMirrorAutobracket" type="checkbox" checked><label for="CYSExtensionCodeMirrorAutobracket">Automatic Bracket Closing</label></td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="CYSExtensionCodeMirrorSubsetting">
+  <td>&nbsp;</td>
+  <td class="smallerText">When this box is checked, the enhanced plain text editor automatically closes common brackets (<code>'</code> <code>"</code> <code>(</code> <code>[</code> <code>{</code>) as you type.</td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="CYSExtensionCodeMirrorSubsetting">
+  <td colspan="3"><img src="../i/spacer.gif" style="width: 100%; height: 15px;"></td>
+</tr>
+<tr class="CYSExtensionCodeMirrorSubsetting">
+  <td>&nbsp;</td>
   <td><input id="CYSExtensionCodeMirrorAutoclose" class="CYSExtension" data-key="preferenceCodeMirrorAutoclose" type="checkbox" checked><label for="CYSExtensionCodeMirrorAutoclose">Automatic Tag Closing</label></td>
   <td>&nbsp;</td>
 </tr>
@@ -94,6 +129,38 @@
 <tr class="CYSExtensionCodeMirrorSubsetting">
   <td>&nbsp;</td>
   <td class="smallerText">Check this box if you prefer the line breaks you type to be honored as such in posts, messages, etc.; leave unchecked to keep the default line-break-ignoring behavior. This feature works by automatically inserting additional HTML into the enhanced text editor. Note that disabling this feature will not remove the HTML in messages already posted.</td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="CYSExtensionCodeMirrorSubsetting">
+  <td colspan="3"><img src="../i/spacer.gif" style="width: 100%; height: 15px;"></td>
+</tr>
+<tr class="CYSExtensionCodeMirrorSubsetting">
+  <td>&nbsp;</td>
+  <td>
+    <label for="CYSExtensionCodeMirrorNotepad">Notepad Syntax</label>
+    <select id="CYSExtensionCodeMirrorNotepad" class="CYSExtension" data-key="preferenceCodeMirrorNotepad">
+      <optgroup label="Markup">
+        <option label="BBCode" value="bbcodemixed">
+        <option label="CYS-Flavored HTML" value="cyshtml">
+        <option label="HTML" value="htmlmixed">
+        <option label="Markdown" value="markdown" selected>
+        <option label="Plain Text" value="null">
+        <option label="Textile" value="textile">
+        <option label="YAML" value="yaml">
+      </optgroup>
+      <optgroup label="Programming">
+        <option label="JavaScript" value=javascript>
+      </optgroup>
+      <optgroup label="Style Sheet">
+        <option label="CSS" value="css">
+      </optgroup>
+    </select>
+  </td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="CYSExtensionCodeMirrorSubsetting">
+  <td>&nbsp;</td>
+  <td class="smallerText">Choose a language for your Notepad's syntax highlighting. Select the "plain text" option to disable highlighting.</td>
   <td>&nbsp;</td>
 </tr>
 <tr class="CYSExtensionCodeMirrorSubsetting">

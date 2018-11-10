@@ -231,6 +231,18 @@ div[style="width=680px; "]>form[method="get"]+div {
 
 /* Preferences */
 
+#CYSExtensionAvatarPreview {
+  float: right;
+  margin-bottom: -79px;
+  max-height: 80px;
+  position: relative;
+  top: -3.95em;
+}
+
+#CYSExtensionAvatarPreview[src=""] {
+  display: none;
+}
+
 .CYSExtensionCodeMirrorSubsetting>td:nth-child(2) {
   padding-left: 52px;
 }

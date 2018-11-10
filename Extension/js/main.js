@@ -25,7 +25,7 @@ if (url.pathname.endsWith("article.aspx")) {
     });
 }
 
-if (u) chrome.storage.sync.get("preferenceNotifications", e => {
+if (u) chrome.storage.sync.get(["preferenceNotifications", "preferenceStifleTags"], e => {
     if (!chrome.runtime.lastError && e.preferenceNotifications !== false) {
         AJAX.then((resolve, reject) => {
             var alertCheck;
@@ -48,7 +48,7 @@ if (u) chrome.storage.sync.get("preferenceNotifications", e => {
                                 notifications = 0;
                             data.forEach(i => {
                                 if ((i.type || null) === "newmessage") n.messages.value = parseInt(i.message.match(/\d[\d,]*/)[0].replace(/,/g, ""));
-                                else if ((i.type || null) === "notification") n.notifications.value++;
+                                else if ((i.type || null) === "notification" && (!e.preferenceStifleTags || !/tagged/.test(i.message))) n.notifications.value++;
                             });
                             for (var i in n) {
                                 i = n[i];

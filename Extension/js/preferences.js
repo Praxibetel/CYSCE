@@ -13,6 +13,9 @@ chrome.storage.sync.get(null, e => {
 
                     }
                 }).end()
+                .find("input[type='radio']").each(function() {
+                    if (this.dataset.key) this.checked = e[this.dataset.key] === this.value;
+                }).end()
                 .find("select").each(function() {
                     if (this.dataset.key) {
                         var s = $(this).find("option"),
@@ -33,6 +36,24 @@ chrome.storage.sync.get(null, e => {
                 var preferences = {};
                 preferences[e.dataset.key] = e.checked;
                 chrome.storage.sync.set(preferences);
+                chrome.runtime.sendMessage({
+                    action: "CYSupdatePreference",
+                    key: e.dataset.key,
+                    value: e.checked
+                });
+            }
+        });
+        $("form").on("click", ".CYSExtension[type='radio']", function() {
+            var e = this;
+            if (e.dataset.key) {
+                var preferences = {};
+                preferences[e.dataset.key] = e.value;
+                chrome.storage.sync.set(preferences);
+                chrome.runtime.sendMessage({
+                    action: "CYSupdatePreference",
+                    key: e.dataset.key,
+                    value: e.value
+                });
             }
         });
         $("form").on("change", ".CYSExtension:not([type='checkbox'])", function() {
@@ -74,6 +95,14 @@ if (!$("script:contains('CKEDITOR.replace')").length) chrome.storage.sync.get("p
         });
     }
 });
+
+$("select[name='Avatar Image ID']").change(function() {
+    var val = $(this).val();
+    $("#CYSExtensionAvatarPreview").attr("src", val !== "none" ? `/i?${val}` : "");
+}).parent().parent().next().find(".smallerText").prepend($("<img>", {
+    id: "CYSExtensionAvatarPreview",
+    src: $("select[name='Avatar Image ID']").val() !== "none" ? `/i?${$("select[name='Avatar Image ID']").val()}` : ""
+}));
 
 $("input[name='Birthdate']").attr("type", "hidden").after($("<input>", {
     type: "date"
