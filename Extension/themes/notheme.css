@@ -43,6 +43,53 @@
   content: url("/0x44/InedoLib/Inedo.Web.Controls.IconImage/ProcessImageRequest/InedoIcons/F3Silk/16x16/add.png");
 }
 
+x-spoiler {
+  background-color: #000;
+  border-color: transparent;
+  border-style: dotted;
+  border-width: 1px;
+  color: transparent;
+  cursor: pointer;
+  padding: 0 .125em;
+  position: relative;
+}
+
+x-spoiler::before {
+  color: #fff;
+  content: "Spoiler";
+  max-width: 100%;
+  overflow: hidden;
+  position: absolute;
+  text-overflow: ellipsis;
+  text-shadow: -1px -1px #000, -1px 1px #000, 1px -1px #000, 1px 1px #000;
+  white-space: nowrap;
+}
+
+x-spoiler[title]::before {
+  content: attr(title);
+}
+
+x-spoiler[data-open], x-spoiler:hover {
+  background-color: inherit;
+  background-image: none;
+  color: inherit;
+  position: relative;
+}
+
+x-spoiler[data-open]::before, x-spoiler:hover::before {
+  content: none;
+}
+
+x-spoiler[data-open] {
+  border-color: transparent;
+  text-decoration: underline dotted;
+}
+
+x-spoiler:hover {
+  border-color: #333;
+  text-decoration: none;
+}
+
 div[style="width=680px; "]>form[method="get"]+div {
   white-space: pre-wrap;
 }
@@ -266,6 +313,12 @@ ul.help-info-selector span {
 
 h3+h2+h3 {
   font-size: .9em;
+}
+
+/* About Member */
+
+.unpublished {
+  font-style: italic;
 }
 
 /* Emoji */

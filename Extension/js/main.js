@@ -2,6 +2,33 @@ var e,
     u = !!$("#Cys_DisplayName").length,
     url = new URL(document.location);
 
+$("link[rel='icon']").replaceWith($("<link>", {
+    rel: "icon",
+    type: "image/png",
+    href: chrome.extension.getURL("cysicon-16.png"),
+    sizes: "16x16"
+}).add($("<link>", {
+    rel: "icon",
+    type: "image/png",
+    href: chrome.extension.getURL("cysicon-19.png"),
+    sizes: "19x19"
+})).add($("<link>", {
+    rel: "icon",
+    type: "image/png",
+    href: chrome.extension.getURL("cysicon-24.png"),
+    sizes: "24x24"
+})).add($("<link>", {
+    rel: "icon",
+    type: "image/png",
+    href: chrome.extension.getURL("cysicon-32.png"),
+    sizes: "32x32"
+})).add($("<link>", {
+    rel: "icon",
+    type: "image/png",
+    href: chrome.extension.getURL("cysicon-38.png"),
+    sizes: "38x38"
+})));
+
 e = $(".sidebar-content > ul > li > a[href='/Stories/']");
 if (!e.parent().find("ul").length) e.after('<ul id="ctl13"><li id="ctl14"><a id="ctl15" href="/stories/random">Random</a></li><li id="ctl16"><a id="ctl17" href="/Games/Search.aspx">Search</a></li></ul>');
 e = $(".sidebar-content > ul > li > a[href='/forums']");
@@ -13,6 +40,7 @@ if (!e.parent().find("ul").length) e.after('<ul id="ctl50"><li id="ctl51"><a id=
 if (!u) $(".sidebar-content > ul > li > a[href='/Logon.aspx']").after('<ul><li><a href="/newuser.aspx">Register</a></li></ul>');
 
 if (url.pathname.endsWith("article.aspx")) {
+    $("title").text(`${$("#maincontent > h1:first-child").text().trim()} > Help & Info > ChooseYourStory.com`)
     $(document.body).append($("<link>", {
         rel: "stylesheet",
         type: "text/css",
@@ -23,6 +51,84 @@ if (url.pathname.endsWith("article.aspx")) {
             class: "help-info-selector"
         }).append($(this).find(".tertiaryButton"));
     });
+}
+
+switch (url.pathname) {
+    case "/endorsements":
+        $("title").text(`Commendations > All ${url.searchParams.get("sect")}s > ChooseYourStory.com`);
+        break;
+    case "/user/endorsements":
+        $("title").text(`Commendations > ${url.searchParams.get("username")} > ChooseYourStory.com`);
+        break;
+    case "/user/points":
+        $("title").text(`Experience Points > ${url.searchParams.get("username")} > ChooseYourStory.com`);
+        break;
+    case "/secret/cysid/set-render-mode":
+        $("title").text("Abandon all hope, ye who enter here > ChooseYourStory.com");
+        break;
+    case "/Forums/Search.aspx":
+        $("title").text("Just Google it > ChooseYourStory.com");
+        var upDate1 = function() {
+                var date = new Date($(`input[name="${$(this).data("for")}"]`).val());
+                console.log(date);
+                return isNaN(date) ? "" : `${date.getUTCFullYear()}-${("00" + (date.getUTCMonth() + 1)).slice(-2)}-${("00" + date.getUTCDate()).slice(-2)}`;
+            },
+            upDate2 = function() {
+                var date = new Date(this.value);
+                $(`input[name="${$(this).data("for")}"]`).val(isNaN(date) ? "" : `${date.getUTCMonth() + 1}/${date.getUTCDate()}/${date.getUTCFullYear()}`);
+            }
+        $("input[name='d1']").attr("type", "hidden").after($("<input>", {
+            type: "date",
+            "data-for": "d1"
+        }).val(upDate1).on("change", upDate2));
+        $("input[name='d2']").attr("type", "hidden").after($("<input>", {
+            type: "date",
+            "data-for": "d2"
+        }).val(upDate1).on("change", upDate2));
+        $(".smallerText:contains('MM/DD/YY')").remove();
+        $("input[value='Search']").after(" ", $("<form></form>", {
+            action: "https://www.google.com/search",
+            method: "get",
+            style: "display: inline-block;"
+        }).submit(function() {
+            var e = $(this),
+                p = e.parent(),
+                date,
+                forum,
+                query = [],
+                username;
+            query.push(`site:chooseyourstory.com/forums${(forum = p.find("select[name='f']").val()) ? "/" + [
+              null,
+              "the-lounge",
+              "news-and-updates",
+              "the-parlor-room",
+              "newbie-central",
+              "writing-workshop",
+              "advanced-editor-forum",
+              "feature-wishing-well",
+              "bugs-and-problems",
+              "reading-corner",
+              null,
+              null,
+              "creative-corner"
+            ][parseInt(forum)] : ""}`.trim(),
+                p.find("td input[name='q']").val().trim()
+            );
+            if (username = p.find("td input[name='u']").val().trim()) query.push(`"${username}"`);
+            e.find("input[name='q']").val(query.join(" "));
+            date = [p.find("input[name='d1']").val(), p.find("input[name='d2']").val()];
+            if (date[0] || date[1]) e.find("input[name='tbs']").val(`cdr:1${date[0] ? ",cd_min:" + date[0] : ""}${date[1] ? ",cd_max:" + date[1] : ""}`);
+        }).append($("<input>", {
+            type: "hidden",
+            name: "q"
+        }), $("<input>", {
+            type: "hidden",
+            name: "tbs"
+        }), $("<input>", {
+            type: "submit",
+            value: "Search Google"
+        })));
+        break;
 }
 
 if (u) chrome.storage.sync.get(["preferenceNotifications", "preferenceStifleTags"], e => {
@@ -64,4 +170,9 @@ if (u) chrome.storage.sync.get(["preferenceNotifications", "preferenceStifleTags
             alertCheck();
         });
     }
+});
+
+$("body").on("click", "x-spoiler", function() {
+    let e = $(this);
+    e.attr("data-open", e.attr("data-open") == null ? "" : null);
 });

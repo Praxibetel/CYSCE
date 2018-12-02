@@ -897,6 +897,22 @@ ul
       max-width: 100%
       height: auto
 
+x-spoiler
+  background-color: $color-text-heading
+  background-image: repeating-linear-gradient(-45deg, transparent, transparent 1em, $color-text-main 1em, $color-text-main 2em)
+  border-radius: $radius-default
+  border-style: dashed
+
+  &::before
+    color: invert($color-text-heading)
+    text-shadow: -1px -1px $color-text-heading, -1px 1px $color-text-heading, 1px -1px $color-text-heading, 1px 1px $color-text-heading
+
+  &[data-open], &:hover
+    background-image: none
+
+  &:hover
+    border-color: $color-text-main
+
 // My Stuff
 
 =helper

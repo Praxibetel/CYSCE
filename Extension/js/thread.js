@@ -1,3 +1,5 @@
+$("title").text(`${$(".forum-message > .heading > h2").eq(0).text()} > ${$(".main-content > form > h1 > a:nth-child(2)").text()} > ChooseYourStory.com`);
+
 if ($("a.button:contains('Non-threaded')").length) {
     $(".forum-message").each(function(e) {
         for (var s = $(this).nextAll(".forum-message"), t = 0; t < s.length && $(this).attr("style") !== $(s).eq(t).attr("style"); t++);
@@ -34,22 +36,8 @@ $(".forum-thread > .forum-thread .forum-message .heading .buttons").prepend(
     }).append($("<img>", {
         src: "/0x44/InedoLib/Inedo.Web.Controls.IconImage/ProcessImageRequest/InedoIcons/F3Silk/16x16/delete.png"
     }), " ", $("<span></span>").text("Collapse")));
-$(".body, .body *").contents().filter(function() {
-    return (this.nodeType == 3 && $.trim(this.nodeValue) && /@[\w-]+/.test(this.data))
-}).each(function() {
-    var div = $("<div></div>"),
-        node = $(this);
-    div.html(node.text().replace(/@([\w-]+)/g, "<a href='/Member/?Username=$1'>$&</a>"));
-    node.before(div.contents()).remove();
-});
-$(".body, .body *").contents().filter(function() {
-    return (this.nodeType == 3 && this.parentNode.nodeName !== "A" && $.trim(this.nodeValue) && /\b(https?|ftp):\/\/(-\.)?([^\s/?\.#-]+\.?)+(\/[^\s]*)?/i.test(this.data))
-}).each(function() {
-    var div = $("<div></div>"),
-        node = $(this);
-    div.html(node.text().replace(/\b(https?|ftp):\/\/(-\.)?([^\s/?\.#-]+\.?)+(\/[^\s]*)?/gi, "<a href='$&'>$&</a>"));
-    node.before(div.contents()).remove();
-});
+
+dynamicizeForumPosts(".body");
 
 $("a[name]").each(function() {
     $(this).parent().find(".heading .buttons").prepend($("<a></a>", {

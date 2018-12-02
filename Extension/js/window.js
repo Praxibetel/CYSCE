@@ -160,3 +160,36 @@ function CMPreLine(text) {
 function CMUnPreLine(text) {
     return text.replace(/^<div *data-autobreak *style=["'] *white-space: *pre-line *;? *["']>([\s\S]*?)<\/div>$/gi, "$1");
 }
+
+function dynamicizeForumPosts(selector) {
+    selector = `${selector}, ${selector} *`;
+    $(selector).contents().filter(function() {
+        return (this.nodeType == 3 && $.trim(this.nodeValue) && /@[\w-]+/.test(this.data))
+    }).each(function() {
+        var div = $("<div></div>"),
+            node = $(this);
+        div.html(node.text().replace(/@([\w-]+)/g, "<a href='/Member/?Username=$1'>$&</a>"));
+        node.before(div.contents()).remove();
+    });
+    $(selector).contents().filter(function() {
+        return (this.nodeType == 3 && this.parentNode.nodeName !== "A" && $.trim(this.nodeValue) && /\b(https?|ftp):\/\/(-\.)?([^\s/?\.#-]+\.?)+(\/[^\s]*)?/i.test(this.data))
+    }).each(function() {
+        var div = $("<div></div>"),
+            node = $(this);
+        div.html(node.text().replace(/\b(https?|ftp):\/\/(-\.)?([^\s/?\.#-]+\.?)+(\/[^\s]*)?/gi, "<a href='$&'>$&</a>"));
+        node.before(div.contents()).remove();
+    });
+    $(selector).contents().filter(function() {
+        return (this.nodeType == 3 && $.trim(this.nodeValue) && /\[\s*spoiler(\s*=\s*.*?)?\s*].*?\[\s*\/\s*spoiler\s*]/i.test(this.data))
+    }).each(function() {
+        var div = $("<div></div>"),
+            node = $(this);
+        div.html(node.text()
+            .replace(/\[\s*spoiler\s*=\s*"(.*?)"\s*](.*?)\[\s*\/\s*spoiler\s*]/gi, `<x-spoiler title="$1">$2</x-spoiler>`)
+            .replace(/\[\s*spoiler\s*=\s*'(.*?)'\s*](.*?)\[\s*\/\s*spoiler\s*]/gi, `<x-spoiler title='$1'>$2</x-spoiler>`)
+            .replace(/\[\s*spoiler\s*=\s*(.*?)\s*](.*?)\[\s*\/\s*spoiler\s*]/gi, ($$, $1, $2) => `<x-spoiler title="${$1.replace(/"/gi, "&quot;")}">${$2}</x-spoiler>`)
+            .replace(/\[\s*spoiler\s*.*?\s*](.*?)\[\s*\/\s*spoiler\s*]/gi, `<x-spoiler>$1</x-spoiler>`)
+        );
+        node.before(div.contents()).remove();
+    });
+}
