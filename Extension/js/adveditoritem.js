@@ -1,11 +1,12 @@
 if (!$("script:contains('CKEDITOR.replace')").length) chrome.storage.sync.get("preferenceCodeMirror", e => {
     if (!chrome.runtime.lastError && e.preferenceCodeMirror !== false) {
-        var propertyMirror = CodeMirror.fromTextArea($("#Description")[0], CMHTML);
+        var propertyContent = $("#Description")[0],
+            propertyMirror = CodeMirror.fromTextArea(propertyContent, CMHTML);
 
         if (CMAutobreak) propertyMirror.setValue(CMUnPreLine(propertyMirror.getValue()));
 
-        $("form").submit(function() {
-            $("#Description").val(CMAutobreak ? CMPreLine(propertyMirror.getValue()) : propertyMirror.getValue());
+        propertyMirror.on("change", function(mirror) {
+            propertyContent.value = CMAutobreak ? CMPreLine(mirror.getValue()) : mirror.getValue();
         });
 
         $(window).on("load", function() {
