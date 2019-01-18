@@ -7,21 +7,32 @@
 ### Features:
 
 + Complete overhaul of storygame search functionality
-+ Things you wish were clicky links are now clicky (any posted links, member tags, unpublished games, etc)
+	- Can search by tag, rating, length, etc.
++ Things you wish were clicky links are now clicky
+	- Any posted links, member tags, unpublished games, and much more.
 + Site navigation links are available from every webpage
+	- Can access through drop-down menus if using themed CYS.
 + Complete graphic overhaul
-	- New icons, symbols, and trophy graphics
+	- New icons, symbols, and trophy graphics that are more modern in both looks and format
 + HTTPS support
 + Complete MyStuff overhaul
-	+ Arrange widgets for messages, storygames, your notepad, points, and anything else you can think of!
+	- Arrange widgets for messages, storygames, your notepad, points, and anything else you can think of to create a great dashboard area where you can see everything you need to at once.
+	- Toggleable 
 + Able to collapse and anchor thread posts
+	- Anchoring allows one to copy the direct post link
+	- Collapsing allows one to read long threads with greater organization ability; allows one to collapse a post and it's replies for better screenshots and archiving ability
 + New profile settings
 	+ Storygame Developer Mode
-		- Allows for in-preview variable editing and other cool stuff
-		- Hover over the page title to view the page ID; hover over a link to view its link ID
-	+ CYS theme integration (no more need for stylish/stylus chrome extension)
-		- Makes the site beautiful. Dark Mode for easy browsing at night, light mode for an elegant new look with the same comfy feel, or just keep the default :)
+		- Allows for in-preview variable editing
+		- Shows link and page IDs for testing and development purposes
+	+ CYS theme integration
+		- Makes the site beautiful; Dark Mode for easy browsing at night, light mode for an elegant new look with the same comfy feel, or just keep the default :)
 	+ Choose to recieve alerts or not
-+ Text editors around the site now have syntax highlighting
-	- toggleable for those who like the old text editor
+		- Customize whether you see alerts as a badge on the CYS extension icon without even having the site open!
+		- Choose what alerts you want to be notified of
++ Text editors have toggleable syntax highlighting
+	- Very useful for coding CYS-script or post HTML
+	- Colors the text of key elements and allows for ease of finding particular sections of code
+	- Quite useful for debugging code and identifying mistakes
 + Lots of nit-picky fixes
+	- Some letters were a misaligned by a pixel...we fixed those and some other stuff you'd never notice.
