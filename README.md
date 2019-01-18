@@ -34,5 +34,7 @@
 	- Very useful for coding CYS-script or post HTML
 	- Colors the text of key elements and allows for ease of finding particular sections of code
 	- Quite useful for debugging code and identifying mistakes
++ Spoiler text ability
+	- By using bbcode spoiler tag, one can create a spoiler overlay for those with the extension so as to not spoil anything in a post.
 + Lots of nit-picky fixes
 	- Some letters were a misaligned by a pixel...we fixed those and some other stuff you'd never notice.
