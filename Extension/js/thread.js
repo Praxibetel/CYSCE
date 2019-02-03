@@ -9,16 +9,22 @@ if ($("a.button:contains('Non-threaded')").length) {
     });
 }
 
+$(".forum-message .heading").each(function(e) {
+    $(this).find("h2, .subH2").wrapAll($("<div></div>", {
+        class: "heading-text"
+    }));
+});
+
 $(".forum-message .heading .buttons").eq(0).prepend(
     $("<a></a>", {
         href: "#collapse",
         class: "button collapse"
     }).click(function() {
         var e = $(this).parent().parent().parent().siblings().filter(".forum-thread");
-        if ($(this).hasClass("collapsed")) e.removeClass("collapsed").find("span").text("Collapse"),
-            $(this).find("span").text("Collapse");
-        else e.addClass("collapsed").find("span").text("Expand"),
-            $(this).find("span").text("Expand");
+        if ($(this).hasClass("collapsed")) e.removeClass("collapsed").find(".collapse").attr("title", "Collapse").find("span").text("Collapse"),
+            $(this).attr("title", "Collapse All").find("span").text("Collapse");
+        else e.addClass("collapsed").find(".collapse").attr("title", "Expand").find("span").text("Expand"),
+            $(this).attr("title", "Expand All").find("span").text("Expand");
         $(this).toggleClass("collapsed");
         return false;
     }).append($("<img>", {
@@ -31,7 +37,7 @@ $(".forum-thread > .forum-thread .forum-message .heading .buttons").prepend(
     }).click(function() {
         var e = $(this).parent().parent().parent().parent();
         e.toggleClass("collapsed");
-        $(this).find("span").text(e.hasClass("collapsed") ? "Expand" : "Collapse");
+        $(this).attr("title", e.hasClass("collapsed") ? "Expand" : "Collapse").find("span").text(e.hasClass("collapsed") ? "Expand" : "Collapse");
         return false;
     }).append($("<img>", {
         src: "/0x44/InedoLib/Inedo.Web.Controls.IconImage/ProcessImageRequest/InedoIcons/F3Silk/16x16/delete.png"
@@ -46,4 +52,8 @@ $("a[name]").each(function() {
     }).append($("<img>", {
         src: "/0x44/InedoLib/Inedo.Web.Controls.IconImage/ProcessImageRequest/InedoIcons/F3Silk/16x16/link.png"
     }), " Anchor"));
+});
+
+$(".forum-message .heading .buttons .button").attr("title", function(e) {
+    return $(this).text().trim();
 });
