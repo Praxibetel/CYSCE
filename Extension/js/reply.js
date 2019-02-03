@@ -14,3 +14,9 @@ if (!$("script:contains('CKEDITOR.replace')").length) chrome.storage.sync.get("p
         });
     }
 });
+
+$(".forum-message .heading").each(function(e) {
+    $(this).find("h2, .subH2").wrapAll($("<div></div>", {
+        class: "heading-text"
+    }));
+});
