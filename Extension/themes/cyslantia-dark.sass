@@ -182,12 +182,19 @@ body:not(.cke_editable)
   border: none !important
   box-shadow: 0 3px 8px rgba(black, 0.15)
 
-  > .heading > h2
-    background-color: transparent !important
-    border-bottom: 1px solid $color-background-accent !important
-    color: $color-text-heading
-    line-height: 1.5
+  > .heading
+    .heading-dom, > h2
+      background-color: transparent !important
+      border-bottom: 1px solid $color-background-accent !important
+      margin: 0 !important
+      padding: 0 0 5px
+
+      h2
+        color: $color-text-heading
 
   > .avatar-container
     background-color: transparent
     border: none !important
+
+    > .avatar[src="/i/?"]
+      border-color: $color-background-accent

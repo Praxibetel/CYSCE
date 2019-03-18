@@ -6,20 +6,25 @@
 
 /* Forums */
 
-.forum-message .heading {
-  align-items: flex-start;
+.forum-message .heading-dom {
+  align-items: center;
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
 }
 
-.forum-message .heading .heading-text {
+.forum-message .heading h2 {
+  line-height: 18px;
   margin-right: 5px;
+}
+
+.forum-message .heading .heading-spacer {
+  flex: 1 1;
 }
 
 .forum-message .buttons {
   display: flex;
-  flex: 1 0;
+  flex: 1000 0;
   justify-content: flex-end;
   width: 0;
   z-index: 1;
@@ -338,6 +343,10 @@ h3+h2+h3 {
 }
 
 /* About Member */
+
+#profile_Sidebar>div:first-child {
+  padding-top: 5px;
+}
 
 .unpublished {
   font-style: italic;

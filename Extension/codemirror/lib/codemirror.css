@@ -3,10 +3,21 @@
 .CodeMirror {
   /* Set height, width, borders, and global font properties here */
   font-family: "Fira Code", "Fira Mono", monospace;
-  font-variant-ligatures: contextual;
   height: 300px;
   color: black;
   direction: ltr;
+}
+
+/* LIGATURE CONTROL */
+
+.cm-s-liga [class^="cm-"] {
+  -webkit-font-variant-ligatures: contextual;
+  font-variant-ligatures: contextual;
+}
+
+.cm-s-liga [class^="cm-string"] {
+  -webkit-font-variant-ligatures: no-contextual;
+  font-variant-ligatures: no-contextual;
 }
 
 /* PADDING */
@@ -253,8 +264,8 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #a22;}
   position: relative;
   overflow: visible;
   -webkit-tap-highlight-color: transparent;
-  -webkit-font-variant-ligatures: contextual;
-  font-variant-ligatures: contextual;
+  -webkit-font-variant-ligatures: no-contextual;
+  font-variant-ligatures: no-contextual;
 }
 .CodeMirror-wrap pre {
   word-wrap: break-word;

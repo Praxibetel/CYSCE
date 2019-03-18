@@ -100,6 +100,11 @@ $image-icon-fww-new: url("#{$custom}/fwwNew.png") !default
 $image-icon-fww-accepted: url("#{$custom}/fwwAccepted.png") !default
 $image-icon-fww-completed: url("#{$custom}/fwwCompleted.png") !default
 $image-icon-fww-rejected: url("#{$custom}/fwwRejected.png") !default
+$image-icon-webpage: url("#{$elusive}/website.svg") !default
+$image-icon-warn: url("#{$elusive}/warning-sign.svg") !default
+$image-icon-move: url("#{$elusive}/return-key-180.svg") !default
+$image-icon-trash: url("#{$elusive}/trash.svg") !default
+$image-icon-commend: url("#{$elusive}/star-alt-eee.svg") !default
 
 $image-trophy-100points: url("#{$trophy}/100.png") !default
 $image-trophy-500points: url("#{$trophy}/500.png") !default
@@ -381,6 +386,14 @@ body
       position: absolute
       width: 100%
       z-index: -1
+
+  &.compact-navbar .sidebar-content
+    > ul > li > a
+      font-size: 12.8pt
+      line-height: 24px
+
+    > ul > li > ul > li > a
+      font-size: 11.2pt
 
   > .main-content
     background-color: $color-background-main !important
@@ -729,6 +742,15 @@ a.button, a.button:active
     &[src$="note_go.png"], &[src$="email_go.png"]
       content: $image-icon-reply
 
+    &[src$="arrow_turn_right.png"]
+      content: $image-icon-move
+
+    &[src$="note_delete.png"]
+      content: $image-icon-trash
+
+    &[src$="medal_gold_1.png"]
+      content: $image-icon-commend
+
     &[src$="note_edit.png"]
       content: $image-icon-edit
 
@@ -746,6 +768,9 @@ a.button, a.button:active
 
     &[src$="control_fastforward.png"]
       content: $image-icon-next
+
+  &.preview > img
+    content: $image-icon-webpage
 
 img
   &[src="/forums/images/bug.gif"]
@@ -765,6 +790,9 @@ img
 
   &[src="/forums/images/rejectedFeature.gif"]
     content: $image-icon-fww-rejected
+
+  &[src$="16x16/error.png"]
+    content: $image-icon-warn
 
 .icon-box
   background-color: $color-background-chip
@@ -847,7 +875,10 @@ ul
   > .heading
     background-color: inherit
 
-    > .buttons
+    .buttons
+      .button:last-child
+        margin-right: 0
+
       .anchor > img
         content: $image-icon-link
 
@@ -857,16 +888,25 @@ ul
       .collapse.collapsed > img
         content: $image-icon-plus
 
-    > h2
+    > .heading-dom, > h2
       background-color: #C04039
-      color: $color-text-heading-alt
-      padding: 6px 5px
-      margin: -5px -5px 10px
+      margin: -5px -5px 0 !important
+      padding: 5px 5px 5px
 
-    > .subH2
+    h2
+      color: $color-text-heading-alt
+      line-height: 22px
+      margin: 0
+
+    .subH2
       cursor: help
       font-style: italic
-      margin-bottom: 0
+      margin: 0
+      padding-top: 3px
+
+    .text font
+      color: $color-text-comm !important
+      font-size: 8pt
 
   > .avatar-container
     background-color: #F5F0E4
@@ -884,6 +924,10 @@ ul
       max-width: unset
       filter: drop-shadow(0 0px 3px rgba(black, 0.15))
       transition: object-position 0.2s linear
+
+      &[src="/i/?"]
+        border: 1px solid #E6DABE
+        box-sizing: border-box
 
     > .user-name
       overflow: visible
@@ -1146,9 +1190,9 @@ img[src="App_Themes/CYS/images/login.gif"]
     padding-bottom: 5px
     margin: 0 10px 0
 
-  &:last-of-type, + div
-    border-bottom: none
-    padding-bottom: 0
+    &:last-child
+      border-bottom: none
+      padding-bottom: 0
 
   a
     color: $color-text-sidebar !important
@@ -1444,6 +1488,18 @@ form[name="mainForm"]
 
     .footer-content
       border-style: none none solid
+
+    &.compact-navbar
+      .sidebar-content > ul
+        flex-wrap: wrap
+        height: 85px
+
+        > li
+          flex: 1 0 25%
+          height: 27px
+
+      > .main-content
+        margin-top: 75px !important
 
 @media (max-width: 780px)
   #BodyContainer

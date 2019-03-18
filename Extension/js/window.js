@@ -50,7 +50,7 @@ CMHTML = {
     mode: "htmlmixed"
 };
 
-CMReady = chrome.storage.sync.get(["preferenceCodeMirrorAutobracket", "preferenceCodeMirrorAutobreak", "preferenceCodeMirrorAutoclose", "preferenceCodeMirrorTheme"], e => {
+CMReady = chrome.storage.sync.get(["preferenceCodeMirrorAutobracket", "preferenceCodeMirrorAutobreak", "preferenceCodeMirrorAutoclose", "preferenceCodeMirrorLigature", "preferenceCodeMirrorTheme"], e => {
     if (chrome.runtime.lastError) return;
     CMAutobreak = e.preferenceCodeMirrorAutobreak === true;
     CMHTML.autoCloseTags.whenClosing = CMHTML.autoCloseTags.whenOpening = e.preferenceCodeMirrorAutoclose !== false;
@@ -64,7 +64,7 @@ CMReady = chrome.storage.sync.get(["preferenceCodeMirrorAutobracket", "preferenc
         },
         lineNumbers: true,
         lineWrapping: true,
-        theme: e.preferenceCodeMirrorTheme || "base16-dark",
+        theme: `${e.preferenceCodeMirrorTheme || "base16-dark"}${e.preferenceCodeMirrorLigature ? " liga" : ""}`,
         workDelay: 800,
         workTime: 600
     });

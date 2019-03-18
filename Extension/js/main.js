@@ -29,6 +29,8 @@ $("link[rel='icon']").replaceWith($("<link>", {
     sizes: "38x38"
 })));
 
+if ($(".sidebar-content > ul > li").length > 6) $("#BodyContainer").addClass("compact-navbar");
+
 e = $(".sidebar-content > ul > li > a[href='/Stories/']");
 if (!e.parent().find("ul").length) e.after('<ul id="ctl13"><li id="ctl14"><a id="ctl15" href="/stories/random">Random</a></li><li id="ctl16"><a id="ctl17" href="/Games/Search.aspx">Search</a></li></ul>');
 e = $(".sidebar-content > ul > li > a[href='/forums']");
@@ -38,6 +40,10 @@ if (u && !e.parent().find("ul").length) e.after('<ul id="ctl25"><li id="ctl26"><
 e = $(".sidebar-content > ul > li > a[href='/help/']");
 if (!e.parent().find("ul").length) e.after('<ul id="ctl50"><li id="ctl51"><a id="ctl52" href="/Help/History.aspx">CYOA History</a></li><li id="ctl53"><a id="ctl54" href="/Help/AboutUs.aspx">About Us</a></li><li id="ctl55"><a id="ctl56" href="/Help/PrivacyPolicy.aspx">Privacy Policy</a></li><li id="ctl57"><a id="ctl58" href="/Help/TermsOfService.aspx">Terms Of Service</a></li></ul>');
 if (!u) $(".sidebar-content > ul > li > a[href='/Logon.aspx']").after('<ul><li><a href="/newuser.aspx">Register</a></li></ul>');
+
+if (u) $("#Cys_DisplayName").wrap($("<a></a>", {
+    href: `/Member/?Username=${$("#Cys_DisplayName").text()}`
+}));
 
 if (url.pathname.endsWith("article.aspx")) {
     $("title").text(`${$("#maincontent > h1:first-child").text().trim()} > Help & Info > ChooseYourStory.com`)
@@ -53,7 +59,7 @@ if (url.pathname.endsWith("article.aspx")) {
     });
 }
 
-switch (url.pathname) {
+switch (url.pathname.toLowerCase()) {
     case "/endorsements":
         $("title").text(`Commendations > All ${url.searchParams.get("sect")}s > ChooseYourStory.com`);
         break;
@@ -66,7 +72,7 @@ switch (url.pathname) {
     case "/secret/cysid/set-render-mode":
         $("title").text("Abandon all hope, ye who enter here > ChooseYourStory.com");
         break;
-    case "/Forums/Search.aspx":
+    case "/forums/search.aspx":
         $("title").text("Just Google it > ChooseYourStory.com");
         var upDate1 = function() {
                 var date = new Date($(`input[name="${$(this).data("for")}"]`).val());

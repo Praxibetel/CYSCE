@@ -10,8 +10,14 @@ if ($("a.button:contains('Non-threaded')").length) {
 }
 
 $(".forum-message .heading").each(function(e) {
-    $(this).find("h2, .subH2").wrapAll($("<div></div>", {
-        class: "heading-text"
+    $(this).find("h2").add($(this).find(".buttons")).wrapAll($("<div></div>", {
+        class: "heading-dom"
+    }));
+    $(this).find(".buttons").after($("<div></div>", {
+        class: "heading-spacer"
+    }));
+    $(this).find(".subH2, .text[id]").wrapAll($("<div></div>", {
+        class: "heading-sub"
     }));
 });
 

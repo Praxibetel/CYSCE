@@ -3,6 +3,12 @@ var username = $("h1:first-child > span").text().trim();
 if ($("meta[itemprop='doctitle']").length) $("title").text($("meta[itemprop='doctitle']").attr("content"));
 else $("title").text(`${username} > ChooseYourStory.com`);
 
+$("#profile_Sidebar").prepend(
+  $("<div></div>").text($(".footer-content a").filter(function() {
+    return this.textContent === username;
+  }).length ? "Online" : "Offline")
+);
+
 $("#profile_Sidebar h2:contains('Commendations') + div").after(
     $("<h2></h2>").text("Worth"),
     (() => {
