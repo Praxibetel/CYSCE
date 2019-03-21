@@ -30,6 +30,7 @@ if (!$("script:contains('CKEDITOR.replace')").length) {
                 html, body {
                   background: transparent !important;
                   min-height: unset !important;
+                  padding-bottom: .05px;
                 } img {
                   height: auto;
                   max-width: 100%;
