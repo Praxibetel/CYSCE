@@ -3,7 +3,7 @@
 
   "name": "CYSCE",
   "description": "CYS Chrome Extension",
-  "version": "0.4.9",
+  "version": "0.5.1",
 
   "icons": {
     "16": "cysicon-16.png",
