@@ -1,5 +1,5 @@
-if (!$("script:contains('CKEDITOR.replace')").length) chrome.storage.sync.get("preferenceCodeMirror", e => {
-    if (!chrome.runtime.lastError && e.preferenceCodeMirror !== false) {
+if (!$("script:contains('CKEDITOR.replace')").length) browser.storage.sync.get("preferenceCodeMirror").then((e, error) => {
+    if (!error && e.preferenceCodeMirror !== false) {
         var htmlContent = document.getElementById("Content"),
             htmlMirror = CodeMirror.fromTextArea(htmlContent, Object.assign({}, CMHTML, {
                 mode: "cyshtml"

@@ -90,8 +90,8 @@ $("#svbanner").after(devPanel, $("<div></div>", {
     class: "CYSExtension"
 }));
 
-chrome.storage.sync.get("preferenceDevmode", e => {
-    if ((!chrome.runtime.lastError && e.preferenceDevmode) || /adveditor/i.test(opener.location)) {
+browser.storage.sync.get("preferenceDevmode").then((e, error) => {
+    if ((!error && e.preferenceDevmode) || /adveditor/i.test(opener.location)) {
         $("#svbanner ul").prepend($("<li></li>", {
             class: "CYSExtension"
         }).append($("<a></a>", {

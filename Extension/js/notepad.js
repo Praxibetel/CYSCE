@@ -1,5 +1,5 @@
-if (!$("script:contains('CKEDITOR.replace')").length) chrome.storage.sync.get(["preferenceCodeMirror", "preferenceCodeMirrorNotepad"], (e) => {
-    if (!chrome.runtime.lastError && e.preferenceCodeMirror !== false) {
+if (!$("script:contains('CKEDITOR.replace')").length) browser.storage.sync.get(["preferenceCodeMirror", "preferenceCodeMirrorNotepad"]).then((e, error) => {
+    if (!error && e.preferenceCodeMirror !== false) {
         var noteContent = $("form > textarea")[0],
             noteMirror = CodeMirror.fromTextArea(noteContent, Object.assign({}, ["cyshtml", "htmlmixed", "markdown", "textile"].includes(e.preferenceCodeMirrorNotepad) ? CMHTML : {}, {
                 mode: e.preferenceCodeMirrorNotepad || "markdown"

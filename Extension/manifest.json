@@ -3,7 +3,7 @@
 
   "name": "CYSCE",
   "description": "CYS Chrome Extension",
-  "version": "0.5.1",
+  "version": "0.6.0",
 
   "icons": {
     "16": "cysicon-16.png",
@@ -17,7 +17,7 @@
   },
 
   "background": {
-    "scripts": ["js/background.js"]
+    "scripts": ["js/browser-polyfill.js", "js/background.js"]
   },
 
   "browser_action": {
@@ -29,11 +29,12 @@
     "matches": ["*://chooseyourstory.com/*"],
     "exclude_matches": ["*://chooseyourstory.com/story/viewer/*"],
     "js": [
+      "js/browser-polyfill.js",
       "js/jquery.js", "js/jquery-ui.js",
-      "codemirror/lib/codemirror.js", "codemirror/addon/edit/closebrackets.js", "codemirror/addon/edit/closetag.js", "codemirror/addon/mode/overlay.js", "codemirror/addon/mode/simple.js", "codemirror/mode/css/css.js", "codemirror/mode/javascript/javascript.js", "codemirror/mode/xml/xml.js", "codemirror/mode/htmlmixed/htmlmixed.js",
+      "codemirror/lib/codemirror.js", "codemirror/addon/edit/closebrackets.js", "codemirror/addon/edit/closetag.js", "codemirror/addon/hint/show-hint.js", "codemirror/addon/mode/overlay.js", "codemirror/addon/mode/simple.js", "codemirror/mode/css/css.js", "codemirror/mode/javascript/javascript.js", "codemirror/mode/xml/xml.js", "codemirror/mode/htmlmixed/htmlmixed.js",
       "js/window.js"
     ],
-    "css": ["themes/notheme.css", "codemirror/lib/codemirror.css", "codemirror/theme/base16-dark-modified.css", "codemirror/theme/base16-light-modified.css"],
+    "css": ["themes/notheme.css", "codemirror/lib/codemirror.css", "codemirror/addon/hint/show-hint.css", "codemirror/theme/base16-dark-modified.css", "codemirror/theme/base16-light-modified.css"],
     "run_at": "document_start",
     "all_frames": true
   }, {
@@ -61,7 +62,7 @@
     "js": ["js/mystuff.js"],
     "run_at": "document_end"
   }, {
-    "matches": ["*://chooseyourstory.com/My/Games.aspx"],
+    "matches": ["*://chooseyourstory.com/My/Games.aspx", "*://chooseyourstory.com/my/Games.aspx"],
     "js": ["js/rating.js"],
     "run_at": "document_end"
   }, {
@@ -111,14 +112,20 @@
     "run_at": "document_end"
   }, {
     "matches": ["*://chooseyourstory.com/story/viewer/*"],
-    "js": ["js/jquery.js", "js/storygame-dev.js"],
+    "js": ["js/browser-polyfill.js", "js/jquery.js"],
     "css": ["themes/notheme-viewer.css"],
+    "run_at": "document_start"
+  }, {
+    "matches": ["*://chooseyourstory.com/story/viewer/*"],
+    "js": ["js/storygame-dev.js"],
     "run_at": "document_end"
   }],
 
   "permissions": [
+    "*://chooseyourstory.com/*",
     "activeTab",
-    "storage"
+    "storage",
+    "webNavigation"
   ],
 
   "web_accessible_resources": [

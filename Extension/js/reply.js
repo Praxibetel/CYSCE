@@ -76,11 +76,11 @@ if (!$("script:contains('CKEDITOR.replace')").length) {
             htmlFrame.contents().find("#seamless").before($("#CYS-Theme").clone());
             htmlFrame.contents().find("body").html(htmlContent.value);
         });
-        $.get("//chooseyourstory.com/My/Profile.aspx").then(data => htmlPreview.find(".avatar").attr("src", `/i/?${$(data).find("[name='Avatar Image ID']").val()}`));
+        $.get(href("/My/Profile.aspx")).then(data => htmlPreview.find(".avatar").attr("src", `/i/?${$(data).find("[name='Avatar Image ID']").val()}`));
     });
 
-    chrome.storage.sync.get(["preferenceCodeMirror", "preferenceHTMLNormalize"], e => {
-        if (!chrome.runtime.lastError) {
+    browser.storage.sync.get(["preferenceCodeMirror", "preferenceCodeMirrorAtAutocomplete", "preferenceHTMLNormalize"]).then((e, error) => {
+        if (!error) {
             if (e.preferenceCodeMirror !== false) {
                 htmlMirror = CodeMirror.fromTextArea(htmlContent, CMHTML);
 
@@ -90,6 +90,15 @@ if (!$("script:contains('CKEDITOR.replace')").length) {
                     let htmlVal = CMAutobreak ? CMPreLine(mirror.getValue()) : mirror.getValue();
                     htmlContent.value = htmlVal;
                     previewPost(htmlVal);
+                });
+
+                if (e.preferenceCodeMirrorAtAutocomplete) htmlMirror.on("keyup", function(cm, event) {
+                    if (!cm.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
+                        event.keyCode != 13) { /*Enter - do not open autocomplete list just after item has been selected in it*/
+                        CodeMirror.showHint(cm, CodeMirror.hint.tagHint, {
+                            async: true
+                        });
+                    }
                 });
 
                 $(window).on("load", function() {

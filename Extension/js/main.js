@@ -1,44 +1,59 @@
 var e,
+    path,
     u = !!$("#Cys_DisplayName").length,
     url = new URL(document.location);
 
 $("link[rel='icon']").replaceWith($("<link>", {
     rel: "icon",
     type: "image/png",
-    href: chrome.extension.getURL("cysicon-16.png"),
+    href: browser.extension.getURL("cysicon-16.png"),
     sizes: "16x16"
 }).add($("<link>", {
     rel: "icon",
     type: "image/png",
-    href: chrome.extension.getURL("cysicon-19.png"),
+    href: browser.extension.getURL("cysicon-19.png"),
     sizes: "19x19"
 })).add($("<link>", {
     rel: "icon",
     type: "image/png",
-    href: chrome.extension.getURL("cysicon-24.png"),
+    href: browser.extension.getURL("cysicon-24.png"),
     sizes: "24x24"
 })).add($("<link>", {
     rel: "icon",
     type: "image/png",
-    href: chrome.extension.getURL("cysicon-32.png"),
+    href: browser.extension.getURL("cysicon-32.png"),
     sizes: "32x32"
 })).add($("<link>", {
     rel: "icon",
     type: "image/png",
-    href: chrome.extension.getURL("cysicon-38.png"),
+    href: browser.extension.getURL("cysicon-38.png"),
     sizes: "38x38"
 })));
 
 if ($(".sidebar-content > ul > li").length > 6) $("#BodyContainer").addClass("compact-navbar");
 
 e = $(".sidebar-content > ul > li > a[href='/Stories/']");
-if (!e.parent().find("ul").length) e.after('<ul id="ctl13"><li id="ctl14"><a id="ctl15" href="/stories/random">Random</a></li><li id="ctl16"><a id="ctl17" href="/Games/Search.aspx">Search</a></li></ul>');
+if (!e.parent().find("ul").length) e.after('<ul><li><a href="/stories/random">Random</a></li><li><a href="/Games/Search.aspx">Search</a></li></ul>');
+e.parent().find("ul").append(`
+<li style="display: flex;"><a href="/Stories/new.aspx" style="flex: 1; margin-right: 0;">Newly Created</a><a id="rssNavbar" href="/Stories/newStoriesRss.ashx" title="Syndicate with RSS" style="margin-left: 0;"><img src="/Resources/Images/feed-icon-12x12.gif" alt="RSS Feed" width="12" height="12" style="border: 0px;"></a></li>
+<li><a href="/Stories/top.aspx">Top Rated</a></li>
+<li><a href="/Stories/Fantasy_Adventure.aspx" class="narrower">Fantasy Adventure</a></li>
+<li><a href="/Stories/Modern_Adventure.aspx" class="narrower">Modern Adventure</a></li>
+<li><a href="/Stories/Sci-Fi_Adventure.aspx">Sci-Fi Adventure</a></li>
+<li><a href="/Stories/Edutainment.aspx">Edutainment</a></li>
+<li><a href="/Stories/School-Based.aspx">School-Based</a></li>
+<li><a href="/Stories/Mystery__0x2f__Puzzle.aspx">Mystery / Puzzle</a></li>
+<li><a href="/Stories/Fan_Fiction.aspx">Fan Fiction</a></li>
+<li><a href="/Stories/Everything_Else.aspx">Everything Else</a></li>
+<li><a href="/Stories/Love__0x26__Dating.aspx">Love &amp; Dating</a></li>
+<li><a href="/Stories/Horror.aspx">Horror</a></li>
+`);
 e = $(".sidebar-content > ul > li > a[href='/forums']");
-if (!e.parent().find("ul").length) e.after('<ul id="ctl104"><li id="ctl105"><a id="ctl106" href="/Forums/Search.aspx">Search</a></li></ul>');
+if (!e.parent().find("ul").length) e.after('<ul><li><a href="/Forums/Search.aspx">Search</a></li></ul>');
 e = $(".sidebar-content > ul > li > a[href='/my/']");
-if (u && !e.parent().find("ul").length) e.after('<ul id="ctl25"><li id="ctl26"><a id="ctl27" href="/My/Games.aspx">Storygames</a></li><li id="ctl28"><a id="ctl29" href="/My/Pictures/Default.aspx">Pictures</a></li><li id="ctl30"><a id="ctl31" href="/my/messages">Messages</a></li><li id="ctl32"><a id="ctl33" href="/My/Notifications">Notifications</a></li><li id="ctl34"><a id="ctl35" href="/My/Duels/Default.aspx">Duels</a></li><li id="ctl36"><a id="ctl37" href="/My/Saves.aspx">Saves</a></li><li id="ctl38"><a id="ctl39" href="/My/Comments.aspx">Comments</a></li><li id="ctl40"><a id="ctl41" href="/My/Points.aspx">Points</a></li><li id="ctl42"><a id="ctl43" href="/user/endorsements?username=' + $("#Cys_DisplayName").text() + '">Commendations</a></li><li id="ctl44"><a id="ctl45" href="/my/notepad">Notepad</a></li><li id="ctl46"><a id="ctl47" href="/My/Profile.aspx">Profile</a></li></ul>');
+if (u && !e.parent().find("ul").length) e.after('<ul><li><a href="/My/Games.aspx">Storygames</a></li><li><a href="/My/Pictures/Default.aspx">Pictures</a></li><li><a href="/my/messages">Messages</a></li><li><a href="/My/Notifications">Notifications</a></li><li><a href="/My/Duels/Default.aspx">Duels</a></li><li><a href="/My/Saves.aspx">Saves</a></li><li><a href="/My/Comments.aspx">Comments</a></li><li><a href="/My/Points.aspx">Points</a></li><li><a href="/user/endorsements?username=' + $("#Cys_DisplayName").text() + '">Commendations</a></li><li><a href="/my/notepad">Notepad</a></li><li><a href="/My/Profile.aspx">Profile</a></li></ul>');
 e = $(".sidebar-content > ul > li > a[href='/help/']");
-if (!e.parent().find("ul").length) e.after('<ul id="ctl50"><li id="ctl51"><a id="ctl52" href="/Help/History.aspx">CYOA History</a></li><li id="ctl53"><a id="ctl54" href="/Help/AboutUs.aspx">About Us</a></li><li id="ctl55"><a id="ctl56" href="/Help/PrivacyPolicy.aspx">Privacy Policy</a></li><li id="ctl57"><a id="ctl58" href="/Help/TermsOfService.aspx">Terms Of Service</a></li></ul>');
+if (!e.parent().find("ul").length) e.after('<ul><li><a href="/Help/History.aspx">CYOA History</a></li><li><a href="/Help/AboutUs.aspx">About Us</a></li><li><a href="/Help/PrivacyPolicy.aspx">Privacy Policy</a></li><li><a href="/Help/TermsOfService.aspx">Terms Of Service</a></li></ul>');
 if (!u) $(".sidebar-content > ul > li > a[href='/Logon.aspx']").after('<ul><li><a href="/newuser.aspx">Register</a></li></ul>');
 
 if (u) $("#Cys_DisplayName").wrap($("<a></a>", {
@@ -50,7 +65,7 @@ if (url.pathname.endsWith("article.aspx")) {
     $(document.body).append($("<link>", {
         rel: "stylesheet",
         type: "text/css",
-        href: chrome.extension.getURL("themes/print.css")
+        href: browser.extension.getURL("themes/print.css")
     }));
     $(".tertiaryButton").parent().replaceWith(function() {
         return $("<ul></ul>", {
@@ -59,20 +74,20 @@ if (url.pathname.endsWith("article.aspx")) {
     });
 }
 
-switch (url.pathname.toLowerCase()) {
-    case "/endorsements":
+switch (path = url.pathname.toLowerCase(), true) {
+    case "/endorsements" === path:
         $("title").text(`Commendations > All ${url.searchParams.get("sect")}s > ChooseYourStory.com`);
         break;
-    case "/user/endorsements":
+    case "/user/endorsements" === path:
         $("title").text(`Commendations > ${url.searchParams.get("username")} > ChooseYourStory.com`);
         break;
-    case "/user/points":
+    case "/user/points" === path:
         $("title").text(`Experience Points > ${url.searchParams.get("username")} > ChooseYourStory.com`);
         break;
-    case "/secret/cysid/set-render-mode":
+    case "/secret/cysid/set-render-mode" === path:
         $("title").text("Abandon all hope, ye who enter here > ChooseYourStory.com");
         break;
-    case "/forums/search.aspx":
+    case "/forums/search.aspx" === path:
         $("title").text("Just Google it > ChooseYourStory.com");
         var upDate1 = function() {
                 var date = new Date($(`input[name="${$(this).data("for")}"]`).val());
@@ -137,44 +152,65 @@ switch (url.pathname.toLowerCase()) {
         break;
 }
 
-if (u) chrome.storage.sync.get(["preferenceNotifications", "preferenceStifleTags"], e => {
-    if (!chrome.runtime.lastError && e.preferenceNotifications !== false) {
-        AJAX.then((resolve, reject) => {
-            var alertCheck;
-            $(".header-alerts-container").parent().hide();
-            alertCheck = function() {
-                $.get("/alerts", data => {
-                    if (data) {
-                        data = JSON.parse(data);
-                        if (data && data.length) {
-                            var n = {
-                                    messages: {
-                                        selector: "li a[href='/my/messages']",
-                                        value: 0
+if (u) browser.storage.sync.get(["preferenceNotifications", "preferenceStifleTags", "welcomedOn"]).then((e, error) => {
+    if (!error) {
+        let manifest = browser.runtime.getManifest();
+        if (e.preferenceNotifications !== false) {
+            AJAX.then((resolve, reject) => {
+                var alertCheck;
+                $(".header-alerts-container").parent().hide();
+                alertCheck = function() {
+                    $.get("/alerts", data => {
+                        if (data) {
+                            data = JSON.parse(data);
+                            if (data && data.length) {
+                                var n = {
+                                        messages: {
+                                            selector: "li a[href='/my/messages']",
+                                            value: 0
+                                        },
+                                        notifications: {
+                                            selector: "li a[href='/My/Notifications']",
+                                            value: 0
+                                        }
                                     },
-                                    notifications: {
-                                        selector: "li a[href='/My/Notifications']",
-                                        value: 0
-                                    }
-                                },
-                                notifications = 0;
-                            data.forEach(i => {
-                                if ((i.type || null) === "newmessage") n.messages.value = parseInt(i.message.match(/\d[\d,]*/)[0].replace(/,/g, ""));
-                                else if ((i.type || null) === "notification" && (!e.preferenceStifleTags || !/tagged/.test(i.message))) n.notifications.value++;
-                            });
-                            for (var i in n) {
-                                i = n[i];
-                                if (i.value) $(i.selector).attr("data-badge", i.value);
-                                notifications += i.value;
+                                    notifications = 0;
+                                data.forEach(i => {
+                                    if ((i.type || null) === "newmessage") n.messages.value = parseInt(i.message.match(/\d[\d,]*/)[0].replace(/,/g, ""));
+                                    else if ((i.type || null) === "notification" && (!e.preferenceStifleTags || !/tagged/.test(i.message))) n.notifications.value++;
+                                });
+                                for (var i in n) {
+                                    i = n[i];
+                                    if (i.value) $(i.selector).attr("data-badge", i.value);
+                                    notifications += i.value;
+                                }
+                                if (notifications) return $("li a[href='/my/']").attr("data-badge", "!");
                             }
-                            if (notifications) return $("li a[href='/my/']").attr("data-badge", "!");
                         }
-                    }
-                    if (resolve) setTimeout(alertCheck, 15000);
-                });
-            }
-            alertCheck();
-        });
+                        if (resolve) setTimeout(alertCheck, 15000);
+                    });
+                }
+                alertCheck();
+            });
+        }
+        if (e.welcomedOn != null) {}
+        else if (e.welcomedOn !== manifest.version) {/*
+            $("#CYS-Theme").before($("<link>", {
+              type: "text/css",
+              rel: "stylesheet",
+              href: "/Resources/jQuery/jquery-ui-1.10.3/smoothness/jquery-ui.min.css"
+            }));
+            $("<div></div>", {
+                title: `Welcome to ${manifest.name} ${manifest.version}!`
+            }).append($(`
+              <p>Hello, ${$("#Cys_DisplayName").text()}, and welcome to ${manifest.name} ${manifest.version}!</p>
+              <p>While the original theme is enabled by default, ${manifest.name} provides alternate dark and light themes that can be enabled from your <a href="/My/Profile.aspx">profile preferences</a>.</p>
+            `)).dialog({
+                modal: true,
+                resizable: false,
+                closeText: ""
+            });
+        */}
     }
 });
 

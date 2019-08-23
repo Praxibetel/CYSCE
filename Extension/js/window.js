@@ -1,8 +1,8 @@
-var AJAX, CMAutobreak, CMCYSScript, CMHTML, CMReady;
+var AJAX, CMAutobreak, CMCYSScript, CMHTML, CMReady, protocol;
 
-chrome.runtime.sendMessage({
+browser.runtime.sendMessage({
     action: "CYSgetTheme"
-}, response => {
+}).then(response => {
     if (response) {
         var style = $("<style></style>", {
             id: "CYS-Theme"
@@ -10,7 +10,7 @@ chrome.runtime.sendMessage({
         if (!document.body) {
             var observer = new MutationObserver(mutations => {
                 mutations.forEach(mutation => {
-                    if (!mutation.addedNodes) return
+                    if (!mutation.addedNodes) return;
                     for (var i = 0; i < mutation.addedNodes.length; i++) {
                         var node = mutation.addedNodes[i];
                         if (node.nodeName == "BODY") {
@@ -31,8 +31,8 @@ chrome.runtime.sendMessage({
 });
 
 AJAX = new Promise((resolve, reject) => {
-    chrome.storage.sync.get("preferenceAJAX", e => {
-        if (chrome.runtime.lastError) reject(chrome.runtime.lastError);
+    browser.storage.sync.get("preferenceAJAX").then((e, error) => {
+        if (error) reject(error);
         resolve(e.preferenceAJAX !== false && e.preferenceAJAX !== "0");
     });
 });
@@ -50,8 +50,8 @@ CMHTML = {
     mode: "htmlmixed"
 };
 
-CMReady = chrome.storage.sync.get(["preferenceCodeMirrorAutobracket", "preferenceCodeMirrorAutobreak", "preferenceCodeMirrorAutoclose", "preferenceCodeMirrorLigature", "preferenceCodeMirrorTheme"], e => {
-    if (chrome.runtime.lastError) return;
+CMReady = browser.storage.sync.get(["preferenceCodeMirrorAutobracket", "preferenceCodeMirrorAutobreak", "preferenceCodeMirrorAutoclose", "preferenceCodeMirrorLigature", "preferenceCodeMirrorTheme"]).then((e, error) => {
+    if (error) return;
     CMAutobreak = e.preferenceCodeMirrorAutobreak === true;
     CMHTML.autoCloseTags.whenClosing = CMHTML.autoCloseTags.whenOpening = e.preferenceCodeMirrorAutoclose !== false;
     Object.assign(CodeMirror.defaults, {
@@ -153,6 +153,54 @@ CodeMirror.defineMode("cyshtml", function(config, parserConfig) {
     return CodeMirror.overlayMode(CodeMirror.getMode(config, parserConfig.backdrop || "htmlmixed"), CodeMirror.getMode(config, "onpage"));
 });
 
+CodeMirror.registerHelper("hint", "tagHint", function(editor, callback) {
+    return (async (resolve, reject) => {
+        var cur = editor.getCursor(),
+            curLine = editor.getLine(cur.line),
+            start = cur.ch,
+            end = start,
+            search = [];
+        while (end < curLine.length && /[@\w$-]/.test(curLine.charAt(end))) ++end;
+        while (start && /[@\w$-]/.test(curLine.charAt(start - 1))) --start;
+        var curWord = start !== end && curLine.slice(start, end);
+        if (!/^@/.test(curWord)) curWord = "";
+        var regex = new RegExp('^' + curWord.slice(1), 'i');
+        var online = $(".footer-content > div > a").map(function() {
+            return $(this).text()
+        }).get(),
+            op = $(".avatar-container a").first().text();
+        if (op && !online.includes(op)) online.push(op);
+        online = online.filter(user => regex.test(user)).sort((a, b) => {
+            a = a.toLowerCase(), b = b.toLowerCase()
+            return a > b ? 1 : a < b ? -1 : 0;
+        });
+        if (curWord.length > 3) {
+            try {
+                search = JSON.parse(await $.get(`https://chooseyourstory.com/0x44/ChooseYourStory.WebApplication/ChooseYourStory.WebApplication.Pages.Messages.NewMessagePage+UsernameTextBox/ProcessUsernameRequest?term=${curWord.slice(1)}`))
+                    .filter(user => !online.includes(user))
+                    .sort((a, b) => {
+                        a = a.toLowerCase(), b = b.toLowerCase()
+                        return a > b ? 1 : a < b ? -1 : 0;
+                    });
+            } catch (e) {}
+        }
+        callback({
+            list: (!curWord ? [] : online.concat(search).map(user => ({
+                text: `@${user}`,
+                displayText: user
+            }))),
+            from: CodeMirror.Pos(cur.line, start),
+            to: CodeMirror.Pos(cur.line, end)
+        });
+    })();
+});
+
+CodeMirror.commands.autocomplete = function(cm) {
+    CodeMirror.showHint(cm, CodeMirror.hint.tagHint, {
+        async: true
+    });
+};
+
 function CMPreLine(text) {
     return `<div data-autobreak style="white-space: pre-line;">${text}</div>`;
 }
@@ -161,18 +209,23 @@ function CMUnPreLine(text) {
     return text.replace(/^<div *data-autobreak *style=["'] *white-space: *pre-line *;? *["']>([\s\S]*?)<\/div>$/gi, "$1");
 }
 
+function href(pathname) {
+  return new URL(pathname, document.location).toString();
+}
+
 function dynamicizeForumPosts(selector) {
+    let noParent = ["SCRIPT", "STYLE"];
     selector = `${selector}, ${selector} *`;
     $(selector).contents().filter(function() {
-        return (this.nodeType == 3 && $.trim(this.nodeValue) && /@[\w-]+/.test(this.data))
+        return (this.nodeType == 3 && !noParent.includes(this.parentNode.nodeName) && $.trim(this.nodeValue) && /@[\w-]{4,}/.test(this.data))
     }).each(function() {
         var div = $("<div></div>"),
             node = $(this);
-        div.html(node.text().replace(/@([\w-]+)/g, "<a href='/Member/?Username=$1'>$&</a>"));
+        div.html(node.text().replace(/@([\w-]{4,})/g, "<a href='/Member/?Username=$1'>$&</a>"));
         node.before(div.contents()).remove();
     });
     $(selector).contents().filter(function() {
-        return (this.nodeType == 3 && this.parentNode.nodeName !== "A" && $.trim(this.nodeValue) && /\b(https?|ftp):\/\/(-\.)?([^\s/?\.#-]+\.?)+(\/[^\s]*)?/i.test(this.data))
+        return (this.nodeType == 3 && !noParent.includes(this.parentNode.nodeName) && this.parentNode.nodeName !== "A" && $.trim(this.nodeValue) && /\b(https?|ftp):\/\/(-\.)?([^\s/?\.#-]+\.?)+(\/[^\s]*)?/i.test(this.data))
     }).each(function() {
         var div = $("<div></div>"),
             node = $(this);
@@ -180,7 +233,7 @@ function dynamicizeForumPosts(selector) {
         node.before(div.contents()).remove();
     });
     $(selector).contents().filter(function() {
-        return (this.nodeType == 3 && $.trim(this.nodeValue) && /\[\s*spoiler(\s*=\s*.*?)?\s*].*?\[\s*\/\s*spoiler\s*]/i.test(this.data))
+        return (this.nodeType == 3 && !noParent.includes(this.parentNode.nodeName) && $.trim(this.nodeValue) && /\[\s*spoiler(\s*=\s*.*?)?\s*].*?\[\s*\/\s*spoiler\s*]/i.test(this.data))
     }).each(function() {
         var div = $("<div></div>"),
             node = $(this);

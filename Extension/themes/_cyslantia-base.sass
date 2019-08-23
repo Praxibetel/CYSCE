@@ -327,6 +327,16 @@ body
             margin: auto
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px rgba(255, 255, 255, 0.2)
 
+          &#rssNavbar
+            img
+              transition: filter 333ms ease
+
+            &:hover img
+              filter: drop-shadow(0 0 10px #f27c36)
+
+          &.narrower
+            transform: none
+
         &:last-of-type a
           border-right: none
 

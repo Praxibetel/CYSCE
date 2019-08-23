@@ -1,5 +1,5 @@
-chrome.storage.sync.get("preferenceCodeMirror", e => {
-    if (!chrome.runtime.lastError && e.preferenceCodeMirror !== false) {
+browser.storage.sync.get("preferenceCodeMirror").then((e, error) => {
+    if (!error && e.preferenceCodeMirror !== false) {
         var htmlContent = document.querySelector(".message-body > textarea"),
             htmlMirror = CodeMirror.fromTextArea(htmlContent, CMHTML);
 

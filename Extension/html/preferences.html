@@ -13,9 +13,9 @@
   <td>
     <label for="CYSExtensionTheme">CYS Theme</label>
     <select id="CYSExtensionTheme" class="CYSExtension" data-key="preferenceTheme">
-      <option label="none" value="none" selected>
-      <option label="CYS Light" value="light">
-      <option label="CYS Dark" value="dark">
+      <option label="none" value="none" selected>none</option>
+      <option label="CYS Light" value="light">CYS Light</option>
+      <option label="CYS Dark" value="dark">CYS Dark</option>
     </select>
   </td>
   <td>&nbsp;</td>
@@ -23,6 +23,26 @@
 <tr>
   <td>&nbsp;</td>
   <td class="smallerText">Select a visual theme to be applied to each page of the site (or stick with the default).</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td colspan="3"><img src="../i/spacer.gif" style="width: 100%; height: 15px;"></td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td>
+    <label for="CYSExtensionViewerTheme">Storygame Theme</label>
+    <select id="CYSExtensionViewerTheme" class="CYSExtension" data-key="preferenceViewerTheme">
+      <option label="none" value="none" selected>none</option>
+      <option label="invert brightness" value="invert-retain-hue">invert brightness</option>
+      <option label="invert colors" value="invert">invert colors</option>
+    </select>
+  </td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td class="smallerText">Select a visual theme to be applied to the storygame viewer.</td>
   <td>&nbsp;</td>
 </tr>
 <tr>
@@ -81,8 +101,8 @@
   <td>
     <input id="CYSExtensionCodeMirror" class="CYSExtension" data-key="preferenceCodeMirror" type="checkbox" checked><label for="CYSExtensionCodeMirror">Enhanced Plain Text</label>
     <select id="CYSExtensionCodeMirrorTheme" class="CYSExtension" data-key="preferenceCodeMirrorTheme">
-      <option label="Dark Theme" value="base16-dark" selected>
-      <option label="Light Theme" value="base16-light">
+      <option label="Dark Theme" value="base16-dark" selected>Dark Theme</option>
+      <option label="Light Theme" value="base16-light">Light Theme</option>
     </select>
   </td>
   <td>&nbsp;</td>
@@ -93,6 +113,19 @@
   <td>&nbsp;</td>
 </tr>
 <tr>
+  <td colspan="3"><img src="../i/spacer.gif" style="width: 100%; height: 15px;"></td>
+</tr>
+<tr class="CYSExtensionCodeMirrorSubsetting">
+  <td>&nbsp;</td>
+  <td><input id="CYSExtensionCodeMirrorAtAutocomplete" class="CYSExtension" data-key="preferenceCodeMirrorAtAutocomplete" type="checkbox"><label for="CYSExtensionCodeMirrorAtAutocomplete">@ Autocomplete</label></td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="CYSExtensionCodeMirrorSubsetting">
+  <td>&nbsp;</td>
+  <td class="smallerText">When this box is checked, the enhanced plain text editor will automatically suggest usernames following an <code>@</code> for quicker tagging. Type at least three letters after to query a much longer list of members.</td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="CYSExtensionCodeMirrorSubsetting">
   <td colspan="3"><img src="../i/spacer.gif" style="width: 100%; height: 15px;"></td>
 </tr>
 <tr class="CYSExtensionCodeMirrorSubsetting">
@@ -166,19 +199,19 @@
     <label for="CYSExtensionCodeMirrorNotepad">Notepad Syntax</label>
     <select id="CYSExtensionCodeMirrorNotepad" class="CYSExtension" data-key="preferenceCodeMirrorNotepad">
       <optgroup label="Markup">
-        <option label="BBCode" value="bbcodemixed">
-        <option label="CYS-Flavored HTML" value="cyshtml">
-        <option label="HTML" value="htmlmixed">
-        <option label="Markdown" value="markdown" selected>
-        <option label="Plain Text" value="null">
-        <option label="Textile" value="textile">
-        <option label="YAML" value="yaml">
+        <option label="BBCode" value="bbcodemixed">BBCode</option>
+        <option label="CYS-Flavored HTML" value="cyshtml">CYS-Flavored HTML</option>
+        <option label="HTML" value="htmlmixed">HTML</option>
+        <option label="Markdown" value="markdown" selected>Markdown</option>
+        <option label="Plain Text" value="null">Plain Text</option>
+        <option label="Textile" value="textile">Textile</option>
+        <option label="YAML" value="yaml">YAML</option>
       </optgroup>
       <optgroup label="Programming">
-        <option label="JavaScript" value=javascript>
+        <option label="JavaScript" value=javascript>JavaScript</option>
       </optgroup>
       <optgroup label="Style Sheet">
-        <option label="CSS" value="css">
+        <option label="CSS" value="css">CSS</option>
       </optgroup>
     </select>
   </td>

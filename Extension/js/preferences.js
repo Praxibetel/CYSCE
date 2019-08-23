@@ -1,9 +1,9 @@
 var profileMirror;
 
-chrome.storage.sync.get(null, e => {
-    if (!chrome.runtime.lastError) {
+browser.storage.sync.get(null).then((e, error) => {
+    if (!error) {
         //console.log(e);
-        $.get(chrome.extension.getURL("html/preferences.html"), data => {
+        $.get(browser.extension.getURL("html/preferences.html"), data => {
             $("form > table > tbody > tr:nth-child(22)").after(
                 $(data)
                 .find("input[type='checkbox']").each(function() {
@@ -35,8 +35,8 @@ chrome.storage.sync.get(null, e => {
             if (e.dataset.key) {
                 var preferences = {};
                 preferences[e.dataset.key] = e.checked;
-                chrome.storage.sync.set(preferences);
-                chrome.runtime.sendMessage({
+                browser.storage.sync.set(preferences);
+                browser.runtime.sendMessage({
                     action: "CYSupdatePreference",
                     key: e.dataset.key,
                     value: e.checked
@@ -48,8 +48,8 @@ chrome.storage.sync.get(null, e => {
             if (e.dataset.key) {
                 var preferences = {};
                 preferences[e.dataset.key] = e.value;
-                chrome.storage.sync.set(preferences);
-                chrome.runtime.sendMessage({
+                browser.storage.sync.set(preferences);
+                browser.runtime.sendMessage({
                     action: "CYSupdatePreference",
                     key: e.dataset.key,
                     value: e.value
@@ -61,12 +61,17 @@ chrome.storage.sync.get(null, e => {
             if (e.dataset.key) {
                 var preferences = {};
                 preferences[e.dataset.key] = e.value;
-                chrome.storage.sync.set(preferences, () => {
+                browser.storage.sync.set(preferences).then(() => {
                     switch (e.id) {
                         case "CYSExtensionTheme":
-                            chrome.runtime.sendMessage({
+                            browser.runtime.sendMessage({
                                 action: "CYSupdateTheme"
-                            }, response => $("style#CYS-Theme").text(response.theme || ""));
+                            }).then(response => $("style#CYS-Theme").text(response.theme || ""));
+                            break;
+                        case "CYSExtensionViewerTheme":
+                            browser.runtime.sendMessage({
+                                action: "CYSupdateViewerTheme"
+                            });
                             break;
                         case "CYSExtensionCodeMirrorTheme":
                             profileMirror.setOption("theme", e.value);
@@ -80,8 +85,8 @@ chrome.storage.sync.get(null, e => {
     }
 });
 
-if (!$("script:contains('CKEDITOR.replace')").length) chrome.storage.sync.get("preferenceCodeMirror", e => {
-    if (!chrome.runtime.lastError && e.preferenceCodeMirror !== false) {
+if (!$("script:contains('CKEDITOR.replace')").length) browser.storage.sync.get("preferenceCodeMirror").then((e, error) => {
+    if (!error && e.preferenceCodeMirror !== false) {
         profileMirror = CodeMirror.fromTextArea(document.getElementById("Profile"), CMHTML);
 
         if (CMAutobreak) profileMirror.setValue(CMUnPreLine(profileMirror.getValue()));

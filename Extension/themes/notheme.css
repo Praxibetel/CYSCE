@@ -1,5 +1,19 @@
 /* Navigation */
 
+#BodyContainer .sidebar-content ul {
+  max-width: 136px;
+}
+
+#BodyContainer .sidebar-content li li a {
+  white-space: nowrap;
+}
+
+#BodyContainer .sidebar-content li li a.narrower {
+  display: block;
+  transform: scaleX(.9);
+  transform-origin: left;
+}
+
 #BodyContainer .sidebar-content>ul>li a[data-badge]::after {
   content: " (" attr(data-badge) ")";
 }
@@ -456,6 +470,12 @@ img[src$="/smiley/images/envelope.png"] {
 
 .CodeMirror {
   line-height: normal;
+}
+
+/* Dialogs */
+
+.ui-dialog.ui-front {
+  z-index: 101;
 }
 
 /* Storygame Search */

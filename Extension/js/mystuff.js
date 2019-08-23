@@ -65,8 +65,8 @@ var flexContainer,
 AJAX.then((resolve, reject) => {
     if (reject || !resolve) return;
     $("form > table + table").empty();
-    chrome.storage.sync.get("myStuffConfig", e => {
-        if (!chrome.runtime.lastError && e.myStuffConfig) stuffTable = e.myStuffConfig;
+    browser.storage.sync.get("myStuffConfig").then((e, error) => {
+        if (!error && e.myStuffConfig) stuffTable = e.myStuffConfig;
 
         if ($("#MainContentPlaceHolder_btnNormalMode").length) {
             // Edit Mode
@@ -130,7 +130,7 @@ AJAX.then((resolve, reject) => {
                 flexContainer.append(flexRow);
             }
 
-            $.get("Games.aspx", data => {
+            $.get(href("Games.aspx"), data => {
                 $(".flex.storygames").append(
                     $("<h2></h2>").append($("<a></a>", {
                         href: "Games.aspx"
@@ -141,7 +141,7 @@ AJAX.then((resolve, reject) => {
                 );
             });
 
-            $.get("messages", data => {
+            $.get(href("messages"), data => {
                 $(".flex.messages").append(
                     $("<h2></h2>").append($("<a></a>", {
                         href: "messages"
@@ -154,7 +154,7 @@ AJAX.then((resolve, reject) => {
                 );
             });
 
-            $.get("Duels/open.aspx", data => {
+            $.get(href("Duels/open.aspx"), data => {
                 $(".flex.duels").append(
                     $("<h2></h2>").append($("<a></a>", {
                         href: "Duels/default.aspx"
@@ -165,7 +165,7 @@ AJAX.then((resolve, reject) => {
                 );
             });
 
-            $.get("Comments.aspx", data => {
+            $.get(href("Comments.aspx"), data => {
                 $(".flex.comments").append(
                     $("<h2></h2>").append($("<a></a>", {
                         href: "Comments.aspx"
@@ -176,7 +176,7 @@ AJAX.then((resolve, reject) => {
                 );
             });
 
-            $.get(`/user/points?username=${$("#Cys_DisplayName").text()}`, data => {
+            $.get(href(`/user/points?username=${$("#Cys_DisplayName").text()}`), data => {
                 $(".flex.points").append(
                     $("<h2></h2>").append($("<a></a>", {
                         href: `/user/points?username=${$("#Cys_DisplayName").text()}`
@@ -187,7 +187,7 @@ AJAX.then((resolve, reject) => {
                 );
             });
 
-            $.get(`/user/endorsements?username=${$("#Cys_DisplayName").text()}`, data => {
+            $.get(href(`/user/endorsements?username=${$("#Cys_DisplayName").text()}`), data => {
                 $(".flex.commendations").append(
                     $("<h2></h2>").append($("<a></a>", {
                         href: `/user/endorsements?username=${$("#Cys_DisplayName").text()}`
@@ -198,7 +198,7 @@ AJAX.then((resolve, reject) => {
                 );
             });
 
-            $.get("Saves.aspx", data => {
+            $.get(href("Saves.aspx"), data => {
                 $(".flex.saves").append(
                     $("<h2></h2>").append($("<a></a>", {
                         href: "Saves.aspx"
@@ -339,7 +339,7 @@ function myStuffUpdate() {
             tempTable.push(colArray);
         }
     });
-    chrome.storage.sync.set({
+    browser.storage.sync.set({
         myStuffConfig: tempTable
     });
     myStuffUpdateRows();

@@ -1,37 +1,39 @@
-var alerts, fetchIfTagged, theme;
+var alerts, fetchIfTagged, theme = {};
 
-getTheme(data => theme = data);
+getTheme("main", (data) => theme.main = data);
+getTheme("viewer", (data) => theme.viewer = data);
 
-
-chrome.storage.sync.get(["preferenceAJAX", "preferenceStifleTags"], e => {
-    if (!chrome.runtime.lastError && e.preferenceAJAX === "2") fetchIfTagged = !e.preferenceStifleTags, alertInterval();
+browser.webNavigation.onCommitted.addListener(function(tab) {
+    browser.tabs.insertCSS(tab.tabId, {
+        code: theme.viewer,
+        runAt: "document_start"
+    });
+}, {
+    url: [{
+        hostEquals: "chooseyourstory.com",
+        pathPrefix: "/story/viewer/"
+    }]
 });
 
-function cacheTheme(callback) {
-    chrome.storage.sync.get("preferenceTheme", e => {
-        if (!chrome.runtime.lastError && e.preferenceTheme && e.preferenceTheme !== "none") {
+browser.storage.sync.get(["preferenceAJAX", "preferenceStifleTags"]).then((e, error) => {
+    if (!error && e.preferenceAJAX === "2") fetchIfTagged = !e.preferenceStifleTags, alertInterval();
+});
+
+function cacheTheme(sect, callback) {
+    browser.storage.sync.get(sect !== "viewer" ? "preferenceTheme" : "preferenceViewerTheme").then((e, error) => {
+        if (!error && (e.preferenceTheme || e.preferenceViewerTheme) && (e.preferenceTheme !== "none" || e.preferenceViewerTheme !== "none")) {
             var httpRequest = new XMLHttpRequest();
             httpRequest.onreadystatechange = () => {
-                /*
-                  chrome.storage.local.set({
-                      theme: {
-                          content: data,
-                          timestamp: Date.now()
-                      }
-                  }, () => {
-                      callback(data);
-                  });
-                  */
                 if (httpRequest.readyState === 4) {
                     var data = httpRequest.response;
-                    sessionStorage.setItem("theme", JSON.stringify({
+                    sessionStorage.setItem(sect !== "viewer" ? "theme" : "viewerTheme", JSON.stringify({
                         content: data,
                         timestamp: Date.now()
                     }));
                     callback(data);
                 }
             };
-            httpRequest.open("GET", `themes/cyslantia-${e.preferenceTheme}.min.css`);
+            httpRequest.open("GET", `themes/cyslantia-${e.preferenceTheme ? e.preferenceTheme : `viewer-${e.preferenceViewerTheme}`}.min.css`);
             httpRequest.send();
         } else {
             callback("");
@@ -39,20 +41,10 @@ function cacheTheme(callback) {
     });
 }
 
-function getTheme(callback) {
-    /*
-    chrome.storage.local.get("theme", (e) => {
-        if (e.theme && e.theme.content && e.theme.timestamp) {
-            if (e.theme.timestamp > Date.now() - 3600 * 1000) {
-                return callback(e.theme.content);
-            }
-        }
-        cacheTheme(callback);
-    });
-    */
-    var e = sessionStorage.getItem("theme");
+function getTheme(sect, callback) {
+    var e = sessionStorage.getItem(sect !== "viewer" ? "theme" : "viewerTheme");
     if (e && e.content && e.timestamp && e.timestamp > Date.now() - 3600000) return callback(e.content);
-    cacheTheme(callback);
+    cacheTheme(sect, callback);
 }
 
 function alertInterval() {
@@ -98,7 +90,7 @@ function processAlerts(callback) {
     fetchAlerts(a => {
         alerts = a;
         n = a.messages + a.notifications
-        chrome.browserAction.setBadgeText({
+        browser.browserAction.setBadgeText({
             text: n ? n < 1000 ? `${n}` : "999+" : ""
         });
         if (typeof callback === "function") callback();
@@ -106,18 +98,32 @@ function processAlerts(callback) {
 }
 
 
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     switch (request.action) {
         case "CYSgetTheme":
             sendResponse({
-                theme: theme
+                theme: theme.main
             });
             break;
         case "CYSupdateTheme":
-            cacheTheme(data => {
-                theme = data;
+            cacheTheme("main", data => {
+                theme.main = data;
                 sendResponse({
-                    theme: theme
+                    theme: theme.main
+                });
+            });
+            return true;
+            break;
+        case "CYSgetViewerTheme":
+            sendResponse({
+                theme: theme.viewer
+            });
+            break;
+        case "CYSupdateViewerTheme":
+            cacheTheme("viewer", data => {
+                theme.viewer = data;
+                sendResponse({
+                    theme: theme.viewer
                 });
             });
             return true;
@@ -130,7 +136,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                     } else {
                         if (alerts != null) {
                             alerts = clearInterval(alerts);
-                            chrome.browserAction.setBadgeText({
+                            browser.browserAction.setBadgeText({
                                 text: ""
                             });
                         }

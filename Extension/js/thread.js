@@ -2,7 +2,8 @@ $("title").text(`${$(".forum-message > .heading > h2").eq(0).text()} > ${$(".mai
 
 if ($("a.button:contains('Non-threaded')").length) {
     $(".forum-message").each(function(e) {
-        for (var s = $(this).nextAll(".forum-message"), t = 0; t < s.length && $(this).attr("style") !== $(s).eq(t).attr("style"); t++);
+        let t = 0;
+        for (let s = $(this).nextAll(".forum-message"); t < s.length && $(this).attr("style") !== $(s).eq(t).attr("style"); t++);
         $(".forum-message").slice(e, e + ++t).wrapAll($("<div></div>", {
             "class": "forum-thread"
         }));
@@ -26,7 +27,7 @@ $(".forum-message .heading .buttons").eq(0).prepend(
         href: "#collapse",
         class: "button collapse"
     }).click(function() {
-        var e = $(this).parent().parent().parent().siblings().filter(".forum-thread");
+        var e = $(this).parents().siblings(".forum-thread");
         if ($(this).hasClass("collapsed")) e.removeClass("collapsed").find(".collapse").attr("title", "Collapse").find("span").text("Collapse"),
             $(this).attr("title", "Collapse All").find("span").text("Collapse");
         else e.addClass("collapsed").find(".collapse").attr("title", "Expand").find("span").text("Expand"),
@@ -41,7 +42,7 @@ $(".forum-thread > .forum-thread .forum-message .heading .buttons").prepend(
         href: "#collapse",
         class: "button collapse"
     }).click(function() {
-        var e = $(this).parent().parent().parent().parent();
+        var e = $(this).parents(".forum-thread").first();
         e.toggleClass("collapsed");
         $(this).attr("title", e.hasClass("collapsed") ? "Expand" : "Collapse").find("span").text(e.hasClass("collapsed") ? "Expand" : "Collapse");
         return false;
