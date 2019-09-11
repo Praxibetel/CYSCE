@@ -81,7 +81,7 @@ if (!$("script:contains('CKEDITOR.replace')").length) {
 
     browser.storage.sync.get(["preferenceCodeMirror", "preferenceCodeMirrorAtAutocomplete", "preferenceHTMLNormalize"]).then((e, error) => {
         if (!error) {
-            if (e.preferenceCodeMirror !== false) {
+            if (e.preferenceCodeMirror !== false) CMReady.then(() => {
                 htmlMirror = CodeMirror.fromTextArea(htmlContent, CMHTML);
 
                 if (CMAutobreak) htmlMirror.setValue(CMUnPreLine(htmlMirror.getValue()));
@@ -104,7 +104,7 @@ if (!$("script:contains('CKEDITOR.replace')").length) {
                 $(window).on("load", function() {
                     htmlMirror.refresh();
                 });
-            }
+            });
             if (e.preferenceHTMLNormalize !== false) {
                 $("form > a.button").on("click", function() {
                     let normalizedHTML = $("<div>").append($.parseHTML(htmlContent.value)).html()

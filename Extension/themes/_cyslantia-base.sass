@@ -51,10 +51,10 @@ $font-size-main: 14px !default
 
 $image-background-page: url("#{$image}/cys-banner-baked.svg") !default
 $image-background-underside: url("#{$image}/cys-corner.svg") !default
-$image-background-masthead-1x: url("#{$image}/cys-header.png") !default
-$image-background-masthead-2x: url("#{$image}/cys-header-2x.png") !default
-$image-background-masthead-3x: url("#{$image}/cys-header-3x.png") !default
-$image-background-masthead-4x: url("#{$image}/cys-header-4x.png") !default
+$image-background-masthead-1x: url("#{$image}/masthead-1x.png") !default
+$image-background-masthead-2x: url("#{$image}/masthead-2x.png") !default
+$image-background-masthead-3x: url("#{$image}/masthead-3x.png") !default
+$image-background-masthead-4x: url("#{$image}/masthead-4x.png") !default
 
 $image-login: url("#{$image}/login.png") !default
 
@@ -105,6 +105,7 @@ $image-icon-warn: url("#{$elusive}/warning-sign.svg") !default
 $image-icon-move: url("#{$elusive}/return-key-180.svg") !default
 $image-icon-trash: url("#{$elusive}/trash.svg") !default
 $image-icon-commend: url("#{$elusive}/star-alt-eee.svg") !default
+$image-icon-resolve: url("#{$elusive}/check.svg") !default
 
 $image-trophy-100points: url("#{$trophy}/100.png") !default
 $image-trophy-500points: url("#{$trophy}/500.png") !default
@@ -130,12 +131,15 @@ $image-trophy-fromendmaster: url("#{$trophy}/end.png") !default
 $image-trophy-fromfleshnblood: url("#{$trophy}/nate.png") !default
 $image-trophy-fromhavacoman: url("#{$trophy}/havacoman.png") !default
 $image-trophy-fromjjj: url("#{$trophy}/3j.png") !default
+$image-trophy-fromkillarobot: url("#{$trophy}/killa.png") !default
 $image-trophy-frommadglee: url("#{$trophy}/madglee.png") !default
 $image-trophy-frommarch5th: url("#{$trophy}/march.png") !default
+$image-trophy-frommizal: url("#{$trophy}/mizal.png") !default
 $image-trophy-fromsethaniel: url("#{$trophy}/seth.png") !default
 $image-trophy-fromsolostrike: url("#{$trophy}/solo.png") !default
 $image-trophy-fromtsmpaul: url("#{$trophy}/tsmpaul.png") !default
 $image-trophy-fromwill11: url("#{$trophy}/will.png") !default
+$image-trophy-fromunknown: url("#{$trophy}/placeholder.png") !default
 
 $image-duel-toggle: url("#{$custom}/duel-toggle.png") !default
 $image-duel-rps: url("#{$custom}/duel-rps.png") !default
@@ -269,7 +273,7 @@ body
 
     > ul
       margin: 0 auto !important
-      max-width: 978px
+      max-width: 978px !important
       height: 48px
       box-sizing: border-box
       padding: 10px 5px !important
@@ -504,6 +508,10 @@ table
 
   .dark1borderTop1pxSolid
     border-top: none
+
+[role="dialog"]
+  tr
+    background-color: unset !important
 
 .smallerText
   font-size: 0.75em
@@ -765,6 +773,9 @@ a.button, a.button:active
 
     &[src$="note_edit.png"]
       content: $image-icon-edit
+
+    &[src$="bug_delete.png"]
+      content: $image-icon-resolve
 
     &[src$="tag_green.png"]
       content: $image-icon-tag
@@ -1330,11 +1341,17 @@ img
   &[src="images/trophies/fromJJJ-thebanisher.gif"]
     content: $image-trophy-fromjjj
 
+  &[src="images/trophies/fromKilla_Robot.gif"]
+    content: $image-trophy-fromkillarobot
+
   &[src="images/trophies/fromMadglee.gif"]
     content: $image-trophy-frommadglee
 
   &[src="images/trophies/frommarch5th00.gif"]
     content: $image-trophy-frommarch5th
+
+  &[src="images/trophies/fromMizal.gif"]
+    content: $image-trophy-frommizal
 
   &[src="images/trophies/fromSethaniel.gif"]
     content: $image-trophy-fromsethaniel

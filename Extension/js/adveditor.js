@@ -1,5 +1,5 @@
 if (!$("script:contains('CKEDITOR.replace')").length) browser.storage.sync.get("preferenceCodeMirror").then((e, error) => {
-    if (!error && e.preferenceCodeMirror !== false) {
+    if (!error && e.preferenceCodeMirror !== false) CMReady.then(() => {
         var propertyMirror = CodeMirror.fromTextArea($("#MainContentPlaceHolder_StoryDescription_ctl00")[0], CMHTML);
 
         if (CMAutobreak) propertyMirror.setValue(CMUnPreLine(propertyMirror.getValue()));
@@ -11,5 +11,5 @@ if (!$("script:contains('CKEDITOR.replace')").length) browser.storage.sync.get("
         $(window).on("load", function() {
             propertyMirror.refresh();
         });
-    }
+    });
 });

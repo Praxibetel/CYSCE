@@ -1,5 +1,5 @@
 if (!$("script:contains('CKEDITOR.replace')").length) browser.storage.sync.get("preferenceCodeMirror").then((e, error) => {
-    if (!error && e.preferenceCodeMirror !== false) {
+    if (!error && e.preferenceCodeMirror !== false) CMReady.then(() => {
         var htmlContent = document.getElementById("Content"),
             htmlMirror = CodeMirror.fromTextArea(htmlContent, Object.assign({}, CMHTML, {
                 mode: "cyshtml"
@@ -12,7 +12,7 @@ if (!$("script:contains('CKEDITOR.replace')").length) browser.storage.sync.get("
         $(window).on("load", function() {
             htmlMirror.refresh();
         });
-    }
+    });
 });
 
 $("input[name='Title']").parent().children().wrapAll($("<span></span>", {

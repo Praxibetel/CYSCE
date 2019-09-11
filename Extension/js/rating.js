@@ -21,7 +21,7 @@ AJAX.then((resolve, reject) => {
     rows.each(function() {
         var t = $(this);
         if (t.find("td:nth-child(3)").text().trim() !== "--") {
-            $.get(t.find("td:first-child a").attr("href"), function(data) {
+            $.get(href(t.find("td:first-child a").attr("href")), function(data) {
                 if (data) {
                     data = $(data);
                     t.find("td:nth-child(4) span").text(data.find(".storygame-sidebar .rating").eq(0).text().trim().slice(0, -2))

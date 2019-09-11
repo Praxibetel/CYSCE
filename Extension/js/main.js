@@ -60,20 +60,6 @@ if (u) $("#Cys_DisplayName").wrap($("<a></a>", {
     href: `/Member/?Username=${$("#Cys_DisplayName").text()}`
 }));
 
-if (url.pathname.endsWith("article.aspx")) {
-    $("title").text(`${$("#maincontent > h1:first-child").text().trim()} > Help & Info > ChooseYourStory.com`)
-    $(document.body).append($("<link>", {
-        rel: "stylesheet",
-        type: "text/css",
-        href: browser.extension.getURL("themes/print.css")
-    }));
-    $(".tertiaryButton").parent().replaceWith(function() {
-        return $("<ul></ul>", {
-            class: "help-info-selector"
-        }).append($(this).find(".tertiaryButton"));
-    });
-}
-
 switch (path = url.pathname.toLowerCase(), true) {
     case "/endorsements" === path:
         $("title").text(`Commendations > All ${url.searchParams.get("sect")}s > ChooseYourStory.com`);
@@ -150,6 +136,59 @@ switch (path = url.pathname.toLowerCase(), true) {
             value: "Search Google"
         })));
         break;
+      case /^\/help(\/articles)?\/?$/.test(path):
+        $.get(browser.extension.getURL("html/articles/articles.json")).then(json => {
+          let articleContainer = $(`<div><strong><h1>${browser.runtime.getManifest().name}</h1></strong><br></div>`);
+          for (let i = 0; i < json.length; i++) {
+            let article = json[i];
+            articleContainer.append($(`
+              <h3 style="display:inline"></h3><h2 style="display:inline"><a href="/help/articles/article.aspx?ArticleEx=${i}">${article.title}</a></h2><h3> [${article.level >= 2 ? "Expert" : article.level == 1 ? "Intermediate" : "Beginner"}]</h3>&nbsp;<span class="smallerText">by <a href="/member/?username=${article.author}">${article.author}</a></span><br><br>
+            `));
+          }
+          $("#maincontent > div:last-child").append(articleContainer);
+        });
+        break;
+      case path.endsWith("article.aspx"):
+        if (/ArticleEx=\d+/i.test(url.search)) {
+          $.get(browser.extension.getURL("html/articles/articles.json")).done(json => {
+            let id = parseInt(url.search.match(/ArticleEx=(\d+)/i)[1]),
+                article;
+            if (id in json) {
+              article = json[id];
+              $("title").text(`${article.title} > Help & Info > ChooseYourStory.com`);
+              $("#maincontent > h1:first-child").text(article.title);
+              $("#maincontent > p.smallerText > a").attr("href", `../../member/?Username=${article.author}`).text(article.author);
+              $.get(browser.extension.getURL(`html/articles/${article.doc}`)).then(html => $("#maincontent > div:last-child").html(html));
+            }
+          });
+        }
+
+        $("title").text(`${$("#maincontent > h1:first-child").text().trim()} > Help & Info > ChooseYourStory.com`);
+        $(document.body).append($("<link>", {
+            rel: "stylesheet",
+            type: "text/css",
+            href: browser.extension.getURL("themes/print.css")
+        }));
+        $(".tertiaryButton").parent().replaceWith(function() {
+            return $("<ul></ul>", {
+                class: "help-info-selector"
+            }).append($(this).find(".tertiaryButton"));
+        });
+        break;
+      /*
+      case /^\/secret\/BradinDvorak/i.test(path):
+        $.get("/secret/cysid/set-render-mode", html => {
+          if (html) {
+            console.log($(html).find("head").html());
+            $("head").html($(html).find("head").html());
+            //$(document.body).html($(html).find("body").find(".main-content > form").remove().end().html());
+          }
+        });
+        //break;
+      case /\142u(\x6b){2}a\1(?=e\b)/i.test(path):
+        $(document.body).append($("<img>", {src: browser.extension.getURL("themes/images/custom/モザイク.svg")}));
+        break;
+      */
 }
 
 if (u) browser.storage.sync.get(["preferenceNotifications", "preferenceStifleTags", "welcomedOn"]).then((e, error) => {
@@ -160,7 +199,7 @@ if (u) browser.storage.sync.get(["preferenceNotifications", "preferenceStifleTag
                 var alertCheck;
                 $(".header-alerts-container").parent().hide();
                 alertCheck = function() {
-                    $.get("/alerts", data => {
+                    $.get(href("/alerts"), data => {
                         if (data) {
                             data = JSON.parse(data);
                             if (data && data.length) {

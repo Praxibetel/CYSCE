@@ -1,5 +1,5 @@
 if (!$("script:contains('CKEDITOR.replace')").length) browser.storage.sync.get(["preferenceCodeMirror", "preferenceCodeMirrorNotepad"]).then((e, error) => {
-    if (!error && e.preferenceCodeMirror !== false) {
+    if (!error && e.preferenceCodeMirror !== false) CMReady.then(() => {
         var noteContent = $("form > textarea")[0],
             noteMirror = CodeMirror.fromTextArea(noteContent, Object.assign({}, ["cyshtml", "htmlmixed", "markdown", "textile"].includes(e.preferenceCodeMirrorNotepad) ? CMHTML : {}, {
                 mode: e.preferenceCodeMirrorNotepad || "markdown"
@@ -12,5 +12,5 @@ if (!$("script:contains('CKEDITOR.replace')").length) browser.storage.sync.get([
         $(window).on("load", function() {
             noteMirror.refresh();
         });
-    }
+    });
 });
