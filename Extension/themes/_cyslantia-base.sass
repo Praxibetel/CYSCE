@@ -85,7 +85,7 @@ $image-icon-plus: url("#{$elusive}/plus.svg") !default
 $image-icon-bug: url("#{$custom}/bug.png") !default
 $image-icon-squashed-bug: url("#{$custom}/squashedbug.png") !default
 $image-icon-tag: url("#{$elusive}/tag.svg") !default
-$image-icon-exclaim: url("#{$elusive}/exclaim.png") !default
+$image-icon-exclaim: url("#{$elusive}/exclamation-sign.svg") !default
 $image-icon-coauth: url("#{$elusive}/group.svg") !default
 $image-icon-edit-adv: url("#{$elusive}/file-edit.svg") !default
 $image-icon-delete: url("#{$elusive}/remove.svg") !default
@@ -535,8 +535,11 @@ select, textarea
   font-variant-ligatures: no-contextual
   padding: 4px
 
+optgroup
+  background-color: lighten($color-background-main, 3%)
+
 input
-  &[type="text"], &[type="password"], &[type="number"], &[type="date"]
+  &:not([type]), &[type="text"], &[type="password"], &[type="number"], &[type="date"]
     @extend select
 
   &[type="button"], &[type="file"], &[type="submit"]
@@ -824,7 +827,7 @@ img
   line-height: 1
 
 ul
-  &.bug-selector, &.fww-selector, &.help-info-selector
+  &.bug-selector, &.fww-selector, &.help-info-selector, &.generic-selector
     @extend .icon-box
 
     display: table
@@ -850,8 +853,9 @@ ul
         transform: translateY(-50%)
         width: 1px
 
-      &.selected
+      &.selected, &.tertiaryButtonSelected
         background-color: $color-background-chip-active
+        color: white
 
         &::after
           content: none
@@ -1417,6 +1421,8 @@ img
 
   &[src$="/exclaim.gif"]
     content: $image-icon-exclaim
+    width: 12px
+    height: 12px
 
   &[src$="/edit.gif"]
     content: $image-icon-edit-adv

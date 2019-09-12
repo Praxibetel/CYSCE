@@ -136,6 +136,13 @@ switch (path = url.pathname.toLowerCase(), true) {
             value: "Search Google"
         })));
         break;
+      case /^(\/my\/duels\/(default|open|history)\.aspx|\/help\/aboutus\.aspx)$/.test(path):
+          $(".tertiaryButton").parent().replaceWith(function() {
+              return $("<ul></ul>", {
+                  class: "generic-selector"
+              }).append($(this).find(".tertiaryButton, .tertiaryButtonSelected"));
+          });
+          break;
       case /^\/help(\/articles)?\/?$/.test(path):
         $.get(browser.extension.getURL("html/articles/articles.json")).then(json => {
           let articleContainer = $(`<div><strong><h1>${browser.runtime.getManifest().name}</h1></strong><br></div>`);

@@ -1,36 +1,41 @@
 (async () => {
-    const ADMZip = require("adm-zip"),
-          csso = require("csso"),
+    const csso = require("csso"),
           fs = require("fs").promises,
           glob = require("glob"),
+          htmlMinify = require("html-minifier").minify,
+          JSZip = require("jszip"),
           path = require("path"),
           sass = require("node-sass"),
           UglifyJS = require("uglify-es");
 
     const defaults = {
-        browser: "chrome",
-        folder: "Extension",
-        ignore: [
-            "**/.*",
-            "**/*.alpha",
-            "**/*.beta",
-            "**/*.sass",
-            "**/Thumbs.db"
-        ],
-        minify: false,
-        output: "build.zip",
-        verbose: false
+          browser: "chrome",
+          folder: "Extension",
+          ignore: [
+              "**/.*",
+              "**/*.alpha",
+              "**/*.beta",
+              "**/*.sass",
+              "**/Thumbs.db",
+              "**/codemirror/**/*.html",
+              "**/codemirror/**/*test.js"
+          ],
+          minify: false,
+          output: "build.zip",
+          verbose: 1
     };
 
-    var args = process.argv.slice(2),
+    var arg,
+        args = process.argv.slice(2),
         i = 0,
         iter = 0,
         options = Object.assign({}, defaults),
         renderedSass = {},
-        zip = new ADMZip();
+        zip = new JSZip(),
+        zipBuffer;
 
     while (i < args.length) {
-        switch (args[i++]) {
+        switch (arg = (args[i++] || "").toLowerCase()) {
             case "-c":
             case "--chrome":
                 options.browser = "chrome";
@@ -42,7 +47,16 @@
                 break;
             case "-m":
             case "--minify":
-                options.minify = true;
+                switch (arg = (args[i++] || "").toLowerCase(), true) {
+                    case /\b(css|html|js)\b/.test(arg):
+                        if (typeof options.minify !== "object") options.minify = {};
+                        for (let subarg of arg.split(/\W+/)) options.minify[subarg] = true;
+                        break;
+                    default:
+                        options.minify = true;
+                        --i;
+                        break;
+                }
                 break;
             case "-o":
             case "--out":
@@ -52,7 +66,26 @@
                 break;
             case "-v":
             case "--verbose":
-                options.verbose = true;
+                switch (arg = (args[i++] || "").toLowerCase()) {
+                    case "0":
+                    case "none":
+                        options.verbose = 0;
+                        break;
+                    case "1":
+                    case "some":
+                    case "modified":
+                        options.verbose = 1;
+                        break;
+                    case "2":
+                    case "all":
+                    case "verbose":
+                        options.verbose = 2;
+                        break;
+                    default:
+                        options.verbose = 2;
+                        --i;
+                        break;
+                }
                 break;
         }
     }
@@ -92,7 +125,7 @@
                 },
                 indentedSyntax: true,
                 includePaths: [path.join(file, "..")],
-                outputStyle: options.minify ? "compressed" : "expanded"
+                outputStyle: options.minify === true || options.minify.css ? "compressed" : "expanded"
             }, (error, result) => {
                 if (error) return reject(error);
                 if (options.verbose) console.log(`Successfully rendered \x1b[33m${file}\x1b[0m as \x1b[34m${file.replace(/sass$/, "min.css")}\x1b[0m`);
@@ -128,42 +161,57 @@
                         manifest.applications = {
                             "gecko": {
                                 "id": "cysffe@bradin.pw",
-                                "strict_min_version": "42.0",
+                                "strict_min_version": "53.0",
                                 "update_url": "https://www.bradin.pw/cyslantia/CYSFFE/update.json"
                             }
                         };
                         if (!manifest.browser_action) manifest.browser_action = {};
                         manifest.browser_action.default_icon = manifest.icons;
                         console.log(`Successfully managed \x1b[33m${file}\x1b[0m`);
-                        await zip.addFile(path.relative(options.folder, file), JSON.stringify(manifest, null, "\t"));
+                        zip.file(path.relative(options.folder, file), JSON.stringify(manifest, null, "\t"));
                         break;
                     case ext === ".css" && fname in renderedSass:
-                        await zip.addFile(path.relative(options.folder, file), renderedSass[fname].css);
+                        zip.file(path.relative(options.folder, file), renderedSass[fname].css);
                         break;
                     case ext === ".css":
                         let css = await fs.readFile(file, "utf-8");
                         if (options.browser === "firefox") css = css.replace(/chrome-extension/g, "moz-extension");
-                        if (options.minify) {
+                        if (options.minify === true || options.minify.css) {
                             css = csso.minify(css).css
                             if (options.verbose) console.log(`Successfully minified \x1b[33m${file}\x1b[0m`);
                         }
-                        await zip.addFile(path.relative(options.folder, file), Buffer.from(css));
+                        await zip.file(path.relative(options.folder, file), Buffer.from(css));
                         break;
-                    case options.minify && ext === ".js":
-                        let min = UglifyJS.minify(await fs.readFile(file, "utf-8"), {
-                          mangle: false,
-                          output: {
-                            beautify: true
-                          }
+                    case ext === ".html" && (options.minify === true || options.minify.html):
+                        let htmin = htmlMinify(await fs.readFile(file, "utf-8"), {
+                            collapseBooleanAttributes: true,
+                            collapseWhitespace: true,
+                            decodeEntities: true,
+                            minifyCSS: options.minify === true || options.minify.css,
+                            minifyJS: options.minify === true || options.minify.js,
+                            removeComments: true,
+                            removeRedundantAttributes: true,
+                            removeScriptTypeAttributes: true,
+                            removeStyleLinkTypeAttributes: true
                         });
-                        if (min.error) throw min.error;
                         if (options.verbose) console.log(`Successfully minified \x1b[33m${file}\x1b[0m`);
-                        await zip.addFile(path.relative(options.folder, file), Buffer.from(min.code));
+                        await zip.file(path.relative(options.folder, file), Buffer.from(htmin));
+                        break;
+                    case ext === ".js" && (options.minify === true || options.minify.js):
+                        let jsmin = UglifyJS.minify(await fs.readFile(file, "utf-8"), {
+                            mangle: false,
+                            output: {
+                                beautify: true
+                            }
+                        });
+                        if (jsmin.error) throw jsmin.error;
+                        if (options.verbose) console.log(`Successfully minified \x1b[33m${file}\x1b[0m`);
+                        await zip.file(path.relative(options.folder, file), Buffer.from(jsmin.code));
                         break;
                     default:
-                        await zip.addFile(path.relative(options.folder, file), await fs.readFile(file));
+                        await zip.file(path.relative(options.folder, file), await fs.readFile(file));
                 }
-                if (options.verbose) console.log(`Added \x1b[34m${file}\x1b[0m to the ZIP archive`);
+                if (options.verbose > 1) console.log(`Added \x1b[34m${file}\x1b[0m to the ZIP archive`);
             } catch (error) {
                 console.log(`Build failed at file \x1b[31m${file}\x1b[0m`);
                 console.log(error);
@@ -171,17 +219,31 @@
             }
         }
 
-        zip.writeZip(options.output);
+        zipBuffer = await zip.generateAsync({
+            type: "nodebuffer",
+            compression: "DEFLATE",
+            compressionOptions: {
+                level: 9
+            }
+        });
+
+        try {
+            await fs.writeFile(options.output, zipBuffer);
+            console.log(`Successfully wrote \x1b[34m${options.output}\x1b[0m`);
+        } catch (e) {
+            console.log(`Couldn't write \x1b[31m${options.output}\x1b[0m`);
+            console.log(e);
+        }
 
         resolve();
     }));
 
-    console.log(`Successfully wrote \x1b[34m${options.output}\x1b[0m`);
 
     await new Promise(resolve => glob(`temp${process.pid}-*.*`, {}, async (error, matches) => {
         for (let temp of matches) {
             await fs.unlink(temp);
         }
+
         resolve();
     }));
 

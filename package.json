@@ -1,15 +1,16 @@
 {
   "name": "CYSCE",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "ChooseYourStory Chrome Extension",
   "main": "build.js",
   "scripts": {
     "start": "node build.js"
   },
   "dependencies": {
-    "adm-zip": "git://github.com/cthackers/adm-zip.git#ff17ae85000b62b9d159e2520564902724d26c17",
     "csso": "^3.5.1",
     "glob": "^7.1.4",
+    "html-minifier": "^4.0.0",
+    "jszip": "^3.2.2",
     "node-sass": "^4.12.0",
     "uglify-es": "^3.3.9"
   },
