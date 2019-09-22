@@ -1415,6 +1415,43 @@ tr
 
 // Advanced Editor
 
+input[type="image"][src*="/my/adveditor/images/"]
+  background-size: 12px 12px
+  box-sizing: border-box
+  height: 12px
+  padding-left: 12px
+  width: 12px
+
+  &[src$="CYS/images/checkmark.gif"][alt$="coauthor"]
+    background-image: $image-icon-coauth
+
+  &[src$="/exclaim.gif"]
+    background-image: $image-icon-exclaim
+
+  &[src$="/edit.gif"]
+    background-image: $image-icon-edit-adv
+
+  &[src$="/script.gif"], &[src$="/script_dim.gif"]
+    background-image: $image-icon-script
+
+  &[src$="/delete.gif"]
+    background-image: $image-icon-delete
+
+  &[src$="/go.gif"]
+    background-image: $image-icon-go
+
+  &[src$="/stop.gif"], &[src$="/stop_dim.gif"], &[src$="16x16/delete.png"]
+    background-image: $image-icon-stop
+
+  &[src$="/item.gif"], &[src$="/item_dim.gif"]
+    background-image: $image-icon-item
+
+  &[src$="/addsub.gif"], &[src$="/addsub_dim.gif"]
+    background-image: $image-icon-variable
+
+  &[src$="_dim.gif"]
+    filter: saturate(0.8) opacity(0.6)
+
 img
   &[src$="CYS/images/checkmark.gif"][alt$="coauthor"]
     content: $image-icon-coauth

@@ -1,6 +1,6 @@
 if (!$("script:contains('CKEDITOR.replace')").length) browser.storage.sync.get("preferenceCodeMirror").then((e, error) => {
     if (!error && e.preferenceCodeMirror !== false) CMReady.then(() => {
-        var htmlContent = document.getElementById("Content"),
+        var htmlContent = document.querySelector("form > div > textarea"),
             htmlMirror = CodeMirror.fromTextArea(htmlContent, Object.assign({}, CMHTML, {
                 mode: "cyshtml"
             }));
