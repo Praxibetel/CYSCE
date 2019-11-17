@@ -1,1 +1,1 @@
-html{background-color:#111;filter:invert(.933)}.dark1border+div>div img{filter:invert(1)}
+html{background-color:#111;filter:invert(.933)}.dark1border+div img:not([src^="images/i_"]){filter:invert(1)}

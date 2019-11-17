@@ -77,7 +77,6 @@ switch (path = url.pathname.toLowerCase(), true) {
         $("title").text("Just Google it > ChooseYourStory.com");
         var upDate1 = function() {
                 var date = new Date($(`input[name="${$(this).data("for")}"]`).val());
-                console.log(date);
                 return isNaN(date) ? "" : `${date.getUTCFullYear()}-${("00" + (date.getUTCMonth() + 1)).slice(-2)}-${("00" + date.getUTCDate()).slice(-2)}`;
             },
             upDate2 = function() {
@@ -136,6 +135,16 @@ switch (path = url.pathname.toLowerCase(), true) {
             value: "Search Google"
         })));
         break;
+      case /^\/my\/adveditor\/chapters\.aspx/.test(path):
+          $(".tertiaryButton, .tertiaryButtonSelected").first().parent().replaceWith(function() {
+              return $("<ul></ul>", {
+                  class: "generic-selector"
+              }).append($(this).find(".tertiaryButton, .tertiaryButtonSelected"));
+          }).end().parent().parent().addClass("generic-selector-parent");
+          break;
+      case /^\/advanced_editor\/\d+\/newpage/.test(path):
+          $("[name='page_title_text']").focus();
+          break;
       case /^(\/my\/duels\/(default|open|history)\.aspx|\/help\/aboutus\.aspx)$/.test(path):
           $(".tertiaryButton").parent().replaceWith(function() {
               return $("<ul></ul>", {

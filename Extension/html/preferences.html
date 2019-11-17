@@ -32,17 +32,64 @@
   <td>&nbsp;</td>
   <td>
     <label for="CYSExtensionViewerTheme">Storygame Theme</label>
-    <select id="CYSExtensionViewerTheme" class="CYSExtension" data-key="preferenceViewerTheme">
+    <select id="CYSExtensionViewerTheme" class="CYSExtension" data-key="preferenceViewerTheme" onchange="return; $('[data-cyslantia-viewer-only]').prop('disabled', !/^(light|dark)$/.test(this.value));">
       <option label="none" value="none" selected>none</option>
+      <option label="CYS Light" value="light" selected>CYS Light</option>
+      <option label="CYS Dark" value="dark" selected>CYS Dark</option>
       <option label="invert brightness" value="invert-retain-hue">invert brightness</option>
       <option label="invert colors" value="invert">invert colors</option>
+    </select>
+    <select id="CYSExtensionViewerSerifs" class="CYSExtension" data-key="preferenceViewerSerifs" data-parent="CYSExtensionViewerTheme" data-parent-values="light dark">
+      <option label="sans-serif" value="sans-serif" selected>sans-serif</option>
+      <option label="serif" value="serif">serif</option>
+    </select>
+    <select id="CYSExtensionViewerCPL" class="CYSExtension" data-key="preferenceViewerCPL" data-parent="CYSExtensionViewerTheme" data-parent-values="light dark">
+      <option label="static" value="none" selected>static</option>
+      <option label="90 cpl" value="90">90 cpl</option>
+      <option label="110 cpl" value="110">110 cpl</option>
+    </select>
+    <select id="CYSExtensionViewerDestyle" class="CYSExtension" data-key="preferenceViewerDestyle" data-parent="CYSExtensionViewerTheme" data-parent-values="light dark">
+      <option label="no suppression" value="" selected>no suppression</option>
+      <option label="suppress fonts" value="destyle-fonts">suppress fonts</option>
+      <option label="suppress stylesheets" value="destyle-css">suppress stylesheets</option>
+      <option label="suppress all" value="destyle-fonts destyle-css">suppress all</option>
+    </select>
+    <!--
+
+    -->
+  </td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td class="smallerText">Select a visual theme to be applied to the storygame viewer. Choosing CYS Light or Dark allows the secondary options to take effect. [explain secondary effects here...]</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td colspan="3"><img src="../i/spacer.gif" style="width: 100%; height: 15px;"></td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td>
+    <label for="CYSExtensionVisibility">Text Visibility</label>
+    <select id="CYSExtensionVisibility" class="CYSExtension" data-key="preferenceVisibility">
+      <option label="normal" value="" selected>normal</option>
+      <option label="shift colors" value="shift">shift colors</option>
+      <option label="suppress colors" value="destyle">suppress colors</option>
+    </select>
+    <select id="CYSExtensionContrast" class="CYSExtension" data-key="preferenceContrast" data-parent="CYSExtensionVisibility" data-parent-values="shift">
+      <option label="2:1" value="2">2:1</option>
+      <option label="3:1" value="3">3:1</option>
+      <option label="4.5:1" value="4.5" selected>4.5:1</option>
+      <option label="7:1" value="7">7:1</option>
+      <option label="B/W" value="21">B/W</option>
     </select>
   </td>
   <td>&nbsp;</td>
 </tr>
 <tr>
   <td>&nbsp;</td>
-  <td class="smallerText">Select a visual theme to be applied to the storygame viewer.</td>
+  <td class="smallerText">When enabled, the text colors of user-generated content (forum posts, storygames, etc.) will be modified for better visibility. The "suppress" setting will simply remove the custom text color, while "shift" will lighten or darken it to better contrast against the background. The higher the selected ratio, the higher the level of contrast. This option is intended to counteract text that becomes unreadable in storygames and otherwise when a theme is enabled.</td>
   <td>&nbsp;</td>
 </tr>
 <tr>

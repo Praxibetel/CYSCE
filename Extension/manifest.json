@@ -3,7 +3,7 @@
 
   "name": "CYSCE",
   "description": "CYS Chrome Extension",
-  "version": "0.6.3",
+  "version": "0.7.0",
 
   "icons": {
     "16": "cysicon-16.png",
@@ -47,7 +47,7 @@
     "js": ["js/moment.js", "js/storylist.js"]
   }, {
     "matches": ["*://chooseyourstory.com/forums/*/message/*"],
-    "js": ["js/thread.js"],
+    "js": ["js/thread.js", "js/contrast.js"],
     "run_at": "document_end"
   }, {
     "matches": ["*://chooseyourstory.com/forums/*/edit-post*", "*://chooseyourstory.com/forums/*/new-post*", "*://chooseyourstory.com/forums/*/new-reply*"],
@@ -55,7 +55,7 @@
     "run_at": "document_end"
   }, {
     "matches": ["*://chooseyourstory.com/member/*", "*://chooseyourstory.com/Member/*"],
-    "js": ["js/member.js"],
+    "js": ["js/member.js", "js/contrast.js"],
     "run_at": "document_end"
   }, {
     "matches": ["*://chooseyourstory.com/my/", "*://chooseyourstory.com/My/", "*://chooseyourstory.com/my/default.aspx*", "*://chooseyourstory.com/My/default.aspx*"],
@@ -66,8 +66,12 @@
     "js": ["js/rating.js"],
     "run_at": "document_end"
   }, {
+    "matches": ["*://chooseyourstory.com/My/Saves.aspx", "*://chooseyourstory.com/my/Saves.aspx"],
+    "js": ["js/moment.js", "js/saves.js"],
+    "run_at": "document_end"
+  }, {
     "matches": ["*://chooseyourstory.com/my/messages/conversation*", "*://chooseyourstory.com/my/messages/new*"],
-    "js": ["js/messages.js"],
+    "js": ["js/messages.js", "js/contrast.js"],
     "run_at": "document_end"
   }, {
     "matches": ["*://chooseyourstory.com/my/notepad"],
@@ -86,7 +90,7 @@
     "js": ["js/login.js"],
     "run_at": "document_end"
   }, {
-    "matches": ["*://chooseyourstory.com/my/adveditor/properties.aspx*", "*://chooseyourstory.com/My/adveditor/properties.aspx*", "*://chooseyourstory.com/my/adveditor/Properties.aspx*", "*://chooseyourstory.com/My/adveditor/Properties.aspx*", "*://chooseyourstory.com/my/adveditor/default.aspx*", "*://chooseyourstory.com/My/adveditor/default.aspx*"],
+    "matches": ["*://chooseyourstory.com/my/adveditor/properties.aspx*", "*://chooseyourstory.com/My/adveditor/properties.aspx*", "*://chooseyourstory.com/my/adveditor/Properties.aspx*", "*://chooseyourstory.com/My/adveditor/Properties.aspx*", "*://chooseyourstory.com/my/adveditor/default.aspx*", "*://chooseyourstory.com/My/adveditor/default.aspx*", "*://chooseyourstory.com/my/adveditor/?*", "*://chooseyourstory.com/My/adveditor/?*"],
     "js": ["js/adveditor.js"],
     "run_at": "document_end"
   }, {
@@ -108,7 +112,7 @@
   }, {
     "matches": ["*://chooseyourstory.com/story/*"],
     "exclude_matches": ["*://chooseyourstory.com/story/viewer/*"],
-    "js": ["js/an.js"],
+    "js": ["js/an.js", "js/contrast.js"],
     "run_at": "document_end"
   }, {
     "matches": ["*://chooseyourstory.com/story/viewer/*"],
@@ -117,7 +121,7 @@
     "run_at": "document_start"
   }, {
     "matches": ["*://chooseyourstory.com/story/viewer/*"],
-    "js": ["js/storygame-dev.js"],
+    "js": ["js/viewer.js", "js/contrast.js"],
     "run_at": "document_end"
   }],
 

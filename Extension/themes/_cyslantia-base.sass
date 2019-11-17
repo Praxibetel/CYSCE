@@ -535,6 +535,9 @@ select, textarea
   font-variant-ligatures: no-contextual
   padding: 4px
 
+  &[disabled]
+    color: transparentize(lighten($color-text-main, 6%), .5)
+
 optgroup
   background-color: lighten($color-background-main, 3%)
 
@@ -1012,6 +1015,9 @@ x-spoiler
     > .flex.row
       > .flex.col
         +helper
+
+img[src$="images/spacer.gif"]
+  visibility: hidden
 
 // My Pictures
 

@@ -2,7 +2,6 @@ var profileMirror;
 
 browser.storage.sync.get(null).then((e, error) => {
     if (!error) {
-        //console.log(e);
         $.get(browser.extension.getURL("html/preferences.html"), data => {
             $("form > table > tbody > tr:nth-child(22)").after(
                 $(data)
@@ -29,6 +28,12 @@ browser.storage.sync.get(null).then((e, error) => {
                     }
                 }).end()
             );
+            $(`.CYSExtension[data-parent]`).each(function() {
+                if (!this.dataset.parent || !this.dataset.parentValues) return;
+                let p = $(`#${this.dataset.parent}`);
+                if (!p.length) return;
+                this.disabled = !this.dataset.parentValues.trim().split(/\s+/).includes("" + p.val());
+            });
         });
         $("form").on("click", ".CYSExtension[type='checkbox']", function() {
             var e = this;
@@ -69,6 +74,9 @@ browser.storage.sync.get(null).then((e, error) => {
                             }).then(response => $("style#CYS-Theme").text(response.theme || ""));
                             break;
                         case "CYSExtensionViewerTheme":
+                        case "CYSExtensionViewerSerifs":
+                        case "CYSExtensionViewerCPL":
+                        case "CYSExtensionViewerDestyle":
                             browser.runtime.sendMessage({
                                 action: "CYSupdateViewerTheme"
                             });
@@ -79,6 +87,10 @@ browser.storage.sync.get(null).then((e, error) => {
                         default:
                             break;
                     }
+                });
+                $(`.CYSExtension[data-parent="${e.id}"]`).each(function() {
+                    if (!this.dataset.parentValues) return;
+                    this.disabled = !this.dataset.parentValues.trim().split(/\s+/).includes("" + e.value);
                 });
             }
         });

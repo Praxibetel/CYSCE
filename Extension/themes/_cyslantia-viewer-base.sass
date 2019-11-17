@@ -1,0 +1,245 @@
+$directory: "chrome-extension://__MSG_@@extension_id__/themes"
+
+$image: "#{$directory}/images"
+$custom: "#{$directory}/images/custom"
+$elusive: "#{$directory}/images/elusive"
+$trophy: "#{$directory}/images/custom/trophies"
+
+$author: "Brad in Dvorak" !default
+$title: "Cyslantia Viewer" !default
+$version: "2.0" !default
+
+// Version info
+
+/*! #{$title}, version #{$version} by #{$author} !*/
+
+// Initialize variables
+
+$color-background-page: null !default
+$color-background-masthead: null !default
+$color-background-navbar: null !default
+$color-background-main: null !default
+$color-background-sidebar: null !default
+$color-background-accent: null !default
+$color-background-button: null !default
+$color-background-card: null !default
+$color-background-chip: null !default
+$color-background-chip-active: null !default
+$color-background-badge: #C09839 !default
+
+$color-border-navbar: null !default
+$color-border-main: null !default
+$color-border-sidebar: null !default
+
+$color-text-masthead: null !default
+$color-text-navbar: null !default
+$color-text-heading: null !default
+$color-text-heading-alt: null !default
+$color-text-main: null !default
+$color-text-sidebar: null !default
+$color-text-sidebar-heading: null !default
+$color-text-link: null !default
+$color-text-link-hover: null !default
+$color-text-label: null !default
+$color-text-button: $color-text-masthead !default
+$color-text-comm: #B68000 !default
+
+$font-heading: "Playfair Display", serif !default
+$font-banner: "Route 159", Ubuntu, "Trebuchet MS", sans-serif !default
+$font-main-sans: "Route 159", Ubuntu, "Trebuchet MS", sans-serif !default
+$font-main-serif: "Playfair Display", serif !default
+$font-monospace: "Fira Code", "Fira Mono", monospace !default
+$font-size-main: 16px !default
+
+$image-background-svbanner-1x: url("#{$image}/svbanner-1x.png") !default
+$image-background-svbanner-2x: url("#{$image}/svbanner-2x.png") !default
+$image-background-svbanner-3x: url("#{$image}/svbanner-3x.png") !default
+$image-background-svbanner-4x: url("#{$image}/svbanner-4x.png") !default
+
+$radius-default: 4px
+
+@import cyslantia-fonts
+
+@import cyslantia-functions
+
+/*! :root !*/
+
+html, body
+  min-height: 100vh
+
+html
+  background-color: $color-background-main
+  color: $color-text-main
+  font-family: var(--font)
+  font-size: $font-size-main !important
+
+body
+  box-sizing: border-box
+  position: relative
+
+// Banner
+
+#svbanner, [name="SS"] + table
+  background-color: $color-background-main
+  background: $image-background-svbanner-1x top left no-repeat, specular-gradient(360px, 33.33%), $color-background-masthead
+  background: -webkit-image-set($image-background-svbanner-1x 1x, $image-background-svbanner-2x 2x, $image-background-svbanner-3x 3x, $image-background-svbanner-4x 4x) top left no-repeat, specular-gradient(360px, 33.33%), $color-background-masthead
+  border-bottom: 1px solid $color-border-navbar
+  box-sizing: border-box
+  opacity: 1
+  height: 20px
+  display: block
+
+  img
+    visibility: hidden
+
+  ul li a
+    color: #EEE
+    background-color: #871D18
+    font-family: $font-banner
+    font-size: 9.5px
+    letter-spacing: .08em
+
+// Main Content
+
+.dark1border
+  border: none !important
+  box-sizing: border-box
+  width: 715px
+  margin-left: auto !important
+  margin-right: auto !important
+
+  > h1
+    border-bottom: 1px solid $color-border-main
+    color: $color-text-heading
+    font-family: $font-heading
+    font-size: 20px
+    font-variant-numeric: lining-nums
+
+  + div
+    box-sizing: border-box
+    margin: 0 auto !important
+    width: 715px
+    text-align: justify
+
+    /*&::after
+      content: " "
+      position: absolute
+      top: 0
+      left: 0
+      bottom: 0
+      background-color: $color-background-main
+      right: 0
+      z-index: -2
+      min-width: 715px
+      max-width: 960px
+      margin: 0 auto
+      box-shadow: 0 2px 10px rgba(black, 0.35)
+      */
+
+    > table
+      background-color: $color-background-chip
+      border-collapse: collapse
+      border-radius: $radius-default
+      width: 100%
+
+      h2
+        color: $color-text-heading
+        font-family: $font-heading
+        font-size: 18px
+        font-variant-numeric: lining-nums
+
+      .smallerText img
+        border-radius: $radius-default
+
+      table[id^="Item"]
+        border-bottom: 1px solid $color-border-chip
+        box-sizing: border-box
+        padding: 10px 0
+        width: 100%
+
+        > tr:nth-child(2), > tbody > tr:nth-child(2)
+
+          > td:nth-child(2)
+            box-sizing: border-box
+            padding-right: 10px
+            width: 30%
+
+            > img
+              object-fit: contain
+              object-position: top
+              width: 100%
+
+      &:nth-child(3)
+        background-color: transparent !important
+        width: unset !important
+
+        td
+          background-color: $color-background-chip
+          padding: 10px 5px
+
+          &:first-child
+            border-bottom-left-radius: $radius-default
+            border-top-left-radius: $radius-default
+            padding-left: 10px
+
+          &:last-child
+            border-bottom-right-radius: $radius-default
+            border-top-right-radius: $radius-default
+            padding-right: 10px
+
+    > table, > table > tbody
+
+      > tr:first-child > td
+        border-bottom: 1px solid $color-border-chip
+        width: unset !important
+
+        &:first-child, &:last-child
+          border-bottom: none !important
+          width: 10px !important
+
+a
+  color: $color-text-link
+
+  &:hover
+    color: $color-text-link-hover
+    text-decoration: underline
+
+// Inventory border image hiding
+
+td
+
+  &[style*=i_m]
+    background-image: none !important
+
+  img[src*="i_"]
+    display: none
+
+// Destyling classes
+
+body.destyle-colors
+  background-color: transparent !important
+  color: inherit !important
+
+  .dark1border + div > div
+    div, font, p, span
+      background-color: transparent !important
+      color: inherit !important
+
+body.destyle-fonts
+  font-family: inherit !important
+  font-size: inherit !important
+
+  .dark1border + div > div
+    div, font, p, span
+      font-family: inherit !important
+      font-size: inherit !important
+
+// Media queries
+
+@media (min-width: 1300px)
+  .dark1border, .dark1border + div
+    width: 55%
+
+@media (min-width: 715px)
+  html
+    font-size: var(--size) !important

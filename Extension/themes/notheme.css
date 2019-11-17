@@ -337,6 +337,11 @@ div[style="width=680px; "]>form[method="get"]+div {
 
 /* Help & Info */
 
+.generic-selector-parent {
+  border: none !important;
+  padding: 0 !important;
+}
+
 ul.help-info-selector, ul.generic-selector {
   font-weight: bold;
   border: solid 1px #900;
@@ -364,106 +369,6 @@ h3+h2+h3 {
 
 .unpublished {
   font-style: italic;
-}
-
-/* Emoji */
-
-img[src*="/ckeditor4/plugins/smiley/images/"] {
-  width: 24px !important;
-  height: 24px !important;
-  box-sizing: border-box;
-  vertical-align: text-bottom;
-}
-
-/* Hoverfix */
-
-img[src*="/ckeditor4/plugins/smiley/images/"][src*="/ckeditor4/plugins/smiley/images/"]:hover {
-  width: 24px !important;
-  height: 24px !important;
-}
-
-img[src$="/smiley/images/regular_smile.png"] {
-  content: url("chrome-extension://__MSG_@@extension_id__/themes/images/noto/emoji_u1f642.svg");
-}
-
-img[src$="/smiley/images/sad_smile.png"] {
-  content: url("chrome-extension://__MSG_@@extension_id__/themes/images/noto/emoji_u2639.svg");
-}
-
-img[src$="/smiley/images/wink_smile.png"] {
-  content: url("chrome-extension://__MSG_@@extension_id__/themes/images/noto/emoji_u1f609.svg");
-}
-
-img[src$="/smiley/images/teeth_smile.png"] {
-  content: url("chrome-extension://__MSG_@@extension_id__/themes/images/noto/emoji_u1f604.svg");
-}
-
-img[src$="/smiley/images/confused_smile.png"] {
-  content: url("chrome-extension://__MSG_@@extension_id__/themes/images/noto/emoji_u1f615.svg");
-}
-
-img[src$="/smiley/images/tongue_smile.png"] {
-  content: url("chrome-extension://__MSG_@@extension_id__/themes/images/noto/emoji_u1f61b.svg");
-}
-
-img[src$="/smiley/images/embarrassed_smile.png"] {
-  content: url("chrome-extension://__MSG_@@extension_id__/themes/images/noto/emoji_u1f60a.svg");
-}
-
-img[src$="/smiley/images/omg_smile.png"] {
-  content: url("chrome-extension://__MSG_@@extension_id__/themes/images/noto/emoji_u1f632.svg");
-}
-
-img[src$="/smiley/images/whatchutalkingabout_smile.png"] {
-  content: url("chrome-extension://__MSG_@@extension_id__/themes/images/noto/emoji_u1f610.svg");
-}
-
-img[src$="/smiley/images/angry_smile.png"] {
-  content: url("chrome-extension://__MSG_@@extension_id__/themes/images/noto/emoji_u1f621.svg");
-}
-
-img[src$="/smiley/images/angel_smile.png"] {
-  content: url("chrome-extension://__MSG_@@extension_id__/themes/images/noto/emoji_u1f607.svg");
-}
-
-img[src$="/smiley/images/shades_smile.png"] {
-  content: url("chrome-extension://__MSG_@@extension_id__/themes/images/noto/emoji_u1f60e.svg");
-}
-
-img[src$="/smiley/images/devil_smile.png"] {
-  content: url("chrome-extension://__MSG_@@extension_id__/themes/images/noto/emoji_u1f608.svg");
-}
-
-img[src$="/smiley/images/cry_smile.png"] {
-  content: url("chrome-extension://__MSG_@@extension_id__/themes/images/noto/emoji_u1f62d.svg");
-}
-
-img[src$="/smiley/images/lightbulb.png"] {
-  content: url("chrome-extension://__MSG_@@extension_id__/themes/images/noto/emoji_u1f4a1.svg");
-}
-
-img[src$="/smiley/images/thumbs_down.png"] {
-  content: url("chrome-extension://__MSG_@@extension_id__/themes/images/noto/emoji_u1f44e.svg");
-}
-
-img[src$="/smiley/images/thumbs_up.png"] {
-  content: url("chrome-extension://__MSG_@@extension_id__/themes/images/noto/emoji_u1f44d.svg");
-}
-
-img[src$="/smiley/images/heart.png"] {
-  content: url("chrome-extension://__MSG_@@extension_id__/themes/images/noto/emoji_u2764.svg");
-}
-
-img[src$="/smiley/images/broken_heart.png"] {
-  content: url("chrome-extension://__MSG_@@extension_id__/themes/images/noto/emoji_u1f494.svg");
-}
-
-img[src$="/smiley/images/kiss.png"] {
-  content: url("chrome-extension://__MSG_@@extension_id__/themes/images/noto/emoji_u1f48b.svg");
-}
-
-img[src$="/smiley/images/envelope.png"] {
-  content: url("chrome-extension://__MSG_@@extension_id__/themes/images/noto/emoji_u2709.svg");
 }
 
 /* CodeMirror */

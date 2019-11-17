@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>:: Story State Viewer</title>
+    <link rel="stylesheet" href="/themes/notheme-dev.css" />
+    <link rel="stylesheet" href="/codemirror/lib/codemirror.css" />
+    <link rel="stylesheet" href="/codemirror/theme/base16-dark-modified.css" />
+  </head>
+  <body>
+    <div id="header">
+      <button type="button" class="active" data-for="variable-tab">Variables</button>
+      <button type="button" data-for="link-tab">Links</button>
+      <button type="button" data-for="item-tab">Items</button>
+      <button type="button" data-for="pagetext-tab">$PAGETEXT</button>
+      <button type="button" data-for="qsave-tab">Quicksaves</button>
+      <!--<button type="button" data-for="options-tab">Options</button>-->
+    </div>
+    <div id="main">
+      <div id="variable-tab" class="tab active">
+        <div class="tab-content">
+          <ul id="variable-body" class="editable flex"></ul>
+        </div>
+        <div class="tab-footer">
+          <button type="button" data-action="reset">Reset</button>
+          <button type="button" data-action="softApply">Apply</button>
+          <button type="button" data-action="hardApply">Apply & Reload</button>
+        </div>
+      </div>
+      <div id="link-tab" class="tab">
+        <ul id="link-body" class="tab-content flex"></ul>
+      </div>
+      <div id="item-tab" class="tab">
+        <div class="tab-content">
+          <table>
+            <tbody id="item-body"></tbody>
+          </table>
+        </div>
+        <div class="tab-footer">
+          <button type="button" data-action="reset">Reset</button>
+          <button type="button" data-action="softApply">Apply</button>
+          <button type="button" data-action="hardApply">Apply & Reload</button>
+        </div>
+      </div>
+      <div id="pagetext-tab" class="tab">
+        <textarea id="pagetextarea"></textarea>
+      </div>
+      <div id="qsave-tab" class="tab">
+        <ul id="qsaves" class="tab-content"></ul>
+        <div class="tab-footer">
+          <button type="button" data-action="qsave">New Quicksave</button>
+        </div>
+      </div>
+      <div id="options-tab" class="tab"></div>
+    </div>
+    <div id="footer" title="Click to toggle expanded view.">
+      <div id="breadcrumbs">
+        <div id="breadcrumb-content">
+        </div>
+      </div>
+    </div>
+    <template id="variable-template">
+      <li>
+        <span class="variable-name"></span>
+        <input type="number" class="variable-value" />
+      </li>
+    </template>
+    <template id="item-template">
+      <tr>
+        <td><img class="item-image" /></td>
+        <td class="item-name"></td>
+        <td class="item-id"></td>
+        <td><input type="number" class="item-used" /></td>
+      </tr>
+    </template>
+    <template id="qsave-template">
+      <li>
+        <span>
+          <span class="qsave-name"></span>
+          <span class="qsave-date" data-timestamp="1573557764545"></span>
+        </span>
+        <span>
+          <span class="qsave-keyvalue">
+            <span>$PAGEID:</span>
+            <span class="qsave-pageid"></span>
+          </span>
+          <span class="qsave-keyvalue">
+            <span>%SCORE:</span>
+            <span class="qsave-score"></span>
+          </span>
+        </span>
+        <span>
+          <span class="qsave-keyvalue">
+            <span>Items:</span>
+            <span class="qsave-items"></span>
+          </span>
+          <span class="qsave-keyvalue">
+            <span>Links followed:</span>
+            <span class="qsave-links"></span>
+          </span>
+        </span>
+        <span>
+          <button type="button" data-action="load">Restore</button>
+          <button type="button" data-action="delete">Delete</button>
+        </span>
+      </li>
+    </template>
+    <script src="/js/browser-polyfill.js"></script>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/moment.js"></script>
+    <script src="/codemirror/lib/codemirror.js"></script>
+    <script src="/codemirror/mode/css/css.js"></script>
+    <script src="/codemirror/mode/javascript/javascript.js"></script>
+    <script src="/codemirror/mode/xml/xml.js"></script>
+    <script src="/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+    <script src="/js/beautify-html.js"></script>
+    <script src="/js/viewer-dev.js"></script>
+  </body>
+</html>

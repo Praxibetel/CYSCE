@@ -4,15 +4,15 @@ if ($("meta[itemprop='doctitle']").length) $("title").text($("meta[itemprop='doc
 else $("title").text(`${username} > ChooseYourStory.com`);
 
 $("#profile_Sidebar").prepend(
-  $("<div></div>").text($(".footer-content a").filter(function() {
-    return this.textContent === username;
-  }).length ? "Online" : "Offline")
+    $("<div></div>").text($(".footer-content a").filter(function() {
+        return this.textContent === username;
+    }).length ? "Online" : "Offline")
 );
 
 $("#profile_Sidebar h2:contains('Commendations') + div").after(
     $("<h2></h2>").text("Worth"),
     (() => {
-        var active, commendations, contributor, featured, joined, lucky, points, posts, storygames, trophies, years;
+        var active, articles, commendations, contributor, featured, joined, points, posts, storygames, trophies, years;
         joined = new Date($("#profile_Sidebar h2:contains('Member Since') + div").text());
         if (!(joined instanceof Date && !isNaN(joined))) {
             joined = new Date("1/1/2001");
@@ -22,21 +22,29 @@ $("#profile_Sidebar h2:contains('Commendations') + div").after(
             active = new Date("1/1/2001");
         }
         years = (active - joined) / 31556952000;
-        if (years < 1) {
-            years = 1;
-        }
         points = parseInt($("#profile_Sidebar h2:contains('EXP Points') + div").text().replace(/,/g, "") || 0);
         if (isNaN(points)) {
-            points = /infinit[ey]/i.test($("#profile_Sidebar h2:contains('EXP Points') + div").text()) ? 2e308 : 0;
+            points = /infinit[ey]/i.test($("#profile_Sidebar h2:contains('EXP Points') + div").text()) ? Infinity : 0;
         }
         posts = parseInt($("#profile_Sidebar h2:contains('Post Count') + div").text().replace(/,/g, "") || 0);
         storygames = parseInt($("#profile_Sidebar h2:contains('Storygame Count') + div").text().replace(/,/g, "") || 0);
         commendations = parseInt($("#profile_Sidebar h2:contains('Commendations') + div").text().replace(/,/g, "") || 0);
-        trophies = $("#profile_Trophies img").length;
-        contributor = $("#profile_Trophies img[src$='CommunityContributor.gif']").length !== 0;
-        lucky = $("#profile_Trophies img[src$='luckyDueler.gif']").length !== 0;
+        trophies = $("#profile_Trophies img").filter(function() {
+            return /\/(from.*?|contestWinner|luckyDueler|bugHunter|(top|supreme)Rater)\.gif$/i.test(this.src);
+        }).length;
+        contributor = $("#profile_Trophies img[src$='CommunityContributor.gif']").length;
         featured = $("#profile_Stories img[alt='Featured Story']").length;
-        return $("<div></div>").text(((years * points / 1000 * posts / 1000 * (storygames + featured) + commendations + trophies) * (contributor ? 5 : 1) * (lucky ? 2 : 1)).toFixed(2));
+        articles = $("#profile_Articles div").length;
+        storygames -= featured;
+        return $("<div></div>").text((100 * [
+            [0.27, (storygames + 6 * featured) / 10],
+            [0.20, Math.log2((points / 3000) + 1)],
+            [0.20, Math.log2((commendations / 200) + 1)],
+            [0.12, Math.log2((posts / 1000) + 1)],
+            [0.11, trophies / 8],
+            [0.05, articles],
+            [0.05, contributor]
+        ].map(x => x.reduce((a, b) => a * b)).reduce((a, b) => a + b) * (years / 3) ** 0.22).toFixed(2).replace("Infinity", "infinite"));
     })()
 );
 
