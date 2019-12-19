@@ -211,11 +211,21 @@ body
 
 // Header area
 
+\:root
+  --masthead-1x: #{$image-background-masthead-1x}
+  --masthead-2x: #{$image-background-masthead-2x}
+  --masthead-3x: #{$image-background-masthead-3x}
+  --masthead-4x: #{$image-background-masthead-4x}
+
+  &.CYSCE-trad
+    --masthead-1x: url("#{$image}/masthead-omg-1x.png")
+
+
 #HeaderContainer
   background-color: $color-background-masthead
 
   //background: $image-background-masthead top center no-repeat, specular-gradient(360px, 33.33%), $color-background-masthead
-  background: -webkit-image-set($image-background-masthead-1x 1x, $image-background-masthead-2x 2x, $image-background-masthead-3x 3x, $image-background-masthead-4x 4x) top center no-repeat, specular-gradient(360px, 33.33%), $color-background-masthead
+  background: -webkit-image-set(var(--masthead-1x) 1x, var(--masthead-2x) 2x, var(--masthead-3x) 3x, var(--masthead-4x) 4x) top center no-repeat, specular-gradient(360px, 33.33%), $color-background-masthead
   height: 130px
   z-index: -1
 

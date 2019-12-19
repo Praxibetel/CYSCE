@@ -1,7 +1,7 @@
-if (css) {
+if (CYSCE_CSS) {
     var style = document.createElement("STYLE");
     style.id = "CYS-Theme";
-    style.textContent = css;
+    style.textContent = CYSCE_CSS;
     if (!document.body) {
         var observer = new MutationObserver(mutations => {
             mutations.forEach(mutation => {
@@ -21,5 +21,7 @@ if (css) {
             attributes: false,
             characterData: false
         });
-    } else (document.head || document.documentElement).append(style), document.addEventListener("DOMContentLoaded", () =>$("style#CYS-Theme").appendTo("head"));
+    } else (document.head || document.documentElement).append(style), document.addEventListener("DOMContentLoaded", () => $("style#CYS-Theme").appendTo("head"));
 }
+
+if (CYSCE_Class) document.documentElement.classList.add(CYSCE_Class);

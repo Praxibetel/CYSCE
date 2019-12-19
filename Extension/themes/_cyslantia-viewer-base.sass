@@ -136,7 +136,7 @@ body
       box-shadow: 0 2px 10px rgba(black, 0.35)
       */
 
-    > table
+    > table:not(:first-child)
       background-color: $color-background-chip
       border-collapse: collapse
       border-radius: $radius-default
@@ -196,6 +196,34 @@ body
         &:first-child, &:last-child
           border-bottom: none !important
           width: 10px !important
+
+    > table:first-child
+      width: 100%
+
+      input[type="submit"], textarea
+        background-color: lighten($color-background-main, 12%)
+        border: none
+        border-radius: $radius-default
+        color: lighten($color-text-main, 6%)
+        font-family: $font-monospace
+        font-size: 11px
+        font-variant-ligatures: no-contextual
+        padding: 4px
+
+      input[type="submit"]
+        background-color: $color-background-button
+        background-image: unset
+        color: $color-text-button
+        cursor: pointer
+        font-family: $font-main-sans
+
+      textarea
+        resize: vertical
+        width: 100%
+
+      td > h3
+        color: $color-text-label
+        font-family: $font-main-sans
 
 a
   color: $color-text-link

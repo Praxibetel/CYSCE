@@ -1,35 +1,5 @@
 var AJAX, CMAutobreak, CMCYSScript, CMHTML, CMReady, protocol;
 
-browser.runtime.sendMessage({
-    action: "CYSgetTheme"
-}).then(response => {
-    if (response) {
-        var style = $("<style></style>", {
-            id: "CYS-Theme"
-        }).text(response.theme || "");
-        if (!document.body) {
-            var observer = new MutationObserver(mutations => {
-                mutations.forEach(mutation => {
-                    if (!mutation.addedNodes) return;
-                    for (var i = 0; i < mutation.addedNodes.length; i++) {
-                        var node = mutation.addedNodes[i];
-                        if (node.nodeName == "BODY") {
-                            $(document.head).append(style);
-                            observer.disconnect();
-                        }
-                    }
-                });
-            });
-            observer.observe(document, {
-                childList: true,
-                subtree: true,
-                attributes: false,
-                characterData: false
-            });
-        } else $(document.head || document.documentElement).append(style), $(() => $("style#CYS-Theme").appendTo("head"));
-    }
-});
-
 AJAX = new Promise((resolve, reject) => {
     browser.storage.sync.get("preferenceAJAX").then((e, error) => {
         if (error) reject(error);
@@ -206,7 +176,7 @@ function CMPreLine(text) {
 }
 
 function CMUnPreLine(text) {
-    return text.replace(/^<div *data-autobreak *style=["'] *white-space: *pre-line *;? *["']>([\s\S]*?)<\/div>$/gi, "$1");
+    return text.replace(/^<div *data-autobreak(?:=["']{2}) *style=["'] *white-space: *pre-line *;? *["']>([\s\S]*?)<\/div>$/gi, "$1");
 }
 
 function href(pathname) {

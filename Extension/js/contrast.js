@@ -22,6 +22,10 @@ switch (true) {
         selector = "#profile_Text *[style*='color'], #profile_Text font[color], #profile_Stories *[style*='color'], #profile_Stories font[color], #profile_Posts *[style*='color'], #profile_Posts font[color]"
         base = document.querySelector("#BodyContainer > .main-content");
         break;
+    case /^\/help\/articles\/article\.aspx/.test(path):
+        selector = "#maincontent > :last-child *[style*='color'], #maincontent > :last-child font[color]"
+        base = document.querySelector("#BodyContainer > .main-content");
+        break;
 }
 
 function sRGBtolinearRGB(rgb) {

@@ -2,11 +2,25 @@ var alerts, fetchIfTagged, theme = {}, viewerWindow = {};
 
 getTheme("main", (data) => theme.main = data);
 getTheme("viewer", (data) => theme.viewer = data);
+browser.storage.sync.get("preferenceMasthead").then((e, error) => {
+    if (!error && e.preferenceMasthead) theme.masthead = `CYSCE-${e.preferenceMasthead}`;
+});
 
 browser.webNavigation.onCommitted.addListener(tab => {
-    if (!theme.viewer) return;
+    let className, css, url = new URL(tab.url);
+    if (url.pathname.startsWith("/story/viewer/")) {
+      css = theme.viewer;
+    } else {
+      css = theme.main;
+      if (theme.masthead) className = theme.masthead;
+    }
+    if (!css && !className) return;
     browser.tabs.executeScript(tab.tabId, {
-        code: `var css = ${JSON.stringify(theme.viewer)};`,
+        code: [
+            "var CYSCE_Class, CYSCE_CSS;",
+            css ? `CYSCE_CSS = ${JSON.stringify(css)};` : null,
+            className ? `CYSCE_Class = ${JSON.stringify(className)};` : null,
+        ].filter(ln => ln != null).join("\n"),
         runAt: "document_start"
     }), browser.tabs.executeScript(tab.tabId, {
         file: "/js/css.js",
@@ -14,8 +28,7 @@ browser.webNavigation.onCommitted.addListener(tab => {
     });
 }, {
     url: [{
-        hostEquals: "chooseyourstory.com",
-        pathPrefix: "/story/viewer/"
+        hostEquals: "chooseyourstory.com"
     }]
 });
 
@@ -147,6 +160,11 @@ browser.runtime.onMessage.addListener((request, sender) => {
                     });
                 });
                 //return true;
+                break;
+            case "CYSupdateMasthead":
+                sendResponse({
+                    masthead: theme.masthead = request.masthead ? `CYSCE-${request.masthead}` : null
+                });
                 break;
             case "CYSgetViewerTheme":
                 sendResponse({

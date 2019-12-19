@@ -155,10 +155,11 @@ switch (path = url.pathname.toLowerCase(), true) {
       case /^\/help(\/articles)?\/?$/.test(path):
         $.get(browser.extension.getURL("html/articles/articles.json")).then(json => {
           let articleContainer = $(`<div><strong><h1>${browser.runtime.getManifest().name}</h1></strong><br></div>`);
-          for (let i = 0; i < json.length; i++) {
-            let article = json[i];
+          for (let i = 0; i < json.length; i++) json[i].id = i;
+          json.sort((a, b) => a.title > b.title ? 1 : a.title < b.title ? -1 : 0);
+          for (let article of json) {
             articleContainer.append($(`
-              <h3 style="display:inline"></h3><h2 style="display:inline"><a href="/help/articles/article.aspx?ArticleEx=${i}">${article.title}</a></h2><h3> [${article.level >= 2 ? "Expert" : article.level == 1 ? "Intermediate" : "Beginner"}]</h3>&nbsp;<span class="smallerText">by <a href="/member/?username=${article.author}">${article.author}</a></span><br><br>
+              <h3 style="display:inline"></h3><h2 style="display:inline"><a href="/help/articles/article.aspx?ArticleEx=${article.id}">${article.title}</a></h2><h3> [${article.level >= 2 ? "Expert" : article.level == 1 ? "Intermediate" : "Beginner"}]</h3>&nbsp;<span class="smallerText">by <a href="/member/?username=${article.author}">${article.author}</a></span><br><br>
             `));
           }
           $("#maincontent > div:last-child").append(articleContainer);
@@ -207,7 +208,7 @@ switch (path = url.pathname.toLowerCase(), true) {
       */
 }
 
-if (u) browser.storage.sync.get(["preferenceNotifications", "preferenceStifleTags", "welcomedOn"]).then((e, error) => {
+browser.storage.sync.get((u ? ["preferenceNotifications", "preferenceStifleTags", "welcomedOn"] : []).concat("preferenceDoubleEn")).then((e, error) => {
     if (!error) {
         let manifest = browser.runtime.getManifest();
         if (e.preferenceNotifications !== false) {
@@ -266,6 +267,14 @@ if (u) browser.storage.sync.get(["preferenceNotifications", "preferenceStifleTag
                 closeText: ""
             });
         */}
+        if (e.preferenceDoubleEn) $("*").contents().filter(function() {
+            return (this.nodeType == 3 && !["SCRIPT", "STYLE"].includes(this.parentNode.nodeName) && $.trim(this.nodeValue) && /\bm\x69\x7a(\b|\x61\x6c)/.test(this.data))
+        }).each(function() {
+            var div = $("<div></div>"),
+                node = $(this);
+            div.html(node.text().replace(/\bm\x69\x7a(\b|\x61\x6c)/g, atob("TWl6YWw")));
+            node.before(div.contents()).remove();
+        });
     }
 });
 

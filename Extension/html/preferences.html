@@ -32,7 +32,7 @@
   <td>&nbsp;</td>
   <td>
     <label for="CYSExtensionViewerTheme">Storygame Theme</label>
-    <select id="CYSExtensionViewerTheme" class="CYSExtension" data-key="preferenceViewerTheme" onchange="return; $('[data-cyslantia-viewer-only]').prop('disabled', !/^(light|dark)$/.test(this.value));">
+    <select id="CYSExtensionViewerTheme" class="CYSExtension" data-key="preferenceViewerTheme">
       <option label="none" value="none" selected>none</option>
       <option label="CYS Light" value="light" selected>CYS Light</option>
       <option label="CYS Dark" value="dark" selected>CYS Dark</option>
@@ -54,15 +54,12 @@
       <option label="suppress stylesheets" value="destyle-css">suppress stylesheets</option>
       <option label="suppress all" value="destyle-fonts destyle-css">suppress all</option>
     </select>
-    <!--
-
-    -->
   </td>
   <td>&nbsp;</td>
 </tr>
 <tr>
   <td>&nbsp;</td>
-  <td class="smallerText">Select a visual theme to be applied to the storygame viewer. Choosing CYS Light or Dark allows the secondary options to take effect. [explain secondary effects here...]</td>
+  <td class="smallerText">Select a visual theme to be applied to the storygame viewer. Choosing CYS Light or Dark allows you to set additional options: whether to use a sans or sans-serif body font, whether to enforce a set amount of characters per line, and whether to suppress fonts or stylesheets set by the author.</td>
   <td>&nbsp;</td>
 </tr>
 <tr>
@@ -285,3 +282,31 @@
 <tr>
   <td colspan="3"><img src="../i/spacer.gif" style="width: 100%; height: 15px;"></td>
 </tr>
+<tr class="CYSExtensionHidden">
+  <td>&nbsp;</td>
+  <td><input id="CYSExtensionDoubleEn" class="CYSExtension" data-key="preferenceDoubleEn" type="checkbox"><label for="CYSExtensionDoubleEn">M Mode</label></td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="CYSExtensionHidden">
+  <td>&nbsp;</td>
+  <td class="smallerText">Miraculously mitigates members' misfortunate miniscule <em id="m">m</em> mistakes.</td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="CYSExtensionHidden">
+  <td colspan="3"><img src="../i/spacer.gif" style="width: 100%; height: 15px;"></td>
+</tr>
+<!--
+<tr class="CYSExtensionHidden">
+  <td>&nbsp;</td>
+  <td><input id="CYSExtensionWelcomedOn" class="CYSExtension" data-key="welcomedOn" type="checkbox"><label for="CYSExtensionWelcomedOn">hi every1 im new!!!!!!!</label></td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="CYSExtensionHidden">
+  <td>&nbsp;</td>
+  <td class="smallerText">Check to get the welcome message again.</td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="CYSExtensionHidden">
+  <td colspan="3"><img src="../i/spacer.gif" style="width: 100%; height: 15px;"></td>
+</tr>
+-->

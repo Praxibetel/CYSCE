@@ -335,6 +335,10 @@ div[style="width=680px; "]>form[method="get"]+div {
   padding-left: 52px;
 }
 
+.CYSExtensionHidden {
+  display: none;
+}
+
 /* Help & Info */
 
 .generic-selector-parent {
