@@ -106,10 +106,6 @@
     "js": ["js/scripteditor.js"],
     "run_at": "document_end"
   }, {
-    "matches": ["*://chooseyourstory.com/Member/trophyInfo.htm"],
-    "js": ["js/trophyinfo.js"],
-    "run_at": "document_end"
-  }, {
     "matches": ["*://chooseyourstory.com/help/articles/article.aspx*", "*://chooseyourstory.com/help/Articles/article.aspx*", "*://chooseyourstory.com/help/articles/Article.aspx*", "*://chooseyourstory.com/help/Articles/Article.aspx*"],
     "js": ["js/contrast.js"],
     "run_at": "document_end"
