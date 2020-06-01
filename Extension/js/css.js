@@ -1,9 +1,9 @@
-var TEMP_CSS = sessionStorage.getItem("themeName") ? sessionStorage.getItem("theme") : null;
+var TEMP_OVERWRITE = !!sessionStorage.getItem("themeName");
 
-if (TEMP_CSS || CYSCE_CSS) {
+if (TEMP_OVERWRITE || CYSCE_CSS) {
     var style = document.createElement("STYLE");
     style.id = "CYS-Theme";
-    style.textContent = TEMP_CSS || CYSCE_CSS;
+    style.textContent = TEMP_OVERWRITE ? (sessionStorage.getItem("theme") || "") : CYSCE_CSS;
     if (!document.body) {
         var observer = new MutationObserver(mutations => {
             mutations.forEach(mutation => {
