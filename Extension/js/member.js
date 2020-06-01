@@ -51,7 +51,7 @@ $("#profile_Sidebar h2:contains('Commendations') + div").after(
 $("#profile_Stories > div > span").each(function() {
     var e = $(this);
     e.wrap($("<a></a>", {
-        href: `../story/${encodeURIComponent(e.text()).replace(/[-_.~"]/g, (c) => `%${c.charCodeAt(0).toString(16)}`).replace(/%/g, "~").toLowerCase()}`
+        href: `../story/${encodeURIComponent(e.text().replace(/[\[_%]/g, "[$&]")).replace(/[-_.~"]/g, (c) => `%${c.charCodeAt(0).toString(16)}`).replace(/%/g, "~").toLowerCase()}`
     }));
 }).addClass("unpublished");
 

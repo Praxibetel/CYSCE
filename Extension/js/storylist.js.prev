@@ -1,27 +1,28 @@
-var storyListData = [],
-    storyListDataFiltered = [],
-    storyListFiltersDefault = {
-        inclEvery: true,
-        inclFeatured: null,
-        inclRated: null,
-        inclTags: [],
-        maxRating: 8,
-        minRating: 3
-    },
-    storyListDataFilters = {},
-    storyListPageCount = 0,
-    storyListPageIndex = 0,
-    storyListPaginationDefault = {
-        order: 1,
-        pageSize: 18,
-        sort: "rating"
-    },
-    storyListPagination = {},
-    storyListTags = [],
-    url = new URL(document.location);
+storyListData = [];
+storyListDataFiltered = [];
+storyListFiltersDefault = {
+    inclEvery: true,
+    inclFeatured: [true, true],
+    inclRated: [true, true],
+    inclTags: [],
+    maxRating: 8,
+    minRating: 3
+};
+//storyListDataFilters = {};
+storyListPageCount = 0;
+storyListPageIndex = 0;
+storyListPaginationDefault = {
+    order: 1,
+    pageSize: 18,
+    sort: "rating"
+};
+storyListTags = [];
+
+url = new URL(document.location);
+query = Object.fromEntries(url.searchParams);
 
 function storyListFilter(filters) {
-    storyListDataFilters = Object.assign(Object.assign({}, storyListFiltersDefault), {
+    filters = {
         inclEvery: $("#filterTagAny").prop("checked") ? false : true,
         inclFeatured: $("#filterFeatureFeatured").prop("checked") ? [true, false] : $("#filterFeatureUnfeatured").prop("checked") ? [false, true] : [true, true],
         inclRated: $("#filterRatedRated").prop("checked") ? [true, false] : $("#filterRatedUnrated").prop("checked") ? [false, true] : [true, true],
@@ -32,9 +33,10 @@ function storyListFilter(filters) {
         minRating: parseInt($("#filterRatingMin").val()) || storyListFiltersDefault.minRating,
         maxDate: new Date($("#filterDateMax").val()),
         minDate: new Date($("#filterDateMin").val())
-    });
-    for (let key in storyListDataFilters) {
-        let value = storyListDataFilters[key];
+    };
+    filters = Object.assign(Object.assign({}, storyListFiltersDefault), filters);
+    for (let key in filters) {
+        let value = filters[key];
         if (Array.isArray(value)) value = value.join(",");
         console.log(key, value, value === storyListFiltersDefault[key]);
         if (!value || value === storyListFiltersDefault[key]) url.searchParams.delete(key);
@@ -63,17 +65,19 @@ function storyListFilter(filters) {
 }
 
 function storyListPaginate(data = []) {
-    storyListPagination = Object.assign(Object.assign({}, storyListPaginationDefault), {
+    pagination = {
         order: $("#paginationSort")
             .val()
             .split("-")[1] === "asc" ?
             1 :
             -1,
-        pageSize: parseInt($("#paginationPageSize").val()) || undefined,
+        pageSize: parseInt($("#paginationPageSize").val()) ||
+            storyListPaginationDefault.pageSize,
         sort: $("#paginationSort")
             .val()
             .split("-")[0]
-    });
+    };
+    pagination = Object.assign(storyListPaginationDefault, pagination);
 
     if ($("#paginationSearch").val()) data = data.filter(a => {
         var test = $("#paginationSearch").val().toLowerCase();

@@ -170,6 +170,8 @@
                         console.log(`Successfully managed \x1b[33m${file}\x1b[0m`);
                         zip.file(path.relative(options.folder, file), JSON.stringify(manifest, null, "\t"));
                         break;
+                    case fname === "browser-polyfill.js" && options.browser === "firefox":
+                        break;
                     case ext === ".css" && fname in renderedSass:
                         zip.file(path.relative(options.folder, file), renderedSass[fname].css);
                         break;

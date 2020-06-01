@@ -1,0 +1,123 @@
+<html>
+<head>
+<link rel="stylesheet" href="/themes/notheme-dev.css" />
+</head>
+<body>
+<h3 id="CYSExtensionVersion"></h3>
+<tr>
+  <td>&nbsp;</td>
+  <td>
+    <h2>CYS Extension Preferences</h2>
+  </td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td colspan="3"><img src="../i/spacer.gif" style="width: 100%; height: 15px;"></td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td>
+    <label for="CYSExtensionTheme">CYS Theme</label>
+    <select id="CYSExtensionTheme" class="CYSExtension" data-key="preferenceTheme">
+      <option label="none" value="none" selected>
+      <option label="CYS Light" value="light">
+      <option label="CYS Dark" value="dark">
+    </select>
+  </td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td class="smallerText">Select a visual theme to be applied to each page of the site (or stick with the default).</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td colspan="3"><img src="../i/spacer.gif" style="width: 100%; height: 15px;"></td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td><input id="CYSExtensionAJAX" class="CYSExtension" data-key="preferenceAJAX" type="checkbox" checked><label for="CYSExtensionAJAX">Asynchronous Enhancements</label></td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td class="smallerText">Enables "My Stuff" customization and other features that may make additional webpage requests. This is best left unchecked if you have limited data or bandwidth.</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td colspan="3"><img src="../i/spacer.gif" style="width: 100%; height: 15px;"></td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td><input id="CYSExtensionNotify" class="CYSExtension" data-key="preferenceNotifications" type="checkbox" checked><label for="CYSExtensionNotify">Badge Notifications</label></td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td class="smallerText">When this box is checked, you will be alerted of your notifications via "badges" in the navigation bar rather than the default alert box.</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td colspan="3"><img src="../i/spacer.gif" style="width: 100%; height: 15px;"></td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td>
+    <input id="CYSExtensionCodeMirror" class="CYSExtension" data-key="preferenceCodeMirror" type="checkbox" checked><label for="CYSExtensionCodeMirror">Enhanced Plain Text</label>
+    <select id="CYSExtensionCodeMirrorTheme" class="CYSExtension" data-key="preferenceCodeMirrorTheme">
+      <option label="Dark Theme" value="base16-dark" selected>
+      <option label="Light Theme" value="base16-light">
+    </select>
+  </td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td class="smallerText">Quality-of-life upgrades to the basic text editor when rich text is disabled. This includes syntax highlighting for both HTML and CYS Script, automatic bracket closing, dark and light themes, and more.</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td colspan="3"><img src="../i/spacer.gif" style="width: 100%; height: 15px;"></td>
+</tr>
+<tr class="CYSExtensionCodeMirrorSubsetting">
+  <td>&nbsp;</td>
+  <td><input id="CYSExtensionCodeMirrorAutoclose" class="CYSExtension" data-key="preferenceCodeMirrorAutoclose" type="checkbox" checked><label for="CYSExtensionCodeMirrorAutoclose">Automatic Tag Closing</label></td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="CYSExtensionCodeMirrorSubsetting">
+  <td>&nbsp;</td>
+  <td class="smallerText">When this box is checked, the enhanced plain text editor automatically closes HTML tags as you type.</td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="CYSExtensionCodeMirrorSubsetting">
+  <td colspan="3"><img src="../i/spacer.gif" style="width: 100%; height: 15px;"></td>
+</tr>
+<tr class="CYSExtensionCodeMirrorSubsetting">
+  <td>&nbsp;</td>
+  <td><input id="CYSExtensionCodeMirrorAutobreak" class="CYSExtension" data-key="preferenceCodeMirrorAutobreak" type="checkbox"><label for="CYSExtensionCodeMirrorAutobreak">Preserve Line Breaks</label></td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="CYSExtensionCodeMirrorSubsetting">
+  <td>&nbsp;</td>
+  <td class="smallerText">Check this box if you prefer the line breaks you type to be honored as such in posts, messages, etc.; leave unchecked to keep the default line-break-ignoring behavior. This feature works by automatically inserting additional HTML into the enhanced text editor. Note that disabling this feature will not remove the HTML in messages already posted.</td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="CYSExtensionCodeMirrorSubsetting">
+  <td colspan="3"><img src="../i/spacer.gif" style="width: 100%; height: 15px;"></td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td><input id="CYSExtensionDevmode" class="CYSExtension" data-key="preferenceDevmode" type="checkbox"><label for="CYSExtensionDevmode">Storygame Developer Mode</label></td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td class="smallerText">By default, additional developer options are available when previewing your storygame from the editor. Checking this box enables these functionalities on all storygames.</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td colspan="3"><img src="../i/spacer.gif" style="width: 100%; height: 15px;"></td>
+</tr>
+<script src="/js/popup.js"></script>
+</body>
+</html>

@@ -10,6 +10,7 @@ browser.webNavigation.onCommitted.addListener(tab => {
     let className, css, url = new URL(tab.url);
     if (url.pathname.startsWith("/story/viewer/")) {
       css = theme.viewer;
+      className = "viewer";
     } else {
       css = theme.main;
       if (theme.masthead) className = theme.masthead;
@@ -204,7 +205,7 @@ browser.runtime.onMessage.addListener((request, sender) => {
               if (sender.tab.id in viewerWindow && viewerWindow[sender.tab.id]) return viewerWindow[sender.tab.id];
               browser.windows.create({
                 type: "panel",
-                url: `${browser.extension.getURL("html/dev-panel.html")}?title=${request.title}`,
+                url: `${browser.extension.getURL("html/dev-panel.html")}?title=${request.title}${request.dev ? "&dev" : ""}`,
                 width: 600,
                 height: 480
               }).then((resolve, reject) => {
@@ -238,6 +239,35 @@ browser.runtime.onMessage.addListener((request, sender) => {
               delete viewerWindow[sender.tab.id];
               sendResponse(true);
             } else sendResponse(false);
+            break;
+          case "CYSbuildTempViewerTheme":
+            browser.storage.sync.get(["preferenceViewerCPL", "preferenceViewerSerifs"]).then((e, error) => {
+              if (error) return sendResponse("");
+              var httpRequest = new XMLHttpRequest();
+              httpRequest.onreadystatechange = () => {
+                  if (httpRequest.readyState === 4) {
+                      var data = httpRequest.response;
+                      if (["light", "dark"].includes(request.theme)) data = data.replace(/\/\*\!\s*:root\s*\!\*\//, `:root{--font:${
+                        e.preferenceViewerSerifs === "serif" ?
+                        `"Playfair Display",serif` :
+                        `"Route 159",Ubuntu,"Trebuchet MS",sans-serif`
+                      };--size:${
+                        e.preferenceViewerCPL === "90" ?
+                        "calc(1.37097vw - 1.82258px)" : e.preferenceViewerCPL === "110" ?
+                        "calc(1.08108vw - 0.75676px)" :
+                        "16px"
+                      }}`).replace(/@media\s*\(min-width:\s*715px\)/, `@media (min-width: ${
+                        e.preferenceViewerCPL === "90" ?
+                        "1300" : e.preferenceViewerCPL === "110" ?
+                        "1550" :
+                        "715"
+                      }px)`);
+                      sendResponse(data);
+                  }
+              };
+              httpRequest.open("GET", `themes/cyslantia-viewer-${request.theme}.min.css`);
+              httpRequest.send();
+            });
             break;
         }
     });

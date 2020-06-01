@@ -3,7 +3,7 @@
 
   "name": "CYSCE",
   "description": "CYS Chrome Extension",
-  "version": "0.7.1",
+  "version": "0.7.2",
 
   "icons": {
     "16": "cysicon-16.png",
@@ -22,7 +22,8 @@
 
   "browser_action": {
     "browser_style": true,
-    "default_title": "CYS Chrome Extension"
+    "default_title": "CYS Chrome Extension",
+    "default_popup": "html/popup.html"
   },
 
   "content_scripts": [{
@@ -112,7 +113,7 @@
   }, {
     "matches": ["*://chooseyourstory.com/story/*"],
     "exclude_matches": ["*://chooseyourstory.com/story/viewer/*"],
-    "js": ["js/an.js", "js/contrast.js"],
+    "js": ["js/storygame.js", "js/contrast.js"],
     "run_at": "document_end"
   }, {
     "matches": ["*://chooseyourstory.com/story/viewer/*"],
@@ -128,6 +129,7 @@
   "permissions": [
     "*://chooseyourstory.com/*",
     "activeTab",
+    "clipboardWrite",
     "storage",
     "webNavigation"
   ],

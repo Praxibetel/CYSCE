@@ -33,7 +33,9 @@ $("link[rel='icon']").replaceWith($("<link>", {
 if ($(".sidebar-content > ul > li").length > 6) $("#BodyContainer").addClass("compact-navbar");
 
 e = $(".sidebar-content > ul > li > a[href='/Stories/']");
-if (!e.parent().find("ul").length) e.after('<ul><li><a href="/stories/random">Random</a></li><li><a href="/Games/Search.aspx">Search</a></li></ul>');
+if (!e.parent().find("ul").length) e
+  .parent().addClass("expandable").end()
+  .after('<ul><li><a href="/stories/random">Random</a></li><li><a href="/Games/Search.aspx">Search</a></li></ul>');
 e.parent().find("ul").append(`
 <li style="display: flex;"><a href="/Stories/new.aspx" style="flex: 1; margin-right: 0;">Newly Created</a><a id="rssNavbar" href="/Stories/newStoriesRss.ashx" title="Syndicate with RSS" style="margin-left: 0;"><img src="/Resources/Images/feed-icon-12x12.gif" alt="RSS Feed" width="12" height="12" style="border: 0px;"></a></li>
 <li><a href="/Stories/top.aspx">Top Rated</a></li>
@@ -49,18 +51,54 @@ e.parent().find("ul").append(`
 <li><a href="/Stories/Horror.aspx">Horror</a></li>
 `);
 e = $(".sidebar-content > ul > li > a[href='/forums']");
-if (!e.parent().find("ul").length) e.after('<ul><li><a href="/Forums/Search.aspx">Search</a></li></ul>');
+if (!e.parent().find("ul").length) e
+  .parent().addClass("expandable").end()
+  .after('<ul><li><a href="/Forums/Search.aspx">Search</a></li></ul>');
 e = $(".sidebar-content > ul > li > a[href='/my/']");
-if (u && !e.parent().find("ul").length) e.after('<ul><li><a href="/My/Games.aspx">Storygames</a></li><li><a href="/My/Pictures/Default.aspx">Pictures</a></li><li><a href="/my/messages">Messages</a></li><li><a href="/My/Notifications">Notifications</a></li><li><a href="/My/Duels/Default.aspx">Duels</a></li><li><a href="/My/Saves.aspx">Saves</a></li><li><a href="/My/Comments.aspx">Comments</a></li><li><a href="/My/Points.aspx">Points</a></li><li><a href="/user/endorsements?username=' + $("#Cys_DisplayName").text() + '">Commendations</a></li><li><a href="/my/notepad">Notepad</a></li><li><a href="/My/Profile.aspx">Profile</a></li></ul>');
+if (u && !e.parent().find("ul").length) e
+  .parent().addClass("expandable").end()
+  .after('<ul><li><a href="/My/Games.aspx">Storygames</a></li><li><a href="/My/Pictures/Default.aspx">Pictures</a></li><li><a href="/my/messages">Messages</a></li><li><a href="/My/Notifications">Notifications</a></li><li><a href="/My/Duels/Default.aspx">Duels</a></li><li><a href="/My/Saves.aspx">Saves</a></li><li><a href="/My/Comments.aspx">Comments</a></li><li><a href="/My/Points.aspx">Points</a></li><li><a href="/user/endorsements?username=' + $("#Cys_DisplayName").text() + '">Commendations</a></li><li><a href="/my/notepad">Notepad</a></li><li><a href="/My/Profile.aspx">Profile</a></li></ul>');
 e = $(".sidebar-content > ul > li > a[href='/help/']");
-if (!e.parent().find("ul").length) e.after('<ul><li><a href="/Help/History.aspx">CYOA History</a></li><li><a href="/Help/AboutUs.aspx">About Us</a></li><li><a href="/Help/PrivacyPolicy.aspx">Privacy Policy</a></li><li><a href="/Help/TermsOfService.aspx">Terms Of Service</a></li></ul>');
-if (!u) $(".sidebar-content > ul > li > a[href='/Logon.aspx']").after('<ul><li><a href="/newuser.aspx">Register</a></li></ul>');
+if (!e.parent().find("ul").length) e
+  .parent().addClass("expandable").end()
+  .after('<ul><li><a href="/Help/History.aspx">CYOA History</a></li><li><a href="/Help/AboutUs.aspx">About Us</a></li><li><a href="/Help/PrivacyPolicy.aspx">Privacy Policy</a></li><li><a href="/Help/TermsOfService.aspx">Terms Of Service</a></li></ul>');
+if (!u) $(".sidebar-content > ul > li > a[href='/Logon.aspx']")
+  .parent().addClass("expandable").end()
+  .after('<ul><li><a href="/newuser.aspx">Register</a></li></ul>');
 
 if (u) $("#Cys_DisplayName").wrap($("<a></a>", {
     href: `/Member/?Username=${$("#Cys_DisplayName").text()}`
 }));
 
 switch (path = url.pathname.toLowerCase(), true) {
+    case ["/", "/default.aspx"].includes(path):
+        $.get(browser.extension.getURL("html/.recommended-test.html")).then(html => {
+          let limit = 5,
+              storygames = $(html).find("#featured li").get(),
+              storygameSet = [];
+          $.get(browser.extension.getURL("html/home.html")).then(row => {
+              row = $(row);
+              let recommended = row.find(".categoryBoxStorygames").first(),
+              favorite = row.find(".categoryBoxStorygames").last(),
+              template = row.filter("#storygame-template");
+              for (let i = 0; i < limit; i++) storygameSet.push(storygames.splice(Math.floor(Math.random() * storygames.length), 1)[0]);
+              storygameSet.sort((a, b) => {
+                  let A = a.querySelector("a.title").textContent.toUpperCase().replace(/^\s*(THE|AN?)\b(.*)$/, (m, $1, $2) => `${$2.trim()}, ${$1}`),
+                      B = b.querySelector("a.title").textContent.toUpperCase().replace(/^\s*(THE|AN?)\b(.*)$/, (m, $1, $2) => `${$2.trim()}, ${$1}`)
+                  return A > B ? 1 : A < B ? -1 : 0;
+              });
+              for (let storygame of storygameSet) {
+                let temp = template.clone().contents();
+                recommended.append(temp
+                  .find(".title").replaceWith(storygame.querySelector("a.title")).end()
+                  .find(".author").replaceWith(storygame.querySelector("a.author")).end()
+                );
+              }
+              console.log(recommended.html());
+              $(".main-content > table").prepend(row.filter("tbody"));
+          });
+        });
+        break;
     case "/endorsements" === path:
         $("title").text(`Commendations > All ${url.searchParams.get("sect")}s > ChooseYourStory.com`);
         break;

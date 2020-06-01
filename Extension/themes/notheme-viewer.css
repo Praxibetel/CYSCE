@@ -3,110 +3,22 @@
   z-index: 103;
 }
 
-#devPanel {
-  position: relative;
-  height: 200px;
-  overflow: hidden;
-  background-color: #201E1A;
-  z-index: 102;
-  transition: height 300ms ease;
-  font-family: monospace;
-  box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.5) inset;
+body.destyle-colors {
+  background-color: transparent !important;
+  color: inherit !important
 }
 
-#devPanel[style*="none"] {
-  display: block !important;
-  height: 0 !important;
+body.destyle-colors .dark1border+div>div div, body.destyle-colors .dark1border+div>div font, body.destyle-colors .dark1border+div>div p, body.destyle-colors .dark1border+div>div span {
+  background-color: transparent !important;
+  color: inherit !important
 }
 
-#devPanelList {
-  box-sizing: border-box;
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  overflow: auto hidden;
-  margin: 0;
-  padding: 10px;
-  padding-bottom: 30px;
+body.destyle-fonts {
+  font-family: inherit !important;
+  font-size: inherit !important
 }
 
-#devPanelList li {
-  font-family: "Fira Code", "Ubuntu Mono", monospace;
-  color: #EEE;
-  height: 30px;
-  display: flex;
-  line-height: 30px;
-  font-size: 16px;
-  width: 10em;
-  padding-right: 10px;
-  justify-content: space-between;
-}
-
-#devPanelList li input {
-  flex: 1 0 auto;
-  background: none;
-  color: #C09839;
-  font-family: inherit;
-  font-style: inherit;
-  font-weight: bold;
-  border: none;
-  font-size: inherit;
-  width: 0;
-  text-align: right;
-}
-
-#devPanelList li.unapplied span {
-  font-style: italic;
-  text-decoration: underline;
-}
-
-#devPanelList li.unapplied input {
-  color: #E3A000;
-}
-
-#devPanelButtons {
-  position: absolute;
-  bottom: 20px;
-  width: 100%;
-}
-
-#devPanel+#devPanelOverlay {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(32, 30, 26, .5);
-  z-index: 101;
-  backdrop-filter: blur(3px);
-  transition: 300ms ease backdrop-filter, 300ms ease background-color;
-  pointer-events: none;
-}
-
-#devPanel[style*="none"]+#devPanelOverlay {
-  background-color: transparent;
-  backdrop-filter: none;
-}
-
-#devPanel button {
-  margin-left: 10px;
-  color: #EEE;
-  background-color: #871D18;
-  font-family: "Route 159", "Trebuchet MS", sans-serif;
-  letter-spacing: .08em;
-  border: none;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
-#devPanel button:hover {
-  text-decoration: underline;
-}
-
-#devPanel input[type="range"] {
-  float: right;
-  margin-right: 10px;
+body.destyle-fonts .dark1border+div>div div, body.destyle-fonts .dark1border+div>div font, body.destyle-fonts .dark1border+div>div p, body.destyle-fonts .dark1border+div>div span {
+  font-family: inherit !important;
+  font-size: inherit !important
 }

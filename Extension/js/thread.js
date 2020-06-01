@@ -57,7 +57,22 @@ if ($(".forum-message .heading .buttons").length) {
             class: "button anchor"
         }).append($("<img>", {
             src: "/0x44/InedoLib/Inedo.Web.Controls.IconImage/ProcessImageRequest/InedoIcons/F3Silk/16x16/link.png"
-        }), " Permalink"));
+        }), " Permalink").on("dblclick", function() {
+          let cb = new DataTransfer(),
+              body = $(this).parents(".forum-message").find(".body")
+              cb;
+          if (ClipboardItem != null) {
+            cb = [new ClipboardItem({
+              //"text/html": new Blob([body.html()]),
+              "text/plain": new Blob([body.text()], {type: "text/plain"})
+            })];
+          } else {
+            cb = new DataTransfer();
+            cb.items.add(body.html(), "text/html");
+            cb.items.add(body.text(), "text/plain");
+          }
+          navigator.clipboard.write(cb).then(alert.bind(null, "Copied to clipboard"));
+        }));
     });
 
 }

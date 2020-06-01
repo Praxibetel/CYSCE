@@ -283,7 +283,8 @@ body
 
     > ul
       margin: 0 auto !important
-      max-width: 978px !important
+      max-width: 978px
+      width: unset !important
       height: 48px
       box-sizing: border-box
       padding: 10px 5px !important
@@ -354,16 +355,25 @@ body
         &:last-of-type a
           border-right: none
 
+        &::after
+          content: none !important
+
         > ul
-          position: absolute
-          top: 100%
-          padding-top: 10px
-          background-color: darken(desaturate($color-background-navbar, 14), 4)
+          position: absolute !important
+          top: 100% !important
+          left: unset !important
+          padding-top: 10px !important
+          padding-bottom: 0 !important
+          padding-right: 0 !important
+          background-color: darken(desaturate($color-background-navbar, 14), 4) !important
           background-clip: content-box
+          border: none !important
           visibility: hidden
           opacity: 0
-          transition: opacity 333ms ease
+          transition: opacity 333ms ease !important
           min-width: 100%
+          height: unset !important
+          max-height: unset !important
           z-index: 1
 
           > li
@@ -395,6 +405,9 @@ body
 
             &:last-of-type a
               border-bottom: none
+
+          &::before
+            content: none !important
 
         &:hover > ul
           visibility: visible
