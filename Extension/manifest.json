@@ -127,7 +127,6 @@
 
   "permissions": [
     "*://chooseyourstory.com/*",
-    "activeTab",
     "storage",
     "webNavigation"
   ],
