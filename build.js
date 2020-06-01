@@ -186,7 +186,6 @@
                         let htmin = htmlMinify(await fs.readFile(file, "utf-8"), {
                             collapseBooleanAttributes: true,
                             collapseWhitespace: true,
-                            decodeEntities: true,
                             minifyCSS: options.minify === true || options.minify.css,
                             minifyJS: options.minify === true || options.minify.js,
                             removeComments: true,
