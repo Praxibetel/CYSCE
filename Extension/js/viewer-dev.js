@@ -24,9 +24,15 @@ var guid,
     SSIter,
     SSWorking,
     template,
-    URL = new URL(document.location);
+    url = new URL(document.location);
 
-document.title = `${decodeURIComponent(URL.searchParams.get("title"))} ${document.title}`;
+document.title = `${decodeURIComponent(url.searchParams.get("title"))} ${document.title}`;
+
+if (url.searchParams.get("dev") != null) $(".dev-hidden").removeClass("dev-hidden"),
+  $("#header button").removeClass("active"),
+  $("#header button[data-for='variable-tab']").addClass("active"),
+  $(".tab").removeClass("active"),
+  $("#variable-tab").addClass("active");
 
 template = {
     variable: $($("#variable-template").prop("content")),
@@ -117,6 +123,10 @@ function newState(data) {
     }
 
     mirror.setValue(html_beautify(data.PAGETEXT));
+
+    $(`#option-temp-theme option[value="${data.themeName}"]`).prop("selected", true);
+    console.log(data.destyle ? data.destyle === "" ? "none" : data.destyle : "");
+    $(`#option-temp-destyle option[value="${data.destyle ? data.destyle === "" ? "none" : data.destyle : ""}"]`).prop("selected", true);
 
     $("#breadcrumb-content").empty().append(StoryState.history.map((e, i) => $(`<span>${(i === 0 ? "Page ID: "  : "") + e}</span>`)));
 }
@@ -299,6 +309,31 @@ $("#qsaves").on("click", "button[data-action='delete']", function() {
       browser.storage.local.set(workingSaves);
     });
     $(this).parents("li").remove();
+});
+
+$("#option-temp-theme").on("change", function() {
+    if (!openerId) return;
+    if (!this.value || this.value === "none") return browser.tabs.sendMessage(openerId, {
+        action: "SVDsetTempTheme",
+        themeName: this.value,
+        theme: ""
+    });
+    else return browser.runtime.sendMessage({
+        action: "CYSbuildTempViewerTheme",
+        theme: this.value
+    }).then(response => {console.log(response), browser.tabs.sendMessage(openerId, {
+        action: "SVDsetTempTheme",
+        themeName: this.value,
+        theme: response
+    })});
+});
+
+$("#option-temp-destyle").on("change", function() {
+    if (!openerId) return;
+    return browser.tabs.sendMessage(openerId, {
+        action: "SVDsetTempDestyle",
+        destyle: this.value ? this.value === "none" ? "" : this.value : null
+    });
 });
 
 $("#footer").click(function() {

@@ -65,7 +65,7 @@
     <div class="flex"><input type="button" id="filterApply" value="Apply Filters"></div>
   </form>
   <div id="storygameListPages">
-    <form id="storygameListPagination">
+    <form id="storygameListPagination" class="storygameListPagination">
       <div class="flex">
         Search
         <input id="paginationSearch" type="text">
@@ -94,12 +94,19 @@
           <option value="36">36</option>
         </select>
       </div>
-      <div id="paginationNumeration">
+      <div class="paginationNumeration">
         Page
-        <strong id="paginationPageNumber"><span id="paginationNumerator">1</span>/<span id="paginationDenominator">1</span></strong>
-        <input type="button" id="paginationPrev" value="◄"><input type="button" id="paginationNext" value="►">
+        <strong class="paginationPageNumber"><span class="paginationNumerator">1</span>/<span class="paginationDenominator">1</span></strong>
+        <input type="button" class="paginationPrev" value="◄"><input type="button" class="paginationNext" value="►">
       </div>
     </form>
     <div id="storygameList"></div>
+    <form id="storygameListSubPagination" class="storygameListPagination" style="display: none;">
+      <div class="paginationNumeration">
+        Page
+        <strong class="paginationPageNumber"><span class="paginationNumerator">1</span>/<span class="paginationDenominator">1</span></strong>
+        <input type="button" class="paginationPrev" value="◄"><input type="button" class="paginationNext" value="►">
+      </div>
+    </form>
   </div>
 </div>

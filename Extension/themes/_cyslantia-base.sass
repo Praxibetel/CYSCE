@@ -283,7 +283,8 @@ body
 
     > ul
       margin: 0 auto !important
-      max-width: 978px !important
+      max-width: 978px
+      width: unset !important
       height: 48px
       box-sizing: border-box
       padding: 10px 5px !important
@@ -354,16 +355,25 @@ body
         &:last-of-type a
           border-right: none
 
+        &::after
+          content: none !important
+
         > ul
-          position: absolute
-          top: 100%
-          padding-top: 10px
-          background-color: darken(desaturate($color-background-navbar, 14), 4)
+          position: absolute !important
+          top: 100% !important
+          left: unset !important
+          padding-top: 10px !important
+          padding-bottom: 0 !important
+          padding-right: 0 !important
+          background-color: darken(desaturate($color-background-navbar, 14), 4) !important
           background-clip: content-box
+          border: none !important
           visibility: hidden
           opacity: 0
-          transition: opacity 333ms ease
+          transition: opacity 333ms ease !important
           min-width: 100%
+          height: unset !important
+          max-height: unset !important
           z-index: 1
 
           > li
@@ -395,6 +405,9 @@ body
 
             &:last-of-type a
               border-bottom: none
+
+          &::before
+            content: none !important
 
         &:hover > ul
           visibility: visible
@@ -1289,100 +1302,100 @@ img[src="App_Themes/CYS/images/login.gif"]
     margin-left: 2px
 
 img
-  &[src="images/trophies/100points.gif"]
+  &[src$="images/trophies/100points.gif" i]:not([src^="http"])
     content: $image-trophy-100points
 
-  &[src="images/trophies/500points.gif"]
+  &[src$="images/trophies/500points.gif" i]:not([src^="http"])
     content: $image-trophy-500points
 
-  &[src="images/trophies/1000points.gif"]
+  &[src$="images/trophies/1000points.gif" i]:not([src^="http"])
     content: $image-trophy-1000points
 
-  &[src="images/trophies/2000points.gif"], &[src="../member/images/trophies/2000points.gif"]
+  &[src$="images/trophies/2000points.gif" i]:not([src^="http"])
     content: $image-trophy-2000points
 
-  &[src="images/trophies/5000points.gif"]
+  &[src$="images/trophies/5000points.gif" i]:not([src^="http"])
     content: $image-trophy-5000points
 
-  &[src="images/trophies/infinitePoints.gif"]
+  &[src$="images/trophies/infinitePoints.gif" i]:not([src^="http"])
     content: $image-trophy-infinitepoints
 
-  &[src="images/trophies/contestWinner.gif"]
+  &[src$="images/trophies/contestWinner.gif" i]:not([src^="http"])
     content: $image-trophy-contestwinner
 
-  &[src="images/trophies/featuredStory.gif"]
+  &[src$="images/trophies/featuredStory.gif" i]:not([src^="http"])
     content: $image-trophy-featuredstory
 
-  &[src="images/trophies/luckyDueler.gif"]
+  &[src$="images/trophies/luckyDueler.gif" i]:not([src^="http"])
     content: $image-trophy-luckydueler
 
-  &[src="images/trophies/topPoster.gif"]
+  &[src$="images/trophies/topPoster.gif" i]:not([src^="http"])
     content: $image-trophy-topposter
 
-  &[src="images/trophies/supremePoster.gif"]
+  &[src$="images/trophies/supremePoster.gif" i]:not([src^="http"])
     content: $image-trophy-supremeposter
 
-  &[src="images/trophies/bugHunter.gif"]
+  &[src$="images/trophies/bugHunter.gif" i]:not([src^="http"])
     content: $image-trophy-bughunter
 
-  &[src="images/trophies/topRater.gif"]
+  &[src$="images/trophies/topRater.gif" i]:not([src^="http"])
     content: $image-trophy-toprater
 
-  &[src="images/trophies/supremeRater.gif"]
+  &[src$="images/trophies/supremeRater.gif" i]:not([src^="http"])
     content: $image-trophy-supremerater
 
-  &[src="images/trophies/CommunityContributor.gif"]
+  &[src$="images/trophies/CommunityContributor.gif" i]:not([src^="http"])
     content: $image-trophy-communitycontributor
 
-  &[src="images/genericFrom.gif"]
+  &[src="images/genericFrom.gif" i]:not([src^="http"])
     content: $image-trophy-genericfrom
 
-  &[src="images/trophyFromIndex.gif"]
+  &[src="images/trophyFromIndex.gif" i]:not([src^="http"])
     content: $image-trophy-fromindex
 
-  &[src="images/trophies/fromalexp.gif"]
+  &[src$="images/trophies/fromalexp.gif" i]:not([src^="http"])
     content: $image-trophy-fromalexp
 
-  &[src="images/trophies/fromBerkaZerka.gif"]
+  &[src$="images/trophies/fromBerkaZerka.gif" i]:not([src^="http"])
     content: $image-trophy-fromberka
 
-  &[src="images/trophies/fromchocobot.gif"]
+  &[src$="images/trophies/fromchocobot.gif" i]:not([src^="http"])
     content: $image-trophy-fromchocobot
 
-  &[src="images/trophies/fromEndMaster.gif"]
+  &[src$="images/trophies/fromEndMaster.gif" i]:not([src^="http"])
     content: $image-trophy-fromendmaster
 
-  &[src="images/trophies/fromFleshnblood_78.gif"]
+  &[src$="images/trophies/fromFleshnblood_78.gif" i]:not([src^="http"])
     content: $image-trophy-fromfleshnblood
 
-  &[src="images/trophies/fromHavacoman.gif"]
+  &[src$="images/trophies/fromHavacoman.gif" i]:not([src^="http"])
     content: $image-trophy-fromhavacoman
 
-  &[src="images/trophies/fromJJJ-thebanisher.gif"]
+  &[src$="images/trophies/fromJJJ-thebanisher.gif" i]:not([src^="http"])
     content: $image-trophy-fromjjj
 
-  &[src="images/trophies/fromKilla_Robot.gif"]
+  &[src$="images/trophies/fromKilla_Robot.gif" i]:not([src^="http"])
     content: $image-trophy-fromkillarobot
 
-  &[src="images/trophies/fromMadglee.gif"]
+  &[src$="images/trophies/fromMadglee.gif" i]:not([src^="http"])
     content: $image-trophy-frommadglee
 
-  &[src="images/trophies/frommarch5th00.gif"]
+  &[src$="images/trophies/frommarch5th00.gif" i]:not([src^="http"])
     content: $image-trophy-frommarch5th
 
-  &[src="images/trophies/fromMizal.gif"]
+  &[src$="images/trophies/fromMizal.gif" i]:not([src^="http"])
     content: $image-trophy-frommizal
 
-  &[src="images/trophies/fromSethaniel.gif"]
+  &[src$="images/trophies/fromSethaniel.gif" i]:not([src^="http"])
     content: $image-trophy-fromsethaniel
 
-  &[src="images/trophies/fromSolostrike.gif"]
+  &[src$="images/trophies/fromSolostrike.gif" i]:not([src^="http"])
     content: $image-trophy-fromsolostrike
 
-  &[src="images/trophies/fromtsmpaul.gif"]
+  &[src$="images/trophies/fromtsmpaul.gif" i]:not([src^="http"])
     content: $image-trophy-fromtsmpaul
 
-  &[src="images/trophies/fromWill11.gif"]
+  &[src$="images/trophies/fromWill11.gif" i]:not([src^="http"])
     content: $image-trophy-fromwill11
 
 #profile_Articles, #profile_Posts, #profile_Stories

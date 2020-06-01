@@ -83,7 +83,7 @@ function autoContrast(color, base, R) {
 }
 
 function fromCSS(css) {
-    return css.match(/^rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)$/i).slice(1).map(u => parseInt(u));
+    return css.match(/^rgba?\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*/i).slice(1).map(u => parseInt(u));
 }
 
 function toCSS(rgba) {

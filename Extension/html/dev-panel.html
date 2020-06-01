@@ -8,15 +8,15 @@
   </head>
   <body>
     <div id="header">
-      <button type="button" class="active" data-for="variable-tab">Variables</button>
-      <button type="button" data-for="link-tab">Links</button>
-      <button type="button" data-for="item-tab">Items</button>
-      <button type="button" data-for="pagetext-tab">$PAGETEXT</button>
-      <button type="button" data-for="qsave-tab">Quicksaves</button>
-      <!--<button type="button" data-for="options-tab">Options</button>-->
+      <button type="button" class="dev-hidden" data-for="variable-tab">Variables</button>
+      <button type="button" class="dev-hidden" data-for="link-tab">Links</button>
+      <button type="button" class="dev-hidden" data-for="item-tab">Items</button>
+      <button type="button" class="dev-hidden" data-for="pagetext-tab">$PAGETEXT</button>
+      <button type="button" class="dev-hidden" data-for="qsave-tab">Quicksaves</button>
+      <button type="button" class="active" data-for="options-tab">Options</button>
     </div>
     <div id="main">
-      <div id="variable-tab" class="tab active">
+      <div id="variable-tab" class="tab dev-hidden">
         <div class="tab-content">
           <ul id="variable-body" class="editable flex"></ul>
         </div>
@@ -26,10 +26,10 @@
           <button type="button" data-action="hardApply">Apply & Reload</button>
         </div>
       </div>
-      <div id="link-tab" class="tab">
+      <div id="link-tab" class="tab dev-hidden">
         <ul id="link-body" class="tab-content flex"></ul>
       </div>
-      <div id="item-tab" class="tab">
+      <div id="item-tab" class="tab dev-hidden">
         <div class="tab-content">
           <table>
             <tbody id="item-body"></tbody>
@@ -41,18 +41,42 @@
           <button type="button" data-action="hardApply">Apply & Reload</button>
         </div>
       </div>
-      <div id="pagetext-tab" class="tab">
+      <div id="pagetext-tab" class="tab dev-hidden">
         <textarea id="pagetextarea"></textarea>
       </div>
-      <div id="qsave-tab" class="tab">
+      <div id="qsave-tab" class="tab dev-hidden">
         <ul id="qsaves" class="tab-content"></ul>
         <div class="tab-footer">
           <button type="button" data-action="qsave">New Quicksave</button>
         </div>
       </div>
-      <div id="options-tab" class="tab"></div>
+      <div id="options-tab" class="tab active">
+        <ul id="options" class="tab-content">
+          <li>
+            Temporary Theme
+            <select id="option-temp-theme">
+              <option label="&mdash;" value="">&mdash;</option>
+              <option label="none" value="none">none</option>
+              <option label="CYS Light" value="light">CYS Light</option>
+              <option label="CYS Dark" value="dark">CYS Dark</option>
+              <option label="invert brightness" value="invert-retain-hue">invert brightness</option>
+              <option label="invert colors" value="invert">invert colors</option>
+            </select>
+          </li>
+          <li>
+            Temporary Style Suppression
+            <select id="option-temp-destyle">
+              <option label="&mdash;" value="">&mdash;</option>
+              <option label="no suppression" value="none">no suppression</option>
+              <option label="suppress fonts" value="destyle-fonts">suppress fonts</option>
+              <option label="suppress stylesheets" value="destyle-css">suppress stylesheets</option>
+              <option label="suppress all" value="destyle-fonts destyle-css">suppress all</option>
+            </select>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div id="footer" title="Click to toggle expanded view.">
+    <div id="footer" title="Click to toggle expanded view." class="dev-hidden">
       <div id="breadcrumbs">
         <div id="breadcrumb-content">
         </div>

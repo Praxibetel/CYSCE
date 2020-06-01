@@ -8,6 +8,7 @@ storyListFiltersDefault = {
     maxRating: 8,
     minRating: 3
 };
+//storyListDataFilters = {};
 storyListPageCount = 0;
 storyListPageIndex = 0;
 storyListPaginationDefault = {
@@ -17,20 +18,31 @@ storyListPaginationDefault = {
 };
 storyListTags = [];
 
+url = new URL(document.location);
+query = Object.fromEntries(url.searchParams);
+
 function storyListFilter(filters) {
     filters = {
         inclEvery: $("#filterTagAny").prop("checked") ? false : true,
         inclFeatured: $("#filterFeatureFeatured").prop("checked") ? [true, false] : $("#filterFeatureUnfeatured").prop("checked") ? [false, true] : [true, true],
         inclRated: $("#filterRatedRated").prop("checked") ? [true, false] : $("#filterRatedUnrated").prop("checked") ? [false, true] : [true, true],
-        inclTags: $("#filterTagContainer label").map(function() {
-            if ($(this).find("input").prop("checked")) return $(this).text().trim();
+        inclTags: $("#filterTagContainer input:checked").map(function() {
+            return this.value;
         }).get(),
         maxRating: parseInt($("#filterRatingMax").val()) || storyListFiltersDefault.maxRating,
         minRating: parseInt($("#filterRatingMin").val()) || storyListFiltersDefault.minRating,
         maxDate: new Date($("#filterDateMax").val()),
         minDate: new Date($("#filterDateMin").val())
     };
-    filters = Object.assign(storyListFiltersDefault, filters);
+    filters = Object.assign(Object.assign({}, storyListFiltersDefault), filters);
+    for (let key in filters) {
+        let value = filters[key];
+        if (Array.isArray(value)) value = value.join(",");
+        console.log(key, value, value === storyListFiltersDefault[key]);
+        if (!value || value === storyListFiltersDefault[key]) url.searchParams.delete(key);
+        else url.searchParams.set(key, value);
+    }
+    //history.replaceState(null, "", url.toString());
     return storyListData.filter(a => {
         var pubdate = new Date(a.published);
         return (
@@ -106,9 +118,9 @@ function storyListPaginate(data = []) {
     var pageStart = (storyListPageIndex * pagination.pageSize + 1),
         pageEnd = ((storyListPageIndex + 1) * pagination.pageSize);
 
-    $("#paginationNumeration").attr("title", (data.length > 0 ? pageStart : 0) + "–" + (pageEnd < data.length ? pageEnd : data.length) + " of " + data.length);
-    $("#paginationNumerator").text(storyListPageIndex + 1);
-    $("#paginationDenominator").text(storyListPageCount || 1);
+    $(".paginationNumeration").attr("title", (data.length > 0 ? pageStart : 0) + "–" + (pageEnd < data.length ? pageEnd : data.length) + " of " + data.length);
+    $(".paginationNumerator").text(storyListPageIndex + 1);
+    $(".paginationDenominator").text(storyListPageCount || 1);
 
     return data.slice(
         storyListPageIndex * pagination.pageSize,
@@ -204,6 +216,7 @@ function storyListApply(data = []) {
             )
         );
     });
+    $("#storygameListSubPagination").toggle(storyListPageCount > 1);
 }
 
 function storyListProcess(nofilter) {
@@ -232,7 +245,7 @@ $("body").on("click", "#storygameListFilters #filterApply", function() {
 $("body").on("change", "#filterTagContainer input[type='checkbox']", function() {
     $("[data-for='filterTagContainer']").attr("data-value", $("#filterTagContainer input:checked").length);
     $("#filterTagArray").val($("#filterTagContainer input:checked").map(function() {
-        return $(this).parent().text().trim();
+        return this.value;
     }).get().join(","));
 });
 
@@ -265,9 +278,9 @@ $("body").on("change", "#storygameListPagination select, #storygameListPaginatio
     storyListProcess(true);
 });
 
-$("body").on("click", "#storygameListPagination input[type='button']", function() {
-    if (this.id === "paginationPrev" && storyListPageIndex > 0) storyListPageIndex--, storyListProcess(true);
-    else if (this.id === "paginationNext" && storyListPageIndex < storyListPageCount - 1) storyListPageIndex++, storyListProcess(true);
+$("body").on("click", ".storygameListPagination input[type='button']", function() {
+    if (this.className === "paginationPrev" && storyListPageIndex > 0) storyListPageIndex--, storyListProcess(true);
+    else if (this.className === "paginationNext" && storyListPageIndex < storyListPageCount - 1) storyListPageIndex++, storyListProcess(true);
 });
 
 $("body").on("click", ".tag:not(.featured)", function() {
@@ -306,7 +319,9 @@ $.when(getHTML, getList).done(() => {
         storyListTags.sort().map(e => {
             return $("<label></label>").append(
                 $("<input>", {
-                    type: "checkbox"
+                    type: "checkbox",
+                    name: "tag",
+                    value: e
                 }),
                 " ",
                 e
