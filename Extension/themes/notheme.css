@@ -40,6 +40,10 @@
 	content: " ";
 }
 
+#BodyContainer .sidebar-content.expand-all li.expandable::after, #BodyContainer .sidebar-content.expand-all li.expandable:hover::after {
+	content: none;
+}
+
 #BodyContainer .sidebar-content li {
 	position: relative;
 }
@@ -56,6 +60,12 @@
 	padding-bottom: 5px;
 	transition: left 100ms step-end;
 	left: -9999px;
+}
+
+#BodyContainer .sidebar-content.expand-all li.expandable ul {
+  border: none;
+  padding: 0;
+  position: static;
 }
 
 #BodyContainer .sidebar-content li.expandable ul::before {

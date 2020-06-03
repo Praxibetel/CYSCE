@@ -54,6 +54,10 @@ browser.storage.sync.get(null).then((e, error) => {
                   case "CYSExtensionWelcomedOn":
                       preferences[e.dataset.key] = e.checked ? null : browser.runtime.getManifest().version;
                       break;
+                  case "CYSExtensionThemelessMenus":
+                      $(".sidebar-content").toggleClass("expand-all", !e.checked);
+                      preferences[e.dataset.key] = e.checked;
+                      break;
                   case "CYSExtensionDoubleEn":
                       $("#m").text(e.checked ? "M" : "m");
                       // don't break;

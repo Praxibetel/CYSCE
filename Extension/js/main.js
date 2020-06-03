@@ -218,9 +218,10 @@ switch (path = url.pathname.toLowerCase(), true) {
       */
 }
 
-browser.storage.sync.get((u ? ["preferenceNotifications", "preferenceStifleTags", "welcomedOn"] : []).concat("preferenceDoubleEn")).then((e, error) => {
+browser.storage.sync.get((u ? ["preferenceNotifications", "preferenceStifleTags", "preferenceThemelessMenus", "welcomedOn"] : []).concat("preferenceDoubleEn")).then((e, error) => {
     if (!error) {
         let manifest = browser.runtime.getManifest();
+        $(".sidebar-content").toggleClass("expand-all", !(e.preferenceThemelessMenus == null || e.preferenceThemelessMenus));
         if (e.preferenceNotifications !== false) {
             AJAX.then((resolve, reject) => {
                 var alertCheck;
