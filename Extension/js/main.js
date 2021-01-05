@@ -40,10 +40,10 @@ e.parent().find("ul").append(`
 <li style="display: flex;"><a href="/Stories/new.aspx" style="flex: 1; margin-right: 0;">Newly Created</a><a id="rssNavbar" href="/Stories/newStoriesRss.ashx" title="Syndicate with RSS" style="margin-left: 0;"><img src="/Resources/Images/feed-icon-12x12.gif" alt="RSS Feed" width="12" height="12" style="border: 0px;"></a></li>
 <li><a href="/Stories/top.aspx">Top Rated</a></li>
 <li><a href="/Stories/Fantasy_Adventure.aspx" class="narrower">Fantasy Adventure</a></li>
+<li><a href="/Stories/Dark_Fantasy.aspx">Dark Fantasy</a></li>
 <li><a href="/Stories/Modern_Adventure.aspx" class="narrower">Modern Adventure</a></li>
 <li><a href="/Stories/Sci-Fi_Adventure.aspx">Sci-Fi Adventure</a></li>
 <li><a href="/Stories/Edutainment.aspx">Edutainment</a></li>
-<li><a href="/Stories/School-Based.aspx">School-Based</a></li>
 <li><a href="/Stories/Mystery__0x2f__Puzzle.aspx">Mystery / Puzzle</a></li>
 <li><a href="/Stories/Fan_Fiction.aspx">Fan Fiction</a></li>
 <li><a href="/Stories/Everything_Else.aspx">Everything Else</a></li>
@@ -71,6 +71,9 @@ if (u) $("#Cys_DisplayName").wrap($("<a></a>", {
 }));
 
 switch (path = url.pathname.toLowerCase(), true) {
+    case "/" === path:
+        dynamicizeForumPosts("h1.alternate + div > div:nth-child(2n)");
+        break;
     case "/endorsements" === path:
         $("title").text(`Commendations > All ${url.searchParams.get("sect")}s > ChooseYourStory.com`);
         break;

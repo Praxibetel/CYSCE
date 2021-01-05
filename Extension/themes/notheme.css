@@ -129,6 +129,10 @@
   white-space: nowrap;
 }
 
+.forum-message .body {
+  display: flow-root;
+}
+
 .forum-thread.collapsed .avatar {
   display: none;
 }

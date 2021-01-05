@@ -101,3 +101,9 @@ $PI: 3.1415926536
   $coss: $coss / $length
 
   @return rad-to-deg(atan2($sins, $coss))
+
+=clearfix
+  &::after
+    clear: both
+    content: " "
+    display: table
