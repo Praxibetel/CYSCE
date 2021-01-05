@@ -33,6 +33,14 @@ browser.webNavigation.onCommitted.addListener(tab => {
     }]
 });
 
+browser.webRequest.onHeadersReceived.addListener(details => {
+  let i = details.responseHeaders.findIndex(h => h.name.toLowerCase() === "content-type");
+  if (i !== -1 && !details.responseHeaders[i].value.startsWith("image/")) details.responseHeaders.splice(i, 1);
+  return {responseHeaders: details.responseHeaders};
+}, {
+    urls: ["*://chooseyourstory.com/resources/images/user/*"]
+}, ["blocking", "responseHeaders"]);
+
 browser.windows.onRemoved.addListener(windowId => {
     let i;
     if (i = Object.entries(viewerWindow).find(e => e[1].id === windowId)) delete viewerWindow[i[0]];

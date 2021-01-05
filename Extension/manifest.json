@@ -128,7 +128,9 @@
   "permissions": [
     "*://chooseyourstory.com/*",
     "storage",
-    "webNavigation"
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking"
   ],
 
   "web_accessible_resources": [
