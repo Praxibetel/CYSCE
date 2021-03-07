@@ -33,6 +33,32 @@ $color-text-label: hsl($hue-tertiary, 35%, 50%)
 
 $image-login: url("#{$directory}/images/dark-login.png")
 
+$image-category-fantasy: url("#{$directory}/images/dark-category-fantasy.png")
+$image-category-dark-fantasy: url("#{$directory}/images/dark-category-dark-fantasy.png")
+$image-category-modern-adventure: url("#{$directory}/images/dark-category-modern-adventure.png")
+$image-category-sci-fi: url("#{$directory}/images/dark-category-sci-fi.png")
+$image-category-edutainment: url("#{$directory}/images/dark-category-edutainment.png")
+$image-category-mystery-puzzle: url("#{$directory}/images/dark-category-mystery-puzzle.png")
+$image-category-fan-fiction: url("#{$directory}/images/dark-category-fan-fiction.png")
+$image-category-everything-else: url("#{$directory}/images/dark-category-everything-else.png")
+$image-category-love-dating: url("#{$directory}/images/dark-category-love-dating.png")
+$image-category-horror: url("#{$directory}/images/dark-category-horror.png")
+$image-category-new: url("#{$directory}/images/dark-category-new.png")
+$image-category-top: url("#{$directory}/images/dark-category-top.png")
+
+$image-category-fantasy-full: url("#{$directory}/images/dark-category-fantasy-full.png")
+$image-category-dark-fantasy-full: url("#{$directory}/images/dark-category-dark-fantasy-full.png")
+$image-category-modern-adventure-full: url("#{$directory}/images/dark-category-modern-adventure-full.png")
+$image-category-sci-fi-full: url("#{$directory}/images/dark-category-sci-fi-full.png")
+$image-category-edutainment-full: url("#{$directory}/images/dark-category-edutainment-full.png")
+$image-category-mystery-puzzle-full: url("#{$directory}/images/dark-category-mystery-puzzle-full.png")
+$image-category-fan-fiction-full: url("#{$directory}/images/dark-category-fan-fiction-full.png")
+$image-category-everything-else-full: url("#{$directory}/images/dark-category-everything-else-full.png")
+$image-category-love-dating-full: url("#{$directory}/images/dark-category-love-dating-full.png")
+$image-category-horror-full: url("#{$directory}/images/dark-category-horror-full.png")
+$image-category-new-full: url("#{$directory}/images/dark-category-new-full.png")
+$image-category-top-full: url("#{$directory}/images/dark-category-top-full.png")
+
 $image-icon-length-rating: url("#{$directory}/images/custom/dark-length-rating.svg")
 $image-icon-difficulty-1: url("#{$directory}/images/custom/dark-difficulty-1.svg")
 $image-icon-difficulty-2: url("#{$directory}/images/custom/dark-difficulty-2.svg")
@@ -52,9 +78,9 @@ $image-icon-script: url("#{$directory}/images/elusive/dark-file.svg")
 
 $image-trophy-fromindex: url("#{$directory}/images/custom/trophies/trophyFromIndex-dark.png")
 
-$image-duel-toggle: url("#{$directory}/images/custom/duel-dark-toggle.png") !default
-$image-duel-rps: url("#{$directory}/images/custom/duel-dark-rps.png") !default
-$image-duel-rps25: url("#{$directory}/images/custom/duel-dark-rps25.png") !default
+$image-duel-toggle: url("#{$directory}/images/custom/duel-dark-toggle.png")
+$image-duel-rps: url("#{$directory}/images/custom/duel-dark-rps.png")
+$image-duel-rps25: url("#{$directory}/images/custom/duel-dark-rps25.png")
 $image-icon-duel-checked: url("#{$directory}/images/game-icons/dark-checked.svg")
 $image-icon-duel-square: url("#{$directory}/images/game-icons/dark-square.svg")
 $image-icon-duel-blank: url("#{$directory}/images/game-icons/dark-blank.svg")
@@ -96,82 +122,6 @@ $color-background-forumpost: hsl($hue-tertiary, 10%, 17%)
 
 body:not(.cke_editable)
   line-height: 1.25
-
-// Storygame categories
-
-.dark1border
-  &[style*="categories/fantasy.gif"]
-    background-image: url("#{$directory}/images/dark-category-fantasy.png") !important
-
-  &[style*="categories/modern_adventure.gif"]
-    background-image: url("#{$directory}/images/dark-category-modern-adventure.png") !important
-
-  &[style*="categories/science_fiction.gif"]
-    background-image: url("#{$directory}/images/dark-category-sci-fi.png") !important
-
-  &[style*="categories/edutainment.gif"]
-    background-image: url("#{$directory}/images/dark-category-edutainment.png") !important
-
-  &[style*="categories/school.gif"]
-    background-image: url("#{$directory}/images/dark-category-school.png") !important
-
-  &[style*="categories/mystery_puzzle.gif"]
-    background-image: url("#{$directory}/images/dark-category-mystery-puzzle.png") !important
-
-  &[style*="categories/fan_fiction.gif"]
-    background-image: url("#{$directory}/images/dark-category-fan-fiction.png") !important
-
-  &[style*="categories/everything_else.gif"]
-    background-image: url("#{$directory}/images/dark-category-everything-else.png") !important
-
-  &[style*="categories/love_dating.gif"]
-    background-image: url("#{$directory}/images/dark-category-love-dating.png") !important
-
-  &[style*="categories/horror.gif"]
-    background-image: url("#{$directory}/images/dark-category-horror.png") !important
-
-  &[style*="categories/new.gif"]
-    background-image: url("#{$directory}/images/dark-category-new.png") !important
-
-  &[style*="categories/top_rated.gif"]
-    background-image: url("#{$directory}/images/dark-category-top.png") !important
-
-#stories_storylistdiv
-  &[style*="categories/fantasy_full.gif"]
-    background-image: url("#{$directory}/images/dark-category-fantasy-full.png") !important
-
-  &[style*="categories/modern_adventure_full.gif"]
-    background-image: url("#{$directory}/images/dark-category-modern-adventure-full.png") !important
-
-  &[style*="categories/science_fiction_full.gif"]
-    background-image: url("#{$directory}/images/dark-category-sci-fi-full.png") !important
-
-  &[style*="categories/edutainment_full.gif"]
-    background-image: url("#{$directory}/images/dark-category-edutainment-full.png") !important
-
-  &[style*="categories/school_full.gif"]
-    background-image: url("#{$directory}/images/dark-category-school-full.png") !important
-
-  &[style*="categories/mystery_puzzle_full.gif"]
-    background-image: url("#{$directory}/images/dark-category-mystery-puzzle-full.png") !important
-
-  &[style*="categories/fan_fiction_full.gif"]
-    background-image: url("#{$directory}/images/dark-category-fan-fiction-full.png") !important
-
-  &[style*="categories/everything_else_full.gif"]
-    background-image: url("#{$directory}/images/dark-category-everything-else-full.png") !important
-
-  &[style*="categories/love_dating_full.gif"]
-    background-image: url("#{$directory}/images/dark-category-love-dating-full.png") !important
-
-  &[style*="categories/horror_full.gif"]
-    background-image: url("#{$directory}/images/dark-category-horror-full.png") !important
-
-  &[style*="categories/new_full.gif"]
-    background-image: url("#{$directory}/images/dark-category-new-full.png") !important
-
-  &[style*="categories/top_rated_full.gif"]
-    background-image: url("#{$directory}/images/dark-category-top-full.png") !important
 
 // Forums
 

@@ -7,7 +7,7 @@
   width: $width
 
 #HeaderContainer
-  background: $image-background-masthead-1x top center no-repeat, specular-gradient(360px, 33.33%), $color-background-masthead
+  background: var(--masthead-1x) top center no-repeat, specular-gradient(360px, 33.33%), $color-background-masthead
 
 // Storygames
 
@@ -315,111 +315,6 @@ img
 td[valign="top"] > img[width="72"][height="72"][src^="images"][src$=".gif"]
   +pad-image(72px, 72px)
 
-// Profile
-
-img
-  &[src^="images/trophies/"], &[src^="../member/images/trophies/"]
-    background-image: $image-trophy-fromunknown
-    +pad-image(50px, 50px)
-
-  &[src$="images/trophies/100points.gif" i]
-    background-image: $image-trophy-100points
-
-  &[src$="images/trophies/500points.gif" i]
-    background-image: $image-trophy-500points
-
-  &[src$="images/trophies/1000points.gif" i]
-    background-image: $image-trophy-1000points
-
-  &[src$="images/trophies/2000points.gif" i]
-    background-image: $image-trophy-2000points
-
-  &[src$="images/trophies/5000points.gif" i]
-    background-image: $image-trophy-5000points
-
-  &[src$="images/trophies/infinitePoints.gif" i]
-    background-image: $image-trophy-infinitepoints
-
-  &[src$="images/trophies/contestWinner.gif" i]
-    background-image: $image-trophy-contestwinner
-
-  &[src$="images/trophies/featuredStory.gif" i]
-    background-image: $image-trophy-featuredstory
-
-  &[src$="images/trophies/luckyDueler.gif" i]
-    background-image: $image-trophy-luckydueler
-
-  &[src$="images/trophies/topPoster.gif" i]
-    background-image: $image-trophy-topposter
-
-  &[src$="images/trophies/supremePoster.gif" i]
-    background-image: $image-trophy-supremeposter
-
-  &[src$="images/trophies/bugHunter.gif" i]
-    background-image: $image-trophy-bughunter
-
-  &[src$="images/trophies/topRater.gif" i]
-    background-image: $image-trophy-toprater
-
-  &[src$="images/trophies/supremeRater.gif" i]
-    background-image: $image-trophy-supremerater
-
-  &[src$="images/trophies/CommunityContributor.gif" i]
-    background-image: $image-trophy-communitycontributor
-
-  &[src="images/genericFrom.gif" i]
-    background-image: $image-trophy-genericfrom
-    +pad-image(50px, 50px)
-
-  &[src="images/trophyFromIndex.gif" i]
-    background-image: $image-trophy-fromindex
-    +pad-image(160px, 260px)
-
-  &[src$="images/trophies/fromalexp.gif" i]
-    background-image: $image-trophy-fromalexp
-
-  &[src$="images/trophies/fromBerkaZerka.gif" i]
-    background-image: $image-trophy-fromberka
-
-  &[src$="images/trophies/fromchocobot.gif" i]
-    background-image: $image-trophy-fromchocobot
-
-  &[src$="images/trophies/fromEndMaster.gif" i]
-    background-image: $image-trophy-fromendmaster
-
-  &[src$="images/trophies/fromFleshnblood_78.gif" i]
-    background-image: $image-trophy-fromfleshnblood
-
-  &[src$="images/trophies/fromHavacoman.gif" i]
-    background-image: $image-trophy-fromhavacoman
-
-  &[src$="images/trophies/fromJJJ-thebanisher.gif" i]
-    background-image: $image-trophy-fromjjj
-
-  &[src$="images/trophies/fromKilla_Robot.gif" i]
-    background-image: $image-trophy-fromkillarobot
-
-  &[src$="images/trophies/fromMadglee.gif" i]
-    background-image: $image-trophy-frommadglee
-
-  &[src$="images/trophies/frommarch5th00.gif" i]
-    background-image: $image-trophy-frommarch5th
-
-  &[src$="images/trophies/fromMizal.gif" i]
-    background-image: $image-trophy-frommizal
-
-  &[src$="images/trophies/fromSethaniel.gif" i]
-    background-image: $image-trophy-fromsethaniel
-
-  &[src$="images/trophies/fromSolostrike.gif" i]
-    background-image: $image-trophy-fromsolostrike
-
-  &[src$="images/trophies/fromtsmpaul.gif" i]
-    background-image: $image-trophy-fromtsmpaul
-
-  &[src$="images/trophies/fromWill11.gif" i]
-    background-image: $image-trophy-fromwill11
-
 // Editor
 
 img, input[type="image"]
@@ -463,4 +358,4 @@ img, input[type="image"]
 
 img[src="App_Themes/CYS/images/login.gif"]
   background-image: $image-login
-  +pad-image(275px, 300px)
+  +pad-image(300px, 300px)
