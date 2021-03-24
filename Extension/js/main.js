@@ -32,40 +32,6 @@ $("link[rel='icon']").replaceWith($("<link>", {
 
 if ($(".sidebar-content > ul > li").length > 6) $("#BodyContainer").addClass("compact-navbar");
 
-e = $(".sidebar-content > ul > li > a[href='/Stories/']");
-if (!e.parent().find("ul").length) e
-  .parent().addClass("expandable").end()
-  .after('<ul><li><a href="/stories/random">Random</a></li><li><a href="/Games/Search.aspx">Search</a></li></ul>');
-e.parent().find("ul").append(`
-<li style="display: flex;"><a href="/Stories/new.aspx" style="flex: 1; margin-right: 0;">Newly Created</a><a id="rssNavbar" href="/Stories/newStoriesRss.ashx" title="Syndicate with RSS" style="margin-left: 0;"><img src="/Resources/Images/feed-icon-12x12.gif" alt="RSS Feed" width="12" height="12" style="border: 0px;"></a></li>
-<li><a href="/Stories/top.aspx">Top Rated</a></li>
-<li><a href="/Stories/Fantasy_Adventure.aspx" class="narrower">Fantasy Adventure</a></li>
-<li><a href="/Stories/Dark_Fantasy.aspx">Dark Fantasy</a></li>
-<li><a href="/Stories/Modern_Adventure.aspx" class="narrower">Modern Adventure</a></li>
-<li><a href="/Stories/Sci-Fi_Adventure.aspx">Sci-Fi Adventure</a></li>
-<li><a href="/Stories/Edutainment.aspx">Edutainment</a></li>
-<li><a href="/Stories/Mystery__0x2f__Puzzle.aspx">Mystery / Puzzle</a></li>
-<li><a href="/Stories/Fan_Fiction.aspx">Fan Fiction</a></li>
-<li><a href="/Stories/Everything_Else.aspx">Everything Else</a></li>
-<li><a href="/Stories/Love__0x26__Dating.aspx">Love &amp; Dating</a></li>
-<li><a href="/Stories/Horror.aspx">Horror</a></li>
-`);
-e = $(".sidebar-content > ul > li > a[href='/forums']");
-if (!e.parent().find("ul").length) e
-  .parent().addClass("expandable").end()
-  .after('<ul><li><a href="/Forums/Search.aspx">Search</a></li></ul>');
-e = $(".sidebar-content > ul > li > a[href='/my/']");
-if (u && !e.parent().find("ul").length) e
-  .parent().addClass("expandable").end()
-  .after('<ul><li><a href="/My/Games.aspx">Storygames</a></li><li><a href="/My/Pictures/Default.aspx">Pictures</a></li><li><a href="/my/messages">Messages</a></li><li><a href="/My/Notifications">Notifications</a></li><li><a href="/My/Duels/Default.aspx">Duels</a></li><li><a href="/My/Saves.aspx">Saves</a></li><li><a href="/My/Comments.aspx">Comments</a></li><li><a href="/My/Points.aspx">Points</a></li><li><a href="/user/endorsements?username=' + $("#Cys_DisplayName").text() + '">Commendations</a></li><li><a href="/my/notepad">Notepad</a></li><li><a href="/My/Profile.aspx">Profile</a></li></ul>');
-e = $(".sidebar-content > ul > li > a[href='/help/']");
-if (!e.parent().find("ul").length) e
-  .parent().addClass("expandable").end()
-  .after('<ul><li><a href="/Help/History.aspx">CYOA History</a></li><li><a href="/Help/AboutUs.aspx">About Us</a></li><li><a href="/Help/PrivacyPolicy.aspx">Privacy Policy</a></li><li><a href="/Help/TermsOfService.aspx">Terms Of Service</a></li></ul>');
-if (!u) $(".sidebar-content > ul > li > a[href='/Logon.aspx']")
-  .parent().addClass("expandable").end()
-  .after('<ul><li><a href="/newuser.aspx">Register</a></li></ul>');
-
 if (u) $("#Cys_DisplayName").wrap($("<a></a>", {
     href: `/Member/?Username=${$("#Cys_DisplayName").text()}`
 }));
@@ -221,10 +187,9 @@ switch (path = url.pathname.toLowerCase(), true) {
       */
 }
 
-browser.storage.sync.get((u ? ["preferenceNotifications", "preferenceStifleTags", "preferenceThemelessMenus", "welcomedOn"] : []).concat("preferenceDoubleEn")).then((e, error) => {
+browser.storage.sync.get((u ? ["preferenceNotifications", "preferenceStifleTags", "welcomedOn"] : []).concat("preferenceDoubleEn")).then((e, error) => {
     if (!error) {
         let manifest = browser.runtime.getManifest();
-        $(".sidebar-content").toggleClass("expand-all", !(e.preferenceThemelessMenus == null || e.preferenceThemelessMenus));
         if (e.preferenceNotifications !== false) {
             AJAX.then((resolve, reject) => {
                 var alertCheck;

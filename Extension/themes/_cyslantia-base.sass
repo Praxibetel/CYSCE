@@ -313,6 +313,7 @@ body
       align-items: stretch
 
       > li
+        background-color: transparent !important
         display: inline-flex
         position: relative
         height: 100%
@@ -320,6 +321,7 @@ body
         flex: 1 0 auto
 
         a
+          background-color: transparent !important
           font-family: $font-heading
 
           //font-variant: small-caps //using font-weight: 500
@@ -336,8 +338,12 @@ body
           &:hover, &.selected
             text-shadow: 0 0 20px rgba(white, 0.9)
 
+          &.navbar-menu::after
+            content: none
+
           &[data-badge]::after
             content: attr(data-badge)
+            color: inherit
             position: absolute
             bottom: 100%
             font-family: $font-main
@@ -351,15 +357,10 @@ body
             font-weight: bold
             font-size: 0.6em
             left: 0
+            top: unset
             margin: auto
+            padding-right: 0
             box-shadow: 0 2px 4px rgba(black, 0.1), inset 0 1px rgba(white, 0.2)
-
-          &#rssNavbar
-            img
-              transition: filter 333ms ease
-
-            &:hover img
-              filter: drop-shadow(0 0 10px $color-shadow-rss)
 
           &.narrower
             transform: none
@@ -389,16 +390,16 @@ body
           z-index: 1
 
           > li
-            display: block
-            margin: 0
-            width: 100%
+            background-color: transparent !important
+            border-bottom: 1px solid rgba(black, 0.2)
+            display: flex
+            margin: 0 20px
+            width: calc(100% - 40px)
 
             a
-              border-bottom: 1px solid rgba(black, 0.2)
               border-right: none
               display: block
               font-weight: 400
-              margin: 0 20px
               padding: 4px 0
               position: relative
               text-align: left
@@ -415,13 +416,26 @@ body
                 transform: translateY(-50%)
                 width: 18px
 
+              &:first-child
+                flex: 1
+
+            hr
+              display: none
+
+            &#navbarNewStories
+              a img
+                transition: filter 333ms ease
+
+              a:hover img
+                filter: drop-shadow(0 0 10px $color-shadow-rss)
+
             &:last-of-type a
               border-bottom: none
 
           &::before
             content: none !important
 
-        &:hover > ul
+        &:hover > ul, &:focus-within > ul
           visibility: visible
           opacity: 1
 
