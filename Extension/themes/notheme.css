@@ -1,3 +1,13 @@
+/* Navbar Badges */
+
+#BodyContainer .sidebar-content a.navbar-menu[data-badge]::before {
+  content: "(" attr(data-badge) ") ";
+}
+
+#BodyContainer .sidebar-content .navbar-menuitem-container a[data-badge]::before {
+  content: "(" attr(data-badge) ") ";
+}
+
 /* Forums */
 
 .forum-message .heading-dom {
