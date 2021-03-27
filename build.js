@@ -166,6 +166,7 @@
                         };
                         if (!manifest.browser_action) manifest.browser_action = {};
                         manifest.browser_action.default_icon = manifest.icons;
+                        manifest.browser_action.default_title = "CYS Firefox Extension";
                         console.log(`Successfully managed \x1b[33m${file}\x1b[0m`);
                         zip.file(path.relative(options.folder, file), JSON.stringify(manifest, null, "\t"));
                         break;

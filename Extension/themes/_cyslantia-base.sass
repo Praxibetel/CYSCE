@@ -65,35 +65,33 @@ $image-background-masthead-classic-penguin: url("#{$image}/masthead-classic-peng
 
 $image-login: url("#{$image}/login.png") !default
 
-$image-category-dark-fantasy: url("#{$directory}/images/category-dark-fantasy.png") !default
 $image-category-edutainment: url("#{$directory}/images/category-edutainment.png") !default
-$image-category-everything-else: url("#{$directory}/images/category-everything-else.png") !default
 $image-category-family-friendly: url("#{$directory}/images/category-family-friendly.png") !default
 $image-category-fan-fiction: url("#{$directory}/images/category-fan-fiction.png") !default
 $image-category-fantasy: url("#{$directory}/images/category-fantasy.png") !default
+$image-category-grimdark: url("#{$directory}/images/category-grimdark.png") !default
 $image-category-historical: url("#{$directory}/images/category-historical.png") !default
 $image-category-horror: url("#{$directory}/images/category-horror.png") !default
 $image-category-love-dating: url("#{$directory}/images/category-love-dating.png") !default
-$image-category-modern-adventure: url("#{$directory}/images/category-modern-adventure.png") !default
+$image-category-modern: url("#{$directory}/images/category-modern.png") !default
 $image-category-mystery-thriller: url("#{$directory}/images/category-mystery-thriller.png") !default
 $image-category-new: url("#{$directory}/images/category-new.png") !default
-$image-category-puzzle-game: url("#{$directory}/images/category-puzzle-game.png") !default
+$image-category-puzzle-games: url("#{$directory}/images/category-puzzle-games.png") !default
 $image-category-sci-fi: url("#{$directory}/images/category-sci-fi.png") !default
 $image-category-top: url("#{$directory}/images/category-top.png") !default
 
-$image-category-dark-fantasy-full: url("#{$directory}/images/category-dark-fantasy-full.png") !default
 $image-category-edutainment-full: url("#{$directory}/images/category-edutainment-full.png") !default
-$image-category-everything-else-full: url("#{$directory}/images/category-everything-else-full.png") !default
 $image-category-family-friendly-full: url("#{$directory}/images/category-family-friendly-full.png") !default
 $image-category-fan-fiction-full: url("#{$directory}/images/category-fan-fiction-full.png") !default
 $image-category-fantasy-full: url("#{$directory}/images/category-fantasy-full.png") !default
+$image-category-grimdark-full: url("#{$directory}/images/category-grimdark-full.png") !default
 $image-category-historical-full: url("#{$directory}/images/category-historical-full.png") !default
 $image-category-horror-full: url("#{$directory}/images/category-horror-full.png") !default
 $image-category-love-dating-full: url("#{$directory}/images/category-love-dating-full.png") !default
-$image-category-modern-adventure-full: url("#{$directory}/images/category-modern-adventure-full.png") !default
+$image-category-modern-full: url("#{$directory}/images/category-modern-full.png") !default
 $image-category-mystery-thriller-full: url("#{$directory}/images/category-mystery-thriller-full.png") !default
 $image-category-new-full: url("#{$directory}/images/category-new-full.png") !default
-$image-category-puzzle-game-full: url("#{$directory}/images/category-puzzle-game.png-full") !default
+$image-category-puzzle-games-full: url("#{$directory}/images/category-puzzle-games.png-full") !default
 $image-category-sci-fi-full: url("#{$directory}/images/category-sci-fi-full.png") !default
 $image-category-top-full: url("#{$directory}/images/category-top-full.png") !default
 
@@ -675,28 +673,25 @@ td > .dark1border
   &[style*="categories/fantasy.gif"]
     background-image: $image-category-fantasy !important
 
-  &[style*="categories/dark_fantasy.gif"]
-    background-image: $image-category-dark-fantasy !important
+  &[style*="categories/grimdark.gif"], &[style*="categories/dark_fantasy.gif"]
+    background-image: $image-category-grimdark !important
 
   &[style*="categories/science_fiction.gif"]
     background-image: $image-category-sci-fi !important
 
-  &[style*="categories/modern_adventure.gif"]
-    background-image: $image-category-modern-adventure !important
+  &[style*="categories/modern.gif"], &[style*="categories/modern_adventure.gif"]
+    background-image: $image-category-modern !important
 
   &[style*="categories/edutainment.gif"]
     background-image: $image-category-edutainment !important
 
-  &[style*="categories/everything_else.gif"]
-    background-image: $image-category-everything-else !important
-
   &[style*="categories/mystery_thriller.gif"], &[style*="categories/mystery_puzzle.gif"]
     background-image: $image-category-mystery-thriller !important
 
-  &[style*="categories/puzzle_game.gif"]
-    background-image: $image-category-puzzle-game !important
+  &[style*="categories/puzzle_games.gif"]
+    background-image: $image-category-puzzle-games !important
 
-  &[style*="categories/historical.gif"]
+  &[style*="categories/historical.gif"], &[style*="categories/everything_else.gif"]
     background-image: $image-category-historical !important
 
   &[style*="categories/fan_fiction.gif"]
@@ -721,8 +716,8 @@ td > .dark1border
   &[style*="categories/fantasy_full.gif"]
     background-image: $image-category-fantasy-full !important
 
-  &[style*="categories/dark_fantasy_full.gif"]
-    background-image: $image-category-dark-fantasy-full !important
+  &[style*="categories/grimdark_full.gif"], &[style*="categories/dark_fantasy_full.gif"]
+    background-image: $image-category-grimdark-full !important
 
   &[style*="categories/science_fiction_full.gif"]
     background-image: $image-category-sci-fi-full !important
@@ -730,19 +725,16 @@ td > .dark1border
   &[style*="categories/edutainment_full.gif"]
     background-image: $image-category-edutainment-full !important
 
-  &[style*="categories/everything_else_full.gif"]
-    background-image: $image-category-everything-else-full !important
-
-  &[style*="categories/modern_adventure_full.gif"]
-    background-image: $image-category-modern-adventure-full !important
+  &[style*="categories/modern_full.gif"], &[style*="categories/modern_adventure_full.gif"]
+    background-image: $image-category-modern-full !important
 
   &[style*="categories/mystery_thriller_full.gif"], &[style*="categories/mystery_puzzle_full.gif"]
     background-image: $image-category-mystery-thriller-full !important
 
-  &[style*="categories/puzzle_game_full.gif"]
-    background-image: $image-category-puzzle-game !important
+  &[style*="categories/puzzle_games_full.gif"]
+    background-image: $image-category-puzzle-games !important
 
-  &[style*="categories/historical_full.gif"]
+  &[style*="categories/historical_full.gif"], &[style*="categories/everything_else_full.gif"]
     background-image: $image-category-historical !important
 
   &[style*="categories/fan_fiction_full.gif"]
