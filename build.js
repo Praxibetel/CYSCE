@@ -6,7 +6,7 @@
           JSZip = require("jszip"),
           path = require("path"),
           sass = require("node-sass"),
-          UglifyJS = require("uglify-es");
+          UglifyJS = require("uglify-js");
 
     const defaults = {
           browser: "chrome",
@@ -96,7 +96,7 @@
         ignore: "**/_*"
     }, async (error, matches) => {
         for (let file of matches) {
-            let stylesheet = await fs.readFile(file, "utf-8");
+            let stylesheet = await fs.readFile(file, "utf8");
             if (options.browser === "firefox") stylesheet = stylesheet.replace(/chrome-extension/g, "moz-extension");
             renderedSass[`${path.basename(file, ".sass")}.min.css`] = await new Promise((resolve, reject) => sass.render({
                 data: stylesheet,
@@ -106,10 +106,10 @@
                         let timestamp = +new Date();
                         url = url.replace(/(\.sass)?$/, ".sass");
                         try {
-                            imported = await fs.readFile(path.join(file, "..", url), "utf-8");
+                            imported = await fs.readFile(path.join(file, "..", url), "utf8");
                         } catch (e) {
                             try {
-                                imported = await fs.readFile(path.join(file, "..", `_${url}`), "utf-8");
+                                imported = await fs.readFile(path.join(file, "..", `_${url}`), "utf8");
                             } catch (e) {}
                         }
                         if (options.browser === "firefox") {
@@ -117,7 +117,7 @@
                             imported = imported.replace(/chrome-extension/g, "moz-extension");
                         }
                         let tempName = `temp${process.pid}-${iter++}.sass`
-                        await fs.writeFile(tempName, imported, "utf-8");
+                        await fs.writeFile(tempName, imported, "utf8");
                         done({
                             file: tempName
                         });
@@ -161,8 +161,7 @@
                         manifest.applications = {
                             "gecko": {
                                 "id": "cysffe@bradin.pw",
-                                "strict_min_version": "53.0",
-                                "update_url": "https://www.bradin.pw/cyslantia/CYSFFE/update.json"
+                                "strict_min_version": "53.0"
                             }
                         };
                         if (!manifest.browser_action) manifest.browser_action = {};
@@ -174,7 +173,7 @@
                         zip.file(path.relative(options.folder, file), renderedSass[fname].css);
                         break;
                     case ext === ".css":
-                        let css = await fs.readFile(file, "utf-8");
+                        let css = await fs.readFile(file, "utf8");
                         if (options.browser === "firefox") css = css.replace(/chrome-extension/g, "moz-extension");
                         if (options.minify === true || options.minify.css) {
                             css = csso.minify(css).css
@@ -183,7 +182,7 @@
                         await zip.file(path.relative(options.folder, file), Buffer.from(css));
                         break;
                     case ext === ".html" && (options.minify === true || options.minify.html):
-                        let htmin = htmlMinify(await fs.readFile(file, "utf-8"), {
+                        let htmin = htmlMinify(await fs.readFile(file, "utf8"), {
                             collapseBooleanAttributes: true,
                             collapseWhitespace: true,
                             minifyCSS: options.minify === true || options.minify.css,
@@ -197,7 +196,7 @@
                         await zip.file(path.relative(options.folder, file), Buffer.from(htmin));
                         break;
                     case ext === ".js" && (options.minify === true || options.minify.js):
-                        let jsmin = UglifyJS.minify(await fs.readFile(file, "utf-8"), {
+                        let jsmin = UglifyJS.minify(await fs.readFile(file, "utf8"), {
                             mangle: false,
                             output: {
                                 beautify: true
@@ -248,27 +247,3 @@
 
     console.log("Deleted temp files");
 })();
-
-/*
-
-// hic sunt dracones
-// the unsexy kind
-
-function combIterable(obj, func) {
-  if (typeof func === "function" && typeof obj === "object") {
-      if (Array.isArray(obj)) {
-        obj = obj.slice(0).map(entry => func(entry));
-      } else {
-        obj = Object.assign({}, obj);
-        for (entry in obj) entry = func(entry);
-      }
-  } return obj;
-}
-
-function combAndFilter(obj, filter) {
-    if (typeof filter === "function" && Array.isArray(obj)) obj = obj.filter(filter).map(obj => combIterable(obj, entry => entry = combAndFilter(entry, filter)));
-    else obj = combIterable(obj, entry => entry = combAndFilter(entry, filter));
-    return obj;
-}
-
-*/
