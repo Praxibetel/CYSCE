@@ -525,7 +525,7 @@ body
 
 // General main stuff
 
-h1, h2, h3, h1 a
+h1, h2, h3, h1 a, h1 span
   color: $color-text-heading
   font-family: $font-heading
   font-variant-numeric: lining-nums
@@ -634,7 +634,7 @@ hr
 
 // Storygame sections
 
-td > .dark1border
+div.dark1border
   background-color: $color-background-card !important
   border-color: $color-border-main !important
 
@@ -831,6 +831,9 @@ img
 
 img[src$="16x16/star.png"]
   content: $image-icon-featured
+
+.gradienthide
+  background: linear-gradient(to top, $color-background-main 80%, transparent) !important
 
 // Storygame rating container
 
