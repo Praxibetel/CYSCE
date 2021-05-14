@@ -325,7 +325,7 @@ div[style="width=680px; "]>form[method="get"]+div {
   display: none;
 }
 
-.CYSExtensionCodeMirrorSubsetting>td:nth-child(2) {
+.CYSExtensionCodeMirrorSubsetting>td {
   padding-left: 52px;
 }
 
