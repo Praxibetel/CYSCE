@@ -109,7 +109,7 @@
   }, {
     "matches": ["*://chooseyourstory.com/story/*"],
     "exclude_matches": ["*://chooseyourstory.com/story/viewer/*"],
-    "js": ["js/an.js", "js/contrast.js"],
+    "js": ["js/contrast.js"],
     "run_at": "document_end"
   }, {
     "matches": ["*://chooseyourstory.com/story/viewer/*"],
