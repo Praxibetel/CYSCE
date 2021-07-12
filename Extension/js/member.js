@@ -3,11 +3,12 @@ var username = $("h1:first-child > span").text().trim();
 if ($("meta[itemprop='doctitle']").length) $("title").text($("meta[itemprop='doctitle']").attr("content"));
 else $("title").text(`${username} > ChooseYourStory.com`);
 
-$("#profile_Sidebar").prepend(
-    $("<div></div>").text($(".footer-content a").filter(function() {
-        return this.textContent === username;
-    }).length ? "Online" : "Offline")
-);
+var onlineDiv = $("<div></div>").text($(".footer-content a").filter(function() {
+    return this.textContent === username;
+}).length ? "Online" : "Offline");
+
+if ($("#profile_Sidebar h1:first-child").length) $("#profile_Sidebar h1:first-child").after(onlineDiv);
+else $("#profile_Sidebar").prepend(onlineDiv);
 
 $("#profile_Sidebar h2:contains('Commendations') + div").after(
     $("<h2></h2>").text("Worth"),
