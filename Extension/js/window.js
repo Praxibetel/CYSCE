@@ -199,7 +199,7 @@ function dynamicizeForumPosts(selector) {
     }).each(function() {
         var div = $("<div></div>"),
             node = $(this);
-        div.html(node.text().replace(/\b(https?|ftp):\/\/(-\.)?([^\s/?\.#-]+\.?)+(\/[^\s]*)?/gi, "<a href='$&'>$&</a>"));
+        div.html(node.text().replace(/\b(https?|ftp):\/\/(-\.)?([^\s/?\.#-]+\.?)+(\/[^\s]*)?/gi, url => `<a href="${url.replace(/"/g, "&quot;")}">${url}</a>`));
         node.before(div.contents()).remove();
     });
     $(selector).contents().filter(function() {

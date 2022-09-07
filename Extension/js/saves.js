@@ -31,7 +31,11 @@ AJAX.then((resolve, reject) => {
             if (/^quicksave\d+$/.test(i)) {
                 let id = parseInt(i.match(/^quicksave(\d+)$/)[1]);
                 arr = arr.concat(e[i].map(a => [id].concat(a)));
-                if (ajax) titles[id] = $(await $.get(`//chooseyourstory.com/story/viewer/default.aspx?StoryId=${id}`)).filter("title").text().split("::")[0].trim();
+                if (ajax) try {
+                  titles[id] = $(await $.get(`//chooseyourstory.com/story/viewer/default.aspx?StoryId=${id}`)).filter("title").text().split("::")[0].trim();
+                } catch (e) {
+                  titles[id] = null;
+                }
             }
         }
         arr.sort((a, b) => b[1] - a[1]);
@@ -42,9 +46,9 @@ AJAX.then((resolve, reject) => {
             "data-name": i[3] || "Untitled",
         }).append(
             $("<td></td>").text(moment(i[1]).format("M/D/YYYY h:mm A")),
-            $("<td></td>").append(ajax ? $("<a></a>", {
+            $("<td></td>").append(ajax ? titles[i[0]] != null ? $("<a></a>", {
                 href: `../story/${encodeURIComponent(titles[i[0]]).replace(/[-_.~"]/g, (c) => `%${c.charCodeAt(0).toString(16)}`).replace(/%/g, "~").toLowerCase()}`
-            }).text(titles[i[0]]) : i[0]),
+            }).text(titles[i[0]]) : "[Deleted Game]" : i[0]),
             $("<td></td>").text(i[3] || "Untitled"),
             $("<td></td>").append(
                 $(`<a href="#"></a>`).text("[restore]").click(() => {
