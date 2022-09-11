@@ -4,14 +4,17 @@
   "description": "ChooseYourStory Chrome Extension",
   "main": "build.js",
   "scripts": {
-    "start": "node build.js"
+    "start": "node build.js",
+    "build": "npm run build-chrome && npm run build-firefox",
+    "build-chrome": "node build.js -m css+html -o cys-chrome-extension.zip",
+    "build-firefox": "node build.js -f -m css+html -o cys-firefox-extension.zip"
   },
   "dependencies": {
     "csso": "^4.2.0",
     "glob": "^7.1.6",
     "html-minifier": "^4.0.0",
-    "jszip": "^3.6.0",
-    "node-sass": "^7.0.0",
+    "jszip": "^3.10.1",
+    "node-sass": "^7.0.3",
     "uglify-js": "^3.13.2"
   },
   "engines": {
