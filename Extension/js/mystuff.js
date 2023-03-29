@@ -1,4 +1,5 @@
-var flexContainer,
+var mode = new URL(document.location).searchParams.get("CYSCE_mode"),
+    flexContainer,
     notepadMirror,
     sidebar,
     sortableOptions,
@@ -68,7 +69,22 @@ AJAX.then((resolve, reject) => {
     browser.storage.sync.get("myStuffConfig").then((e, error) => {
         if (!error && e.myStuffConfig) stuffTable = e.myStuffConfig;
 
-        if ($("#MainContentPlaceHolder_btnNormalMode").length) {
+        $("td h1").parent().parent().append(
+          $("<td></td>", {
+            style: "text-align: right;"
+          }).append(
+            $("<a></a>", {
+              class: "button",
+              href: `?CYSCE_mode=${mode === "edit" ? "view" : "edit"}`
+            }).append(
+              $("<img>", {
+                src: "/0x44/InedoLib/Inedo.Web.Controls.IconImage/ProcessImageRequest/InedoIcons/F3Silk/16x16/note_edit.png"
+              }),
+              mode === "edit" ? "Finish Editing" : "Edit Widgets"
+            )
+        ));
+
+        if (mode === "edit") {
             // Edit Mode
             $("form > table + table").replaceWith($("<div></div>", {
                 id: "MyStuffEditor"

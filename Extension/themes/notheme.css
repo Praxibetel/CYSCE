@@ -131,6 +131,12 @@ div[style="width=680px; "]>form[method="get"]+div {
 
 /* My Stuff */
 
+a.button img {
+  display: block;
+  float: left;
+  margin-right: 5px;
+}
+
 .ui-sortable-handle {
   cursor: grab;
   transition: background 333ms ease, border 333ms ease, border-radius 333ms ease;

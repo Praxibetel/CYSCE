@@ -3,7 +3,7 @@
 
   "name": "CYSCE",
   "description": "CYS Chrome Extension",
-  "version": "0.9.5",
+  "version": "0.9.6",
 
   "icons": {
     "16": "cysicon-16.png",
@@ -55,7 +55,7 @@
     "js": ["js/member.js", "js/contrast.js"],
     "run_at": "document_end"
   }, {
-    "matches": ["*://chooseyourstory.com/my/", "*://chooseyourstory.com/My/", "*://chooseyourstory.com/my/default.aspx*", "*://chooseyourstory.com/My/default.aspx*"],
+    "matches": ["*://chooseyourstory.com/my/", "*://chooseyourstory.com/My/", "*://chooseyourstory.com/my/?*", "*://chooseyourstory.com/My/?*", "*://chooseyourstory.com/my/default.aspx*", "*://chooseyourstory.com/My/default.aspx*"],
     "js": ["js/mystuff.js"],
     "run_at": "document_end"
   }, {
